@@ -19,7 +19,7 @@ float stepsPerChar;
 
 // servo
 Servo myServo;
-int restAngle = 20;
+int restAngle = 22;
 int peakAngle = 64;
 
 // char
@@ -32,6 +32,7 @@ char charSet[charQuantity] = {
   '+', '+', '+'
 };
 String labelString;
+int charHome = 21;
 bool waitingLabel = false;
 
 // infrared
@@ -40,6 +41,7 @@ int maxLight;
 int thresholdLight;
 int currentCharPosition = -1;
 int deltaPosition;
+bool reverseCalibration;
 
 void setup() {
 	Serial.begin(9600);
@@ -47,12 +49,12 @@ void setup() {
 	pinMode(emitterPin, OUTPUT);
 
 	stepperFeed.setMaxSpeed(1000.0);
-	stepperFeed.setAcceleration(100.0);
+	stepperFeed.setAcceleration(16000.0);
 	stepperFeed.setSpeed(200);
 
 	stepperChar.setMaxSpeed(1000.0);
 	stepperChar.setAcceleration(16000.0);
-	stepperChar.setSpeed(50);
+	stepperChar.setSpeed(200);
 
 	myServo.attach(12);
 	myServo.write(restAngle);
@@ -63,24 +65,11 @@ void setup() {
 	//stepsPerChar = 100;
 	//stepsPerChar = 95;
 	stepsPerChar = (float)stepsPerRevolution / charQuantity;
-	Serial.print("stepsPerChar: ");
-	Serial.println(stepsPerChar);
+	//Serial.print("stepsPerChar: ");
+	//Serial.println(stepsPerChar);
 	sensorStateAvg.begin();
 
 	setHome(true);
-}
-
-void test() {
-
-	if (stepperChar.distanceToGo() == 0) {
-		stepperChar.setCurrentPosition(0);
-		fullCycle = stepsPerRevolution;
-
-		stepperChar.moveTo(fullCycle);
-	}
-
-	stepperChar.run();
-
 }
 
 void setHome(bool calibrate) {
@@ -91,7 +80,7 @@ void setHome(bool calibrate) {
 		maxLight = analogRead(sensorPin);
 		Serial.println("calibrating...");
 
-		stepperChar.moveTo(stepsPerRevolution*1.1f);
+		stepperChar.moveTo(stepsPerRevolution * 1.1f);
 		while (stepperChar.distanceToGo() > 0) {
 			sensorState = analogRead(sensorPin);
 			int averaged = sensorStateAvg.reading(sensorState);
@@ -123,10 +112,16 @@ void setHome(bool calibrate) {
 	//Serial.print(" / maxLight: ");
 	//Serial.println(maxLight);
 
-	Serial.println("calling home...");
+	//Serial.println("calling home...");
 	delay(200);
-		
-	stepperChar.moveTo(stepsPerRevolution*2);
+
+	int targetPosition = stepsPerRevolution * 2;
+
+	if (reverseCalibration) {
+		targetPosition *= -1;
+	}
+
+	stepperChar.moveTo(targetPosition);
 	sensorState = analogRead(sensorPin);
 
 	//Serial.print("sensor ");
@@ -140,44 +135,50 @@ void setHome(bool calibrate) {
 		stepperChar.run();
 		//if (sensorState > thresholdLight) Serial.println(sensorState);
 	}
-
-	//stepperChar.runToNewPosition(stepsPerChar / 6);
-
-	Serial.print("last reading: ");
-	Serial.println(sensorState);
-	currentCharPosition = 22;
 	stepperChar.setCurrentPosition(0);
-	Serial.print("at home, position ");
-	Serial.println(currentCharPosition);
+
+	//Serial.print("last reading: ");
+	//Serial.println(sensorState);
+	currentCharPosition = charHome;
+	if (reverseCalibration) {
+		//Serial.println("<< reverse");
+		stepperChar.runToNewPosition(-stepsPerChar);
+		stepperChar.setCurrentPosition(0);
+		reverseCalibration = false;
+	}
+	else {
+		//Serial.println(">> forward");
+	}
+
+	//Serial.print("at home, position ");
+	//Serial.println(currentCharPosition);
 
 	digitalWrite(emitterPin, LOW);
 	delay(500);
 }
 
 void feedLabel() {
-	for (int i = 0; i < 50; i++) {
-		//stepperFeed.step(-stepsPerRevolution / 7);
-	}
+	stepperFeed.runToNewPosition(stepperChar.currentPosition() - stepsPerRevolution / 2);
 	delay(200);
 }
 
 void pressLabel() {
 	for (int pos = restAngle; pos < peakAngle; pos++) {
 		myServo.write(pos);
+		delay(12);
 	}
-	delay(1000);
+	delay(500);
 	for (int pos = peakAngle; pos > restAngle; pos--) {
 		myServo.write(pos);
+		delay(12);
 	}
-	delay(200);
 }
 
 void writeLabel(String label) {
-
-	//feedLabel();
-
+	feedLabel();
 	for (int i = 0; i < label.length(); i++) {
 		goToCharacter(label[i]);
+		
 		setHome(false);
 	}
 	goToCharacter('*');
@@ -190,17 +191,24 @@ void goToCharacter(char c) {
 
 	int backAdditional = 0;
 
+	if (c == '0') {
+		//Serial.println("exception ZERO");
+		c = 'O';
+	}
+	else if (c == '1') {
+		//Serial.println("exception ONE");
+		c = 'I';
+	}
+
 	for (int i = 0; i < charQuantity; i++) {
 		if (c == charSet[i]) {
-			deltaPosition = i - currentCharPosition + 1;
-			
+			deltaPosition = i - currentCharPosition;
+
 			if (deltaPosition < 0)
-				backAdditional = - stepsPerChar / 2;
-			//	deltaPosition += charQuantity;
+				backAdditional = -stepsPerChar / 2;
 			else if (deltaPosition > 0)
-				backAdditional = stepsPerChar / 4;
-			//	deltaPosition -= charQuantity;
-			
+				backAdditional = stepsPerChar / 2;
+			/*
 			Serial.print("char ");
 			Serial.print(c);
 			Serial.print(" is on position ");
@@ -208,16 +216,22 @@ void goToCharacter(char c) {
 			Serial.print(" ( delta ");
 			Serial.print(deltaPosition);
 			Serial.println(")");
+			*/
 			currentCharPosition = i;
 
-
+			if (i > charHome)
+				reverseCalibration = true;
+			else
+				reverseCalibration = false;
 		}
 	}
-	//stepperChar.step(stepsPerChar * deltaPosition);
+
+
+
 	stepperChar.runToNewPosition(stepsPerChar * deltaPosition + backAdditional);
-	delay(200);
-	//pressLabel();
-	//feedLabel();
+	delay(250);
+	pressLabel();
+	feedLabel();
 }
 
 void readSerial() {
@@ -237,5 +251,4 @@ void readSerial() {
 
 void loop() {
 	readSerial();
-	//test();	
 }
