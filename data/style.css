@@ -1,0 +1,59 @@
+body {
+    background-color: black;
+}
+@font-face {
+    font-family: "fontBlack";
+    src: url("fontBlack.ttf");
+    color: #ffffff;
+}
+@font-face {
+    font-family: "fontWhite";
+    src: url("fontWhite.ttf");
+    color: #000000;
+}
+* {
+    font-family: "fontWhite";
+    font-size: 22px;
+    color: white;
+}
+h1, h2{
+    font-family: "fontWhite";
+    color: #ffffff;
+}
+h1 {
+    font-size: 50px;
+    margin: 0px;
+    padding-top: 15px;
+}
+h2 {
+    font-size: 20px;
+    margin: 15px;
+    margin-bottom: 30px;
+}
+input {
+    color: white;
+    background: none;
+    border-color: #777777;
+    border-width: 2px;
+    padding: 3px 0 4px 0;
+}
+#text-input {
+    border: 0px;
+    outline: none;
+    background: none;
+    color: white;
+    width: 100%;
+    font-family: fontBlack;
+    text-align: center;
+    font-size: 25px;
+    filter: drop-shadow(0px 0px 50px #888888);
+    transform: rotate(-0.5deg)
+}
+#single-column {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    padding-bottom: 25px;
+}

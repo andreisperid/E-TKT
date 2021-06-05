@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=0">
+    <meta charset="utf-8">
+    <title>E-TKT</title>
+
+    <link rel=�preload� href=�fontBlack.ttf� as=�font�>
+    <link rel=�preload� href=�fontWhite.ttf� as=�font�>
+    <link rel=�preload� href="style.css" as="style">
+    <link rel=�preload� href="script.js" as="script">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div style="width: 300px; margin: auto;">
+
+        <h1 align="center" style="transform: rotate(-0.5deg)">E-TKT</h1>
+        <h2 align="center">label maker</h2>
+
+        <form action="/\" method="post" autocomplete="off">
+
+            <div id="single-column">
+                <INPUT type="text" id="text-input" name="LABEL\" maxlength="20" placeholder="WRITE" value="" autofocus>
+                <br><br>
+            </div>
+            <div id="single-column">
+                <INPUT type="button" id="submit-button" value=" Label! " style="transform: rotate(0.5deg)">
+            </div>
+
+            <hr style="width:100%%; transform: rotate(-0.5deg); border-color: #999999;">
+
+            <div id="single-column">
+                <a href="#" onclick="toggleVisibility(extras, extras_label)" style="color:black"><span id="extras_label" style="color: #777777"> + [ EXTRAS ] + </span></a>
+            </div>
+
+            <div id="extras" style="visibility: hidden">
+                <div style="display: table; column-count: 2; margin: auto">
+
+                    <span style="display: table-cell; width: 100%%;">
+                        <INPUT type="button" value=" < RWD " style="transform: rotate(1deg);">
+                    </span>
+                    <span style="display: table-cell; width: 100%%;">
+                        <INPUT type="button" value=" FWD > " style="transform: rotate(1.2deg)">
+                    </span>
+
+                </div>
+                <div style="display: table; column-count: 1; margin: auto">
+                    <span style="display: table-cell; width: 100%%; padding-top: 25px;"><INPUT type="button" value=" --- Cut --- " style="transform: rotate(-1deg); column-span: all"></span>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
