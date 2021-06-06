@@ -1,6 +1,3 @@
-body {
-    background-color: black;
-}
 @font-face {
     font-family: "fontBlack";
     src: url("fontBlack.ttf");
@@ -16,6 +13,9 @@ body {
     font-size: 22px;
     color: white;
 }
+body {
+    background-color: black;
+}
 h1, h2{
     font-family: "fontWhite";
     color: #ffffff;
@@ -29,6 +29,11 @@ h2 {
     font-size: 20px;
     margin: 15px;
     margin-bottom: 30px;
+}
+#hint {
+    font-size: 20px;
+    /* margin: 15px;
+    margin-bottom: 30px; */
 }
 input {
     color: white;

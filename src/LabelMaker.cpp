@@ -339,15 +339,25 @@ void initialize()
 	server.on("/&", HTTP_GET, [](AsyncWebServerRequest *request)
 			  {
 				  int paramsNr = request->params();
-				//   Serial.println(paramsNr);
+				  //   Serial.println(paramsNr);
+				  String parameter;
+				  String value;
 
 				  for (int i = 0; i < paramsNr; i++)
 				  {
 					  AsyncWebParameter *p = request->getParam(i);
-					  Serial.print("Param name: ");
-					  Serial.print(p->name());
-					  Serial.print(", value: ");
-					  Serial.println(p->value());
+					  parameter = p->name();
+					  value = p->value();
+
+					  Serial.print("parameter: ");
+					  Serial.print(parameter);
+
+					  if (value != "")
+					  {
+						  Serial.print(", value: ");
+						  Serial.println(value);
+					  }
+
 				  }
 
 				  request->send(SPIFFS, "/index.html", String(), false, processor); //TODO: avoid refreshing
