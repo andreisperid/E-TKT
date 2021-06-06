@@ -7,3 +7,19 @@ function toggleVisibility(x, y) {
         y.innerHTML  = " + [ EXTRAS ] + ";
     }
 }
+
+function tagCommand(){
+    window.open("&?tag=" + document.getElementById("text-input").value,"_self")
+}
+
+function rwCommand(){
+    window.open("&?rw","_self")
+}
+
+function fwCommand(){
+    window.open("&?fw","_self")
+}
+
+function cutCommand(){
+    window.open("&?cut","_self")
+}

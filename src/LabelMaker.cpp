@@ -2,7 +2,6 @@
 #include <AccelStepper.h>
 #include <ESP32Servo.h>
 #include <movingAvg.h>
-// #include <FS.h>
 #include <WiFi.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
@@ -10,12 +9,12 @@
 #include <DNSServer.h>
 #include "SPIFFS.h"
 
-// mechanics -------------------------------------------------------------------
+// HARDWARE ------------------------------------------------------------------------
 #define HALFSTEP 8
 
 // home sensor
-int sensorPin = 36;
-int emitterPin = 39;
+int sensorPin = 36;	 //A0?
+int emitterPin = 39; //A1?
 int sensorState;
 movingAvg sensorStateAvg(200);
 
@@ -31,18 +30,6 @@ Servo myServo;
 int restAngle = 22;
 int peakAngle = 64;
 
-// char
-#define charQuantity 43
-char charSet[charQuantity] = {
-	' ', '-', '.', '2', '3', '4', '5', '6', '7', '8',
-	'9', '*', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-	'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-	'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '+', '+',
-	'+', '+', '+'};	
-String labelString;
-int charHome = 21;
-bool waitingLabel = false;
-
 // infrared
 int minLight;
 int maxLight;
@@ -51,27 +38,42 @@ int currentCharPosition = -1;
 int deltaPosition;
 bool reverseCalibration;
 
-String labelText;
-bool busyPrinting;
+// DATA ----------------------------------------------------------------------------
 
-// temporary
+// char
+#define charQuantity 43
+char charSet[charQuantity] = {
+	' ', '-', '.', '2', '3', '4', '5', '6', '7', '8',
+	'9', '*', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+	'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+	'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '+', '+',
+	'+', '+', '+'};
+String labelString;
+int charHome = 21;
+bool waitingLabel = false;
+
+String headerCommand;
+bool busy;
+String operationStatus;
+
+// temporary ********
 int ledPin = 1;
 String ledState;
 //
 
-
-// communication -------------------------------------------------------------------
+// COMMUNICATION -------------------------------------------------------------------
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
 DNSServer dns;
 
 // Hardcoded login info
-const char *ssid = "Bug";
-const char *password = "temgente";
-const char *PARAM_MESSAGE = "message";
+// const char *ssid = "";
+// const char *password = "";
+// const char *PARAM_MESSAGE = "message";
 
-// MECHANICS -------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------
+// HARDWARE ------------------------------------------------------------------------
 
 void setHome(bool calibrate)
 {
@@ -238,6 +240,7 @@ void goToCharacter(char c)
 
 void writeLabel(String label)
 {
+	busy = true;
 	feedLabel();
 	for (int i = 0; i < label.length(); i++)
 	{
@@ -246,6 +249,7 @@ void writeLabel(String label)
 	}
 	goToCharacter('*');
 	Serial.println("finished");
+	busy = false;
 	setHome(false);
 }
 
@@ -267,15 +271,57 @@ void readSerial()
 	}
 }
 
+// DATA ----------------------------------------------------------------------------
+// Replaces placeholder with LED state value
+String processor(const String &var)
+{
+	Serial.print("command received: ");
+	Serial.println(var);
+
+	if (var == "label" || var == "rw" || var == "fw" || var == "cut")
+	{
+		operationStatus = busy ? "busy" : "standby";
+		Serial.print("status: ");
+		Serial.println(operationStatus);
+		return operationStatus;
+	}
+}
+
+String processorOld(const String &var)
+{
+	Serial.println(var);
+	if (var == "TAG")
+	{
+		if (digitalRead(ledPin))
+		{
+			ledState = "ON";
+		}
+		else
+		{
+			ledState = "OFF";
+		}
+		Serial.print(ledState);
+		return ledState;
+	}
+}
+
+String receiveTag(const String &var)
+{
+	Serial.println("unprocessed tag is: ");
+	Serial.println(var);
+}
+
 // COMMUNICATION -------------------------------------------------------------------
 void notFound(AsyncWebServerRequest *request)
 {
 	request->send(404, "text/plain", "Not found");
 }
 
-void initialize() {
+void initialize()
+{
 	// Initialize SPIFFS
-	if (!SPIFFS.begin()) {
+	if (!SPIFFS.begin())
+	{
 		Serial.println("An Error has occurred while mounting SPIFFS");
 		return;
 	}
@@ -284,46 +330,54 @@ void initialize() {
 	Serial.println(WiFi.localIP());
 
 	// Route for root / web page
-	server.on("/", HTTP_GET, [](AsyncWebServerRequest* request) {
-		request->send(SPIFFS, "/index.html", String(), false);
-		// request->send(SPIFFS, "/index.html", String(), false, processor);
-	});
+	server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
+			  {
+				  request->send(SPIFFS, "/index.html", String(), false);
+				  //   request->send(SPIFFS, "/index.html", String(), false, processor);
+			  });
+
+	server.on("/&", HTTP_GET, [](AsyncWebServerRequest *request)
+			  {
+				  int paramsNr = request->params();
+				//   Serial.println(paramsNr);
+
+				  for (int i = 0; i < paramsNr; i++)
+				  {
+					  AsyncWebParameter *p = request->getParam(i);
+					  Serial.print("Param name: ");
+					  Serial.print(p->name());
+					  Serial.print(", value: ");
+					  Serial.println(p->value());
+				  }
+
+				  request->send(SPIFFS, "/index.html", String(), false, processor); //TODO: avoid refreshing
+			  });
 
 	// Route to load style.css file
-	server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest* request) {
-		request->send(SPIFFS, "/style.css", "text/css");
-	});
+	server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/style.css", "text/css"); });
 
 	// Route to load script.js file
-	server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest* request) {
-		request->send(SPIFFS, "/script.js", "text/javascript");
-	});
+	server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/script.js", "text/javascript"); });
 
 	// Route to load fonts
-	server.on("/fontWhite.ttf", HTTP_GET, [](AsyncWebServerRequest* request) {
-		request->send(SPIFFS, "/fontWhite.ttf", "font");
-	});
+	server.on("/fontWhite.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/fontWhite.ttf", "font"); });
 	// Route to load fonts
-	server.on("/fontBlack.ttf", HTTP_GET, [](AsyncWebServerRequest* request) {
-		request->send(SPIFFS, "/fontBlack.ttf", "font");
-	});
+	server.on("/fontBlack.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/fontBlack.ttf", "font"); });
 
 	// Route to favicon
-	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest* request) {
-		request->send(SPIFFS, "/favicon.ico"), "image";
-	});
-
-	// Route to set GPIO to HIGH
-	server.on("/tag=", HTTP_GET, [](AsyncWebServerRequest* request) {
-		request->send(SPIFFS, "/index.html", String(), false);
-		// request->send(SPIFFS, "/index.html", String(), false, receiveTag);
-	});
+	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/favicon.ico"), "image"; });
 
 	// Start server
 	server.begin();
 }
 
-void configModeCallback(AsyncWiFiManager* myWiFiManager) {
+void configModeCallback(AsyncWiFiManager *myWiFiManager)
+{
 	Serial.println("Entered config mode");
 	Serial.println(WiFi.softAPIP());
 	//if you used auto generated SSID, print it
@@ -335,7 +389,7 @@ void wifiManager()
 	//Local intialization. Once its business is done, there is no need to keep it around
 	AsyncWiFiManager wifiManager(&server, &dns);
 	//reset settings - for testing
-	//wifiManager.resetSettings();
+	// wifiManager.resetSettings();
 
 	//set callback that gets called when connecting to previous WiFi fails, and enters Access Point mode
 	wifiManager.setAPCallback(configModeCallback);
@@ -355,35 +409,14 @@ void wifiManager()
 
 	//if you get here you have connected to the WiFi
 	Serial.println("connected!");
+
 	initialize();
 }
-
-// DATA
-// Replaces placeholder with LED state value
-String processor(const String& var) {
-	Serial.println(var);
-	if (var == "STATE") {
-		if (digitalRead(ledPin)) {
-			ledState = "ON";
-		} else {
-			ledState = "OFF";
-		}
-		Serial.print(ledState);
-		return ledState;
-	}
-}
-
-String receiveTag(const String& var) {
-	Serial.println("unprocessed tag is: ");
-	Serial.println(var);
-}
-
 
 // CORE
 void setup()
 {
 	Serial.begin(9600);
-	wifiManager();
 
 	pinMode(sensorPin, INPUT);
 	pinMode(emitterPin, OUTPUT);
@@ -410,62 +443,8 @@ void setup()
 	//
 	setHome(true);
 	Serial.println("booting...");
-	SPIFFS.begin();
 
-	// Initialize SPIFFS
-	if (!SPIFFS.begin())
-	{
-		Serial.println("An Error has occurred while mounting SPIFFS");
-		return;
-	}
-
-	WiFi.mode(WIFI_STA);
-	WiFi.begin(ssid, password);
-	if (WiFi.waitForConnectResult() != WL_CONNECTED)
-	{
-		Serial.printf("WiFi Failed!\n");
-		return;
-	}
-
-	Serial.print("IP Address: ");
-	Serial.println(WiFi.localIP());
-
-	// Route for root / web page
-	server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/index.html", String(), false); });
-	// Route to load style.css file
-	server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/style.css", "text/css"); });
-	// Route to load script.js file
-	server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/script.js", "text/javascript"); });
-	// Route to load fonts
-	server.on("/fontWhite.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/fontWhite.ttf", "font"); });
-	// Route to load fonts
-	server.on("/fontBlack.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/fontBlack.ttf", "font"); });
-	// Route to favicon
-	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/favicon.ico"), "image"; });
-
-	// server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-	//     request->send(200, "text/plain", "Hello, world");
-	// });
-	// // Send a GET request to <IP>/sensor/<number>
-	// server.on("^\\/sensor\\/([0-9]+)$", HTTP_GET, [] (AsyncWebServerRequest *request) {
-	//     String sensorNumber = request->pathArg(0);
-	//     request->send(200, "text/plain", "Hello, sensor: " + sensorNumber);
-	// });
-	// // Send a GET request to <IP>/sensor/<number>/action/<action>
-	// server.on("^\\/sensor\\/([0-9]+)\\/action\\/([a-zA-Z0-9]+)$", HTTP_GET, [] (AsyncWebServerRequest *request) {
-	//     String sensorNumber = request->pathArg(0);
-	//     String action = request->pathArg(1);
-	//     request->send(200, "text/plain", "Hello, sensor: " + sensorNumber + ", with action: " + action);
-	// });
-
-	server.onNotFound(notFound);
-	server.begin();
+	wifiManager();
 }
 
 void loop()

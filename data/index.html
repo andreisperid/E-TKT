@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <title>E-TKT</title>
 
-    <link rel=�preload� href=�fontBlack.ttf� as=�font�>
-    <link rel=�preload� href=�fontWhite.ttf� as=�font�>
-    <link rel=�preload� href="style.css" as="style">
-    <link rel=�preload� href="script.js" as="script">
+    <link rel="preload" href="fontBlack.ttf" as="font">
+    <link rel="preload" href="fontWhite.ttf" as="font">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
 
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -25,7 +25,7 @@
                 <br><br>
             </div>
             <div id="single-column">
-                <INPUT type="button" id="submit-button" value=" Label! " style="transform: rotate(0.5deg)">
+                <INPUT type="button" onclick="tagCommand()" id="submit-button" value=" Label! " style="transform: rotate(0.5deg)">
             </div>
 
             <hr style="width:100%%; transform: rotate(-0.5deg); border-color: #999999;">
@@ -38,15 +38,15 @@
                 <div style="display: table; column-count: 2; margin: auto">
 
                     <span style="display: table-cell; width: 100%%;">
-                        <INPUT type="button" value=" < RWD " style="transform: rotate(1deg);">
+                        <INPUT type="button" value=" < RWD " onclick="rwCommand()" style="transform: rotate(1deg);">
                     </span>
                     <span style="display: table-cell; width: 100%%;">
-                        <INPUT type="button" value=" FWD > " style="transform: rotate(1.2deg)">
+                        <INPUT type="button" value=" FWD > " onclick="fwCommand()" style="transform: rotate(1.2deg)">
                     </span>
 
                 </div>
                 <div style="display: table; column-count: 1; margin: auto">
-                    <span style="display: table-cell; width: 100%%; padding-top: 25px;"><INPUT type="button" value=" --- Cut --- " style="transform: rotate(-1deg); column-span: all"></span>
+                    <span style="display: table-cell; width: 100%%; padding-top: 25px;"><INPUT type="button" value=" --- Cut --- "  onclick="cutCommand()" style="transform: rotate(-1deg); column-span: all"></span>
                 </div>
 
             </div>
