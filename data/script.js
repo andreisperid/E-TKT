@@ -1,7 +1,7 @@
 function toggleVisibility(x, y) {
   if (x.style.visibility === "hidden") {
     x.style.visibility = "visible";
-    y.innerHTML = "- EXTRAS -";
+    y.innerHTML = "- [ EXTRAS ] -";
   } else if (x.style.visibility === "visible") {
     x.style.visibility = "hidden";
     y.innerHTML = " + [ EXTRAS ] + ";
@@ -11,9 +11,10 @@ function toggleVisibility(x, y) {
 function tagCommand() {
   let fieldValue = document.getElementById("text-input").value;
 
-  if (useRegex(fieldValue)) {    
-    window.open("&?tag=" + fieldValue, "_self");
-
+  if (useRegex(fieldValue)) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/&?"+"tag=" + fieldValue.toLowerCase(), true);
+    xhr.send();
   } else {
     document.getElementById("hint").style.color = "red";    
     document.getElementById("hint").style.textDecoration = "underline";
@@ -21,9 +22,13 @@ function tagCommand() {
   }
 }
 
-function clearWarnings(){
-    document.getElementById("hint").style.color = "white";    
-    document.getElementById("hint").style.textDecoration = "none";
+function clearWarning(){
+  document.getElementById("hint").style.color = "#777777";    
+  document.getElementById("hint").style.textDecoration = "none";
+}
+
+function clearField(){
+    document.getElementById("text-input").value = "";    
 }
 
 function useRegex(input) {
@@ -32,13 +37,19 @@ function useRegex(input) {
 }
 
 function rwCommand() {
-  window.open("&?rw", "_self");
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "/&?"+"rw", true);
+  xhr.send();
 }
 
 function fwCommand() {
-  window.open("&?fw", "_self");
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/&?"+"fw", true);
+    xhr.send();
 }
 
 function cutCommand() {
-  window.open("&?cut", "_self");
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/&?"+"cut", true);
+    xhr.send();
 }

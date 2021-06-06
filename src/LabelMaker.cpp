@@ -77,6 +77,9 @@ DNSServer dns;
 
 void setHome(bool calibrate)
 {
+	Serial.print("setHome() running on core ");
+	Serial.println(xPortGetCoreID());
+
 	digitalWrite(emitterPin, HIGH);
 	if (calibrate)
 	{
@@ -169,14 +172,23 @@ void setHome(bool calibrate)
 	delay(500);
 }
 
-void feedLabel()
+void feedLabel(bool directOrder, bool forward = true)
 {
-	stepperFeed.runToNewPosition(stepperChar.currentPosition() - stepsPerRevolution / 2);
+	Serial.print("feedLabel() running on core ");
+	Serial.println(xPortGetCoreID());
+	if (directOrder)
+		busy = true;
+	Serial.println("feeding label");
+	stepperFeed.runToNewPosition(forward ? 1 : -1 * (stepperChar.currentPosition() - stepsPerRevolution / 2));
 	delay(200);
+	if (directOrder)
+		busy = false;
 }
 
 void pressLabel()
 {
+	Serial.print("pressLabel() running on core ");
+	Serial.println(xPortGetCoreID());
 	for (int pos = restAngle; pos < peakAngle; pos++)
 	{
 		myServo.write(pos);
@@ -192,6 +204,8 @@ void pressLabel()
 
 void goToCharacter(char c)
 {
+	Serial.print("goToCharacter() running on core ");
+	Serial.println(xPortGetCoreID());
 	int backAdditional = 0;
 	if (c == '0')
 	{
@@ -235,19 +249,36 @@ void goToCharacter(char c)
 	stepperChar.runToNewPosition(stepsPerChar * deltaPosition + backAdditional);
 	delay(250);
 	pressLabel();
-	feedLabel();
+	feedLabel(false);
+}
+
+void cutLabel(bool directOrder)
+{
+	Serial.print("cutLabel() running on core ");
+	Serial.println(xPortGetCoreID());
+
+	if (directOrder)
+		busy = true;
+
+	Serial.println("cutting label");
+	goToCharacter('*');
+
+	if (directOrder)
+		busy = false;
 }
 
 void writeLabel(String label)
 {
+	Serial.print("writeLabel() running on core ");
+	Serial.println(xPortGetCoreID());
 	busy = true;
-	feedLabel();
+	feedLabel(false);
 	for (int i = 0; i < label.length(); i++)
 	{
 		goToCharacter(label[i]);
 		setHome(false);
 	}
-	goToCharacter('*');
+	cutLabel(false);
 	Serial.println("finished");
 	busy = false;
 	setHome(false);
@@ -305,12 +336,6 @@ String processorOld(const String &var)
 	}
 }
 
-String receiveTag(const String &var)
-{
-	Serial.println("unprocessed tag is: ");
-	Serial.println(var);
-}
-
 // COMMUNICATION -------------------------------------------------------------------
 void notFound(AsyncWebServerRequest *request)
 {
@@ -343,6 +368,8 @@ void initialize()
 				  String parameter;
 				  String value;
 
+				  Serial.println("receiving parameters");
+
 				  for (int i = 0; i < paramsNr; i++)
 				  {
 					  AsyncWebParameter *p = request->getParam(i);
@@ -350,17 +377,28 @@ void initialize()
 					  value = p->value();
 
 					  Serial.print("parameter: ");
-					  Serial.print(parameter);
 
 					  if (value != "")
 					  {
+						  Serial.print(parameter);
 						  Serial.print(", value: ");
 						  Serial.println(value);
 					  }
+					  else
+						  Serial.println(parameter);
 
+					  //   if (parameter == "tag")
+					  // 	  writeLabel(value);
+					  //   else if (parameter == "fw")
+					  // 	  feedLabel(true);
+					  //   else if (parameter == "rw")
+					  // 	  feedLabel(true, false);
+					  //   else if (parameter == "cut")
+					  // 	  cutLabel(true);
 				  }
 
-				  request->send(SPIFFS, "/index.html", String(), false, processor); //TODO: avoid refreshing
+				  request->send(SPIFFS, "/index.html", String(), false);
+				  // request->send(SPIFFS, "/index.html", String(), false, processor); //TODO: avoid refreshing
 			  });
 
 	// Route to load style.css file
@@ -372,11 +410,11 @@ void initialize()
 			  { request->send(SPIFFS, "/script.js", "text/javascript"); });
 
 	// Route to load fonts
-	server.on("/fontWhite.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/fontWhite.ttf", "font"); });
+	server.on("/fontwhite.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/fontwhite.ttf", "font"); });
 	// Route to load fonts
-	server.on("/fontBlack.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/fontBlack.ttf", "font"); });
+	server.on("/fontblack.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/fontblack.ttf", "font"); });
 
 	// Route to favicon
 	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -427,6 +465,9 @@ void wifiManager()
 void setup()
 {
 	Serial.begin(9600);
+
+	Serial.print("setup() running on core ");
+	Serial.println(xPortGetCoreID());
 
 	pinMode(sensorPin, INPUT);
 	pinMode(emitterPin, OUTPUT);

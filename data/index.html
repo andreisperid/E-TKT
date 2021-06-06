@@ -8,10 +8,10 @@
     <meta charset="utf-8" />
     <title>E-TKT</title>
 
-    <link rel="preload" href="fontBlack.ttf" as="font" />
-    <link rel="preload" href="fontWhite.ttf" as="font" />
-    <link rel="preload" href="style.css" as="style" />
-    <link rel="preload" href="script.js" as="script" />
+    <link rel="preload" href="/fontblack.ttf" as="font" crossOrigin="anonymous" />
+    <link rel="preload" href="/fontwhite.ttf" as="font" crossOrigin="anonymous" />
+    <link rel="preload" href="/style.css" as="style" />
+    <link rel="preload" href="/script.js" as="script" />
 
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
@@ -29,8 +29,7 @@
             minlenght="1"
             maxlength="20"
             placeholder="WRITE"
-            pattern="/^[a-zA-Z0-9 .*]+$/i"
-            onkeydown="clearWarnings()"
+            onkeydown="clearWarning()"
             value=""
             required
             autofocus
@@ -41,6 +40,13 @@
         </div>
 
         <div id="single-column">
+            <input
+            type="button"
+            onclick="clearField()"
+            id="submit-button"
+            value=" clear "
+            style="transform: rotate(0.75deg); color: #777777"
+          /> &nbsp&nbsp&nbsp
           <input
             type="button"
             onclick="tagCommand()"
@@ -70,8 +76,8 @@
         </div>
 
         <div id="extras" style="visibility: hidden">
-          <div style="display: table; column-count: 2; margin: auto">
-            <span style="display: table-cell; width: 100%%">
+          <div style="display: flex; justify-content: center; column-count: 2; margin: auto; width: 100%%">
+            <span style="display: box; width: 100%%; margin-right: 8px">
               <input
                 type="button"
                 value=" < RWD "
@@ -79,7 +85,7 @@
                 style="transform: rotate(1deg)"
               />
             </span>
-            <span style="display: table-cell; width: 100%%">
+            <span style="display: box; width: 100%%; margin-left: 8px">
               <input
                 type="button"
                 value=" FWD > "
@@ -92,7 +98,7 @@
             <span style="display: table-cell; width: 100%%; padding-top: 25px"
               ><input
                 type="button"
-                value=" --- Cut --- "
+                value=" ---- Cut ---- "
                 onclick="cutCommand()"
                 style="transform: rotate(-1deg); column-span: all"
             /></span>
