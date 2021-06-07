@@ -12,6 +12,8 @@
 // HARDWARE ------------------------------------------------------------------------
 #define HALFSTEP 8
 
+#define CONFIG_ASYNC_TCP_RUNNING_CORE 0
+
 // home sensor
 int sensorPin = 36;	 //A0?
 int emitterPin = 39; //A1?
@@ -303,19 +305,32 @@ void readSerial()
 }
 
 // DATA ----------------------------------------------------------------------------
-// Replaces placeholder with LED state value
-String processor(const String &var)
-{
-	Serial.print("command received: ");
-	Serial.println(var);
 
-	if (var == "label" || var == "rw" || var == "fw" || var == "cut")
-	{
-		operationStatus = busy ? "busy" : "standby";
-		Serial.print("status: ");
-		Serial.println(operationStatus);
-		return operationStatus;
-	}
+String processor(const String parameter, const String value = "")
+{
+	Serial.print("parameter: ");
+	Serial.print(parameter);
+	Serial.print(value !="" ? ", value: " : "");
+	Serial.println(value);
+
+	// 	if (parameter == "fw")
+	// 	{
+	// 		feedLabel(true);
+	// 	}
+	// 	else if (parameter == "rw")
+	// 	{
+	// 		feedLabel(true, false);
+	// 	}
+	// 	else if (parameter == "cut")
+	// 	{
+	// 		cutLabel(true);
+	// 	}
+	// 	else if (parameter == "tag" && value != "")
+	// 	{
+	// 		writeLabel(value);
+	// 		Serial.print(", value: ");
+	// 		Serial.println(value);
+	// 	}
 }
 
 String processorOld(const String &var)
@@ -364,41 +379,17 @@ void initialize()
 	server.on("/&", HTTP_GET, [](AsyncWebServerRequest *request)
 			  {
 				  int paramsNr = request->params();
-				  //   Serial.println(paramsNr);
 				  String parameter;
 				  String value;
-
-				  Serial.println("receiving parameters");
 
 				  for (int i = 0; i < paramsNr; i++)
 				  {
 					  AsyncWebParameter *p = request->getParam(i);
 					  parameter = p->name();
 					  value = p->value();
-
-					  Serial.print("parameter: ");
-
-					  if (value != "")
-					  {
-						  Serial.print(parameter);
-						  Serial.print(", value: ");
-						  Serial.println(value);
-					  }
-					  else
-						  Serial.println(parameter);
-
-					  //   if (parameter == "tag")
-					  // 	  writeLabel(value);
-					  //   else if (parameter == "fw")
-					  // 	  feedLabel(true);
-					  //   else if (parameter == "rw")
-					  // 	  feedLabel(true, false);
-					  //   else if (parameter == "cut")
-					  // 	  cutLabel(true);
+					  processor(parameter, value);
 				  }
-
 				  request->send(SPIFFS, "/index.html", String(), false);
-				  // request->send(SPIFFS, "/index.html", String(), false, processor); //TODO: avoid refreshing
 			  });
 
 	// Route to load style.css file
@@ -501,4 +492,5 @@ void setup()
 void loop()
 {
 	// readSerial();
+	// delay(10);
 }
