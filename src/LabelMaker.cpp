@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <AccelStepper.h>
 #include <ESP32Servo.h>
-#include <movingAvg.h>
+// #include <movingAvg.h>
 #include <WiFi.h>
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
@@ -10,32 +10,30 @@
 #include "SPIFFS.h"
 
 // HARDWARE ------------------------------------------------------------------------
-#define HALFSTEP 8
-
 #define CONFIG_ASYNC_TCP_RUNNING_CORE 0
+#define MICROSTEP_Feed 8
+#define MICROSTEP_Char 16
 
 // home sensor
-int sensorPin = 36;	 //A0?
-int emitterPin = 39; //A1?
+int sensorPin = A0;
 int sensorState;
-movingAvg sensorStateAvg(200);
 
 // stepper
-const int stepsPerRevolution = 4076;
-AccelStepper stepperFeed(HALFSTEP, 2, 4, 3, 5);
-AccelStepper stepperChar(HALFSTEP, 8, 10, 9, 11);
+const int stepsPerRevolutionFeed = 4076;
+const int stepsPerRevolutionChar = 200 * MICROSTEP_Char;
+
+AccelStepper stepperFeed(MICROSTEP_Feed, 2, 4, 3, 5);
+AccelStepper stepperChar(1, 10, 11);
 int fullCycle;
 float stepsPerChar;
 
 // servo
 Servo myServo;
-int restAngle = 22;
-int peakAngle = 64;
+int restAngle = 55;
+int peakAngle = 18;
 
-// infrared
-int minLight;
-int maxLight;
-int thresholdLight;
+// hall
+int threshold = 128;
 int currentCharPosition = -1;
 int deltaPosition;
 bool reverseCalibration;
@@ -77,138 +75,92 @@ DNSServer dns;
 // ------------------------------------------------------------------------------------------------
 // HARDWARE ------------------------------------------------------------------------
 
-void setHome(bool calibrate)
+//new
+void setHome()
 {
 	Serial.print("setHome() running on core ");
 	Serial.println(xPortGetCoreID());
 
-	digitalWrite(emitterPin, HIGH);
-	if (calibrate)
-	{
-		stepperChar.setCurrentPosition(0);
-		minLight = analogRead(sensorPin);
-		maxLight = analogRead(sensorPin);
-		Serial.println("calibrating...");
+	Serial.println("0. homing");
 
-		stepperChar.moveTo(stepsPerRevolution * 1.1f);
-		while (stepperChar.distanceToGo() > 0)
-		{
-			sensorState = analogRead(sensorPin);
-			int averaged = sensorStateAvg.reading(sensorState);
-
-			if (minLight != 0 && averaged < minLight)
-			{
-				minLight = averaged;
-			}
-			if (maxLight != 1023 && averaged > maxLight)
-			{
-				maxLight = averaged;
-			}
-			thresholdLight = (minLight + maxLight) / 2;
-
-			//Serial.print("reading (c): ");
-			//Serial.println(sensorState);
-			//Serial.print("avg: ");
-			//Serial.println(averaged);
-
-			stepperChar.run();
-		}
-		//Serial.print("last reading: ");
-		//Serial.println(sensorState);
-		stepperChar.setCurrentPosition(0);
-	}
-
-	//Serial.print("threshold :");
-	//Serial.print(thresholdLight);
-	//Serial.print(" << calibrated >> minLight :");
-	//Serial.print(minLight);
-	//Serial.print(" / maxLight: ");
-	//Serial.println(maxLight);
-
-	//Serial.println("calling home...");
-	delay(200);
-
-	int targetPosition = stepsPerRevolution * 2;
-
-	if (reverseCalibration)
-	{
-		targetPosition *= -1;
-	}
-
-	stepperChar.moveTo(targetPosition);
 	sensorState = analogRead(sensorPin);
+	// Serial.print("reading a: ");
+	// Serial.println(sensorState);
 
-	//Serial.print("sensor ");
-	//Serial.println(sensorState);
-	sensorStateAvg.reset();
-	int averaged = sensorStateAvg.reading(sensorState);
+	if (sensorState < threshold)
+	{
+		Serial.println("over sensor");
+		stepperChar.runToNewPosition(-stepsPerChar * 4);
+		stepperChar.run();
+	}
 
-	while (averaged < thresholdLight)
+	sensorState = analogRead(sensorPin);
+	// Serial.print("reading b: ");
+	// Serial.println(sensorState);
+
+	stepperChar.move(-stepsPerRevolutionChar * 1.5f);
+	while (sensorState > threshold)
 	{
 		sensorState = analogRead(sensorPin);
-		averaged = sensorStateAvg.reading(sensorState);
+		// Serial.println("run");
 		stepperChar.run();
-		//if (sensorState > thresholdLight) Serial.println(sensorState);
 	}
 	stepperChar.setCurrentPosition(0);
 
-	//Serial.print("last reading: ");
-	//Serial.println(sensorState);
+	sensorState = analogRead(sensorPin);
+	// Serial.print("reading c: ");
+	// Serial.println(sensorState);
+
+	stepperChar.runToNewPosition(stepsPerChar * 0.75f);
+	stepperChar.run();
+	stepperChar.setCurrentPosition(0);
 	currentCharPosition = charHome;
-	if (reverseCalibration)
-	{
-		//Serial.println("<< reverse");
-		stepperChar.runToNewPosition(-stepsPerChar);
-		stepperChar.setCurrentPosition(0);
-		reverseCalibration = false;
-	}
-	else
-	{
-		//Serial.println(">> forward");
-	}
 
-	//Serial.print("at home, position ");
-	//Serial.println(currentCharPosition);
-
-	digitalWrite(emitterPin, LOW);
-	delay(500);
+	delay(100);
 }
 
-void feedLabel(bool directOrder, bool forward = true)
+//new
+void feedLabel()
 {
-	Serial.print("feedLabel() running on core ");
-	Serial.println(xPortGetCoreID());
-	if (directOrder)
-		busy = true;
-	Serial.println("feeding label");
-	stepperFeed.runToNewPosition(forward ? 1 : -1 * (stepperChar.currentPosition() - stepsPerRevolution / 2));
-	delay(200);
-	if (directOrder)
-		busy = false;
+	Serial.println("3. feeding");
+
+	stepperFeed.enableOutputs();
+	stepperFeed.runToNewPosition(stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8); // TODO adjust length
+	stepperFeed.disableOutputs();
+
+	delay(10);
 }
 
+//new
 void pressLabel()
 {
-	Serial.print("pressLabel() running on core ");
-	Serial.println(xPortGetCoreID());
-	for (int pos = restAngle; pos < peakAngle; pos++)
+
+	Serial.println("2. pressing");
+
+	for (int pos = restAngle; pos > peakAngle; pos--)
 	{
 		myServo.write(pos);
-		delay(12);
+		delay(5);
+		// delay(12);
 	}
 	delay(500);
-	for (int pos = peakAngle; pos > restAngle; pos--)
+	for (int pos = peakAngle; pos < restAngle; pos++)
 	{
 		myServo.write(pos);
-		delay(12);
+		// delay(12);
+		delay(5);
 	}
+	delay(500);
 }
 
+//new
 void goToCharacter(char c)
 {
-	Serial.print("goToCharacter() running on core ");
-	Serial.println(xPortGetCoreID());
+	Serial.print("1. roaming for ");
+	Serial.println(c);
+
 	int backAdditional = 0;
+
 	if (c == '0')
 	{
 		//Serial.println("exception ZERO");
@@ -226,32 +178,39 @@ void goToCharacter(char c)
 		{
 			deltaPosition = i - currentCharPosition;
 
-			if (deltaPosition < 0)
-				backAdditional = -stepsPerChar / 2;
-			else if (deltaPosition > 0)
-				backAdditional = stepsPerChar / 2;
-			/*
-			Serial.print("char ");
-			Serial.print(c);
-			Serial.print(" is on position ");
-			Serial.print(i);
-			Serial.print(" ( delta ");
-			Serial.print(deltaPosition);
-			Serial.println(")");
-			*/
+			Serial.print("   deltaPosition: ");
+			Serial.println(deltaPosition);
+
 			currentCharPosition = i;
 
-			if (i > charHome)
-				reverseCalibration = true;
-			else
-				reverseCalibration = false;
+			// if (i > charHome)
+			//   reverseCalibration = true;
+			// else
+			//   reverseCalibration = false;
 		}
 	}
 
-	stepperChar.runToNewPosition(stepsPerChar * deltaPosition + backAdditional);
-	delay(250);
-	pressLabel();
-	feedLabel(false);
+	if (deltaPosition < 0)
+	{
+		deltaPosition += 43;
+	}
+
+	Serial.print("   corrected deltaPosition: ");
+	Serial.println(deltaPosition);
+
+	stepperChar.runToNewPosition(-stepsPerChar * deltaPosition);
+	delay(10);
+
+	if (c == '*')
+	{
+		pressLabel();
+		pressLabel();
+		pressLabel();
+	}
+	else
+	{
+		pressLabel();
+	}
 }
 
 void cutLabel(bool directOrder)
@@ -269,21 +228,46 @@ void cutLabel(bool directOrder)
 		busy = false;
 }
 
+//new
 void writeLabel(String label)
 {
 	Serial.print("writeLabel() running on core ");
 	Serial.println(xPortGetCoreID());
 	busy = true;
-	feedLabel(false);
-	for (int i = 0; i < label.length(); i++)
+
+	// abcdefghijklmnopqrstuvwxyz23456789*
+	label.toUpperCase();
+	Serial.println(label);
+
+	int labelLength = label.length();
+
+	feedLabel();
+	for (int i = 0; i < labelLength; i++)
 	{
-		goToCharacter(label[i]);
-		setHome(false);
+		if (label[i] != ' ')
+		{
+			goToCharacter(label[i]);
+		}
+		delay(50);
+		feedLabel();
+		setHome();
 	}
+
+	if (labelLength < 6 && labelLength != 1)
+	{
+		int spaceDelta = 6 - labelLength;
+		Serial.print("space delta: ");
+		Serial.println(spaceDelta);
+		for (int i = 0; i < spaceDelta; i++)
+		{
+			feedLabel();
+		}
+	}
+
 	cutLabel(false);
 	Serial.println("finished");
 	busy = false;
-	setHome(false);
+	setHome();
 }
 
 void readSerial()
@@ -310,27 +294,27 @@ String processor(const String parameter, const String value = "")
 {
 	Serial.print("parameter: ");
 	Serial.print(parameter);
-	Serial.print(value !="" ? ", value: " : "");
+	Serial.print(value != "" ? ", value: " : "");
 	Serial.println(value);
 
-	// 	if (parameter == "fw")
-	// 	{
-	// 		feedLabel(true);
-	// 	}
-	// 	else if (parameter == "rw")
-	// 	{
-	// 		feedLabel(true, false);
-	// 	}
-	// 	else if (parameter == "cut")
-	// 	{
-	// 		cutLabel(true);
-	// 	}
-	// 	else if (parameter == "tag" && value != "")
-	// 	{
-	// 		writeLabel(value);
-	// 		Serial.print(", value: ");
-	// 		Serial.println(value);
-	// 	}
+	if (parameter == "fw")
+	{
+		feedLabel();
+	}
+	else if (parameter == "rw")
+	{
+		feedLabel();
+	}
+	else if (parameter == "cut")
+	{
+		cutLabel(true);
+	}
+	else if (parameter == "tag" && value != "")
+	{
+		writeLabel(value);
+		Serial.print(", value: ");
+		Serial.println(value);
+	}
 }
 
 String processorOld(const String &var)
@@ -453,37 +437,31 @@ void wifiManager()
 }
 
 // CORE
+//new
 void setup()
 {
 	Serial.begin(9600);
 
-	Serial.print("setup() running on core ");
-	Serial.println(xPortGetCoreID());
+	pinMode(sensorPin, INPUT_PULLUP);
 
-	pinMode(sensorPin, INPUT);
-	pinMode(emitterPin, OUTPUT);
-
-	stepperFeed.setMaxSpeed(1000.0);
-	stepperFeed.setAcceleration(16000.0);
-	stepperFeed.setSpeed(200);
-	stepperChar.setMaxSpeed(1000.0);
-	stepperChar.setAcceleration(16000.0);
-	stepperChar.setSpeed(200);
+	stepperFeed.setMaxSpeed(500);
+	stepperFeed.setAcceleration(500);
+	stepperChar.setMaxSpeed(8000000);
+	stepperChar.setAcceleration(800000);
 
 	myServo.attach(12);
 	myServo.write(restAngle);
-	delay(100);
+	delay(10);
 
 	Serial.println();
-	//stepsPerChar = 100;
-	//stepsPerChar = 95;
-	stepsPerChar = (float)stepsPerRevolution / charQuantity;
-	//Serial.print("stepsPerChar: ");
-	//Serial.println(stepsPerChar);
-	sensorStateAvg.begin();
+
+	stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
+
+	Serial.print("setup() running on core ");
+	Serial.println(xPortGetCoreID());
 
 	//
-	setHome(true);
+	setHome();
 	Serial.println("booting...");
 
 	wifiManager();
@@ -491,6 +469,6 @@ void setup()
 
 void loop()
 {
-	// readSerial();
+	readSerial();
 	// delay(10);
 }
