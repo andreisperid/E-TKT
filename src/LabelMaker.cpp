@@ -11,6 +11,7 @@
 
 // HARDWARE ------------------------------------------------------------------------
 #define CONFIG_ASYNC_TCP_RUNNING_CORE 0
+
 #define MICROSTEP_Feed 8
 #define MICROSTEP_Char 16
 
@@ -119,7 +120,7 @@ void setHome()
 	delay(100);
 }
 
-//new
+//new TODO: NEGATIVE FEED
 void feedLabel()
 {
 	Serial.println("3. feeding");
@@ -128,7 +129,9 @@ void feedLabel()
 	stepperFeed.runToNewPosition(stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8); // TODO adjust length
 	stepperFeed.disableOutputs();
 
-	delay(10);
+	// delay(10);
+	
+	Serial.println("3. feeding DONE");
 }
 
 //new
@@ -151,6 +154,9 @@ void pressLabel()
 		delay(5);
 	}
 	delay(500);
+
+	
+	Serial.println("2. pressing DONE");
 }
 
 //new
@@ -159,7 +165,7 @@ void goToCharacter(char c)
 	Serial.print("1. roaming for ");
 	Serial.println(c);
 
-	int backAdditional = 0;
+	// int backAdditional = 0;
 
 	if (c == '0')
 	{
@@ -236,7 +242,6 @@ void writeLabel(String label)
 	busy = true;
 
 	// abcdefghijklmnopqrstuvwxyz23456789*
-	label.toUpperCase();
 	Serial.println(label);
 
 	int labelLength = label.length();
@@ -283,7 +288,7 @@ void readSerial()
 		Serial.print("TAG: ");
 		Serial.println(labelString);
 
-		writeLabel(labelString);
+		// writeLabel(labelString);
 		waitingLabel = false;
 	}
 }
@@ -297,6 +302,9 @@ String processor(const String parameter, const String value = "")
 	Serial.print(value != "" ? ", value: " : "");
 	Serial.println(value);
 
+	String label = value;
+	label.toUpperCase();
+
 	if (parameter == "fw")
 	{
 		feedLabel();
@@ -309,29 +317,11 @@ String processor(const String parameter, const String value = "")
 	{
 		cutLabel(true);
 	}
-	else if (parameter == "tag" && value != "")
+	else if (parameter == "tag" && label != "")
 	{
-		writeLabel(value);
+		writeLabel(label);
 		Serial.print(", value: ");
-		Serial.println(value);
-	}
-}
-
-String processorOld(const String &var)
-{
-	Serial.println(var);
-	if (var == "TAG")
-	{
-		if (digitalRead(ledPin))
-		{
-			ledState = "ON";
-		}
-		else
-		{
-			ledState = "OFF";
-		}
-		Serial.print(ledState);
-		return ledState;
+		Serial.println(label);
 	}
 }
 
@@ -393,7 +383,7 @@ void initialize()
 
 	// Route to favicon
 	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/favicon.ico"), "image"; });
+			  { request->send(SPIFFS, "/favicon.ico"), "image";});
 
 	// Start server
 	server.begin();
@@ -469,6 +459,6 @@ void setup()
 
 void loop()
 {
-	readSerial();
-	// delay(10);
+	// readSerial();
+	delay(50);
 }
