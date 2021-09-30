@@ -11,7 +11,19 @@
 #include "SPIFFS.h"
 
 // HARDWARE ------------------------------------------------------------------------
-#define CONFIG_ASYNC_TCP_RUNNING_CORE 0
+// #define CONFIG_ASYNC_TCP_RUNNING_CORE 0
+
+// mega
+// sensorPin = A0
+// stepperFeed = 2, 4, 3, 5
+// stepperChar = 10, 11
+
+// esp32
+// sensorPin = GPIO34
+// stepperFeed = GPIO33, GPIO25, GPIO26, GPIO27, 
+// stepperChar = GPIO36, GPIO39
+// pn532 = GPIO19, GPIO23, GPIO18, GPIO5
+// resetWifi = GPIO2
 
 #define MICROSTEP_Feed 8
 #define MICROSTEP_Char 16
@@ -19,6 +31,10 @@
 // home sensor
 int sensorPin = A0;
 int sensorState;
+int threshold = 128;
+int currentCharPosition = -1;
+int deltaPosition;
+bool reverseCalibration;
 
 // stepper
 const int stepsPerRevolutionFeed = 4076;
@@ -31,14 +47,12 @@ float stepsPerChar;
 
 // servo
 Servo myServo;
+const int servoPin = 12;
 int restAngle = 55;
 int peakAngle = 18;
 
-// hall
-int threshold = 128;
-int currentCharPosition = -1;
-int deltaPosition;
-bool reverseCalibration;
+
+
 
 // DATA ----------------------------------------------------------------------------
 
@@ -57,6 +71,10 @@ bool waitingLabel = false;
 String headerCommand;
 bool busy;
 String operationStatus;
+
+String parameter = "";
+String value = "";
+TaskHandle_t processorTaskHandle = NULL;
 
 // temporary ********
 int ledPin = 1;
@@ -77,41 +95,27 @@ DNSServer dns;
 // ------------------------------------------------------------------------------------------------
 // HARDWARE ------------------------------------------------------------------------
 
-//new
 void setHome()
 {
-	Serial.print("setHome() running on core ");
-	Serial.println(xPortGetCoreID());
-
-	Serial.println("0. homing");
+	Serial.println("	home");
 
 	sensorState = analogRead(sensorPin);
-	// Serial.print("reading a: ");
-	// Serial.println(sensorState);
 
 	if (sensorState < threshold)
 	{
-		Serial.println("over sensor");
 		stepperChar.runToNewPosition(-stepsPerChar * 4);
 		stepperChar.run();
 	}
-
 	sensorState = analogRead(sensorPin);
-	// Serial.print("reading b: ");
-	// Serial.println(sensorState);
 
 	stepperChar.move(-stepsPerRevolutionChar * 1.5f);
 	while (sensorState > threshold)
 	{
 		sensorState = analogRead(sensorPin);
-		// Serial.println("run");
 		stepperChar.run();
 	}
 	stepperChar.setCurrentPosition(0);
-
 	sensorState = analogRead(sensorPin);
-	// Serial.print("reading c: ");
-	// Serial.println(sensorState);
 
 	stepperChar.runToNewPosition(stepsPerChar * 0.75f);
 	stepperChar.run();
@@ -121,61 +125,52 @@ void setHome()
 	delay(100);
 }
 
-//new TODO: NEGATIVE FEED
+// TODO: NEGATIVE FEED
 void feedLabel()
 {
-	Serial.println("3. feeding");
+	Serial.println("				feed");
 
 	stepperFeed.enableOutputs();
 	stepperFeed.runToNewPosition(stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8); // TODO adjust length
 	stepperFeed.disableOutputs();
 
-	// delay(10);
-	
-	Serial.println("3. feeding DONE");
+	delay(10);
+
+	// Serial.println("3. feeding DONE");
 }
 
-//new
 void pressLabel()
 {
-
-	Serial.println("2. pressing");
-
+	Serial.println("			press");
 	for (int pos = restAngle; pos > peakAngle; pos--)
 	{
 		myServo.write(pos);
 		delay(5);
-		// delay(12);
 	}
 	delay(500);
 	for (int pos = peakAngle; pos < restAngle; pos++)
 	{
 		myServo.write(pos);
-		// delay(12);
 		delay(5);
 	}
 	delay(500);
-
-	
-	Serial.println("2. pressing DONE");
+	// Serial.println("2. pressing DONE");
 }
 
-//new
 void goToCharacter(char c)
 {
-	Serial.print("1. roaming for ");
-	Serial.println(c);
-
-	// int backAdditional = 0;
+	if (c != '*')
+	{
+		Serial.print("		go ");
+		Serial.println(c);
+	}
 
 	if (c == '0')
 	{
-		//Serial.println("exception ZERO");
 		c = 'O';
 	}
 	else if (c == '1')
 	{
-		//Serial.println("exception ONE");
 		c = 'I';
 	}
 
@@ -184,16 +179,7 @@ void goToCharacter(char c)
 		if (c == charSet[i])
 		{
 			deltaPosition = i - currentCharPosition;
-
-			Serial.print("   deltaPosition: ");
-			Serial.println(deltaPosition);
-
 			currentCharPosition = i;
-
-			// if (i > charHome)
-			//   reverseCalibration = true;
-			// else
-			//   reverseCalibration = false;
 		}
 	}
 
@@ -202,52 +188,35 @@ void goToCharacter(char c)
 		deltaPosition += 43;
 	}
 
-	Serial.print("   corrected deltaPosition: ");
-	Serial.println(deltaPosition);
-
 	stepperChar.runToNewPosition(-stepsPerChar * deltaPosition);
 	delay(10);
 
-	if (c == '*')
-	{
-		pressLabel();
-		pressLabel();
-		pressLabel();
-	}
-	else
+	if (c != '*')
 	{
 		pressLabel();
 	}
 }
 
-void cutLabel(bool directOrder)
+void cutLabel()
 {
-	Serial.print("cutLabel() running on core ");
-	Serial.println(xPortGetCoreID());
-
-	if (directOrder)
-		busy = true;
-
-	Serial.println("cutting label");
+	Serial.println("					cut");
 	goToCharacter('*');
 
-	if (directOrder)
-		busy = false;
+	for (int i = 0; i < 3; i++)
+	{
+		pressLabel();
+	}
 }
 
-//new
 void writeLabel(String label)
 {
-	Serial.print("writeLabel() running on core ");
-	Serial.println(xPortGetCoreID());
-	busy = true;
-
 	// abcdefghijklmnopqrstuvwxyz23456789*
-	Serial.println(label);
 
 	int labelLength = label.length();
-
+	
 	feedLabel();
+	setHome();
+
 	for (int i = 0; i < labelLength; i++)
 	{
 		if (label[i] != ' ')
@@ -262,18 +231,22 @@ void writeLabel(String label)
 	if (labelLength < 6 && labelLength != 1)
 	{
 		int spaceDelta = 6 - labelLength;
-		Serial.print("space delta: ");
-		Serial.println(spaceDelta);
 		for (int i = 0; i < spaceDelta; i++)
 		{
 			feedLabel();
 		}
 	}
 
-	cutLabel(false);
-	Serial.println("finished");
+	cutLabel();
+
 	busy = false;
 	setHome();
+
+	// reset server parameters
+	parameter = "";
+	value = "";
+	Serial.println("						finished");
+	vTaskDelete(processorTaskHandle);
 }
 
 void readSerial()
@@ -296,15 +269,17 @@ void readSerial()
 
 // DATA ----------------------------------------------------------------------------
 
-String processor(const String parameter, const String value = "")
+// void processor(const String parameter, const String value = "")
+void processor(void *parameters)
 {
-	Serial.print("parameter: ");
+	// Serial.print("parameter: ");
 	Serial.print(parameter);
-	Serial.print(value != "" ? ", value: " : "");
-	Serial.println(value);
 
 	String label = value;
 	label.toUpperCase();
+
+	Serial.print(label != "" ? ", value: " : "");
+	Serial.println(label);
 
 	if (parameter == "fw")
 	{
@@ -316,7 +291,7 @@ String processor(const String parameter, const String value = "")
 	}
 	else if (parameter == "cut")
 	{
-		cutLabel(true);
+		cutLabel();
 	}
 	else if (parameter == "tag" && label != "")
 	{
@@ -342,7 +317,7 @@ void initialize()
 	}
 
 	// Print ESP32 Local IP Address
-	Serial.println(WiFi.localIP());
+	// Serial.println(WiFi.localIP());
 
 	// Route for root / web page
 	server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -354,15 +329,25 @@ void initialize()
 	server.on("/&", HTTP_GET, [](AsyncWebServerRequest *request)
 			  {
 				  int paramsNr = request->params();
-				  String parameter;
-				  String value;
+				  //   String parameter;
+				  //   String value;
 
 				  for (int i = 0; i < paramsNr; i++)
 				  {
 					  AsyncWebParameter *p = request->getParam(i);
 					  parameter = p->name();
 					  value = p->value();
-					  processor(parameter, value);
+
+					  xTaskCreatePinnedToCore(
+						  processor,			/* função que implementa a tarefa */
+						  "processorTask",		/* nome da tarefa */
+						  10000,				/* número de palavras a serem alocadas para uso com a pilha da tarefa */
+						  NULL,					/* parâmetro de entrada para a tarefa (pode ser NULL) */
+						  1,					/* prioridade da tarefa (0 a N) */
+						  &processorTaskHandle, /* referência para a tarefa (pode ser NULL) */
+						  0);					/* core 0 */
+
+					  //   processor(parameter, value);
 				  }
 				  request->send(SPIFFS, "/index.html", String(), false);
 			  });
@@ -384,7 +369,7 @@ void initialize()
 
 	// Route to favicon
 	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/favicon.ico"), "image";});
+			  { request->send(SPIFFS, "/favicon.ico"), "image"; });
 
 	// Start server
 	server.begin();
@@ -400,6 +385,8 @@ void configModeCallback(AsyncWiFiManager *myWiFiManager)
 
 void wifiManager()
 {
+	// TODO: button to delete wifi data
+
 	//Local intialization. Once its business is done, there is no need to keep it around
 	AsyncWiFiManager wifiManager(&server, &dns);
 	//reset settings - for testing
@@ -421,10 +408,12 @@ void wifiManager()
 		delay(1000);
 	}
 
-	if(!MDNS.begin("etkt")) {
+	if (!MDNS.begin("etkt"))
+	{
 		Serial.println("Error starting mDNS");
 		return;
 	}
+
 	//if you get here you have connected to the WiFi
 	Serial.println("connected!");
 
@@ -432,7 +421,6 @@ void wifiManager()
 }
 
 // CORE
-//new
 void setup()
 {
 	Serial.begin(9600);
@@ -444,7 +432,7 @@ void setup()
 	stepperChar.setMaxSpeed(8000000);
 	stepperChar.setAcceleration(800000);
 
-	myServo.attach(12);
+	myServo.attach(servoPin);
 	myServo.write(restAngle);
 	delay(10);
 
@@ -452,18 +440,14 @@ void setup()
 
 	stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
 
-	Serial.print("setup() running on core ");
-	Serial.println(xPortGetCoreID());
-
-	//
-	setHome();
-	Serial.println("booting...");
-
+	Serial.println("boot");
 	wifiManager();
+	delay(500); //tempo para a tarefa iniciar
+
+	setHome();
 }
 
 void loop()
 {
 	// readSerial();
-	delay(50);
 }

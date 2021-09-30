@@ -18,7 +18,7 @@ function tagCommand() {
   } else {
     document.getElementById("hint").style.color = "red";    
     document.getElementById("hint").style.textDecoration = "underline";
-    window.alert("allowed: A-Z 0-9 space . - * (20 max)")
+    window.alert("allowed: A-Z 0-9 space . - (20 max)")
   }
 }
 
@@ -32,7 +32,7 @@ function clearField(){
 }
 
 function useRegex(input) {
-    let regex = /^[a-zA-Z0-9 .*]+$/i;
+    let regex = /^[a-zA-Z0-9 .]+$/i;
     return regex.test(input);
 }
 
