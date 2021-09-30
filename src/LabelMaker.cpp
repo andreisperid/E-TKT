@@ -7,6 +7,7 @@
 #include <ESPAsyncWebServer.h>
 #include <ESPAsyncWiFiManager.h>
 #include <DNSServer.h>
+#include <ESPmDNS.h>
 #include "SPIFFS.h"
 
 // HARDWARE ------------------------------------------------------------------------
@@ -420,6 +421,10 @@ void wifiManager()
 		delay(1000);
 	}
 
+	if(!MDNS.begin("etkt")) {
+		Serial.println("Error starting mDNS");
+		return;
+	}
 	//if you get here you have connected to the WiFi
 	Serial.println("connected!");
 
