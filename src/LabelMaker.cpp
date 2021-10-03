@@ -18,40 +18,44 @@
 // stepperFeed = 2, 4, 3, 5
 // stepperChar = 10, 11
 
+// 34, 35, 36, 39 > input only, no pup/pdwn
+
 // esp32
 // sensorPin = GPIO34
-// stepperFeed = GPIO33, GPIO25, GPIO26, GPIO27, 
-// stepperChar = GPIO36, GPIO39
-// pn532 = GPIO19, GPIO23, GPIO18, GPIO5
-// resetWifi = GPIO2
+// servo = GPIO14
+// stepperFeed = GPIO16, GPIO4, GPIO2, GPIO15
+// stepperChar = GPIO32, GPIO33
+// pn532 = GPIO19, GPIO23, GPIO18, GPIOO5
+// resetWifi = GPIO13
 
 #define MICROSTEP_Feed 8
 #define MICROSTEP_Char 16
 
 // home sensor
-int sensorPin = A0;
+int sensorPin = 34;
 int sensorState;
 int threshold = 128;
 int currentCharPosition = -1;
 int deltaPosition;
 bool reverseCalibration;
 
+// wifi reset
+const int wifiResetPin = 13;
+
 // stepper
 const int stepsPerRevolutionFeed = 4076;
 const int stepsPerRevolutionChar = 200 * MICROSTEP_Char;
 
-AccelStepper stepperFeed(MICROSTEP_Feed, 2, 4, 3, 5);
-AccelStepper stepperChar(1, 10, 11);
+AccelStepper stepperFeed(MICROSTEP_Feed, 15, 4, 2, 16);
+AccelStepper stepperChar(1, 33, 32);
 int fullCycle;
 float stepsPerChar;
 
 // servo
 Servo myServo;
-const int servoPin = 12;
+const int servoPin = 14;
 int restAngle = 55;
 int peakAngle = 18;
-
-
 
 
 // DATA ----------------------------------------------------------------------------
@@ -65,6 +69,7 @@ char charSet[charQuantity] = {
 	'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '+', '+',
 	'+', '+', '+'};
 String labelString;
+char prevChar;
 int charHome = 21;
 bool waitingLabel = false;
 
@@ -75,11 +80,6 @@ String operationStatus;
 String parameter = "";
 String value = "";
 TaskHandle_t processorTaskHandle = NULL;
-
-// temporary ********
-int ledPin = 1;
-String ledState;
-//
 
 // COMMUNICATION -------------------------------------------------------------------
 
@@ -122,7 +122,7 @@ void setHome()
 	stepperChar.setCurrentPosition(0);
 	currentCharPosition = charHome;
 
-	delay(100);
+	delay(250);
 }
 
 // TODO: NEGATIVE FEED
@@ -134,7 +134,7 @@ void feedLabel()
 	stepperFeed.runToNewPosition(stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8); // TODO adjust length
 	stepperFeed.disableOutputs();
 
-	delay(10);
+	delay(50);
 
 	// Serial.println("3. feeding DONE");
 }
@@ -145,13 +145,13 @@ void pressLabel()
 	for (int pos = restAngle; pos > peakAngle; pos--)
 	{
 		myServo.write(pos);
-		delay(5);
+		// delay(2);
 	}
 	delay(500);
 	for (int pos = peakAngle; pos < restAngle; pos++)
 	{
 		myServo.write(pos);
-		delay(5);
+		// delay(2);
 	}
 	delay(500);
 	// Serial.println("2. pressing DONE");
@@ -159,10 +159,13 @@ void pressLabel()
 
 void goToCharacter(char c)
 {
+	setHome();
+
 	if (c != '*')
 	{
-		Serial.print("		go ");
-		Serial.println(c);
+		Serial.print("		\" ");
+		Serial.print(c);		
+		Serial.println(" \"");
 	}
 
 	if (c == '0')
@@ -191,10 +194,10 @@ void goToCharacter(char c)
 	stepperChar.runToNewPosition(-stepsPerChar * deltaPosition);
 	delay(10);
 
-	if (c != '*')
-	{
-		pressLabel();
-	}
+	// if (c != '*')
+	// {
+	// 	pressLabel();
+	// }
 }
 
 void cutLabel()
@@ -213,19 +216,19 @@ void writeLabel(String label)
 	// abcdefghijklmnopqrstuvwxyz23456789*
 
 	int labelLength = label.length();
-	
+
 	feedLabel();
-	setHome();
 
 	for (int i = 0; i < labelLength; i++)
 	{
-		if (label[i] != ' ')
-		{
+		if (label[i] != ' ' && label[i] != prevChar)
+		{			
 			goToCharacter(label[i]);
+			prevChar = label[i];
 		}
 		delay(50);
+		pressLabel();
 		feedLabel();
-		setHome();
 	}
 
 	if (labelLength < 6 && labelLength != 1)
@@ -369,7 +372,7 @@ void initialize()
 
 	// Route to favicon
 	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/favicon.ico"), "image"; });
+			  { request->send(SPIFFS, "/favicon.ico", "image"); });
 
 	// Start server
 	server.begin();
@@ -390,7 +393,6 @@ void wifiManager()
 	//Local intialization. Once its business is done, there is no need to keep it around
 	AsyncWiFiManager wifiManager(&server, &dns);
 	//reset settings - for testing
-	// wifiManager.resetSettings();
 
 	//set callback that gets called when connecting to previous WiFi fails, and enters Access Point mode
 	wifiManager.setAPCallback(configModeCallback);
@@ -426,11 +428,23 @@ void setup()
 	Serial.begin(9600);
 
 	pinMode(sensorPin, INPUT_PULLUP);
+	pinMode(wifiResetPin, INPUT_PULLDOWN);
 
-	stepperFeed.setMaxSpeed(500);
-	stepperFeed.setAcceleration(500);
-	stepperChar.setMaxSpeed(8000000);
-	stepperChar.setAcceleration(800000);
+	bool wifiReset = digitalRead(wifiResetPin);
+
+	// Serial.print("wifi reset? ");
+	// Serial.println(wifiReset);
+	if (wifiReset)
+	{
+		Serial.println("<< wifi reset >>");
+		// wifiManager.resetSettings();
+		  WiFi.disconnect(true);
+	}
+
+	stepperFeed.setMaxSpeed(40000);
+	stepperFeed.setAcceleration(6000);
+	stepperChar.setMaxSpeed(2000 * MICROSTEP_Char);
+	stepperChar.setAcceleration(2000 * MICROSTEP_Char);
 
 	myServo.attach(servoPin);
 	myServo.write(restAngle);
