@@ -57,7 +57,6 @@ const int servoPin = 14;
 int restAngle = 55;
 int peakAngle = 18;
 
-
 // DATA ----------------------------------------------------------------------------
 
 // char
@@ -164,7 +163,7 @@ void goToCharacter(char c)
 	if (c != '*')
 	{
 		Serial.print("		\" ");
-		Serial.print(c);		
+		Serial.print(c);
 		Serial.println(" \"");
 	}
 
@@ -222,7 +221,7 @@ void writeLabel(String label)
 	for (int i = 0; i < labelLength; i++)
 	{
 		if (label[i] != ' ' && label[i] != prevChar)
-		{			
+		{
 			goToCharacter(label[i]);
 			prevChar = label[i];
 		}
@@ -374,6 +373,10 @@ void initialize()
 	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/favicon.ico", "image"); });
 
+	// Route to favicon
+	server.on("/splash.png", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/splash.png", "image"); });
+
 	// Start server
 	server.begin();
 }
@@ -427,9 +430,11 @@ void setup()
 {
 	Serial.begin(9600);
 
+
 	pinMode(sensorPin, INPUT_PULLUP);
 	pinMode(wifiResetPin, INPUT_PULLDOWN);
 
+	Serial.println();
 	bool wifiReset = digitalRead(wifiResetPin);
 
 	// Serial.print("wifi reset? ");
@@ -438,7 +443,7 @@ void setup()
 	{
 		Serial.println("<< wifi reset >>");
 		// wifiManager.resetSettings();
-		  WiFi.disconnect(true);
+		WiFi.disconnect(true);
 	}
 
 	stepperFeed.setMaxSpeed(40000);
@@ -450,7 +455,6 @@ void setup()
 	myServo.write(restAngle);
 	delay(10);
 
-	Serial.println();
 
 	stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
 

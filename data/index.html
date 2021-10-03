@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
+    
+    <link rel="preload" href="/splash.png" as="image" crossOrigin="anonymous" /> 
+    <link rel="preload" href="/style.css" as="style" crossOrigin="anonymous" />
+    <link rel="preload" href="/script.js" as="script" crossOrigin="anonymous" />    
+    <link rel="preload" href="/fontblack.ttf" as="font" crossOrigin="anonymous" />
+    <link rel="preload" href="/fontwhite.ttf" as="font" crossOrigin="anonymous" />
+    
     <meta
       name="viewport"
       content="width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=0"
-    />
+    />    
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta charset="utf-8" />
-    <title>E-TKT</title>
 
-    <link rel="preload" href="/fontblack.ttf" as="font" crossOrigin="anonymous" />
-    <link rel="preload" href="/fontwhite.ttf" as="font" crossOrigin="anonymous" />
-    <link rel="preload" href="/style.css" as="style" />
-    <link rel="preload" href="/script.js" as="script" />
+    <title>E-TKT</title>
 
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
+
+    <div id="splash">
+      <div id="splashlogo">
+        <div id="splashbar"></div>
+      </div>
+    </div>
+
+
+    <div id="background"></div>
+
     <div style="width: 300px; margin: auto">
       <h1 align="center" style="transform: rotate(-0.5deg)">E-TKT</h1>
       <h2 align="center">label maker</h2>
@@ -106,6 +122,9 @@
         </div>
       </form>
     </div>
+
+
+
     <script src="script.js"></script>
   </body>
 </html>

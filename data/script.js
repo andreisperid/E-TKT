@@ -8,6 +8,10 @@ function toggleVisibility(x, y) {
   }
 }
 
+function fadeSplash(){
+  
+}
+
 function tagCommand() {
   let fieldValue = document.getElementById("text-input").value;
 
