@@ -373,9 +373,17 @@ void initialize()
 	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/favicon.ico", "image"); });
 
-	// Route to favicon
+	// Route to splash icon
 	server.on("/splash.png", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/splash.png", "image"); });
+
+	// Route to webapp icon
+	server.on("/icon192.png", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/icon512.png", "image"); });
+
+	// Route to webapp icon
+	server.on("/icon512.png", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/icon512.png", "image"); });
 
 	// Start server
 	server.begin();
