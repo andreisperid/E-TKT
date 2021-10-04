@@ -377,6 +377,11 @@ void initialize()
 	server.on("/splash.png", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/splash.png", "image"); });
 
+
+	// Route to manifest file
+	server.on("/manifest.json", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/manifest.json", "image"); });
+
 	// Route to webapp icon
 	server.on("/icon192.png", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/icon512.png", "image"); });
