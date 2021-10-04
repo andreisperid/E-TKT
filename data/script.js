@@ -1,16 +1,22 @@
-function toggleVisibility(x, y) {
+function toggleVisibility(x, y, openedLabel, closedLabel) {
   if (x.style.visibility === "hidden") {
-    x.style.visibility = "visible";
-    y.innerHTML = "- [ EXTRAS ] -";
+    x.style.visibility = "visible"
+    x.style.height = "unset"
+    y.innerHTML = openedLabel;
   } else if (x.style.visibility === "visible") {
-    x.style.visibility = "hidden";
-    y.innerHTML = " + [ EXTRAS ] + ";
+    x.style.visibility = "hidden" 
+    x.style.height = "0px"
+    y.innerHTML = closedLabel;
   }
 }
 
-function fadeSplash(){
-  
+function calculateLength(){
+  let label = document.getElementById("length-label");
+  let input = document.getElementById("text-input").value;
+
+  label.innerHTML =  ((input.length < 7 ? 7 : input.length) * 4) + "mm"
 }
+
 
 function tagCommand() {
   let fieldValue = document.getElementById("text-input").value;

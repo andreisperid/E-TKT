@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
-    <link rel="preload" href="/splash.png" as="image" crossOrigin="anonymous" /> 
-    <link rel="preload" href="/style.css" as="style" crossOrigin="anonymous" />
-    <link rel="preload" href="/script.js" as="script" crossOrigin="anonymous" />    
-    <link rel="preload" href="/fontblack.ttf" as="font" crossOrigin="anonymous" />
-    <link rel="preload" href="/fontwhite.ttf" as="font" crossOrigin="anonymous" />
-    
+    <link rel="preload" href="/splash.png" as="image" crossorigin="anonymous" />
+    <link rel="preload" href="/style.css" as="style" crossorigin="anonymous" />
+    <link rel="preload" href="/script.js" as="script" crossorigin="anonymous" />
+    <link
+      rel="preload"
+      href="/fontblack.ttf"
+      as="font"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/fontwhite.ttf"
+      as="font"
+      crossorigin="anonymous"
+    />
+
     <meta
       name="viewport"
       content="width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=0"
-    />    
+    />
     <meta name="theme-color" content="#000000" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <meta charset="utf-8" />
 
     <title>E-TKT</title>
@@ -22,13 +34,11 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-
     <div id="splash">
       <div id="splashlogo">
         <div id="splashbar"></div>
       </div>
     </div>
-
 
     <div id="background"></div>
 
@@ -36,7 +46,12 @@
       <h1 align="center" style="transform: rotate(-0.5deg)">E-TKT</h1>
       <h2 align="center">label maker</h2>
 
-      <form action="/\" method="post" autocomplete="off">
+      <form
+        action="none"
+        method="post"
+        autocomplete="off"
+        onsubmit="return false"
+      >
         <div id="single-column">
           <input
             type="text"
@@ -44,8 +59,9 @@
             name="LABEL\"
             minlenght="1"
             maxlength="20"
-            placeholder="WRITE"
+            placeholder=" WRITE "
             onkeydown="clearWarning()"
+            onkeyup="calculateLength()"
             value=""
             required
             autofocus
@@ -53,16 +69,18 @@
         </div>
         <div id="single-column">
           <span id="hint">A-Z 0-9 space . -</span>
+          &nbsp&nbsp&nbsp<span id="length-label">30mm</span>
         </div>
 
         <div id="single-column">
-            <input
+          <input
             type="button"
             onclick="clearField()"
             id="submit-button"
             value=" clear "
             style="transform: rotate(0.75deg)"
-          /> &nbsp&nbsp
+          />
+          &nbsp&nbsp
           <input
             type="button"
             onclick="tagCommand()"
@@ -75,24 +93,82 @@
         <hr
           style="
             width: 100%%;
-            transform: rotate(-0.5deg);
-            border-color: #999999;
+            /* transform: rotate(0.5deg); */
+            border-color: #222;
           "
         />
-
+        <br>
         <div id="single-column">
           <a
             href="#"
-            onclick="toggleVisibility(extras, extras_label)"
+            onclick="toggleVisibility(historyDiv, history_label, '- LAST TAGS -', '+ LAST TAGS +')"
             style="color: black"
-            ><span id="extras_label" style="color: #777777">
-              + [ EXTRAS ] +
+            ><span id="history_label" style="color: #777777">
+              + LAST TAGS +
             </span></a
           >
         </div>
 
-        <div id="extras" style="visibility: hidden">
-          <div style="display: flex; justify-content: center; column-count: 2; margin: auto; width: 100%%">
+        <div id="historyDiv" style="visibility: hidden; height: 0px">
+          <div style="display: table; column-count: 1; margin: auto; padding-bottom: 25px">
+            <span style="display: table-cell; width: 100%%"
+              ><input
+                type="button"
+                value=" SOME TAG "
+                onclick="cutCommand()"
+                style="transform: rotate(-1deg); column-span: all"
+            /></span>
+          </div>
+          <div style="display: table; column-count: 1; margin: auto; padding-bottom: 25px">
+            <span style="display: table-cell; width: 100%%"
+              ><input
+                type="button"
+                value=" SOME OTHER TAG "
+                onclick="cutCommand()"
+                style="transform: rotate(-1deg); column-span: all"
+            /></span>
+          </div>
+          <div style="display: table; column-count: 1; margin: auto; padding-bottom: 25px">
+            <span style="display: table-cell; width: 100%%"
+              ><input
+                type="button"
+                value=" FIRST TAG "
+                onclick="cutCommand()"
+                style="transform: rotate(-1deg); column-span: all"
+            /></span>
+          </div>
+        </div>
+
+        <hr
+          style="
+            width: 100%%;
+            /* transform: rotate(0.5deg); */
+            border-color: #222;
+          "
+        />
+        
+        <br>
+        <div id="single-column">
+          <a
+            href="#"
+            onclick="toggleVisibility(extras, extras_label, '- SETUP -', '+ SETUP +')"
+            style="color: black"
+            ><span id="extras_label" style="color: #777777">
+              + SETUP +
+            </span></a
+          >
+        </div>
+
+        <div id="extras" style="visibility: hidden; height: 0px">
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              column-count: 2;
+              margin: auto;
+              width: 100%%;
+            "
+          >
             <span style="display: box; width: 100%%; margin-right: 8px">
               <input
                 type="button"
@@ -111,7 +187,7 @@
             </span>
           </div>
           <div style="display: table; column-count: 1; margin: auto">
-            <span style="display: table-cell; width: 100%%; padding-top: 25px"
+            <span style="display: table-cell; width: 100%%; padding-top: 25px; padding-bottom: 25px"
               ><input
                 type="button"
                 value=" ---- Cut ---- "
@@ -120,10 +196,18 @@
             /></span>
           </div>
         </div>
+
+
+        <hr
+          style="
+            width: 100%%;
+            /* transform: rotate(0.5deg); */
+            border-color: #222;
+          "
+        />
+
       </form>
     </div>
-
-
 
     <script src="script.js"></script>
   </body>
