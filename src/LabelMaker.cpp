@@ -3,6 +3,7 @@
 #include <ESP32Servo.h>
 // #include <movingAvg.h>
 #include <WiFi.h>
+#include "esp_wifi.h"
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include <ESPAsyncWiFiManager.h>
@@ -377,7 +378,6 @@ void initialize()
 	server.on("/splash.png", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/splash.png", "image"); });
 
-
 	// Route to manifest file
 	server.on("/manifest.json", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/manifest.json", "image"); });
@@ -402,16 +402,48 @@ void configModeCallback(AsyncWiFiManager *myWiFiManager)
 	Serial.println(myWiFiManager->getConfigPortalSSID());
 }
 
+void clearWifiCredentials()
+{
+	//load the flash-saved configs
+	wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
+	esp_wifi_init(&cfg); //initiate and allocate wifi resources (does not matter if connection fails)
+	delay(2000);		 //wait a bit
+	if (esp_wifi_restore() != ESP_OK)
+	{
+		Serial.println("WiFi is not initialized by esp_wifi_init ");
+	}
+	else
+	{
+		Serial.println("WiFi Configurations Cleared!");
+	}
+	delay(1000);
+	esp_restart(); //just my reset configs routine...
+}
+
 void wifiManager()
 {
-	// TODO: button to delete wifi data
-
 	//Local intialization. Once its business is done, there is no need to keep it around
 	AsyncWiFiManager wifiManager(&server, &dns);
+
 	//reset settings - for testing
+	bool wifiReset = digitalRead(wifiResetPin);
+
+	Serial.print("wifi reset? ");
+	Serial.println(wifiReset);
+
+	if (wifiReset)
+	{
+		Serial.println("<< wifi reset >>");
+		Serial.println();
+		clearWifiCredentials();
+		// wifiManager.resetSettings();
+		// ESP.restart();
+	}
 
 	//set callback that gets called when connecting to previous WiFi fails, and enters Access Point mode
 	wifiManager.setAPCallback(configModeCallback);
+
+	// wifiManager.setDebugOutput(false);
 
 	//fetches ssid and pass and tries to connect
 	//if it does not connect it starts an access point with the specified name
@@ -426,7 +458,7 @@ void wifiManager()
 		delay(1000);
 	}
 
-	if (!MDNS.begin("etkt"))
+	if (!MDNS.begin("e-tkt"))
 	{
 		Serial.println("Error starting mDNS");
 		return;
@@ -443,21 +475,8 @@ void setup()
 {
 	Serial.begin(9600);
 
-
 	pinMode(sensorPin, INPUT_PULLUP);
 	pinMode(wifiResetPin, INPUT_PULLDOWN);
-
-	Serial.println();
-	bool wifiReset = digitalRead(wifiResetPin);
-
-	// Serial.print("wifi reset? ");
-	// Serial.println(wifiReset);
-	if (wifiReset)
-	{
-		Serial.println("<< wifi reset >>");
-		// wifiManager.resetSettings();
-		WiFi.disconnect(true);
-	}
 
 	stepperFeed.setMaxSpeed(40000);
 	stepperFeed.setAcceleration(6000);
@@ -467,7 +486,6 @@ void setup()
 	myServo.attach(servoPin);
 	myServo.write(restAngle);
 	delay(10);
-
 
 	stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
 
