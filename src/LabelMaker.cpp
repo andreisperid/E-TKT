@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <AccelStepper.h>
 #include <ESP32Servo.h>
-// #include <movingAvg.h>
 #include <WiFi.h>
 #include "esp_wifi.h"
 #include <AsyncTCP.h>
@@ -10,24 +9,10 @@
 #include <DNSServer.h>
 #include <ESPmDNS.h>
 #include "SPIFFS.h"
+#include <qrcode.h>
+#include <U8g2lib.h>
 
 // HARDWARE ------------------------------------------------------------------------
-// #define CONFIG_ASYNC_TCP_RUNNING_CORE 0
-
-// mega
-// sensorPin = A0
-// stepperFeed = 2, 4, 3, 5
-// stepperChar = 10, 11
-
-// 34, 35, 36, 39 > input only, no pup/pdwn
-
-// esp32
-// sensorPin = GPIO34
-// servo = GPIO14
-// stepperFeed = GPIO16, GPIO4, GPIO2, GPIO15
-// stepperChar = GPIO32, GPIO33
-// pn532 = GPIO19, GPIO23, GPIO18, GPIOO5
-// resetWifi = GPIO13
 
 #define MICROSTEP_Feed 8
 #define MICROSTEP_Char 16
@@ -43,7 +28,7 @@ bool reverseCalibration;
 // wifi reset
 const int wifiResetPin = 13;
 
-// stepper
+// steppers
 const int stepsPerRevolutionFeed = 4076;
 const int stepsPerRevolutionChar = 200 * MICROSTEP_Char;
 
@@ -57,6 +42,11 @@ Servo myServo;
 const int servoPin = 14;
 int restAngle = 55;
 int peakAngle = 18;
+
+// oled
+U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
+#define Lcd_X 128
+#define Lcd_Y 64
 
 // DATA ----------------------------------------------------------------------------
 
@@ -74,7 +64,7 @@ int charHome = 21;
 bool waitingLabel = false;
 
 String headerCommand;
-bool busy;
+bool busy = false;
 String operationStatus;
 
 String parameter = "";
@@ -87,12 +77,177 @@ TaskHandle_t processorTaskHandle = NULL;
 AsyncWebServer server(80);
 DNSServer dns;
 
-// Hardcoded login info
-// const char *ssid = "";
-// const char *password = "";
-// const char *PARAM_MESSAGE = "message";
+// qr code
+const int QRcode_Version = 3; //  set the version (range 1->40)
+const int QRcode_ECC = 0;	  //  set the Error Correction level (range 0-3) or symbolic (ECC_LOW, ECC_MEDIUM, ECC_QUARTILE and ECC_HIGH)
+QRCode qrcode;				  // Create the QR code
+String displaySSID = "";
+String displayIP = "";
 
 // ------------------------------------------------------------------------------------------------
+// DISPLAY -------------------------------------------------------------------------
+
+void displayClear()
+{
+	//Empty pixels
+	for (uint8_t y = 0; y < 32; y++)
+	{
+		for (uint8_t x = 0; x < 128; x++)
+		{
+			u8g2.setDrawColor(0); //change 0 to make QR code with black background
+			u8g2.drawPixel(x, y);
+		}
+	}
+	delay(100); // transfer internal memory to the display
+}
+
+void displayInitialize()
+{
+	u8g2.begin();
+	u8g2.clearBuffer();
+	u8g2.setContrast(64); // set OLED brightness(0->255)
+	displayClear();
+
+	u8g2.setFont(u8g2_font_6x13_te); // 9 pixel height
+	u8g2.setDrawColor(1);
+}
+
+void displaySplash()
+{
+	displayInitialize();
+	for (int i = 128; i > 20; i--)
+	{
+		u8g2.setFont(u8g2_font_inr21_mf);
+		u8g2.drawStr(i, 26, "E-TKT");
+		u8g2.sendBuffer();
+		delay(5);
+		// animated splash}
+	}
+}
+
+void displayConfig()
+{
+	displayInitialize();
+	u8g2.setFont(u8g2_font_6x13_te);
+	u8g2.drawStr(0, 12, "Connect to the");
+	u8g2.drawStr(0, 29, "\"E-TKT\" wifi network");
+	u8g2.sendBuffer();
+}
+
+void displayReset()
+{
+	displayInitialize();
+	u8g2.setFont(u8g2_font_6x13_te);
+	u8g2.drawStr(0, 12, "Connection cleared");
+	u8g2.drawStr(0, 29, "Release button");
+	u8g2.sendBuffer();
+}
+
+void displayQRCode()
+{
+	displayInitialize();
+	// u8g2.drawStr(0, 12, "Initializing..."); // write something to the internal memory
+	// u8g2.sendBuffer();						// transfer internal memory to the display
+	displayClear();
+
+	uint8_t qrcodeData[qrcode_getBufferSize(QRcode_Version)];
+
+	if (displayIP != "")
+	{
+		u8g2.setDrawColor(1);
+
+		const char *b = displayIP.c_str();
+		u8g2.drawStr(0, 31, b); // write something to the internal memory
+
+		String displayIPfull = "http://" + displayIP;
+		const char *c = displayIPfull.c_str();
+
+		qrcode_initText(&qrcode, qrcodeData, QRcode_Version, QRcode_ECC, c); //ARK address
+
+		// qr code background
+		for (uint8_t y = 0; y < 31; y++)
+		{
+			for (uint8_t x = 0; x < 31; x++)
+			{
+				u8g2.setDrawColor(1); //change 0 to make QR code with black background
+				u8g2.drawPixel(x + 127 - 32, y);
+			}
+		}
+
+		//--------------------------------------------
+		//setup the top right corner of the QRcode
+		uint8_t x0 = 128 - 32;
+		uint8_t y0 = 1; //16 is the start of the blue portion OLED in the yellow/blue split 64x128 OLED
+
+		//--------------------------------------------
+		//display QRcode
+		for (uint8_t y = 0; y < qrcode.size; y++)
+		{
+			for (uint8_t x = 0; x < qrcode.size; x++)
+			{
+
+				if (qrcode_getModule(&qrcode, x, y) == 0)
+				{
+					u8g2.setDrawColor(1);
+					u8g2.drawPixel(x0 + x, y0 + y);
+				}
+				else
+				{
+					u8g2.setDrawColor(0);
+					u8g2.drawPixel(x0 + x, y0 + y);
+				}
+			}
+			u8g2.sendBuffer();
+		}
+	}
+	//--------------------------------------------
+	// display
+	u8g2.setDrawColor(1);
+	// u8g2.drawStr(0, 12, "E-TKT"); // write something to the internal memory
+
+	if (displaySSID != "")
+	{
+		const char *d = displaySSID.c_str();
+		u8g2.drawStr(11, 12, d); // connected
+		u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+		u8g2.drawGlyph(0, 12, 0x00f8); // connected
+	}
+	else
+	{
+		u8g2.drawStr(11, 12, "disconnected"); // disconnected
+		u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+		u8g2.drawGlyph(0, 12, 0x0057); // disconnected
+	}
+	u8g2.sendBuffer();
+	delay(1000);
+}
+
+void displayProgress(float total, float actual, String label)
+{
+	float progress = actual / total;
+	String progressString = String(progress * 95, 0);
+	progressString.concat("%");
+	const char *p = progressString.c_str();
+	u8g2.drawStr(110, 12, p);
+	// Serial.print("progress: ");
+	// Serial.println(p);
+	u8g2.drawHLine(128.00f - (progress * 128.00f), 16, 128);
+	const char *c = label.c_str();
+	u8g2.drawStr(0, 31, c);
+	u8g2.sendBuffer();
+}
+
+void displayFinished()
+{
+	displayInitialize();
+
+	u8g2.setFont(u8g2_font_6x13_te);  // 9 pixel height
+	u8g2.drawStr(0, 12, "Finished!"); // write something to the internal memory
+	u8g2.sendBuffer();				  // transfer internal memory to the display
+	delay(2000);
+	displayQRCode();
+}
+
 // HARDWARE ------------------------------------------------------------------------
 
 void setHome()
@@ -218,6 +373,8 @@ void writeLabel(String label)
 	int labelLength = label.length();
 
 	feedLabel();
+	displayInitialize();
+	displayProgress(labelLength, 0, label);
 
 	for (int i = 0; i < labelLength; i++)
 	{
@@ -229,6 +386,8 @@ void writeLabel(String label)
 		delay(50);
 		pressLabel();
 		feedLabel();
+
+		displayProgress(labelLength, i+1, label);
 	}
 
 	if (labelLength < 6 && labelLength != 1)
@@ -249,6 +408,7 @@ void writeLabel(String label)
 	parameter = "";
 	value = "";
 	Serial.println("						finished");
+	displayFinished();
 	vTaskDelete(processorTaskHandle);
 }
 
@@ -286,21 +446,29 @@ void processor(void *parameters)
 
 	if (parameter == "fw")
 	{
+		busy = true;
 		feedLabel();
+		busy = false;
 	}
 	else if (parameter == "rw")
 	{
+		busy = true;
 		feedLabel();
+		busy = false;
 	}
 	else if (parameter == "cut")
 	{
+		busy = true;
 		cutLabel();
+		busy = false;
 	}
 	else if (parameter == "tag" && label != "")
 	{
+		busy = true;
+		// Serial.print(", value: ");
+		// Serial.println(label);
 		writeLabel(label);
-		Serial.print(", value: ");
-		Serial.println(label);
+		busy = false;
 	}
 }
 
@@ -341,14 +509,21 @@ void initialize()
 					  parameter = p->name();
 					  value = p->value();
 
-					  xTaskCreatePinnedToCore(
-						  processor,			/* função que implementa a tarefa */
-						  "processorTask",		/* nome da tarefa */
-						  10000,				/* número de palavras a serem alocadas para uso com a pilha da tarefa */
-						  NULL,					/* parâmetro de entrada para a tarefa (pode ser NULL) */
-						  1,					/* prioridade da tarefa (0 a N) */
-						  &processorTaskHandle, /* referência para a tarefa (pode ser NULL) */
-						  0);					/* core 0 */
+					  if (!busy)
+					  {
+						  xTaskCreatePinnedToCore(
+							  processor,			/* função que implementa a tarefa */
+							  "processorTask",		/* nome da tarefa */
+							  10000,				/* número de palavras a serem alocadas para uso com a pilha da tarefa */
+							  NULL,					/* parâmetro de entrada para a tarefa (pode ser NULL) */
+							  1,					/* prioridade da tarefa (0 a N) */
+							  &processorTaskHandle, /* referência para a tarefa (pode ser NULL) */
+							  0);					/* core 0 */
+					  }
+					  else
+					  {
+						  Serial.println("<< DENYING, BUSY >>");
+					  }
 
 					  //   processor(parameter, value);
 				  }
@@ -396,6 +571,7 @@ void initialize()
 
 void configModeCallback(AsyncWiFiManager *myWiFiManager)
 {
+	displayConfig();
 	Serial.println("Entered config mode");
 	Serial.println(WiFi.softAPIP());
 	//if you used auto generated SSID, print it
@@ -416,7 +592,8 @@ void clearWifiCredentials()
 	{
 		Serial.println("WiFi Configurations Cleared!");
 	}
-	delay(1000);
+	displayReset();
+	delay(1500);
 	esp_restart(); //just my reset configs routine...
 }
 
@@ -428,8 +605,8 @@ void wifiManager()
 	//reset settings - for testing
 	bool wifiReset = digitalRead(wifiResetPin);
 
-	Serial.print("wifi reset? ");
-	Serial.println(wifiReset);
+	// Serial.print("wifi reset? ");
+	// Serial.println(wifiReset);
 
 	if (wifiReset)
 	{
@@ -466,6 +643,12 @@ void wifiManager()
 
 	//if you get here you have connected to the WiFi
 	Serial.println("connected!");
+	displayIP = WiFi.localIP().toString();
+	// Serial.println(displayIP);
+	displaySSID = WiFi.SSID();
+	// Serial.println(displaySSID);
+
+	displayQRCode();
 
 	initialize();
 }
@@ -488,6 +671,10 @@ void setup()
 	delay(10);
 
 	stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
+
+	displayInitialize();
+	displayClear();
+	displaySplash();
 
 	Serial.println("boot");
 	wifiManager();
