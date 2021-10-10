@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <title>E-TKT</title>
+
     <link rel="preload" href="/splash.png" as="image" crossorigin="anonymous" />
     <link rel="preload" href="/style.css" as="style" crossorigin="anonymous" />
     <link rel="preload" href="/script.js" as="script" crossorigin="anonymous" />
@@ -16,7 +19,6 @@
       as="font"
       crossorigin="anonymous"
     />
-    <link rel="manifest" href="/manifest.json">
 
     <meta
       name="viewport"
@@ -28,11 +30,10 @@
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
-    <meta charset="utf-8" />
 
-    <title>E-TKT</title>
-
+    <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="manifest" href="/manifest.json" />
   </head>
   <body>
     <div id="splash">
@@ -47,12 +48,12 @@
       <h1 align="center" style="transform: rotate(-0.5deg)">E-TKT</h1>
       <h2 align="center">label maker</h2>
 
-      <form
+      <!-- <form
         action="none"
         method="post"
         autocomplete="off"
         onsubmit="return false"
-      >
+      > -->
         <div id="single-column">
           <input
             type="text"
@@ -68,7 +69,7 @@
             autofocus
           />
         </div>
-        <div id="single-column" style="margin-top: 10px;">
+        <div id="single-column" style="margin-top: 10px">
           <span id="hint">A-Z 0-9 space . -</span>
           &nbsp&nbsp&nbsp<span id="length-label">28mm</span>
         </div>
@@ -98,8 +99,8 @@
             border-color: #222;
           "
         />
-        <br>
-        <div id="single-column">
+        <br />
+        <!--div id="single-column">
           <a
             href="#"
             onclick="toggleVisibility(historyDiv, history_label, '- LAST TAGS -', '+ LAST TAGS +')"
@@ -111,7 +112,14 @@
         </div>
 
         <div id="historyDiv" style="visibility: hidden; height: 0px">
-          <div style="display: table; column-count: 1; margin: auto; padding-bottom: 25px">
+          <div
+            style="
+              display: table;
+              column-count: 1;
+              margin: auto;
+              padding-bottom: 25px;
+            "
+          >
             <span style="display: table-cell; width: 100%%"
               ><input
                 type="button"
@@ -120,7 +128,14 @@
                 style="transform: rotate(-1deg); column-span: all"
             /></span>
           </div>
-          <div style="display: table; column-count: 1; margin: auto; padding-bottom: 25px">
+          <div
+            style="
+              display: table;
+              column-count: 1;
+              margin: auto;
+              padding-bottom: 25px;
+            "
+          >
             <span style="display: table-cell; width: 100%%"
               ><input
                 type="button"
@@ -129,7 +144,14 @@
                 style="transform: rotate(-1deg); column-span: all"
             /></span>
           </div>
-          <div style="display: table; column-count: 1; margin: auto; padding-bottom: 25px">
+          <div
+            style="
+              display: table;
+              column-count: 1;
+              margin: auto;
+              padding-bottom: 25px;
+            "
+          >
             <span style="display: table-cell; width: 100%%"
               ><input
                 type="button"
@@ -147,8 +169,8 @@
             border-color: #222;
           "
         />
-        
-        <br>
+
+        <br /-->
         <div id="single-column">
           <a
             href="#"
@@ -188,7 +210,13 @@
             </span>
           </div>
           <div style="display: table; column-count: 1; margin: auto">
-            <span style="display: table-cell; width: 100%%; padding-top: 25px; padding-bottom: 25px"
+            <span
+              style="
+                display: table-cell;
+                width: 100%%;
+                padding-top: 25px;
+                padding-bottom: 25px;
+              "
               ><input
                 type="button"
                 value=" ---- Cut ---- "
@@ -198,7 +226,6 @@
           </div>
         </div>
 
-
         <hr
           style="
             width: 100%%;
@@ -206,8 +233,7 @@
             border-color: #222;
           "
         />
-
-      </form>
+      <!-- </form> -->
     </div>
 
     <script src="script.js"></script>

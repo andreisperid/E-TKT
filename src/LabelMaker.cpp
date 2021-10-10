@@ -48,6 +48,10 @@ U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 #define Lcd_X 128
 #define Lcd_Y 64
 
+// leds
+#define ledFinish 5
+#define ledChar 17
+
 // DATA ----------------------------------------------------------------------------
 
 // char
@@ -85,6 +89,32 @@ String displaySSID = "";
 String displayIP = "";
 
 // ------------------------------------------------------------------------------------------------
+// LEDS -------------------------------------------------------------------------
+
+void lightFinished()
+{
+	bool state = true;
+	for (int i = 0; i < 10; i++)
+	{
+		analogWrite(ledFinish, state * 128);
+		state = !state;
+		delay(100);
+	}
+	analogWrite(ledFinish, 128);
+	delay(5000);
+	for (int i = 128; i >= 0; i--)
+	{
+		analogWrite(ledFinish, i);
+		state = !state;
+		delay(25);
+	}
+}
+
+void lightChar(bool state)
+{
+	analogWrite(ledChar, state * 128);
+}
+
 // DISPLAY -------------------------------------------------------------------------
 
 void displayClear()
@@ -105,6 +135,7 @@ void displayInitialize()
 {
 	u8g2.begin();
 	u8g2.clearBuffer();
+	u8g2.setFlipMode(1);
 	u8g2.setContrast(64); // set OLED brightness(0->255)
 	displayClear();
 
@@ -115,10 +146,10 @@ void displayInitialize()
 void displaySplash()
 {
 	displayInitialize();
-	for (int i = 128; i > 20; i--)
+	for (int i = 128; i > 18; i--)
 	{
 		u8g2.setFont(u8g2_font_inr21_mf);
-		u8g2.drawStr(i, 26, "E-TKT");
+		u8g2.drawStr(i, 29, "E-TKT");
 		u8g2.sendBuffer();
 		delay(5);
 		// animated splash}
@@ -156,11 +187,31 @@ void displayQRCode()
 	{
 		u8g2.setDrawColor(1);
 
+		//--------------------------------------------
 		const char *b = displayIP.c_str();
 		u8g2.drawStr(0, 31, b); // write something to the internal memory
 
 		String displayIPfull = "http://" + displayIP;
 		const char *c = displayIPfull.c_str();
+
+		//--------------------------------------------
+		// display
+		// u8g2.setDrawColor(1);
+		// u8g2.drawStr(0, 12, "E-TKT"); // write something to the internal memory
+
+		// if (displaySSID != "")
+		// {
+		const char *d = displaySSID.c_str();
+		u8g2.drawStr(11, 12, d); // connected
+		u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+		u8g2.drawGlyph(0, 12, 0x00f8); // connected
+		// }
+		// else
+		// {
+		// 	u8g2.drawStr(11, 12, "disconnected"); // disconnected
+		// 	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+		// 	u8g2.drawGlyph(0, 12, 0x0057); // disconnected
+		// }
 
 		qrcode_initText(&qrcode, qrcodeData, QRcode_Version, QRcode_ECC, c); //ARK address
 
@@ -197,26 +248,8 @@ void displayQRCode()
 					u8g2.drawPixel(x0 + x, y0 + y);
 				}
 			}
-			u8g2.sendBuffer();
 		}
-	}
-	//--------------------------------------------
-	// display
-	u8g2.setDrawColor(1);
-	// u8g2.drawStr(0, 12, "E-TKT"); // write something to the internal memory
-
-	if (displaySSID != "")
-	{
-		const char *d = displaySSID.c_str();
-		u8g2.drawStr(11, 12, d); // connected
-		u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
-		u8g2.drawGlyph(0, 12, 0x00f8); // connected
-	}
-	else
-	{
-		u8g2.drawStr(11, 12, "disconnected"); // disconnected
-		u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
-		u8g2.drawGlyph(0, 12, 0x0057); // disconnected
+		// u8g2.sendBuffer();
 	}
 	u8g2.sendBuffer();
 	delay(1000);
@@ -228,10 +261,22 @@ void displayProgress(float total, float actual, String label)
 	String progressString = String(progress * 95, 0);
 	progressString.concat("%");
 	const char *p = progressString.c_str();
-	u8g2.drawStr(110, 12, p);
+	u8g2.drawStr(0, 12, p);
 	// Serial.print("progress: ");
 	// Serial.println(p);
-	u8g2.drawHLine(128.00f - (progress * 128.00f), 16, 128);
+	u8g2.setDrawColor(1);
+	u8g2.drawHLine(0, 16, 128 - (progress * 128.00f));
+	u8g2.drawHLine(0, 17, 128 - (progress * 128.00f));
+
+	u8g2.setDrawColor(0);
+	u8g2.drawHLine(128 - (progress * 128.00f), 16, 128);
+	u8g2.drawHLine(128 - (progress * 128.00f), 17, 128);
+
+	u8g2.setDrawColor(1);
+	u8g2.drawHLine(0, 16, 5);
+	u8g2.drawHLine(0, 17, 5);
+
+	u8g2.setDrawColor(1);
 	const char *c = label.c_str();
 	u8g2.drawStr(0, 31, c);
 	u8g2.sendBuffer();
@@ -244,8 +289,6 @@ void displayFinished()
 	u8g2.setFont(u8g2_font_6x13_te);  // 9 pixel height
 	u8g2.drawStr(0, 12, "Finished!"); // write something to the internal memory
 	u8g2.sendBuffer();				  // transfer internal memory to the display
-	delay(2000);
-	displayQRCode();
 }
 
 // HARDWARE ------------------------------------------------------------------------
@@ -372,9 +415,11 @@ void writeLabel(String label)
 
 	int labelLength = label.length();
 
-	feedLabel();
+	lightChar(true);
 	displayInitialize();
 	displayProgress(labelLength, 0, label);
+
+	feedLabel();
 
 	for (int i = 0; i < labelLength; i++)
 	{
@@ -387,7 +432,7 @@ void writeLabel(String label)
 		pressLabel();
 		feedLabel();
 
-		displayProgress(labelLength, i+1, label);
+		displayProgress(labelLength, i + 1, label);
 	}
 
 	if (labelLength < 6 && labelLength != 1)
@@ -398,17 +443,19 @@ void writeLabel(String label)
 			feedLabel();
 		}
 	}
-
 	cutLabel();
-
-	busy = false;
-	setHome();
 
 	// reset server parameters
 	parameter = "";
 	value = "";
 	Serial.println("						finished");
+	lightChar(false);
 	displayFinished();
+	lightFinished();
+
+	busy = false;
+	setHome();
+	displayQRCode();
 	vTaskDelete(processorTaskHandle);
 }
 
@@ -432,7 +479,6 @@ void readSerial()
 
 // DATA ----------------------------------------------------------------------------
 
-// void processor(const String parameter, const String value = "")
 void processor(void *parameters)
 {
 	// Serial.print("parameter: ");
@@ -559,7 +605,7 @@ void initialize()
 
 	// Route to webapp icon
 	server.on("/icon192.png", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/icon512.png", "image"); });
+			  { request->send(SPIFFS, "/icon192.png", "image"); });
 
 	// Route to webapp icon
 	server.on("/icon512.png", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -660,6 +706,11 @@ void setup()
 
 	pinMode(sensorPin, INPUT_PULLUP);
 	pinMode(wifiResetPin, INPUT_PULLDOWN);
+	pinMode(ledChar, OUTPUT);
+	pinMode(ledFinish, OUTPUT);
+
+	analogWrite(ledChar, 0);
+	analogWrite(ledFinish, 0);
 
 	stepperFeed.setMaxSpeed(40000);
 	stepperFeed.setAcceleration(6000);
