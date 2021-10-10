@@ -49,6 +49,7 @@ input {
   border-color: #777777;
   border-width: 1px;
   padding: 3px 0 4px 0;
+  /* caret-shape: underscore; */
 }
 #text-input {
   border: 0px;
@@ -69,6 +70,10 @@ input {
   width: 100%;
   margin: auto;
   padding-bottom: 25px;
+}
+
+input[type="button"]:disabled{
+  color: #333333;
 }
 
 #background {
