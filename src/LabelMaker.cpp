@@ -81,6 +81,8 @@ TaskHandle_t processorTaskHandle = NULL;
 AsyncWebServer server(80);
 DNSServer dns;
 
+String webProgress = "";
+
 // qr code
 const int QRcode_Version = 3; //  set the version (range 1->40)
 const int QRcode_ECC = 0;	  //  set the Error Correction level (range 0-3) or symbolic (ECC_LOW, ECC_MEDIUM, ECC_QUARTILE and ECC_HIGH)
@@ -100,8 +102,8 @@ void lightFinished()
 		state = !state;
 		delay(100);
 	}
-	analogWrite(ledFinish, 128);
-	delay(5000);
+	// analogWrite(ledFinish, 128);
+	// delay(5000);
 	for (int i = 128; i >= 0; i--)
 	{
 		analogWrite(ledFinish, i);
@@ -258,7 +260,8 @@ void displayQRCode()
 void displayProgress(float total, float actual, String label)
 {
 	float progress = actual / total;
-	String progressString = String(progress * 95, 0);
+	String progressString = String(progress * 95, 0);	
+	webProgress = progressString;
 	progressString.concat("%");
 	const char *p = progressString.c_str();
 	u8g2.drawStr(0, 12, p);
@@ -285,6 +288,7 @@ void displayProgress(float total, float actual, String label)
 void displayFinished()
 {
 	displayInitialize();
+	webProgress = "finished";
 
 	u8g2.setFont(u8g2_font_6x13_te);  // 9 pixel height
 	u8g2.drawStr(0, 12, "Finished!"); // write something to the internal memory
@@ -450,11 +454,10 @@ void writeLabel(String label)
 	value = "";
 	Serial.println("						finished");
 	lightChar(false);
+	setHome();
 	displayFinished();
 	lightFinished();
-
 	busy = false;
-	setHome();
 	displayQRCode();
 	vTaskDelete(processorTaskHandle);
 }
@@ -568,7 +571,7 @@ void initialize()
 					  }
 					  else
 					  {
-						  Serial.println("<< DENYING, BUSY >>");
+						  //   Serial.println("<< DENYING, BUSY >>");
 					  }
 
 					  //   processor(parameter, value);
@@ -610,6 +613,10 @@ void initialize()
 	// Route to webapp icon
 	server.on("/icon512.png", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/icon512.png", "image"); });
+
+	// Check printing status
+	server.on("/status", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(200, "text/plane", webProgress); });
 
 	// Start server
 	server.begin();

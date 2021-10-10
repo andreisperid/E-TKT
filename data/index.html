@@ -52,6 +52,7 @@
         action="none"
         method="post"
         autocomplete="off"
+        novalidate
         onsubmit="return false"
       >
         <div id="single-column">
@@ -64,10 +65,12 @@
             placeholder=" WRITE "
             onkeyup="return formKeyHandler(event), calculateLength()"
             value=""
-            required
+            autocomplete="off"
+            autocorrect="off"
+            tabindex=-1                 
           />          
           <!-- 
-            autofocus onkeyup="calculateLength()" -->
+            required autofocus onkeyup="calculateLength()" -->
         </div>
         <div id="single-column" style="margin-top: 10px">
           <span id="hint">A-Z 0-9 space . -</span>
@@ -82,6 +85,7 @@
             value=" clear "
             style="transform: rotate(0.75deg)"
             disabled
+            tabindex=-1  
           />
           &nbsp&nbsp
           <input
@@ -91,6 +95,7 @@
             value=" Print Label! "
             style="transform: rotate(0.5deg)"
             disabled
+            tabindex=-1  
           />
         </div>
 

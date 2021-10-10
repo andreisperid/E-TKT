@@ -1,4 +1,5 @@
 document.getElementById("text-input").focus();
+let busy = false;
 
 function toggleVisibility(x, y, openedLabel, closedLabel) {
   if (x.style.visibility === "hidden") {
@@ -23,10 +24,14 @@ function tagCommand() {
   let fieldValue = document.getElementById("text-input").value;
 
   if (useRegex(fieldValue)) {
+    document.getElementById("text-input").blur();
+    document.getElementById("text-input").disabled = true;
+    document.getElementById("clear-button").disabled = true;
+    document.getElementById("submit-button").disabled = true;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "/&?" + "tag=" + fieldValue.toLowerCase(), true);
     xhr.send();
-    fieldValue.blur();
+    busy = true;
   }
 }
 
@@ -57,20 +62,13 @@ function formKeyHandler(e) {
   }
 
   if (keynum === 13 && valid) {
-    // document.getElementById("text-input").value = "eita"
-    // Cancel the default action, if needed
-    // preventDefault();
-    // Trigger the button element with a click
     document.getElementById("submit-button").click();
-    
-    document.getElementById("text-input").blur();
-    // tagCommand();
   }
 }
 
 function clearField() {
   textField = document.getElementById("text-input");
-  
+
   document.getElementById("clear-button").disabled = true;
   document.getElementById("submit-button").disabled = true;
 
@@ -99,4 +97,32 @@ function cutCommand() {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", "/&?" + "cut", true);
   xhr.send();
+}
+
+setInterval(function () {
+  // Call a function repetatively with 2 Second interval
+  if (busy) {
+    getData();
+  }
+  // console.log("interval");
+}, 500); //2000mSeconds update rate
+
+function getData() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      // document.getElementById("ADCValue").innerHTML = this.responseText;
+      console.log(this.responseText);
+
+      if (this.responseText === "finished") {
+        busy = false;
+        // document.getElementById("text-input").blur();
+        document.getElementById("text-input").disabled = false;
+        document.getElementById("clear-button").disabled = false;
+        document.getElementById("submit-button").disabled = false;
+      }
+    }
+  };
+  xhttp.open("GET", "status", true);
+  xhttp.send();
 }
