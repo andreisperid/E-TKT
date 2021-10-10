@@ -55,6 +55,7 @@ function formKeyHandler(e) {
     valid = false;
     document.getElementById("hint").style.color = "red";
     document.getElementById("text-input").style.color = "red";
+    document.getElementById("submit-button").disabled = true;
   } else {
     valid = true;
     document.getElementById("hint").style.color = "#777777";
@@ -71,8 +72,12 @@ function clearField() {
 
   document.getElementById("clear-button").disabled = true;
   document.getElementById("submit-button").disabled = true;
+  document.getElementById("hint").style.color = "#777777";
+  document.getElementById("text-input").style.color = "#ffffff";
 
   textField.value = "";
+  calculateLength();
+
   textField.focus();
 }
 

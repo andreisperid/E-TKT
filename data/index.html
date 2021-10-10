@@ -55,48 +55,62 @@
         novalidate
         onsubmit="return false"
       >
-        <div id="single-column">
+
+        <div id="single-column" style="margin-top: 50px">
           <input
             type="text"
             id="text-input"
             name="LABEL\"
             minlenght="1"
             maxlength="20"
-            placeholder=" WRITE "
+            placeholder="WRITE HERE"
             onkeyup="return formKeyHandler(event), calculateLength()"
             value=""
             autocomplete="off"
             autocorrect="off"
-            tabindex=-1                 
-          />          
-          <!-- 
-            required autofocus onkeyup="calculateLength()" -->
-        </div>
-        <div id="single-column" style="margin-top: 10px">
-          <span id="hint">A-Z 0-9 space . -</span>
-          &nbsp&nbsp&nbsp<span id="length-label">28mm</span>
+            spellcheck="false"
+            tabindex="-1"
+          />
         </div>
 
-        <div id="single-column">
-          <input
-            type="button"
-            id="clear-button"
-            onclick="clearField()"
-            value=" clear "
-            style="transform: rotate(0.75deg)"
-            disabled
-            tabindex=-1  
-          />
-          &nbsp&nbsp
-          <input
-            type="button"
-            onclick="tagCommand()"
-            id="submit-button"
-            value=" Print Label! "
-            style="transform: rotate(0.5deg)"
-            disabled
-            tabindex=-1  
-          />
+
+        <div id="single-column" style="margin-top: 15px" >
+          <div id="hint">A-Z 0-9 space . -</div>          
+          <div id="length-label">28mm</div>
+        </div>
+
+        <div id="single-column" style="margin-top: 0px">
+          <div style="width: 45%">
+            <input
+              type="button"
+              id="clear-button"
+              onclick="clearField()"
+              value=" clear "
+              disabled
+              tabindex="-1"
+            />
+          </div>
+          <div style="width: 45%">
+            <select type="range" id="mode-dropdown" tabindex="-1">
+              <option value="valor1" selected>tight</option>
+              <option value="valor2">margin</option>
+              <option value="valor3">full</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="single-column" style="margin-top: 10px;">
+          <div style="width: 100%; height: 60px">
+            <input
+              type="button"
+              onclick="tagCommand()"
+              id="submit-button"
+              value=" Print! "
+              style="height: 100%;"
+              disabled
+              tabindex="-1"
+            />
+          </div>
         </div>
 
         <hr
@@ -178,15 +192,17 @@
         />
 
         <br /-->
-        <div id="single-column">
-          <a
-            href="#"
-            onclick="toggleVisibility(extras, extras_label, '- SETUP -', '+ SETUP +')"
-            style="color: black"
-            ><span id="extras_label" style="color: #777777">
-              + SETUP +
-            </span></a
-          >
+        <div id="single-column" style="justify-content: center">
+          <div>
+            <a
+              href="#"
+              onclick="toggleVisibility(extras, extras_label, '- SETUP -', '+ SETUP +')"
+              style="color: black"
+              ><span id="extras_label" style="color: #777777">
+                + SETUP +
+              </span></a
+            >
+          </div>
         </div>
 
         <div id="extras" style="visibility: hidden; height: 0px">
