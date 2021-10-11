@@ -45,7 +45,7 @@
     <div id="background"></div>
 
     <div style="width: 300px; margin: auto">
-      <h1 align="center" style="transform: rotate(-0.5deg)">E-TKT</h1>
+      <h1 align="center" style="transform: rotate(-1deg)">E-TKT</h1>
       <h2 align="center">label maker</h2>
 
       <form
@@ -76,52 +76,65 @@
             id="size-helper"
             style="
               pointer-events: none;
-              border: 1px solid white;
+              border-color: rgba(255, 166, 0, 0.3) rgba(0, 102, 255, 0.6) ;
               border-style: solid dashed solid dashed;
-              /* border-width: 0 1px 0 1px; */
+              border-width: 2px 2px 2px 2px;
               margin: auto;
               /* padding-right: 4px; */
-              background: black;
-              /* z-index: 50; */
+              background: #00000044;
+              z-index: 50;
               font-size: 25px;
-              color: #ff000099;
+              color: #ff000000;
             "
           >
             WRITE HERE
           </div>
         </div>
 
-        <div id="single-column" style="margin-top: 15px">
-          <div id="hint">A-Z 0-9 space . -</div>
-          <div id="length-label">28mm</div>
+        <div
+          id="single-column"
+          style="margin: 15px 0 10px 0; justify-content: center"
+        >
+          <div id="hint">valid: A-Z 0-9 space . -</div>
         </div>
 
         <div id="single-column" style="margin-top: 0px">
-          <div style="width: 45%">
+          <div>
             <input
               type="button"
               id="clear-button"
               onclick="clearField()"
-              value=" clear "
+              value=" x "
               disabled
               tabindex="-1"
             />
           </div>
-          <div style="width: 45%">
+
+          <div style="width: 50%">
             <select
               type="range"
               id="mode-dropdown"
               onchange="return formKeyHandler(event)"
             >
-              <option value="margin" selected>margin</option>
               <option value="tight">tight</option>
+              <option value="margin" selected>margin</option>
               <option value="full">full</option>
             </select>
+          </div>
+
+          <div
+            id="length-label"
+            style="border-width: 1.5px 0 1.5px 0; border-style: solid; border-color: orange; padding-top: 5px;"
+          >
+            28mm
           </div>
         </div>
 
         <div id="single-column" style="margin-top: 15px; padding: 0 3px 0 3px">
-          <div id="progress-bar" style="background: white; height: 2px; width: 0%"></div>
+          <div
+            id="progress-bar"
+            style="background: white; height: 2px; width: 0%"
+          ></div>
         </div>
         <div id="single-column" style="margin-top: 0px; padding-top: 0">
           <div style="width: 100%; height: 60px">
@@ -144,7 +157,6 @@
             border-color: #222;
           "
         />
-        <br />
         <!--div id="single-column">
           <a
             href="#"
@@ -216,7 +228,7 @@
         />
 
         <br /-->
-        <div id="single-column" style="justify-content: center">
+        <div id="single-column" style="justify-content: center; margin-top: 15px;">
           <div>
             <a
               href="#"
@@ -263,13 +275,13 @@
           </div>
         </div>
 
-        <hr
+        <!-- <hr
           style="
             width: 100%%;
             /* transform: rotate(0.5deg); */
             border-color: #222;
           "
-        />
+        /> -->
       </form>
     </div>
 

@@ -66,20 +66,23 @@ input {
   font-family: "Impact Label Reversed";
   text-align: center;
   font-size: 25px;
-  filter: drop-shadow(0px 0px 30px #999);  
+  filter: drop-shadow(0px 0px 40px #999);  
   caret-color: auto;
   /* transform: rotate(-0.5deg); */
 }
 #text-input:focus {
-  /* border: 1px dashed #444; */  
+  /* border: 1px solid #777;
+  border-width: 1px 0 1px 0;   */
   background: #11111144;
 }
 
 #mode-dropdown {
   outline: none;
-  border-color: #77777766;
+  /* border-color: #77777766; */
+  border-color: rgb(0, 102, 255);
   border-width: 3px;
   border-radius: 3px;
+  border-width: 0 3px 0 3px; border-style: dashed;
   font-size: 21px;
   background: black;
   height: 36px;  
@@ -101,6 +104,17 @@ input[type="button"]:disabled {
   color: #333333;
 }
 
+
+#clear-button{
+  color: rgb(200, 0, 0);
+  border-color: rgb(128, 0, 0);
+}
+#clear-button:disabled{
+  color: rgb(64, 0, 0);
+  border-color: rgb(64, 0, 0);
+}
+
+
 #background {
   position: fixed;
   top: 0px;
@@ -114,7 +128,7 @@ input[type="button"]:disabled {
   background: radial-gradient(
     ellipse,
     rgb(20, 20, 20) 0%,
-    rgba(0, 0, 0, 1) 75%
+    rgba(0, 0, 0, 1) 90%
   );
 }
 
