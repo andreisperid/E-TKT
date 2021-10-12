@@ -76,7 +76,7 @@
             id="size-helper"
             style="
               pointer-events: none;
-              border-color: rgba(255, 166, 0, 0.3) rgba(0, 102, 255, 0.6) ;
+              border-color: rgba(255, 166, 0, 0.3) rgba(0, 102, 255, 0.6);
               border-style: solid dashed solid dashed;
               border-width: 2px 2px 2px 2px;
               margin: auto;
@@ -98,7 +98,10 @@
           <div id="hint">valid: A-Z 0-9 space . -</div>
         </div>
 
-        <div id="single-column" style="margin-top: 0px">
+        <div
+          id="single-column"
+          style="margin-top: 0px; padding-top: 5px; height: 36px"
+        >
           <div>
             <input
               type="button"
@@ -124,9 +127,16 @@
 
           <div
             id="length-label"
-            style="border-width: 1.5px 0 1.5px 0; border-style: solid; border-color: orange; padding-top: 5px;"
+            style="
+              height: 28px;
+              border-width: 1.5px 0 1.5px 0;
+              border-style: solid;
+              border-color: orange;
+              margin: 0;
+              padding-top: 5px;
+            "
           >
-            28mm
+            <div>28mm</div>
           </div>
         </div>
 
@@ -228,7 +238,10 @@
         />
 
         <br /-->
-        <div id="single-column" style="justify-content: center; margin-top: 15px;">
+        <div
+          id="single-column"
+          style="justify-content: center; margin-top: 15px"
+        >
           <div>
             <a
               href="#"

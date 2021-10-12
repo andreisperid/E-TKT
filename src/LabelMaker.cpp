@@ -260,7 +260,7 @@ void displayQRCode()
 void displayProgress(float total, float actual, String label)
 {
 	float progress = actual / total;
-	String progressString = String(progress * 95, 0);	
+	String progressString = String(progress * 95, 0);
 	webProgress = progressString;
 	progressString.concat("%");
 	const char *p = progressString.c_str();
@@ -293,6 +293,8 @@ void displayFinished()
 	u8g2.setFont(u8g2_font_6x13_te);  // 9 pixel height
 	u8g2.drawStr(0, 12, "Finished!"); // write something to the internal memory
 	u8g2.sendBuffer();				  // transfer internal memory to the display
+
+	webProgress = "";
 }
 
 // HARDWARE ------------------------------------------------------------------------
@@ -421,19 +423,23 @@ void writeLabel(String label)
 
 	lightChar(true);
 	displayInitialize();
+
 	displayProgress(labelLength, 0, label);
 
 	feedLabel();
 
 	for (int i = 0; i < labelLength; i++)
 	{
-		if (label[i] != ' ' && label[i] != prevChar)
+		if (label[i] != ' ' && label[i] != '_' && label[i] != prevChar)
 		{
 			goToCharacter(label[i]);
 			prevChar = label[i];
 		}
 		delay(50);
-		pressLabel();
+		if (label[i] != ' ' && label[i] != '_')
+		{
+			pressLabel();
+		}
 		feedLabel();
 
 		displayProgress(labelLength, i + 1, label);
@@ -491,7 +497,9 @@ void processor(void *parameters)
 	label.toUpperCase();
 
 	Serial.print(label != "" ? ", value: " : "");
-	Serial.println(label);
+	Serial.print("\"");
+	Serial.print(label);
+	Serial.println("\"");
 
 	if (parameter == "fw")
 	{

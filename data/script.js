@@ -75,7 +75,7 @@ function drawHelper() {
       space.repeat(multiplier);
 
     treatedLabel =
-      " ".repeat(multiplier) + field.value + " ".repeat(multiplier);
+      "_".repeat(multiplier) + field.value + "_".repeat(multiplier);
     console.log('"' + treatedLabel + '"');
   } else {
     clear = false;
@@ -90,7 +90,7 @@ function formKeyHandler(e) {
   let field = document.getElementById("text-input");
   let fieldValue = field.value;
 
-  
+
   let keynum;
   if (window.event && e != null) {
     keynum = e.keyCode;
@@ -172,9 +172,9 @@ function getData() {
       document.getElementById("submit-button").value =
         " Printing " + this.responseText + "% ";
       document.getElementById("progress-bar").style.width =
-        this.responseText + "%";
+        (this.responseText === "" ? " 0" : this.responseText) + "%";
 
-      if (this.responseText === "finished") {
+      if (this.responseText === "finished" || this.responseText === "" ) {
         busy = false;
         document.getElementById("progress-bar").style.width = 0;
         document.getElementById("submit-button").value = " Print label! ";
