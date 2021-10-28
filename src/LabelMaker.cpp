@@ -34,6 +34,7 @@ const int stepsPerRevolutionChar = 200 * MICROSTEP_Char;
 
 AccelStepper stepperFeed(MICROSTEP_Feed, 15, 4, 2, 16);
 AccelStepper stepperChar(1, 33, 32);
+#define enableCharStepper 25
 int fullCycle;
 float stepsPerChar;
 
@@ -41,7 +42,7 @@ float stepsPerChar;
 Servo myServo;
 const int servoPin = 14;
 int restAngle = 55;
-int peakAngle = 18;
+int peakAngle = 23;
 
 // oled
 U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
@@ -112,7 +113,7 @@ void lightFinished()
 	}
 }
 
-void lightChar(bool state)
+void lightChar(float state)
 {
 	analogWrite(ledChar, state * 128);
 }
@@ -121,12 +122,12 @@ void lightChar(bool state)
 
 void displayClear()
 {
-	//Empty pixels
+	// Empty pixels
 	for (uint8_t y = 0; y < 32; y++)
 	{
 		for (uint8_t x = 0; x < 128; x++)
 		{
-			u8g2.setDrawColor(0); //change 0 to make QR code with black background
+			u8g2.setDrawColor(0); // change 0 to make QR code with black background
 			u8g2.drawPixel(x, y);
 		}
 	}
@@ -215,25 +216,25 @@ void displayQRCode()
 		// 	u8g2.drawGlyph(0, 12, 0x0057); // disconnected
 		// }
 
-		qrcode_initText(&qrcode, qrcodeData, QRcode_Version, QRcode_ECC, c); //ARK address
+		qrcode_initText(&qrcode, qrcodeData, QRcode_Version, QRcode_ECC, c); // ARK address
 
 		// qr code background
 		for (uint8_t y = 0; y < 31; y++)
 		{
 			for (uint8_t x = 0; x < 31; x++)
 			{
-				u8g2.setDrawColor(1); //change 0 to make QR code with black background
+				u8g2.setDrawColor(1); // change 0 to make QR code with black background
 				u8g2.drawPixel(x + 127 - 32, y);
 			}
 		}
 
 		//--------------------------------------------
-		//setup the top right corner of the QRcode
+		// setup the top right corner of the QRcode
 		uint8_t x0 = 128 - 32;
-		uint8_t y0 = 1; //16 is the start of the blue portion OLED in the yellow/blue split 64x128 OLED
+		uint8_t y0 = 1; // 16 is the start of the blue portion OLED in the yellow/blue split 64x128 OLED
 
 		//--------------------------------------------
-		//display QRcode
+		// display QRcode
 		for (uint8_t y = 0; y < qrcode.size; y++)
 		{
 			for (uint8_t x = 0; x < qrcode.size; x++)
@@ -257,7 +258,7 @@ void displayQRCode()
 	delay(1000);
 }
 
-void displayProgress(float total, float actual, String label)
+/*void displayProgress(float total, float actual, String label)
 {
 	float progress = actual / total;
 	String progressString = String(progress * 95, 0);
@@ -283,6 +284,33 @@ void displayProgress(float total, float actual, String label)
 	const char *c = label.c_str();
 	u8g2.drawStr(0, 31, c);
 	u8g2.sendBuffer();
+}*/
+
+void displayProgress(float total, float actual, String label)
+{
+	float progress = actual / total;
+	String progressString = String(progress * 95, 0);
+	webProgress = progressString;
+	progressString.concat("%");
+	const char *p = progressString.c_str();
+	u8g2.drawStr(0, 12, p);
+
+	u8g2.setDrawColor(0);
+	u8g2.drawHLine(0, 16, 128);
+	u8g2.drawHLine(0, 17, 128);
+
+	u8g2.setDrawColor(1);
+	u8g2.drawHLine(0, 16, (total - actual) * 6);
+	u8g2.drawHLine(0, 17, (total - actual) * 6);
+
+	u8g2.setDrawColor(1);
+	u8g2.drawHLine(0, 16, 5);
+	u8g2.drawHLine(0, 17, 5);
+
+	u8g2.setDrawColor(1);
+	const char *c = label.c_str();
+	u8g2.drawStr(0, 31, c);
+	u8g2.sendBuffer();
 }
 
 void displayFinished()
@@ -290,9 +318,9 @@ void displayFinished()
 	displayInitialize();
 	webProgress = "finished";
 
-	u8g2.setFont(u8g2_font_6x13_te);  // 9 pixel height
-	u8g2.drawStr(0, 12, "Finished!"); // write something to the internal memory
-	u8g2.sendBuffer();				  // transfer internal memory to the display
+	u8g2.setFont(u8g2_font_9x15_te);   // 9 pixel height
+	u8g2.drawStr(24, 24, "Finished!"); // write something to the internal memory
+	u8g2.sendBuffer();				   // transfer internal memory to the display
 
 	webProgress = "";
 }
@@ -301,7 +329,7 @@ void displayFinished()
 
 void setHome()
 {
-	Serial.println("	home");
+	// Serial.println("	home");
 
 	sensorState = analogRead(sensorPin);
 
@@ -332,7 +360,7 @@ void setHome()
 // TODO: NEGATIVE FEED
 void feedLabel()
 {
-	Serial.println("				feed");
+	// Serial.println("				feed");
 
 	stepperFeed.enableOutputs();
 	stepperFeed.runToNewPosition(stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8); // TODO adjust length
@@ -345,17 +373,19 @@ void feedLabel()
 
 void pressLabel()
 {
-	Serial.println("			press");
+	// Serial.println("			press");
 	for (int pos = restAngle; pos > peakAngle; pos--)
 	{
 		myServo.write(pos);
-		// delay(2);
+		// delay(1);
 	}
+	lightChar(1.0f);
 	delay(500);
+	lightChar(0.2f);
 	for (int pos = peakAngle; pos < restAngle; pos++)
 	{
 		myServo.write(pos);
-		// delay(2);
+		// delay(1);
 	}
 	delay(500);
 	// Serial.println("2. pressing DONE");
@@ -367,9 +397,9 @@ void goToCharacter(char c)
 
 	if (c != '*')
 	{
-		Serial.print("		\" ");
-		Serial.print(c);
-		Serial.println(" \"");
+		// Serial.print("		\" ");
+		// Serial.print(c);
+		// Serial.println(" \"");
 	}
 
 	if (c == '0')
@@ -406,7 +436,7 @@ void goToCharacter(char c)
 
 void cutLabel()
 {
-	Serial.println("					cut");
+	// Serial.println("					cut");
 	goToCharacter('*');
 
 	for (int i = 0; i < 3; i++)
@@ -417,11 +447,26 @@ void cutLabel()
 
 void writeLabel(String label)
 {
+	digitalWrite(enableCharStepper, LOW);
+	myServo.attach(servoPin);
+	myServo.write(restAngle);
+	delay(500);
+
 	// abcdefghijklmnopqrstuvwxyz23456789*
 
 	int labelLength = label.length();
 
-	lightChar(true);
+	lightChar(0.2f);
+	setHome();
+
+	for (int i = 0; i < labelLength; i++)
+	{
+		if (label[i] == '_')
+		{
+			label[i] = ' ';
+		}
+	}
+
 	displayInitialize();
 
 	displayProgress(labelLength, 0, label);
@@ -430,16 +475,19 @@ void writeLabel(String label)
 
 	for (int i = 0; i < labelLength; i++)
 	{
+
 		if (label[i] != ' ' && label[i] != '_' && label[i] != prevChar)
 		{
 			goToCharacter(label[i]);
 			prevChar = label[i];
 		}
-		delay(50);
+		delay(100);
+
 		if (label[i] != ' ' && label[i] != '_')
 		{
 			pressLabel();
 		}
+
 		feedLabel();
 
 		displayProgress(labelLength, i + 1, label);
@@ -455,12 +503,18 @@ void writeLabel(String label)
 	}
 	cutLabel();
 
+	lightChar(0.0f);
+
 	// reset server parameters
 	parameter = "";
 	value = "";
-	Serial.println("						finished");
-	lightChar(false);
-	setHome();
+	// Serial.println("						finished");
+	digitalWrite(enableCharStepper, HIGH);
+
+	myServo.write(restAngle);
+	myServo.detach();
+
+	// setHome();
 	displayFinished();
 	lightFinished();
 	busy = false;
@@ -491,12 +545,12 @@ void readSerial()
 void processor(void *parameters)
 {
 	// Serial.print("parameter: ");
-	Serial.print(parameter);
+	// Serial.print(parameter);
 
 	String label = value;
 	label.toUpperCase();
 
-	Serial.print(label != "" ? ", value: " : "");
+	// Serial.print(label != "" ? ", value: " : "");
 	Serial.print("\"");
 	Serial.print(label);
 	Serial.println("\"");
@@ -635,16 +689,16 @@ void configModeCallback(AsyncWiFiManager *myWiFiManager)
 	displayConfig();
 	Serial.println("Entered config mode");
 	Serial.println(WiFi.softAPIP());
-	//if you used auto generated SSID, print it
+	// if you used auto generated SSID, print it
 	Serial.println(myWiFiManager->getConfigPortalSSID());
 }
 
 void clearWifiCredentials()
 {
-	//load the flash-saved configs
+	// load the flash-saved configs
 	wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
-	esp_wifi_init(&cfg); //initiate and allocate wifi resources (does not matter if connection fails)
-	delay(2000);		 //wait a bit
+	esp_wifi_init(&cfg); // initiate and allocate wifi resources (does not matter if connection fails)
+	delay(2000);		 // wait a bit
 	if (esp_wifi_restore() != ESP_OK)
 	{
 		Serial.println("WiFi is not initialized by esp_wifi_init ");
@@ -655,15 +709,15 @@ void clearWifiCredentials()
 	}
 	displayReset();
 	delay(1500);
-	esp_restart(); //just my reset configs routine...
+	esp_restart(); // just my reset configs routine...
 }
 
 void wifiManager()
 {
-	//Local intialization. Once its business is done, there is no need to keep it around
+	// Local intialization. Once its business is done, there is no need to keep it around
 	AsyncWiFiManager wifiManager(&server, &dns);
 
-	//reset settings - for testing
+	// reset settings - for testing
 	bool wifiReset = digitalRead(wifiResetPin);
 
 	// Serial.print("wifi reset? ");
@@ -678,19 +732,19 @@ void wifiManager()
 		// ESP.restart();
 	}
 
-	//set callback that gets called when connecting to previous WiFi fails, and enters Access Point mode
+	// set callback that gets called when connecting to previous WiFi fails, and enters Access Point mode
 	wifiManager.setAPCallback(configModeCallback);
 
-	// wifiManager.setDebugOutput(false);
+	wifiManager.setDebugOutput(false);
 
-	//fetches ssid and pass and tries to connect
-	//if it does not connect it starts an access point with the specified name
-	//here  "AutoConnectAP"
-	//and goes into a blocking loop awaiting configuration
+	// fetches ssid and pass and tries to connect
+	// if it does not connect it starts an access point with the specified name
+	// here  "AutoConnectAP"
+	// and goes into a blocking loop awaiting configuration
 	if (!wifiManager.autoConnect("E-TKT"))
 	{
 		Serial.println("failed to connect and hit timeout");
-		//reset and try again, or maybe put it to deep sleep
+		// reset and try again, or maybe put it to deep sleep
 		ESP.restart();
 		// ESP.reset();
 		delay(1000);
@@ -702,7 +756,7 @@ void wifiManager()
 		return;
 	}
 
-	//if you get here you have connected to the WiFi
+	// if you get here you have connected to the WiFi
 	Serial.println("connected!");
 	displayIP = WiFi.localIP().toString();
 	// Serial.println(displayIP);
@@ -723,18 +777,17 @@ void setup()
 	pinMode(wifiResetPin, INPUT_PULLDOWN);
 	pinMode(ledChar, OUTPUT);
 	pinMode(ledFinish, OUTPUT);
+	pinMode(enableCharStepper, OUTPUT);
 
 	analogWrite(ledChar, 0);
 	analogWrite(ledFinish, 0);
 
-	stepperFeed.setMaxSpeed(40000);
-	stepperFeed.setAcceleration(6000);
-	stepperChar.setMaxSpeed(2000 * MICROSTEP_Char);
-	stepperChar.setAcceleration(2000 * MICROSTEP_Char);
+	digitalWrite(enableCharStepper, HIGH);
 
-	myServo.attach(servoPin);
-	myServo.write(restAngle);
-	delay(10);
+	stepperFeed.setMaxSpeed(40000);
+	stepperFeed.setAcceleration(2000);
+	stepperChar.setMaxSpeed(1500 * MICROSTEP_Char);
+	stepperChar.setAcceleration(1500 * MICROSTEP_Char);
 
 	stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
 
@@ -742,11 +795,12 @@ void setup()
 	displayClear();
 	displaySplash();
 
-	Serial.println("boot");
+	Serial.println();
+	Serial.println("E-TKT");
 	wifiManager();
-	delay(500); //tempo para a tarefa iniciar
+	delay(500); // tempo para a tarefa iniciar
 
-	setHome();
+	// setHome();
 }
 
 void loop()
