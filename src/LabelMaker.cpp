@@ -42,7 +42,7 @@ float stepsPerChar;
 Servo myServo;
 const int servoPin = 14;
 int restAngle = 55;
-int peakAngle = 23;
+int peakAngle = 15;
 
 // oled
 U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
@@ -103,8 +103,6 @@ void lightFinished()
 		state = !state;
 		delay(100);
 	}
-	// analogWrite(ledFinish, 128);
-	// delay(5000);
 	for (int i = 128; i >= 0; i--)
 	{
 		analogWrite(ledFinish, i);
@@ -258,34 +256,6 @@ void displayQRCode()
 	delay(1000);
 }
 
-/*void displayProgress(float total, float actual, String label)
-{
-	float progress = actual / total;
-	String progressString = String(progress * 95, 0);
-	webProgress = progressString;
-	progressString.concat("%");
-	const char *p = progressString.c_str();
-	u8g2.drawStr(0, 12, p);
-	// Serial.print("progress: ");
-	// Serial.println(p);
-	u8g2.setDrawColor(1);
-	u8g2.drawHLine(0, 16, 128 - (progress * 128.00f));
-	u8g2.drawHLine(0, 17, 128 - (progress * 128.00f));
-
-	u8g2.setDrawColor(0);
-	u8g2.drawHLine(128 - (progress * 128.00f), 16, 128);
-	u8g2.drawHLine(128 - (progress * 128.00f), 17, 128);
-
-	u8g2.setDrawColor(1);
-	u8g2.drawHLine(0, 16, 5);
-	u8g2.drawHLine(0, 17, 5);
-
-	u8g2.setDrawColor(1);
-	const char *c = label.c_str();
-	u8g2.drawStr(0, 31, c);
-	u8g2.sendBuffer();
-}*/
-
 void displayProgress(float total, float actual, String label)
 {
 	float progress = actual / total;
@@ -377,16 +347,23 @@ void pressLabel()
 	for (int pos = restAngle; pos > peakAngle; pos--)
 	{
 		myServo.write(pos);
-		// delay(1);
+		delay(1);
 	}
+	myServo.write(peakAngle);
+	delay(5);
+
 	lightChar(1.0f);
 	delay(500);
 	lightChar(0.2f);
+
 	for (int pos = peakAngle; pos < restAngle; pos++)
 	{
 		myServo.write(pos);
-		// delay(1);
+		delay(1);
 	}
+	myServo.write(restAngle);
+	delay(5);
+
 	delay(500);
 	// Serial.println("2. pressing DONE");
 }
@@ -448,7 +425,7 @@ void cutLabel()
 void writeLabel(String label)
 {
 	digitalWrite(enableCharStepper, LOW);
-	myServo.attach(servoPin);
+	// myServo.attach(servoPin);
 	myServo.write(restAngle);
 	delay(500);
 
@@ -512,7 +489,7 @@ void writeLabel(String label)
 	digitalWrite(enableCharStepper, HIGH);
 
 	myServo.write(restAngle);
-	myServo.detach();
+	// myServo.detach();
 
 	// setHome();
 	displayFinished();
@@ -773,6 +750,8 @@ void setup()
 {
 	Serial.begin(9600);
 
+
+
 	pinMode(sensorPin, INPUT_PULLUP);
 	pinMode(wifiResetPin, INPUT_PULLDOWN);
 	pinMode(ledChar, OUTPUT);
@@ -800,6 +779,8 @@ void setup()
 	wifiManager();
 	delay(500); // tempo para a tarefa iniciar
 
+
+	myServo.attach(servoPin);
 	// setHome();
 }
 
