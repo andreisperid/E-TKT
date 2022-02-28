@@ -30,6 +30,9 @@ function tagCommand() {
     document.getElementById("text-input").disabled = true;
     document.getElementById("clear-button").disabled = true;
     document.getElementById("submit-button").disabled = true;
+    document.getElementById("reel-button").disabled = true;
+    document.getElementById("feed-button").disabled = true;
+    document.getElementById("cut-button").disabled = true;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "/&?" + "tag=" + treatedLabel.toLowerCase(), true);
     xhr.send();
@@ -63,6 +66,9 @@ function drawHelper() {
 
   document.getElementById("clear-button").disabled = fieldValue === "";
   document.getElementById("submit-button").disabled = fieldValue === "";
+  document.getElementById("reel-button").disabled = !(fieldValue === "");
+  document.getElementById("feed-button").disabled = !(fieldValue === "");
+  document.getElementById("cut-button").disabled = !(fieldValue === "");
 
   if (fieldValue != "" && !clear) {
     if (multiplier + field.value.length + multiplier < 7) {
@@ -122,7 +128,10 @@ function clearField() {
   textField = document.getElementById("text-input");
 
   document.getElementById("clear-button").disabled = true;
-  document.getElementById("submit-button").disabled = true;
+  document.getElementById("submit-button").disabled = true;  
+  document.getElementById("reel-button").disabled = false;
+  document.getElementById("feed-button").disabled = false;
+  document.getElementById("cut-button").disabled = false;
   document.getElementById("hint").style.color = "#777777";
   document.getElementById("text-input").style.color = "#ffffff";
 
@@ -136,13 +145,13 @@ function clearField() {
 }
 
 function useRegex(input) {
-  let regex = /^[a-zA-Z0-9 .]+$/i;
+  let regex = /^[a-zA-Z0-9 .\-]+$/i;
   return regex.test(input);
 }
 
-function rwCommand() {
+function reelCommand() {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/&?" + "rw", true);
+  xhr.open("GET", "/&?" + "reel", true);
   xhr.send();
 }
 
@@ -181,6 +190,9 @@ function getData() {
         document.getElementById("text-input").disabled = false;
         document.getElementById("clear-button").disabled = false;
         document.getElementById("submit-button").disabled = false;
+        document.getElementById("reel-button").disabled = true;
+        document.getElementById("feed-button").disabled = true;
+        document.getElementById("cut-button").disabled = true;
       }
     }
   };

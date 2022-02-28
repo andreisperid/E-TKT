@@ -37,6 +37,21 @@ h2 {
   margin-top: 5px;
   margin-bottom: 40px;
 }
+h3 {
+  text-align: center;
+  margin-top: 10px;
+  /* font-size: 5px; */
+}
+a {
+  font-family: "Impact Label Reversed";
+  font-size: 18px;
+  color: #777777;
+  opacity: 0.5;
+  filter: drop-shadow(0px 0px 20px #FFF);  
+}
+a:hover {
+  opacity: 1;
+}
 #hint {
   font-size: 20px;
   color: #777777;
@@ -66,14 +81,14 @@ input {
   font-family: "Impact Label Reversed";
   text-align: center;
   font-size: 25px;
-  filter: drop-shadow(0px 0px 40px #999);  
+  filter: drop-shadow(0px 0px 40px #FFF);  
   caret-color: auto;
   /* transform: rotate(-0.5deg); */
 }
 #text-input:focus {
   /* border: 1px solid #777;
   border-width: 1px 0 1px 0;   */
-  background: #11111144;
+  background: #11111166;
 }
 
 #mode-dropdown {
@@ -104,14 +119,49 @@ input[type="button"]:disabled {
   color: #333333;
 }
 
-
 #clear-button{
-  color: rgb(200, 0, 0);
-  border-color: rgb(128, 0, 0);
+  color: rgb(255, 0, 0);
+  border-color: rgba(255, 0, 0, 0.5);
 }
 #clear-button:disabled{
-  color: rgb(64, 0, 0);
-  border-color: rgb(64, 0, 0);
+  color: rgba(255, 0, 0, 0.25);
+  border-color: rgba(255, 0, 0, 0.25);
+}
+
+#reel-button{
+  color: rgba(0, 151, 81, 1.0);
+  border-color: rgba(0, 151, 81, 0.5);
+}
+#reel-button:disabled{
+  color: rgba(0, 151, 81, 0.25);
+  border-color:rgba(0, 151, 81, 0.25);
+}
+
+#feed-button{
+  color: rgba(255, 166, 0, 1);
+  border-color: rgba(255, 166, 0, 0.5);
+}
+#feed-button:disabled{
+  color: rgba(255, 166, 0, 0.25);
+  border-color: rgba(255, 166, 0, 0.25);
+}
+
+#cut-button{
+  color: rgba(0, 102, 255, 1);
+  border-color: rgba(0, 102, 255, 0.5)
+}
+#cut-button:disabled{
+  color: rgba(0, 102, 255, 0.25);
+  border-color: rgba(0, 102, 255, 0.25);
+}
+
+#submit-button{
+  color: rgb(255, 255, 255);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+#submit-button:disabled{
+  color: rgba(128, 128, 128, 0.25);
+  border-color: rgba(128, 128, 128, 0.25);
 }
 
 

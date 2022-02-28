@@ -46,7 +46,7 @@
 
     <div style="width: 300px; margin: auto">
       <h1 style="text-align: center; transform: rotate(-1deg)">E-TKT</h1>
-      <h2 style="text-align: center; margin-top: 10px;">label maker</h2>
+      <h2 style="text-align: center; margin-top: 10px">label maker</h2>
 
       <form
         action="none"
@@ -55,7 +55,7 @@
         novalidate
         onsubmit="return false"
       >
-        <div id="single-column" style="margin-top: 90px; position: relative">
+        <div id="single-column" style="margin-top: 75px; position: relative">
           <div style="position: absolute; top: 0; left: 0">
             <input
               type="text"
@@ -140,7 +140,8 @@
           </div>
         </div>
 
-        <div id="single-column" style="margin-top: 50px; padding: 0 3px 0 3px">
+
+        <div id="single-column" style="margin-top: 30px; padding: 0 3px 0 3px">
           <div
             id="progress-bar"
             style="background: white; height: 2px; width: 0%"
@@ -160,141 +161,47 @@
           </div>
         </div>
 
-        <!-- <hr
-          style="
-            width: 100%;
-            /* transform: rotate(0.5deg); */
-            border-color: #222;
-          "
-        /> -->
-        <!--div id="single-column">
-          <a
-            href="#"
-            onclick="toggleVisibility(historyDiv, history_label, '- LAST TAGS -', '+ LAST TAGS +')"
-            style="color: black"
-            ><span id="history_label" style="color: #777777">
-              + LAST TAGS +
-            </span></a
-          >
-        </div>
-
-        <div id="historyDiv" style="visibility: hidden; height: 0px">
-          <div
-            style="
-              display: table;
-              column-count: 1;
-              margin: auto;
-              padding-bottom: 25px;
-            "
-          >
-            <span style="display: table-cell; width: 100%%"
-              ><input
-                type="button"
-                value=" SOME TAG "
-                onclick="cutCommand()"
-                style="transform: rotate(-1deg); column-span: all"
-            /></span>
-          </div>
-          <div
-            style="
-              display: table;
-              column-count: 1;
-              margin: auto;
-              padding-bottom: 25px;
-            "
-          >
-            <span style="display: table-cell; width: 100%%"
-              ><input
-                type="button"
-                value=" SOME OTHER TAG "
-                onclick="cutCommand()"
-                style="transform: rotate(-1deg); column-span: all"
-            /></span>
-          </div>
-          <div
-            style="
-              display: table;
-              column-count: 1;
-              margin: auto;
-              padding-bottom: 25px;
-            "
-          >
-            <span style="display: table-cell; width: 100%%"
-              ><input
-                type="button"
-                value=" FIRST TAG "
-                onclick="cutCommand()"
-                style="transform: rotate(-1deg); column-span: all"
-            /></span>
-          </div>
-        </div>
-
-        <hr
-          style="
-            width: 100%%;
-            /* transform: rotate(0.5deg); */
-            border-color: #222;
-          "
-        />
-
-        <br /-->
-        <!-- <div
+        <div
           id="single-column"
-          style="justify-content: center; margin-top: 15px"
+          style="margin-top: 0px; padding-top: 30px; height: 36px"
         >
           <div>
-            <a
-              href="#"
-              onclick="toggleVisibility(extras, extras_label, '- SETUP -', '+ SETUP +')"
-              style="color: black"
-              ><span id="extras_label" style="color: #777777">
-                + SETUP +
-              </span></a
-            >
+            <input
+              type="button"
+              id="reel-button"
+              onclick="reelCommand()"
+              value=" REEL "
+              tabindex="-1"
+            />
           </div>
-        </div> -->
+          <div>
+            <input
+              type="button"
+              id="feed-button"
+              onclick="fwCommand()"
+              value=" FEED "
+              tabindex="-1"
+            />
+          </div>
+          <div>
+            <input
+              type="button"
+              id="cut-button"
+              onclick="cutCommand()"
+              value=" CUT "
+              tabindex="-1"
+            />
+          </div>
+        </div>
 
-        <!-- <div id="extras" style="visibility: hidden; height: 0px">
-          <div
-            style="
-              display: flex;
-              justify-content: center;
-              column-count: 2;
-              margin: auto;
-              width: 100%;
-            "
-          >
-            <span style="display: box; width: 100%; margin-right: 8px">
-              <input type="button" value=' rewind ' onclick="rwCommand()" />
-            </span>
-            <span style="display: box; width: 100%; margin-left: 8px">
-              <input type="button" value=" forward " onclick="fwCommand()" />
-            </span>
-          </div>
-          <div style="display: table; column-count: 1; margin: auto">
-            <span
-              style="
-                display: table-cell;
-                width: 100%;
-                padding-top: 25px;
-                padding-bottom: 25px;
-              "
-              ><input
-                type="button"
-                value=" ---- Cut ---- "
-                onclick="cutCommand()"
-                style="column-span: all"
-            /></span>
-          </div>
-        </div> -->
-
-        <!-- <hr
-          style="
-            width: 100%%;
-            /* transform: rotate(0.5deg); */
-            border-color: #222;
-          "
-        /> -->
+        <div
+          id="single-column"
+          style="margin-top: 0px; padding-top: 20px; height: 36px"
+        >
+          <div style="width: 100%">
+            <h3><a href="http://andrei.cc" target="blank">andrei speridião 2022</a></h3>
+          </div>          
+        </div>
       </form>
     </div>
 
