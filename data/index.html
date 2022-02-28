@@ -43,167 +43,169 @@
     </div>
 
     <div id="background"></div>
+    <div style="height: 95vh; display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="width: 300px; margin-right: auto; margin-left: auto;">
+          <h1 style="text-align: center; transform: rotate(-1deg)">E-TKT</h1>
+          <h2 style="text-align: center; margin-top: 10px">label maker</h2>
 
-    <div style="width: 300px; margin: auto">
-      <h1 style="text-align: center; transform: rotate(-1deg)">E-TKT</h1>
-      <h2 style="text-align: center; margin-top: 10px">label maker</h2>
-
-      <form
-        action="none"
-        method="post"
-        autocomplete="off"
-        novalidate
-        onsubmit="return false"
-      >
-        <div id="single-column" style="margin-top: 75px; position: relative">
-          <div style="position: absolute; top: 0; left: 0">
-            <input
-              type="text"
-              id="text-input"
-              name="LABEL\"
-              minlenght="1"
-              maxlength="20"
-              placeholder="WRITE HERE"
-              onkeyup="return formKeyHandler(event), calculateLength()"
-              value=""
-              autocomplete="off"
-              autocorrect="off"
-              spellcheck="false"
-              tabindex="-1"
-            />
-          </div>
-          <div
-            id="size-helper"
-            style="
-              pointer-events: none;
-              border-color: rgba(255, 166, 0, 0.3) rgba(0, 102, 255, 0.6);
-              border-style: solid dashed solid dashed;
-              border-width: 2px 2px 2px 2px;
-              margin: auto;
-              /* padding-right: 4px; */
-              background: #00000044;
-              z-index: 50;
-              font-size: 25px;
-              color: #ff000000;
-            "
-          >
-            WRITE HERE
-          </div>
-        </div>
-
-        <div
-          id="single-column"
-          style="margin: 5px 0 40px 0; justify-content: center"
-        >
-          <div id="hint">valid: A-Z 0-9 space . -</div>
-        </div>
-
-        <div
-          id="single-column"
-          style="margin-top: 0px; padding-top: 0px; height: 36px"
-        >
-          <div>
-            <input
-              type="button"
-              id="clear-button"
-              onclick="clearField()"
-              value=" x "
-              disabled
-              tabindex="-1"
-            />
-          </div>
-
-          <div style="width: 50%">
-            <select
-              type="range"
-              id="mode-dropdown"
-              onchange="return formKeyHandler(event)"
+          <form
+            action="none"
+            method="post"
+            autocomplete="off"
+            novalidate
+            onsubmit="return false"
             >
-              <option value="tight">tight</option>
-              <option value="margin" selected>margin</option>
-              <option value="full">full</option>
-            </select>
-          </div>
+            <div id="single-column" style="margin-top: 75px; position: relative">
+              <div style="position: absolute; top: 0; left: 0">
+                <input
+                  type="text"
+                  id="text-input"
+                  name="LABEL\"
+                  minlenght="1"
+                  maxlength="20"
+                  placeholder="WRITE HERE"
+                  onkeyup="return formKeyHandler(event), calculateLength()"
+                  value=""
+                  autocomplete="off"
+                  autocorrect="off"
+                  spellcheck="false"
+                  tabindex="-1"
+                />
+              </div>
+              <div
+                id="size-helper"
+                style="
+                  pointer-events: none;
+                  border-color: rgba(255, 166, 0, 0.3) rgba(0, 102, 255, 0.6);
+                  border-style: solid dashed solid dashed;
+                  border-width: 2px 2px 2px 2px;
+                  margin: auto;
+                  /* padding-right: 4px; */
+                  background: #00000044;
+                  z-index: 50;
+                  font-size: 25px;
+                  color: #ff000000;
+                "
+              >
+                WRITE HERE
+              </div>
+            </div>
 
-          <div
-            id="length-label"
-            style="
-              height: 28px;
-              border-width: 1.5px 0 1.5px 0;
-              border-style: solid;
-              border-color: orange;
-              margin: 0;
-              padding-top: 5px;
-            "
-          >
-            <div>28mm</div>
-          </div>
+            <div
+              id="single-column"
+              style="margin: 15px 0 15px 0; justify-content: center"
+            >
+              <div id="hint">valid: A-Z 0-9 space . -</div>
+            </div>
+
+            <div
+              id="single-column"
+              style="margin-top: 0px; padding-top: 0px; height: 36px"
+            >
+              <div>
+                <input
+                  type="button"
+                  id="clear-button"
+                  onclick="clearField()"
+                  value=" x "
+                  disabled
+                  tabindex="-1"
+                />
+              </div>
+
+              <div style="width: 50%">
+                <select
+                  type="range"
+                  id="mode-dropdown"
+                  onchange="return formKeyHandler(event)"
+                >
+                  <option value="tight">tight</option>
+                  <option value="margin" selected>margin</option>
+                  <option value="full">full</option>
+                </select>
+              </div>
+
+              <div
+                id="length-label"
+                style="
+                  height: 28px;
+                  border-width: 1.5px 0 1.5px 0;
+                  border-style: solid;
+                  border-color: orange;
+                  margin: 0;
+                  padding-top: 5px;
+                "
+              >
+                <div>28mm</div>
+              </div>
+            </div>
+
+
+            <div id="single-column" style="margin-top: 15px; padding: 0 3px 0 3px">
+              <div
+                id="progress-bar"
+                style="background: white; height: 2px; width: 0%"
+              ></div>
+            </div>
+            <div id="single-column" style="margin-top: 0px; padding-top: 0">
+              <div style="width: 100%; height: 60px">
+                <input
+                  type="button"
+                  onclick="tagCommand()"
+                  id="submit-button"
+                  value=" Print label! "
+                  style="height: 100%"
+                  disabled
+                  tabindex="-1"
+                />
+              </div>
+            </div>
+
+            <div
+              id="single-column"
+              style="margin-top: 0px; padding-top: 15px; height: 36px"
+            >
+              <div>
+                <input
+                  type="button"
+                  id="reel-button"
+                  onclick="reelCommand()"
+                  value=" REEL "
+                  tabindex="-1"
+                />
+              </div>
+              <div>
+                <input
+                  type="button"
+                  id="feed-button"
+                  onclick="fwCommand()"
+                  value=" FEED "
+                  tabindex="-1"
+                />
+              </div>
+              <div>
+                <input
+                  type="button"
+                  id="cut-button"
+                  onclick="cutCommand()"
+                  value=" CUT "
+                  tabindex="-1"
+                />
+              </div>
+            </div>
+
+
+          </form>
         </div>
 
+        <div style="padding-bottom: 15px;">
+          <h3><a href="http://andrei.cc" target="blank">andrei speridião 2022</a></h3>
+        </div>  
 
-        <div id="single-column" style="margin-top: 30px; padding: 0 3px 0 3px">
-          <div
-            id="progress-bar"
-            style="background: white; height: 2px; width: 0%"
-          ></div>
-        </div>
-        <div id="single-column" style="margin-top: 0px; padding-top: 0">
-          <div style="width: 100%; height: 60px">
-            <input
-              type="button"
-              onclick="tagCommand()"
-              id="submit-button"
-              value=" Print label! "
-              style="height: 100%"
-              disabled
-              tabindex="-1"
-            />
-          </div>
-        </div>
 
-        <div
-          id="single-column"
-          style="margin-top: 0px; padding-top: 30px; height: 36px"
-        >
-          <div>
-            <input
-              type="button"
-              id="reel-button"
-              onclick="reelCommand()"
-              value=" REEL "
-              tabindex="-1"
-            />
-          </div>
-          <div>
-            <input
-              type="button"
-              id="feed-button"
-              onclick="fwCommand()"
-              value=" FEED "
-              tabindex="-1"
-            />
-          </div>
-          <div>
-            <input
-              type="button"
-              id="cut-button"
-              onclick="cutCommand()"
-              value=" CUT "
-              tabindex="-1"
-            />
-          </div>
-        </div>
+      </div>    
+  </div>
 
-        <div
-          id="single-column"
-          style="margin-top: 0px; padding-top: 20px; height: 36px"
-        >
-          <div style="width: 100%">
-            <h3><a href="http://andrei.cc" target="blank">andrei speridião 2022</a></h3>
-          </div>          
-        </div>
-      </form>
-    </div>
 
     <script src="script.js"></script>
   </body>
