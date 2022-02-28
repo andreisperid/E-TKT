@@ -29,13 +29,13 @@ h2 {
 h1 {
   font-size: 50px;
   margin: 0px;
-  padding-top: 50px;
+  padding-top: 30px;
 }
 h2 {
   font-size: 21px;
   margin: 0px;
   margin-top: 5px;
-  margin-bottom: 40px;
+  /* margin-bottom: 30px; */
 }
 h3 {
   text-align: center;
