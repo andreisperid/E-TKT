@@ -1,8 +1,8 @@
-@font-face {
+/* @font-face {
   font-family: "Impact Label";
   src: url("/fontblack.ttf");
   color: #ffffff;
-}
+} */
 @font-face {
   font-family: "Impact Label Reversed";
   src: url("/fontwhite.ttf");
@@ -24,19 +24,24 @@ body {
   padding: 0px;
 }
 h1,
-h2 {
-  font-family: "Impact Label Reversed";
+h2,
+h3 {
   color: #ffffff;
+  font-weight: 100;
 }
 h1 {
-  font-size: 50px;
+  font-size: 55px;
   margin: 0px;
   /* padding-top: 20px; */
+  color:rgb(194, 194, 194);
+  opacity: 1;
+  filter: drop-shadow(-2px -2px 2px rgba(255, 255, 255, 0.35));  
 }
 h2 {
-  font-size: 21px;
+  font-size: 23px;
   margin: 0px;
-  margin-top: 5px;
+  /* margin-top: 15px; */
+  opacity: 0.25;
   /* margin-bottom: 30px; */
 }
 h3 {
@@ -45,7 +50,7 @@ h3 {
   /* font-size: 5px; */
 }
 a {
-  font-family: "Impact Label Reversed";
+  /* font-family: "Impact Label Reversed"; */
   font-size: 18px;
   color: #777777;
   opacity: 0.5;
@@ -80,7 +85,7 @@ input {
   padding: 0px;
   color: white;
   width: 100%;
-  font-family: "Impact Label Reversed";
+  /* font-family: "Impact Label Reversed"; */
   text-align: center;
   font-size: 25px;
   filter: drop-shadow(0px 0px 40px #FFF);  
@@ -116,6 +121,11 @@ input {
   margin: auto;
   padding-bottom: 15px;
 }
+
+input[type="button"] {
+  height: 36px;
+}
+
 
 input[type="button"]:disabled {
   color: #333333;
