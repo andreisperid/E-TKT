@@ -19,7 +19,9 @@
   user-select: none; /* Likely future */
 }
 body {
-  background-color: black;
+  background-color: rgb(32, 32, 32);
+  margin: 0px;
+  padding: 0px;
 }
 h1,
 h2 {
@@ -29,7 +31,7 @@ h2 {
 h1 {
   font-size: 50px;
   margin: 0px;
-  padding-top: 30px;
+  /* padding-top: 20px; */
 }
 h2 {
   font-size: 21px;
@@ -82,7 +84,7 @@ input {
   text-align: center;
   font-size: 25px;
   filter: drop-shadow(0px 0px 40px #FFF);  
-  caret-color: auto;
+  caret-color: "white";
   /* transform: rotate(-0.5deg); */
 }
 #text-input:focus {
@@ -173,24 +175,37 @@ input[type="button"]:disabled {
   left: 0px;
   right: 0px;
   margin: auto;
+  padding: 0px;
   z-index: -1;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  background: linear-gradient(
+    rgb(0, 0, 0) 80%,
+    rgb(10, 10, 10)
+  );
+}
+
+#frame{  
+  border-radius: 20px;
+  filter: drop-shadow(-20px -20px 20px rgba(36, 36, 36, 0.65));
   background: radial-gradient(
-    ellipse,
-    rgb(20, 20, 20) 0%,
-    rgba(0, 0, 0, 1) 90%
+    circle,
+    rgb(19, 19, 19) 10%,
+    rgb(8, 8, 8) 90%
   );
 }
 
 #splash {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   position: fixed;
   top: 0px;
   bottom: 0px;
   left: 0px;
   right: 0px;
+
+  padding: 0px;
+  margin: 0px;
 
   background: radial-gradient(
     ellipse,
@@ -204,8 +219,8 @@ input[type="button"]:disabled {
   justify-content: center;
   align-items: center;
 
-  -webkit-animation: fade 3s;
-  animation: fade 3s;
+  -webkit-animation: fade 2s;
+  animation: fade 2s;
   opacity: 0;
   z-index: -1;
 }
@@ -219,8 +234,8 @@ input[type="button"]:disabled {
   justify-content: flex-end;
   align-content: flex-start;
 
-  -webkit-animation: fade 3s;
-  animation: fade 3s;
+  -webkit-animation: fade 1.5s;
+  animation: fade 1.5s;
 
   opacity: 0;
   z-index: -1;
@@ -233,8 +248,8 @@ input[type="button"]:disabled {
 
   height: 150px;
   /* background: white; */
-  -webkit-animation: move 2s;
-  animation: move 2s;
+  -webkit-animation: move 1.5s;
+  animation: move 1.5s;
 }
 @keyframes move {
   0% {

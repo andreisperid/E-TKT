@@ -1,9 +1,9 @@
 document.getElementById("text-input").focus();
 let busy = false;
 let command = "";
-let treatedLabel = ""
+let treatedLabel = "";
 let clear = false;
-let minSize = 7
+let minSize = 7;
 
 function toggleVisibility(x, y, openedLabel, closedLabel) {
   if (x.style.visibility === "hidden") {
@@ -20,13 +20,13 @@ function toggleVisibility(x, y, openedLabel, closedLabel) {
 function calculateLength() {
   let label = document.getElementById("length-label");
 
-  console.log(treatedLabel)
+  // console.log(treatedLabel);
 
-  if (treatedLabel.length === 0){
-    label.innerHTML = "??mm"
-  }
-  else {
-    label.innerHTML = (treatedLabel.length < 7 ? 7 : treatedLabel.length) * 4 + "mm";
+  if (treatedLabel.length === 0) {
+    label.innerHTML = "??mm";
+  } else {
+    label.innerHTML =
+      (treatedLabel.length < 7 ? 7 : treatedLabel.length) * 4 + "mm";
   }
 }
 
@@ -65,7 +65,7 @@ function drawHelper() {
       }
       multiplier = 1;
       break;
-    case "tight":  
+    case "tight":
       minSize = 10;
       multiplier = 0;
       field.maxLength = 20;
@@ -98,7 +98,7 @@ function drawHelper() {
     // console.log('"' + treatedLabel + '"');
   } else {
     clear = false;
-    treatedLabel = ""
+    treatedLabel = "";
     document.getElementById("size-helper").innerHTML =
       space.repeat(multiplier) +
       (mode != "full" ? "WRITE HERE" : "") +
@@ -127,13 +127,14 @@ function formKeyHandler(e) {
     document.getElementById("text-input").style.color = "red";
     document.getElementById("submit-button").disabled = true;
     document.getElementById("submit-button").value = " invalid entry ";
-    document.getElementById("submit-button").style.color = "red"
+    document.getElementById("submit-button").style.color = "red";
   } else {
     valid = true;
     document.getElementById("hint").style.color = "#777777";
     document.getElementById("text-input").style.color = "#ffffff";
-    document.getElementById("submit-button").value = fieldValue != "" ? " Print label! " : " ... ";
-    document.getElementById("submit-button").style.color = "white"
+    document.getElementById("submit-button").value =
+      fieldValue != "" ? " Print label! " : " ... ";
+    document.getElementById("submit-button").style.color = "white";
   }
   if (keynum === 13 && valid) {
     document.getElementById("submit-button").click();
@@ -168,16 +169,18 @@ function useRegex(input) {
 }
 
 function reelCommand() {
-  document.getElementById("reel-button").disabled = true;
-  document.getElementById("feed-button").disabled = true;
-  document.getElementById("cut-button").disabled = true;
-  document.getElementById("submit-button").disabled = true;
-  document.getElementById("submit-button").value = "  reeling... ";
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/&?" + "reel", true);
-  xhr.send();
-  command = "reel";
-  busy = true;
+  if (confirm("Confirm loading a new reel? \n\n Please make sure the tape is touching the cog.")) {
+    document.getElementById("reel-button").disabled = true;
+    document.getElementById("feed-button").disabled = true;
+    document.getElementById("cut-button").disabled = true;
+    document.getElementById("submit-button").disabled = true;
+    document.getElementById("submit-button").value = "  reeling... ";
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/&?" + "reel", true);
+    xhr.send();
+    command = "reel";
+    busy = true;
+  }
 }
 
 function feedCommand() {
@@ -247,11 +250,13 @@ function getData() {
           document.getElementById("progress-bar").style.width = 0;
           document.getElementById("submit-button").value = " Print label! ";
           document.getElementById("text-input").disabled = false;
-          document.getElementById("clear-button").disabled = textField.value == "";
-          document.getElementById("submit-button").disabled = textField.value == "";
-          document.getElementById("reel-button").disabled = false
-          document.getElementById("feed-button").disabled = false
-          document.getElementById("cut-button").disabled = false
+          document.getElementById("clear-button").disabled =
+            textField.value == "";
+          document.getElementById("submit-button").disabled =
+            textField.value == "";
+          document.getElementById("reel-button").disabled = false;
+          document.getElementById("feed-button").disabled = false;
+          document.getElementById("cut-button").disabled = false;
           busy = false;
         }
       }
