@@ -1,5 +1,6 @@
 document.getElementById("text-input").focus();
 let busy = false;
+let command = "";
 let treatedLabel = "";
 let clear = false;
 
@@ -25,7 +26,7 @@ function tagCommand() {
   let fieldValue = document.getElementById("text-input").value;
 
   if (useRegex(fieldValue)) {
-    console.log('printing: "' + treatedLabel.toLowerCase() + '"');
+    // console.log('printing: "' + treatedLabel.toLowerCase() + '"');
     document.getElementById("text-input").blur();
     document.getElementById("text-input").disabled = true;
     document.getElementById("clear-button").disabled = true;
@@ -36,6 +37,7 @@ function tagCommand() {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "/&?" + "tag=" + treatedLabel.toLowerCase(), true);
     xhr.send();
+    command = "tag";
     busy = true;
   }
 }
@@ -73,7 +75,7 @@ function drawHelper() {
   if (fieldValue != "" && !clear) {
     if (multiplier + field.value.length + multiplier < 7) {
       multiplier = Math.ceil((7 - field.value.length) / 2);
-      console.log("minimum length " + multiplier);
+      // console.log("minimum length " + multiplier);
     }
     document.getElementById("size-helper").innerHTML =
       space.repeat(multiplier) +
@@ -82,7 +84,7 @@ function drawHelper() {
 
     treatedLabel =
       "_".repeat(multiplier) + field.value + "_".repeat(multiplier);
-    console.log('"' + treatedLabel + '"');
+    // console.log('"' + treatedLabel + '"');
   } else {
     clear = false;
     document.getElementById("size-helper").innerHTML =
@@ -95,7 +97,6 @@ function drawHelper() {
 function formKeyHandler(e) {
   let field = document.getElementById("text-input");
   let fieldValue = field.value;
-
 
   let keynum;
   if (window.event && e != null) {
@@ -113,10 +114,14 @@ function formKeyHandler(e) {
     document.getElementById("hint").style.color = "red";
     document.getElementById("text-input").style.color = "red";
     document.getElementById("submit-button").disabled = true;
+    document.getElementById("submit-button").value = " invalid entry ";
+    document.getElementById("submit-button").style.color = "red"
   } else {
     valid = true;
     document.getElementById("hint").style.color = "#777777";
     document.getElementById("text-input").style.color = "#ffffff";
+    document.getElementById("submit-button").value = fieldValue != "" ? " Print label! " : " ... ";
+    document.getElementById("submit-button").style.color = "white"
   }
   if (keynum === 13 && valid) {
     document.getElementById("submit-button").click();
@@ -128,12 +133,13 @@ function clearField() {
   textField = document.getElementById("text-input");
 
   document.getElementById("clear-button").disabled = true;
-  document.getElementById("submit-button").disabled = true;  
+  document.getElementById("submit-button").disabled = true;
   document.getElementById("reel-button").disabled = false;
   document.getElementById("feed-button").disabled = false;
   document.getElementById("cut-button").disabled = false;
   document.getElementById("hint").style.color = "#777777";
   document.getElementById("text-input").style.color = "#ffffff";
+  document.getElementById("submit-button").value = " ... ";
 
   textField.value = "";
   treatedLabel = "";
@@ -150,52 +156,95 @@ function useRegex(input) {
 }
 
 function reelCommand() {
+  document.getElementById("reel-button").disabled = true;
+  document.getElementById("feed-button").disabled = true;
+  document.getElementById("cut-button").disabled = true;
+  document.getElementById("submit-button").disabled = true;
+  document.getElementById("submit-button").value = "  reeling... ";
   var xhr = new XMLHttpRequest();
   xhr.open("GET", "/&?" + "reel", true);
   xhr.send();
+  command = "reel";
+  busy = true;
 }
 
-function fwCommand() {
+function feedCommand() {
+  document.getElementById("reel-button").disabled = true;
+  document.getElementById("feed-button").disabled = true;
+  document.getElementById("cut-button").disabled = true;
+  document.getElementById("submit-button").disabled = true;
+  document.getElementById("submit-button").value = " feeding... ";
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/&?" + "fw", true);
+  xhr.open("GET", "/&?" + "feed", true);
   xhr.send();
+  command = "feed";
+  busy = true;
 }
 
 function cutCommand() {
+  document.getElementById("reel-button").disabled = true;
+  document.getElementById("feed-button").disabled = true;
+  document.getElementById("cut-button").disabled = true;
+  document.getElementById("submit-button").disabled = true;
+  document.getElementById("submit-button").value = " cutting... ";
+
   var xhr = new XMLHttpRequest();
   xhr.open("GET", "/&?" + "cut", true);
   xhr.send();
+  command = "cut";
+  busy = true;
 }
 
 setInterval(function () {
-  if (busy) {
-    getData();
-  }
-}, 500);
+  getData();
+}, 100);
 
 function getData() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      console.log(this.responseText);
-      document.getElementById("submit-button").value =
-        " Printing " + this.responseText + "% ";
-      document.getElementById("progress-bar").style.width =
-        (this.responseText === "" ? " 0" : this.responseText) + "%";
+  textField = document.getElementById("text-input");
+  // console.log("getting data");
+  // console.log(textField.value == "");
 
-      if (this.responseText === "finished" || this.responseText === "" ) {
-        busy = false;
-        document.getElementById("progress-bar").style.width = 0;
-        document.getElementById("submit-button").value = " Print label! ";
-        document.getElementById("text-input").disabled = false;
-        document.getElementById("clear-button").disabled = false;
-        document.getElementById("submit-button").disabled = false;
-        document.getElementById("reel-button").disabled = true;
-        document.getElementById("feed-button").disabled = true;
-        document.getElementById("cut-button").disabled = true;
+  if (busy) {
+    // console.log("busy")
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        // console.log("response: " + this.responseText);
+
+        switch (command) {
+          case "tag":
+            document.getElementById("submit-button").value =
+              " Printing " + this.responseText + "% ";
+            break;
+          case "reel":
+            document.getElementById("submit-button").value = " reeling... ";
+            break;
+          case "feed":
+            document.getElementById("submit-button").value = " feeding... ";
+            break;
+          case "cut":
+            document.getElementById("submit-button").value = " cutting... ";
+            break;
+        }
+
+        document.getElementById("progress-bar").style.width =
+          (this.responseText === "" ? " 0" : this.responseText) + "%";
+
+        if (this.responseText === "finished") {
+          document.getElementById("progress-bar").style.width = 0;
+          document.getElementById("submit-button").value = " Print label! ";
+          document.getElementById("text-input").disabled = false;
+          document.getElementById("clear-button").disabled = textField.value == "";
+          document.getElementById("submit-button").disabled = textField.value == "";
+          document.getElementById("reel-button").disabled = false
+          document.getElementById("feed-button").disabled = false
+          document.getElementById("cut-button").disabled = false
+          busy = false;
+        }
       }
-    }
-  };
-  xhttp.open("GET", "status", true);
-  xhttp.send();
+    };
+    xhttp.open("GET", "status", true);
+    xhttp.send();
+  }
 }

@@ -121,7 +121,7 @@ input[type="button"]:disabled {
 
 #clear-button{
   color: rgb(255, 0, 0);
-  border-color: rgba(255, 0, 0, 0.5);
+  border-color: rgba(255, 0, 0, 0.25);
 }
 #clear-button:disabled{
   color: rgba(255, 0, 0, 0.25);
@@ -130,7 +130,7 @@ input[type="button"]:disabled {
 
 #reel-button{
   color: rgba(0, 151, 81, 1.0);
-  border-color: rgba(0, 151, 81, 0.5);
+  border-color: rgba(0, 151, 81, 0.25);
 }
 #reel-button:disabled{
   color: rgba(0, 151, 81, 0.25);
@@ -139,7 +139,7 @@ input[type="button"]:disabled {
 
 #feed-button{
   color: rgba(255, 166, 0, 1);
-  border-color: rgba(255, 166, 0, 0.5);
+  border-color: rgba(255, 166, 0, 0.25);
 }
 #feed-button:disabled{
   color: rgba(255, 166, 0, 0.25);
@@ -148,7 +148,7 @@ input[type="button"]:disabled {
 
 #cut-button{
   color: rgba(0, 102, 255, 1);
-  border-color: rgba(0, 102, 255, 0.5)
+  border-color: rgba(0, 102, 255, 0.25)
 }
 #cut-button:disabled{
   color: rgba(0, 102, 255, 0.25);
@@ -160,7 +160,7 @@ input[type="button"]:disabled {
   border-color: rgba(255, 255, 255, 0.5);
 }
 #submit-button:disabled{
-  color: rgba(128, 128, 128, 0.25);
+  color: rgb(255, 255, 255);
   border-color: rgba(128, 128, 128, 0.25);
 }
 
