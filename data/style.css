@@ -147,6 +147,7 @@ input[type="button"]:disabled {
 }
 
 #cut-button{
+  border-style: dashed;
   color: rgba(0, 102, 255, 1);
   border-color: rgba(0, 102, 255, 0.25)
 }

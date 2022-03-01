@@ -64,7 +64,7 @@
                   minlenght="1"
                   maxlength="20"
                   placeholder="WRITE HERE"
-                  onkeyup="return formKeyHandler(event), calculateLength()"
+                  oninput="return formKeyHandler(event), calculateLength()"
                   value=""
                   autocomplete="off"
                   autocorrect="off"
@@ -117,7 +117,7 @@
                 <select
                   type="range"
                   id="mode-dropdown"
-                  onchange="return formKeyHandler(event)"
+                  onchange="return formKeyHandler(event), calculateLength()"
                 >
                   <option value="tight">tight</option>
                   <option value="margin" selected>margin</option>
@@ -136,7 +136,7 @@
                   padding-top: 5px;
                 "
               >
-                <div>28mm</div>
+                <div>??mm</div>
               </div>
             </div>
 

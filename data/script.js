@@ -1,8 +1,9 @@
 document.getElementById("text-input").focus();
 let busy = false;
 let command = "";
-let treatedLabel = "";
+let treatedLabel = ""
 let clear = false;
+let minSize = 7
 
 function toggleVisibility(x, y, openedLabel, closedLabel) {
   if (x.style.visibility === "hidden") {
@@ -18,8 +19,15 @@ function toggleVisibility(x, y, openedLabel, closedLabel) {
 
 function calculateLength() {
   let label = document.getElementById("length-label");
-  label.innerHTML =
-    (treatedLabel.length < 7 ? 7 : treatedLabel.length) * 4 + "mm";
+
+  console.log(treatedLabel)
+
+  if (treatedLabel.length === 0){
+    label.innerHTML = "??mm"
+  }
+  else {
+    label.innerHTML = (treatedLabel.length < 7 ? 7 : treatedLabel.length) * 4 + "mm";
+  }
 }
 
 function tagCommand() {
@@ -50,17 +58,20 @@ function drawHelper() {
   let mode = document.getElementById("mode-dropdown").value;
   switch (mode) {
     case "margin":
+      minSize = 12;
       field.maxLength = 18;
       if (field.value.length > 18) {
         field.value = fieldValue.slice(0, 18);
       }
       multiplier = 1;
       break;
-    case "tight":
+    case "tight":  
+      minSize = 10;
       multiplier = 0;
       field.maxLength = 20;
       break;
     case "full":
+      minSize = 20;
       multiplier = Math.floor((20 - field.value.length) / 2);
       field.maxLength = 20;
       break;
@@ -87,6 +98,7 @@ function drawHelper() {
     // console.log('"' + treatedLabel + '"');
   } else {
     clear = false;
+    treatedLabel = ""
     document.getElementById("size-helper").innerHTML =
       space.repeat(multiplier) +
       (mode != "full" ? "WRITE HERE" : "") +
