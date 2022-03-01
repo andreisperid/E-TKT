@@ -72,7 +72,7 @@ input {
   /* caret-shape: underscore; */
 }
 #text-input {
-  outline: 15px inset #44444444;
+  outline: 10px inset #44444444;
   /* border: 1px dashed #111; */
   border-radius: 1px;
   border: none;
@@ -187,7 +187,7 @@ input[type="button"]:disabled {
 
 #frame{  
   border-radius: 20px;
-  filter: drop-shadow(-20px -20px 20px rgba(36, 36, 36, 0.65));
+  filter: drop-shadow(-8px -8px 8px rgba(36, 36, 36, 0.5));
   background: radial-gradient(
     circle,
     rgb(19, 19, 19) 10%,

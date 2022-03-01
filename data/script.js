@@ -169,7 +169,11 @@ function useRegex(input) {
 }
 
 function reelCommand() {
-  if (confirm("Confirm loading a new reel? \n\n Please make sure the tape is touching the cog.")) {
+  if (
+    confirm(
+      "Confirm loading a new reel?\n\nPlease make sure the tape is touching the cog."
+    )
+  ) {
     document.getElementById("reel-button").disabled = true;
     document.getElementById("feed-button").disabled = true;
     document.getElementById("cut-button").disabled = true;
