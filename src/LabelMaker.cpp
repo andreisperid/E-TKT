@@ -350,18 +350,34 @@ void pressLabel()
 	for (int pos = restAngle; pos > peakAngle; pos--)
 	{
 		myServo.write(pos);
-		delay(2);
+		delay(1);
 	}
 	myServo.write(peakAngle);
-	delay(200);
+	delay(50);
+	myServo.write(peakAngle);
+	delay(50);
+	myServo.write(peakAngle);
+	delay(50);
+	myServo.write(peakAngle);
+	delay(50);
+	myServo.write(peakAngle);
+	delay(50);
 
 	for (int pos = peakAngle; pos < restAngle; pos++)
 	{
 		myServo.write(pos);
-		delay(2);
+		delay(1);
 	}
 	myServo.write(restAngle);
-	delay(200);
+	delay(50);
+	myServo.write(restAngle);
+	delay(50);
+	myServo.write(restAngle);
+	delay(50);
+	myServo.write(restAngle);
+	delay(50);
+	myServo.write(restAngle);
+	delay(50);
 
 	lightChar(0.2f);
 	// Serial.println("2. pressing DONE");
@@ -415,7 +431,7 @@ void cutLabel()
 	// Serial.println("					cut");
 	goToCharacter('*');
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		pressLabel();
 	}
@@ -802,8 +818,8 @@ void setup()
 		digitalWrite(enableCharStepper, HIGH);
 
 		stepperFeed.setMaxSpeed(100000);
-		stepperFeed.setAcceleration(3000);
-		stepperChar.setMaxSpeed(4000 * MICROSTEP_Char);
+		stepperFeed.setAcceleration(2000);
+		stepperChar.setMaxSpeed(1000 * MICROSTEP_Char);
 		stepperChar.setAcceleration(500 * MICROSTEP_Char);
 
 		stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
