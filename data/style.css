@@ -1,8 +1,3 @@
-/* @font-face {
-  font-family: "Impact Label";
-  src: url("/fontblack.ttf");
-  color: #ffffff;
-} */
 @font-face {
   font-family: "Impact Label Reversed";
   src: url("/fontwhite.ttf");
@@ -32,7 +27,6 @@ h3 {
 h1 {
   font-size: 55px;
   margin: 0px;
-  /* padding-top: 20px; */
   color:rgb(194, 194, 194);
   opacity: 1;
   filter: drop-shadow(-2px -2px 2px rgba(255, 255, 255, 0.35));  
@@ -40,17 +34,13 @@ h1 {
 h2 {
   font-size: 23px;
   margin: 0px;
-  /* margin-top: 15px; */
   opacity: 0.25;
-  /* margin-bottom: 30px; */
 }
 h3 {
   text-align: center;
   margin-top: 10px;
-  /* font-size: 5px; */
 }
 a {
-  /* font-family: "Impact Label Reversed"; */
   font-size: 18px;
   color: #777777;
   opacity: 0.5;
@@ -62,14 +52,12 @@ a:hover {
 #hint {
   font-size: 20px;
   color: #777777;
-  /* margin: 15px;
-    margin-bottom: 30px; */
 }
 input {
   color: white;
   background: none;
   border-color: #77777766;
-  border-width: 3px;
+  border-width: 2px;
   border-radius: 3px;
   padding: 3px 0 4px 0;
   margin: 0px;
@@ -78,39 +66,32 @@ input {
 }
 #text-input {
   outline: 10px inset #44444444;
-  /* border: 1px dashed #111; */
   border-radius: 1px;
   border: none;
   margin: 0px;
   padding: 0px;
   color: white;
   width: 100%;
-  /* font-family: "Impact Label Reversed"; */
   text-align: center;
   font-size: 25px;
   filter: drop-shadow(0px 0px 40px #FFF);  
   caret-color: "white";
-  /* transform: rotate(-0.5deg); */
 }
 #text-input:focus {
-  /* border: 1px solid #777;
-  border-width: 1px 0 1px 0;   */
   background: #11111166;
 }
 
 #mode-dropdown {
   outline: none;
-  /* border-color: #77777766; */
   border-color: rgb(0, 102, 255);
-  border-width: 3px;
-  border-radius: 3px;
-  border-width: 0 3px 0 3px; border-style: dashed;
+  border-width: 1.5px;
+  /* border-radius: 3px; */
+  border-width: 0 1.5px 0 1.5px; border-style: dashed;
   font-size: 21px;
   background: black;
   height: 36px;  
   width: 100%;
   text-align: center;
-  /* padding: 0 0 0 25px; */
 }
 
 #single-column {
@@ -126,18 +107,28 @@ input[type="button"] {
   height: 36px;
 }
 
-
 input[type="button"]:disabled {
   color: #333333;
 }
 
+
+#emoji-button{
+  color: rgb(255, 255, 255, 0.75);
+  border-color: rgb(255, 255, 255, 0.15);
+  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  border-width: 1.5px;
+}
+
+
 #clear-button{
   color: rgb(255, 0, 0);
-  border-color: rgba(255, 0, 0, 0.25);
+  border-color: rgba(255, 0, 0, 0.55);
 }
 #clear-button:disabled{
   color: rgba(255, 0, 0, 0.25);
-  border-color: rgba(255, 0, 0, 0.25);
+  border-color: rgba(255, 0, 0, 0.15);
 }
 
 #reel-button{
@@ -257,7 +248,6 @@ input[type="button"]:disabled {
   background-position: left;
 
   height: 150px;
-  /* background: white; */
   -webkit-animation: move 1.5s;
   animation: move 1.5s;
 }

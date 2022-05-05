@@ -4,6 +4,7 @@ let command = "";
 let treatedLabel = "";
 let clear = false;
 let minSize = 7;
+let caretPosition = 0;
 
 function toggleVisibility(x, y, openedLabel, closedLabel) {
   if (x.style.visibility === "hidden") {
@@ -143,7 +144,7 @@ function formKeyHandler(e) {
 
 function clearField() {
   clear = true;
-  textField = document.getElementById("text-input");
+  const textField = document.getElementById("text-input");
 
   document.getElementById("clear-button").disabled = true;
   document.getElementById("submit-button").disabled = true;
@@ -163,8 +164,47 @@ function clearField() {
   textField.focus();
 }
 
+function insertIntoField(specialChar) {
+  const textarea = document.getElementById("text-input");
+  textarea.focus();
+
+  let insertStartPoint;
+  let insertEndPoint;
+  let value = textarea.value;
+
+  if (textarea.selectionStart == textarea.selectionEnd) {
+    insertStartPoint = textarea.selectionStart;
+    insertEndPoint = insertStartPoint;
+  } else {
+    insertStartPoint = textarea.selectionStart;
+    insertEndPoint = textarea.selectionEnd;
+  }
+
+  // text before cursor/highlighted text + special character + text after cursor/highlighted text
+  value =
+    value.slice(0, insertStartPoint) +
+    specialChar +
+    value.slice(insertEndPoint);
+  textarea.value = value;
+
+  textarea.setSelectionRange(insertStartPoint + 1, insertStartPoint + 1);
+
+  drawHelper();
+  calculateLength();
+
+  textarea.focus();
+}
+
 function useRegex(input) {
-  let regex = /^[a-zA-Z0-9 .\-]+$/i;
+  //  emojis / symbols
+  // 	♥ - U+2665
+  // 	★ - U+2605
+  // 	♪ - U+266A
+  // 	€ - U+20AC
+  // 	@ - U+0040
+  // 	$ - U+0024
+
+  let regex = /^[a-zA-Z0-9 .\-♥★♪€@$]+$/i;
   return regex.test(input);
 }
 
@@ -219,7 +259,7 @@ setInterval(function () {
 }, 100);
 
 function getData() {
-  textField = document.getElementById("text-input");
+  const textField = document.getElementById("text-input");
   // console.log("getting data");
   // console.log(textField.value == "");
 

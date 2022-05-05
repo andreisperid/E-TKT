@@ -113,16 +113,66 @@
 
           <div
             id="single-column"
-            style="margin: 15px 0 15px 0; justify-content: center"
+            style="margin: 5px 0 5px 0; justify-content: center"
           >
-            <div id="hint">valid: A-Z 0-9 space . -</div>
+            <div id="hint">A-Z 0-9 space . -</div>
+          </div>
+
+          <div id="single-column" style="margin: 5px 0 15px 0; height: 36px;">
+            <div>
+              <input
+                type="button"
+                id="emoji-button"
+                value="♥"
+                tabindex="-1"
+                onclick="insertIntoField('♥')"
+              />
+            </div>
+            <div>
+              <input
+                type="button"
+                id="emoji-button"
+                value="★"
+                tabindex="-1"
+                onclick="insertIntoField('★')"
+              />
+            </div>
+            <div>
+              <input
+                type="button"
+                id="emoji-button"
+                value="♪"
+                tabindex="-1"
+                onclick="insertIntoField('♪')"
+              />
+            </div>
+            <div>
+              <input
+                style="font-size: 24px;"
+                type="button"
+                id="emoji-button"
+                value="$"
+                tabindex="-1"
+                onclick="insertIntoField('$')"
+              />
+            </div>
+            <div>
+              <input
+                style="font-size: 24px;"
+                type="button"
+                id="emoji-button"
+                value="@"
+                tabindex="-1"
+                onclick="insertIntoField('@')"
+              />
+            </div>
           </div>
 
           <div
             id="single-column"
             style="margin-top: 0px; padding-top: 0px; height: 36px"
           >
-            <div>
+            <div style="width: 55px">
               <input
                 type="button"
                 id="clear-button"
@@ -154,6 +204,7 @@
                 border-style: solid;
                 border-color: orange;
                 margin: 0;
+                width: 55px;
                 text-align: center;
               "
             >
@@ -186,7 +237,12 @@
 
           <div
             id="single-column"
-            style="margin-top: 0px; padding-bottom:0px; padding-top: 15px; height: 36px"
+            style="
+              margin-top: 0px;
+              padding-bottom: 0px;
+              padding-top: 15px;
+              height: 36px;
+            "
           >
             <div>
               <input
