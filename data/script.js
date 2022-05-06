@@ -97,6 +97,14 @@ function drawHelper() {
     treatedLabel =
       "_".repeat(multiplier) + field.value + "_".repeat(multiplier);
     // console.log('"' + treatedLabel + '"');
+
+    // conversion table to prevent multichar error
+    treatedLabel = treatedLabel.replace(/♡/g, "<");
+    treatedLabel = treatedLabel.replace(/☆/g, ">");
+    treatedLabel = treatedLabel.replace(/♪/g, "~");
+    treatedLabel = treatedLabel.replace(/€/g, "|");
+    // console.log(treatedLabel);
+    
   } else {
     clear = false;
     treatedLabel = "";
@@ -197,14 +205,14 @@ function insertIntoField(specialChar) {
 
 function useRegex(input) {
   //  emojis / symbols
-  // 	♥ - U+2665
-  // 	★ - U+2605
-  // 	♪ - U+266A
-  // 	€ - U+20AC
-  // 	@ - U+0040
-  // 	$ - U+0024
+  // 	♡
+  // 	☆
+  // 	♪
+  // 	€
+  // 	@
+  // 	$
 
-  let regex = /^[a-zA-Z0-9 .\-♥★♪€@$]+$/i;
+  let regex = /^[a-zA-Z0-9 .\-♡☆♪€@$]+$/i;
   return regex.test(input);
 }
 
