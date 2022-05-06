@@ -104,7 +104,6 @@ function drawHelper() {
     treatedLabel = treatedLabel.replace(/♪/g, "~");
     treatedLabel = treatedLabel.replace(/€/g, "|");
     // console.log(treatedLabel);
-    
   } else {
     clear = false;
     treatedLabel = "";
@@ -115,16 +114,9 @@ function drawHelper() {
   }
 }
 
-function formKeyHandler(e) {
+function validateField() {
   let field = document.getElementById("text-input");
   let fieldValue = field.value;
-
-  let keynum;
-  if (window.event && e != null) {
-    keynum = e.keyCode;
-  } else if (e.which && e != null) {
-    keynum = e.which;
-  }
 
   let valid;
 
@@ -145,6 +137,18 @@ function formKeyHandler(e) {
       fieldValue != "" ? " Print label! " : " ... ";
     document.getElementById("submit-button").style.color = "white";
   }
+}
+
+function formKeyHandler(e) {
+  let keynum;
+  if (window.event && e != null) {
+    keynum = e.keyCode;
+  } else if (e.which && e != null) {
+    keynum = e.which;
+  }
+
+  validateField();
+
   if (keynum === 13 && valid) {
     document.getElementById("submit-button").click();
   }
@@ -196,6 +200,8 @@ function insertIntoField(specialChar) {
   textarea.value = value;
 
   textarea.setSelectionRange(insertStartPoint + 1, insertStartPoint + 1);
+
+  validateField();
 
   drawHelper();
   calculateLength();
