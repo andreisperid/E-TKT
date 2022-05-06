@@ -42,7 +42,9 @@ float stepsPerChar;
 Servo myServo;
 const int servoPin = 14;
 int restAngle = 55;
-int peakAngle = 15;
+int peakAngle = 20;
+#define strongAngle 13
+#define lightAngle 17
 
 // oled
 U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
@@ -64,7 +66,7 @@ U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 // ♪ ... ~
 // € ... |
 
-char charSet[charQuantity] = { // TODO: verificar espaço VS $
+char charSet[charQuantity] = {
 	'$', '-', '.', '2', '3', '4', '5', '6', '7', '8',
 	'9', '*', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
 	'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
@@ -157,12 +159,12 @@ void displayInitialize()
 void displaySplash()
 {
 	displayInitialize();
-	for (int i = 128; i > 18; i--)
+	for (int i = 128; i > 18; i = i - 2)
 	{
 		u8g2.setFont(u8g2_font_inr21_mf);
 		u8g2.drawStr(i, 29, "E-TKT");
 		u8g2.sendBuffer();
-		delay(5);
+		delay(1);
 		// animated splash}
 	}
 }
@@ -332,32 +334,46 @@ void setHome()
 	stepperChar.setCurrentPosition(0);
 	currentCharPosition = charHome;
 
-	delay(250);
+	delay(100);
 }
 
-// TODO: NEGATIVE FEED
 void feedLabel()
 {
 	// Serial.println("				feed");
 
 	stepperFeed.enableOutputs();
-	stepperFeed.runToNewPosition(stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8); // TODO adjust length
+	delay(10);
+	stepperFeed.runToNewPosition(stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8);
+	delay(10);
 	stepperFeed.disableOutputs();
 
-	delay(50);
-
+	delay(20);
 	// Serial.println("3. feeding DONE");
 }
 
-void pressLabel()
+void pressLabel(bool strong = false)
 {
+
+	int delayFactor;
+
+	if (strong)
+	{
+		peakAngle = strongAngle;
+		delayFactor = 2;
+	}
+	else
+	{
+		peakAngle = lightAngle;
+		delayFactor = 1;
+	}
+
 	// Serial.println("			press");
 	lightChar(1.0f);
 
 	for (int pos = restAngle; pos > peakAngle; pos--)
 	{
 		myServo.write(pos);
-		delay(1);
+		delay(delayFactor);
 	}
 	myServo.write(peakAngle);
 	delay(50);
@@ -373,7 +389,7 @@ void pressLabel()
 	for (int pos = peakAngle; pos < restAngle; pos++)
 	{
 		myServo.write(pos);
-		delay(1);
+		delay(delayFactor);
 	}
 	myServo.write(restAngle);
 	delay(50);
@@ -425,7 +441,7 @@ void goToCharacter(char c)
 	}
 
 	stepperChar.runToNewPosition(-stepsPerChar * deltaPosition);
-	delay(10);
+	delay(25);
 
 	// if (c != '*')
 	// {
@@ -438,9 +454,9 @@ void cutLabel()
 	// Serial.println("					cut");
 	goToCharacter('*');
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 3; i++)
 	{
-		pressLabel();
+		pressLabel(true);
 	}
 }
 
@@ -457,8 +473,8 @@ void writeLabel(String label)
 
 	int labelLength = label.length();
 
-	lightChar(0.2f);
 	setHome();
+	lightChar(0.2f);
 
 	for (int i = 0; i < labelLength; i++)
 	{
@@ -825,9 +841,9 @@ void setup()
 	digitalWrite(enableCharStepper, HIGH);
 
 	stepperFeed.setMaxSpeed(100000);
-	stepperFeed.setAcceleration(2000);
-	stepperChar.setMaxSpeed(1000 * MICROSTEP_Char);
-	stepperChar.setAcceleration(500 * MICROSTEP_Char);
+	stepperFeed.setAcceleration(3000);
+	stepperChar.setMaxSpeed(300 * MICROSTEP_Char);
+	stepperChar.setAcceleration(10000 * MICROSTEP_Char);
 
 	stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
 
