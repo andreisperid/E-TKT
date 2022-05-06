@@ -57,12 +57,20 @@ U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 
 // char
 #define charQuantity 43
-char charSet[charQuantity] = {
-	' ', '-', '.', '2', '3', '4', '5', '6', '7', '8',
+
+// conversion table to prevent multichar error
+// ♡ ... <
+// ☆ ... >
+// ♪ ... ~
+// € ... |
+
+char charSet[charQuantity] = { // TODO: verificar espaço VS $
+	'$', '-', '.', '2', '3', '4', '5', '6', '7', '8',
 	'9', '*', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
 	'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-	'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '+', '+',
-	'+', '+', '+'};
+	'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '<', '>',
+	'~', '|', '@'};
+
 String labelString;
 char prevChar = 'J';
 int charHome = 21;
@@ -293,7 +301,6 @@ void displayFinished()
 	u8g2.setFont(u8g2_font_9x15_te);   // 9 pixel height
 	u8g2.drawStr(24, 24, "Finished!"); // write something to the internal memory
 	u8g2.sendBuffer();				   // transfer internal memory to the display
-
 }
 
 // HARDWARE ------------------------------------------------------------------------
@@ -443,7 +450,10 @@ void writeLabel(String label)
 	myServo.write(restAngle);
 	delay(500);
 
-	// abcdefghijklmnopqrstuvwxyz23456789*-.
+	// Serial.print("raw label: ");
+	// Serial.println(label);
+
+	// $-.23456789*abcdefghijklmnopqrstuvwxyz♡☆♪€@
 
 	int labelLength = label.length();
 
@@ -539,9 +549,9 @@ void processor(void *parameters)
 	label.toUpperCase();
 
 	if (parameter == "feed" && label == "")
-	{		
-		busy = true;	
-		analogWrite(ledFinish, 32);	
+	{
+		busy = true;
+		analogWrite(ledFinish, 32);
 		digitalWrite(enableCharStepper, LOW);
 		myServo.write(restAngle);
 		delay(500);
@@ -553,19 +563,19 @@ void processor(void *parameters)
 		value = "";
 		digitalWrite(enableCharStepper, HIGH);
 		myServo.write(restAngle);
-		
+
 		busy = false;
 		webProgress = "finished";
 		delay(500);
-		webProgress = " 0";			
-		analogWrite(ledFinish, 0);		
+		webProgress = " 0";
+		analogWrite(ledFinish, 0);
 		lightChar(0.0f);
 		vTaskDelete(processorTaskHandle);
 	}
 	else if (parameter == "reel" && label == "")
 	{
 		busy = true;
-		analogWrite(ledFinish, 32);	
+		analogWrite(ledFinish, 32);
 		digitalWrite(enableCharStepper, LOW);
 		myServo.write(restAngle);
 		delay(500);
@@ -581,15 +591,15 @@ void processor(void *parameters)
 		digitalWrite(enableCharStepper, HIGH);
 		busy = false;
 		webProgress = "finished";
-		delay(500);		
-		webProgress = " 0";	
-		analogWrite(ledFinish, 0);	
+		delay(500);
+		webProgress = " 0";
+		analogWrite(ledFinish, 0);
 		lightChar(0.0f);
 		vTaskDelete(processorTaskHandle);
 	}
 	else if (parameter == "cut" && label == "")
 	{
-		busy = true;		
+		busy = true;
 		lightChar(0.2f);
 		digitalWrite(enableCharStepper, LOW);
 		myServo.write(restAngle);
@@ -604,7 +614,7 @@ void processor(void *parameters)
 		busy = false;
 		webProgress = "finished";
 		delay(500);
-		webProgress = " 0";		
+		webProgress = " 0";
 		lightChar(0.0f);
 		vTaskDelete(processorTaskHandle);
 	}
@@ -619,7 +629,6 @@ void processor(void *parameters)
 		writeLabel(label);
 		busy = false;
 	}
-
 }
 
 // COMMUNICATION -------------------------------------------------------------------
@@ -642,12 +651,10 @@ void initialize()
 
 	// Route for root / web page
 	server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
-			  {
-		request->send(SPIFFS, "/index.html", String(), false);
-		});
+			  { request->send(SPIFFS, "/index.html", String(), false); });
 
-		server.on("/&", HTTP_GET, [](AsyncWebServerRequest *request)
-				  {
+	server.on("/&", HTTP_GET, [](AsyncWebServerRequest *request)
+			  {
 				  int paramsNr = request->params();
 
 				  for (int i = 0; i < paramsNr; i++)
@@ -674,172 +681,172 @@ void initialize()
 				  }
 				  request->send(SPIFFS, "/index.html", String(), false); });
 
-		// Route to load style.css file
-		server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
-				  { request->send(SPIFFS, "/style.css", "text/css"); });
+	// Route to load style.css file
+	server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/style.css", "text/css"); });
 
-		// Route to load script.js file
-		server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request)
-				  { request->send(SPIFFS, "/script.js", "text/javascript"); });
+	// Route to load script.js file
+	server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/script.js", "text/javascript"); });
 
-		// Route to load fonts
-		server.on("/fontwhite.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
-				  { request->send(SPIFFS, "/fontwhite.ttf", "font"); });
-		// Route to load fonts
-		server.on("/fontblack.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
-				  { request->send(SPIFFS, "/fontblack.ttf", "font"); });
+	// Route to load fonts
+	server.on("/fontwhite.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/fontwhite.ttf", "font"); });
+	// Route to load fonts
+	server.on("/fontblack.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/fontblack.ttf", "font"); });
 
-		// Route to favicon
-		server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
-				  { request->send(SPIFFS, "/favicon.ico", "image"); });
+	// Route to favicon
+	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/favicon.ico", "image"); });
 
-		// Route to splash icon
-		server.on("/splash.png", HTTP_GET, [](AsyncWebServerRequest *request)
-				  { request->send(SPIFFS, "/splash.png", "image"); });
+	// Route to splash icon
+	server.on("/splash.png", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/splash.png", "image"); });
 
-		// Route to manifest file
-		server.on("/manifest.json", HTTP_GET, [](AsyncWebServerRequest *request)
-				  { request->send(SPIFFS, "/manifest.json", "image"); });
+	// Route to manifest file
+	server.on("/manifest.json", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/manifest.json", "image"); });
 
-		// Route to webapp icon
-		server.on("/icon192.png", HTTP_GET, [](AsyncWebServerRequest *request)
-				  { request->send(SPIFFS, "/icon192.png", "image"); });
+	// Route to webapp icon
+	server.on("/icon192.png", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/icon192.png", "image"); });
 
-		// Route to webapp icon
-		server.on("/icon512.png", HTTP_GET, [](AsyncWebServerRequest *request)
-				  { request->send(SPIFFS, "/icon512.png", "image"); });
+	// Route to webapp icon
+	server.on("/icon512.png", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/icon512.png", "image"); });
 
-		// Check printing status
-		server.on("/status", HTTP_GET, [](AsyncWebServerRequest *request)
-				  { request->send(200, "text/plane", webProgress); });
+	// Check printing status
+	server.on("/status", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(200, "text/plane", webProgress); });
 
-		// Start server
-		server.begin();
+	// Start server
+	server.begin();
 }
 
 void configModeCallback(AsyncWiFiManager *myWiFiManager)
 {
-		displayConfig();
-		// Serial.println("Entered config mode");
-		// Serial.println(WiFi.softAPIP());
-		// if you used auto generated SSID, print it
-		Serial.println(myWiFiManager->getConfigPortalSSID());
+	displayConfig();
+	// Serial.println("Entered config mode");
+	// Serial.println(WiFi.softAPIP());
+	// if you used auto generated SSID, print it
+	Serial.println(myWiFiManager->getConfigPortalSSID());
 }
 
 void clearWifiCredentials()
 {
-		// load the flash-saved configs
-		wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
-		esp_wifi_init(&cfg); // initiate and allocate wifi resources (does not matter if connection fails)
-		delay(2000);		 // wait a bit
-		if (esp_wifi_restore() != ESP_OK)
-		{
-			// Serial.println("WiFi is not initialized by esp_wifi_init ");
-		}
-		else
-		{
-			// Serial.println("WiFi Configurations Cleared!");
-		}
-		displayReset();
-		delay(1500);
-		esp_restart(); // just my reset configs routine...
+	// load the flash-saved configs
+	wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
+	esp_wifi_init(&cfg); // initiate and allocate wifi resources (does not matter if connection fails)
+	delay(2000);		 // wait a bit
+	if (esp_wifi_restore() != ESP_OK)
+	{
+		// Serial.println("WiFi is not initialized by esp_wifi_init ");
+	}
+	else
+	{
+		// Serial.println("WiFi Configurations Cleared!");
+	}
+	displayReset();
+	delay(1500);
+	esp_restart(); // just my reset configs routine...
 }
 
 void wifiManager()
 {
-		// Local intialization. Once its business is done, there is no need to keep it around
-		AsyncWiFiManager wifiManager(&server, &dns);
+	// Local intialization. Once its business is done, there is no need to keep it around
+	AsyncWiFiManager wifiManager(&server, &dns);
 
-		// reset settings - for testing
-		bool wifiReset = digitalRead(wifiResetPin);
+	// reset settings - for testing
+	bool wifiReset = digitalRead(wifiResetPin);
 
-		// Serial.print("wifi reset? ");
-		// Serial.println(wifiReset);
+	// Serial.print("wifi reset? ");
+	// Serial.println(wifiReset);
 
-		if (wifiReset)
-		{
-			// Serial.println("<< wifi reset >>");
-			// Serial.println();
-			clearWifiCredentials();
-			// wifiManager.resetSettings();
-			// ESP.restart();
-		}
+	if (wifiReset)
+	{
+		// Serial.println("<< wifi reset >>");
+		// Serial.println();
+		clearWifiCredentials();
+		// wifiManager.resetSettings();
+		// ESP.restart();
+	}
 
-		// set callback that gets called when connecting to previous WiFi fails, and enters Access Point mode
-		wifiManager.setAPCallback(configModeCallback);
+	// set callback that gets called when connecting to previous WiFi fails, and enters Access Point mode
+	wifiManager.setAPCallback(configModeCallback);
 
-		wifiManager.setDebugOutput(false);
+	wifiManager.setDebugOutput(false);
 
-		// fetches ssid and pass and tries to connect
-		// if it does not connect it starts an access point with the specified name
-		// here  "AutoConnectAP"
-		// and goes into a blocking loop awaiting configuration
-		if (!wifiManager.autoConnect("E-TKT"))
-		{
-			// Serial.println("failed to connect and hit timeout");
-			// reset and try again, or maybe put it to deep sleep
-			ESP.restart();
-			// ESP.reset();
-			delay(1000);
-		}
+	// fetches ssid and pass and tries to connect
+	// if it does not connect it starts an access point with the specified name
+	// here  "AutoConnectAP"
+	// and goes into a blocking loop awaiting configuration
+	if (!wifiManager.autoConnect("E-TKT"))
+	{
+		// Serial.println("failed to connect and hit timeout");
+		// reset and try again, or maybe put it to deep sleep
+		ESP.restart();
+		// ESP.reset();
+		delay(1000);
+	}
 
-		if (!MDNS.begin("e-tkt"))
-		{
-			// Serial.println("Error starting mDNS");
-			return;
-		}
+	if (!MDNS.begin("e-tkt"))
+	{
+		// Serial.println("Error starting mDNS");
+		return;
+	}
 
-		// if you get here you have connected to the WiFi
-		// Serial.println("connected!");
-		displayIP = WiFi.localIP().toString();
-		// Serial.println(displayIP);
-		displaySSID = WiFi.SSID();
-		// Serial.println(displaySSID);
+	// if you get here you have connected to the WiFi
+	// Serial.println("connected!");
+	displayIP = WiFi.localIP().toString();
+	// Serial.println(displayIP);
+	displaySSID = WiFi.SSID();
+	// Serial.println(displaySSID);
 
-		displayQRCode();
+	displayQRCode();
 
-		initialize();
+	initialize();
 }
 
 // CORE
 void setup()
 {
-		// Serial.begin(9600);
+	// Serial.begin(9600);
 
-		pinMode(sensorPin, INPUT_PULLUP);
-		pinMode(wifiResetPin, INPUT_PULLDOWN);
-		pinMode(ledChar, OUTPUT);
-		pinMode(ledFinish, OUTPUT);
-		pinMode(enableCharStepper, OUTPUT);
+	pinMode(sensorPin, INPUT_PULLUP);
+	pinMode(wifiResetPin, INPUT_PULLDOWN);
+	pinMode(ledChar, OUTPUT);
+	pinMode(ledFinish, OUTPUT);
+	pinMode(enableCharStepper, OUTPUT);
 
-		analogWrite(ledChar, 0);
-		analogWrite(ledFinish, 0);
+	analogWrite(ledChar, 0);
+	analogWrite(ledFinish, 0);
 
-		digitalWrite(enableCharStepper, HIGH);
+	digitalWrite(enableCharStepper, HIGH);
 
-		stepperFeed.setMaxSpeed(100000);
-		stepperFeed.setAcceleration(2000);
-		stepperChar.setMaxSpeed(1000 * MICROSTEP_Char);
-		stepperChar.setAcceleration(500 * MICROSTEP_Char);
+	stepperFeed.setMaxSpeed(100000);
+	stepperFeed.setAcceleration(2000);
+	stepperChar.setMaxSpeed(1000 * MICROSTEP_Char);
+	stepperChar.setAcceleration(500 * MICROSTEP_Char);
 
-		stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
+	stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
 
-		displayInitialize();
-		displayClear();
-		displaySplash();
+	displayInitialize();
+	displayClear();
+	displaySplash();
 
-		// Serial.println();
-		// Serial.println("E-TKT");
-		wifiManager();
-		delay(500); // tempo para a tarefa iniciar
+	// Serial.println();
+	// Serial.println("E-TKT");
+	wifiManager();
+	delay(500); // tempo para a tarefa iniciar
 
-		myServo.attach(servoPin);	
-		myServo.write(restAngle);
-		delay(500);
-		// setHome();
+	myServo.attach(servoPin);
+	myServo.write(restAngle);
+	delay(500);
+	// setHome();
 }
 
 void loop()
 {
-		// readSerial();
+	// readSerial();
 }
