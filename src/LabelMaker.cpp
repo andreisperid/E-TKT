@@ -88,7 +88,7 @@ TaskHandle_t processorTaskHandle = NULL;
 
 // COMMUNICATION -------------------------------------------------------------------
 
-// Create AsyncWebServer object on port 80
+// create AsyncWebServer object on port 80
 AsyncWebServer server(80);
 DNSServer dns;
 
@@ -97,7 +97,7 @@ String webProgress = " 0";
 // qr code
 const int QRcode_Version = 3; //  set the version (range 1->40)
 const int QRcode_ECC = 0;	  //  set the Error Correction level (range 0-3) or symbolic (ECC_LOW, ECC_MEDIUM, ECC_QUARTILE and ECC_HIGH)
-QRCode qrcode;				  // Create the QR code
+QRCode qrcode;				  //  create the QR code
 String displaySSID = "";
 String displayIP = "";
 
@@ -132,7 +132,7 @@ void lightChar(float state)
 
 void displayClear()
 {
-	// Empty pixels
+	// empty pixels
 	for (uint8_t y = 0; y < 32; y++)
 	{
 		for (uint8_t x = 0; x < 128; x++)
@@ -159,13 +159,14 @@ void displayInitialize()
 void displaySplash()
 {
 	displayInitialize();
+
+	// animated splash
 	for (int i = 128; i > 18; i = i - 2)
 	{
 		u8g2.setFont(u8g2_font_inr21_mf);
 		u8g2.drawStr(i, 29, "E-TKT");
 		u8g2.sendBuffer();
-		delay(1);
-		// animated splash}
+		delay(1);		
 	}
 }
 
@@ -190,8 +191,6 @@ void displayReset()
 void displayQRCode()
 {
 	displayInitialize();
-	// u8g2.drawStr(0, 12, "Initializing..."); // write something to the internal memory
-	// u8g2.sendBuffer();						// transfer internal memory to the display
 	displayClear();
 
 	uint8_t qrcodeData[qrcode_getBufferSize(QRcode_Version)];
@@ -207,24 +206,10 @@ void displayQRCode()
 		String displayIPfull = "http://" + displayIP;
 		const char *c = displayIPfull.c_str();
 
-		//--------------------------------------------
-		// display
-		// u8g2.setDrawColor(1);
-		// u8g2.drawStr(0, 12, "E-TKT"); // write something to the internal memory
-
-		// if (displaySSID != "")
-		// {
 		const char *d = displaySSID.c_str();
 		u8g2.drawStr(11, 12, d); // connected
 		u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
 		u8g2.drawGlyph(0, 12, 0x00f8); // connected
-		// }
-		// else
-		// {
-		// 	u8g2.drawStr(11, 12, "disconnected"); // disconnected
-		// 	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
-		// 	u8g2.drawGlyph(0, 12, 0x0057); // disconnected
-		// }
 
 		qrcode_initText(&qrcode, qrcodeData, QRcode_Version, QRcode_ECC, c); // ARK address
 
@@ -238,7 +223,7 @@ void displayQRCode()
 			}
 		}
 
-		//--------------------------------------------
+		//--------------------------------------------		
 		// setup the top right corner of the QRcode
 		uint8_t x0 = 128 - 32;
 		uint8_t y0 = 1; // 16 is the start of the blue portion OLED in the yellow/blue split 64x128 OLED
@@ -262,7 +247,6 @@ void displayQRCode()
 				}
 			}
 		}
-		// u8g2.sendBuffer();
 	}
 	u8g2.sendBuffer();
 	delay(1000);
@@ -309,8 +293,6 @@ void displayFinished()
 
 void setHome()
 {
-	// Serial.println("	home");
-
 	sensorState = analogRead(sensorPin);
 
 	if (sensorState < threshold)
@@ -339,8 +321,6 @@ void setHome()
 
 void feedLabel()
 {
-	// Serial.println("				feed");
-
 	stepperFeed.enableOutputs();
 	delay(10);
 	stepperFeed.runToNewPosition(stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8);
@@ -348,12 +328,10 @@ void feedLabel()
 	stepperFeed.disableOutputs();
 
 	delay(20);
-	// Serial.println("3. feeding DONE");
 }
 
 void pressLabel(bool strong = false)
 {
-
 	int delayFactor;
 
 	if (strong)
@@ -367,7 +345,6 @@ void pressLabel(bool strong = false)
 		delayFactor = 1;
 	}
 
-	// Serial.println("			press");
 	lightChar(1.0f);
 
 	for (int pos = restAngle; pos > peakAngle; pos--)
@@ -403,19 +380,11 @@ void pressLabel(bool strong = false)
 	delay(50);
 
 	lightChar(0.2f);
-	// Serial.println("2. pressing DONE");
 }
 
 void goToCharacter(char c)
 {
 	setHome();
-
-	if (c != '*')
-	{
-		// Serial.print("		\" ");
-		// Serial.print(c);
-		// Serial.println(" \"");
-	}
 
 	if (c == '0')
 	{
@@ -442,16 +411,10 @@ void goToCharacter(char c)
 
 	stepperChar.runToNewPosition(-stepsPerChar * deltaPosition);
 	delay(25);
-
-	// if (c != '*')
-	// {
-	// 	pressLabel();
-	// }
 }
 
 void cutLabel()
 {
-	// Serial.println("					cut");
 	goToCharacter('*');
 
 	for (int i = 0; i < 3; i++)
@@ -466,10 +429,7 @@ void writeLabel(String label)
 	myServo.write(restAngle);
 	delay(500);
 
-	// Serial.print("raw label: ");
-	// Serial.println(label);
-
-	// $-.23456789*abcdefghijklmnopqrstuvwxyz♡☆♪€@
+	// all possible characters: $-.23456789*abcdefghijklmnopqrstuvwxyz♡☆♪€@
 
 	int labelLength = label.length();
 
@@ -539,16 +499,11 @@ void readSerial()
 {
 	if (!waitingLabel)
 	{
-		// Serial.println("write label and hit enter");
 		waitingLabel = true;
 	}
 	while (Serial.available())
 	{
 		labelString = Serial.readStringUntil('\n');
-		// Serial.print("TAG: ");
-		// Serial.println(labelString);
-
-		// writeLabel(labelString);
 		waitingLabel = false;
 	}
 }
@@ -557,10 +512,6 @@ void readSerial()
 
 void processor(void *parameters)
 {
-	// Serial.print("parameter: ");
-	// Serial.print(parameter);
-	// Serial.println();
-
 	String label = value;
 	label.toUpperCase();
 
@@ -572,7 +523,6 @@ void processor(void *parameters)
 		myServo.write(restAngle);
 		delay(500);
 
-		// Serial.println("feed cmd");
 		feedLabel();
 
 		parameter = "";
@@ -596,7 +546,6 @@ void processor(void *parameters)
 		myServo.write(restAngle);
 		delay(500);
 
-		// Serial.println("reel cmd");
 		for (int i = 0; i < 16; i++)
 		{
 			feedLabel();
@@ -621,7 +570,6 @@ void processor(void *parameters)
 		myServo.write(restAngle);
 		delay(500);
 
-		// Serial.println("cut cmd");
 		cutLabel();
 
 		parameter = "";
@@ -637,11 +585,6 @@ void processor(void *parameters)
 	else if (parameter == "tag" && label != "")
 	{
 		busy = true;
-		// Serial.print(label != "" ? ", value: " : "");
-		// Serial.print("\"");
-		// Serial.print(label);
-		// Serial.println("\"");
-		// Serial.println(label);
 		writeLabel(label);
 		busy = false;
 	}
@@ -662,9 +605,6 @@ void initialize()
 		return;
 	}
 
-	// Print ESP32 Local IP Address
-	// Serial.println(WiFi.localIP());
-
 	// Route for root / web page
 	server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/index.html", String(), false); });
@@ -682,12 +622,12 @@ void initialize()
 					  if (!busy)
 					  {
 						  xTaskCreatePinnedToCore(
-							  processor,			/* função que implementa a tarefa */
-							  "processorTask",		/* nome da tarefa */
-							  10000,				/* número de palavras a serem alocadas para uso com a pilha da tarefa */
-							  NULL,					/* parâmetro de entrada para a tarefa (pode ser NULL) */
-							  1,					/* prioridade da tarefa (0 a N) */
-							  &processorTaskHandle, /* referência para a tarefa (pode ser NULL) */
+							  processor,			/* function that implements the task */
+							  "processorTask",		/* name of the task */
+							  10000,				/* number of words to be allocated to use on task  */
+							  NULL,					/* parameter to be input on the task (can be NULL) */
+							  1,					/* priority for the task (0 to N) */
+							  &processorTaskHandle, /* reference to the task (can be NULL) */
 							  0);					/* core 0 */
 					  }
 					  else
@@ -697,55 +637,52 @@ void initialize()
 				  }
 				  request->send(SPIFFS, "/index.html", String(), false); });
 
-	// Route to load style.css file
+	// route to load style.css file
 	server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/style.css", "text/css"); });
 
-	// Route to load script.js file
+	// route to load script.js file
 	server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/script.js", "text/javascript"); });
 
-	// Route to load fonts
+	// route to load fonts
 	server.on("/fontwhite.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/fontwhite.ttf", "font"); });
-	// Route to load fonts
+	// route to load fonts
 	server.on("/fontblack.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/fontblack.ttf", "font"); });
 
-	// Route to favicon
+	// route to favicon
 	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/favicon.ico", "image"); });
 
-	// Route to splash icon
+	// route to splash icon
 	server.on("/splash.png", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/splash.png", "image"); });
 
-	// Route to manifest file
+	// route to manifest file
 	server.on("/manifest.json", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/manifest.json", "image"); });
 
-	// Route to webapp icon
+	// route to webapp icon
 	server.on("/icon192.png", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/icon192.png", "image"); });
 
-	// Route to webapp icon
+	// route to webapp icon
 	server.on("/icon512.png", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/icon512.png", "image"); });
 
-	// Check printing status
+	// check printing status
 	server.on("/status", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(200, "text/plane", webProgress); });
 
-	// Start server
+	// start server
 	server.begin();
 }
 
 void configModeCallback(AsyncWiFiManager *myWiFiManager)
 {
 	displayConfig();
-	// Serial.println("Entered config mode");
-	// Serial.println(WiFi.softAPIP());
-	// if you used auto generated SSID, print it
 	Serial.println(myWiFiManager->getConfigPortalSSID());
 }
 
@@ -765,7 +702,7 @@ void clearWifiCredentials()
 	}
 	displayReset();
 	delay(1500);
-	esp_restart(); // just my reset configs routine...
+	esp_restart();
 }
 
 void wifiManager()
@@ -773,19 +710,11 @@ void wifiManager()
 	// Local intialization. Once its business is done, there is no need to keep it around
 	AsyncWiFiManager wifiManager(&server, &dns);
 
-	// reset settings - for testing
 	bool wifiReset = digitalRead(wifiResetPin);
-
-	// Serial.print("wifi reset? ");
-	// Serial.println(wifiReset);
 
 	if (wifiReset)
 	{
-		// Serial.println("<< wifi reset >>");
-		// Serial.println();
 		clearWifiCredentials();
-		// wifiManager.resetSettings();
-		// ESP.restart();
 	}
 
 	// set callback that gets called when connecting to previous WiFi fails, and enters Access Point mode
@@ -802,7 +731,6 @@ void wifiManager()
 		// Serial.println("failed to connect and hit timeout");
 		// reset and try again, or maybe put it to deep sleep
 		ESP.restart();
-		// ESP.reset();
 		delay(1000);
 	}
 
@@ -851,18 +779,14 @@ void setup()
 	displayClear();
 	displaySplash();
 
-	// Serial.println();
-	// Serial.println("E-TKT");
 	wifiManager();
-	delay(500); // tempo para a tarefa iniciar
+	delay(500); // time for the task to start
 
 	myServo.attach(servoPin);
 	myServo.write(restAngle);
 	delay(500);
-	// setHome();
 }
 
 void loop()
 {
-	// readSerial();
 }
