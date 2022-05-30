@@ -1,51 +1,53 @@
-# E-TKT: anachronic label maker
+<h1 align="center">📦 E-TKT: anachronic label maker 📦</h1>
 
-Andrei Speridião 2022 - http://andrei.cc 
+<p align="center">Andrei Speridião 2022 - http://andrei.cc</p>
 
 # What is it?
 
-> 1. étiquette f (plural étiquettes) tag, label 
-> 2. etiquette, prescribed behavior 
+> ### *étiquette f (plural étiquettes)*
+> ["ticket, memorandum, attach, stick, pierce, sting, to be sharp, goad, puncture, attach, nail"](https://en.wiktionary.org/wiki/%C3%A9tiquette#French)
+> 1. tag, label 
+> 2. prescribed behavior
+
 
 E-TKT is a DIY label maker that mixes both old fashioned and contemporary technology to create something as simple as... Labels!
 
-[See it working!](https://youtu.be/5hv-2kIJUVc)
+## [...see it working!](https://youtu.be/5hv-2kIJUVc)
 
 # Table of contents
 
-- [Why?](#why)
-- [How does it work?](#how-does-it-work)
-- [Key Features](#key-features)
-- [Iterations](#iterations)
-- [To do](#to-do)
-- [List of components](#list-of-components)
-- [3D printing](#3d-printing)
-- [Libraries](#libraries)
+- [Why?](#-why)
+- [How does it work?](#%EF%B8%8F-how-does-it-work)
+- [Features](#-features)
+- [To do](#%EF%B8%8F-to-do)
+- [List of components](#-list-of-components)
+- [3D printing](#-3d-printing)
+- [Libraries](#-libraries)
 
 
 
-# Why?
+# 🤔 Why?
 
-**TLDR: curiosity, technical challenge and of course organizing stuff.*
+### *TLDR: curiosity, technical challenge and of course organizing stuff.*
 
-The initial spark for this project came from an ordinary handheld labeling device that I bought to organize my workshop. I was VERY upset when I noticed that it was basically rubbish, getting broken and unusable after just a few operations.
+The initial spark for this project came from an ordinary handheld [labeling device](https://www.aliexpress.com/item/3256801648218535.html) that I bought to organize my workshop. I was ***VERY UPSET*** when I noticed that it was basically rubbish, getting broken and unusable after just a few operations.
 
 > IMG motex
 
-I knew I could easily buy a common electronic thermal label printer, but something about the vintage embossed finish fascinated me. Furthermore, even though the pressing mechanism was poorly made, the characters' carousel was pretty sturdy and sharp printing. So I thought: can I build over its principles to create a functional device? If so, then why not make it physical-digital?
+I knew I could easily buy a common electronic thermal label printer, but something about the vintage embossed finish fascinated me. Furthermore, even though the pressing mechanism was poorly made, the characters' carousel was pretty sturdy and sharp. So I thought: can I build over its principles to create a functional device? If so, then why not make it physical-digital?
 
-Throughout the process I have constantly questioned what made me devise this ambiguous device, with no clear answer.
+Throughout the process I have constantly questioned what made me develop this ambiguous device, with no clear answer.
 
 Finally, when creating the project video I've realized that "anachronism" is what I’ve been attracted to. According to [Wikipedia](https://en.wikipedia.org/wiki/Anachronism):
 > “a chronological inconsistency in some arrangements, especially a juxtaposition of people, events, objects, language terms and customs from different time periods”.
 
-### The point is: even though the process is digitalized, the resulting label is totally old school and there is no way of telling if it wasn't made in the traditional way.
+### The point is: even though the process is digitalized, the resulting label is totally old school and there is no easy way of telling if it wasn't made in the traditional way.
 
-Why bother mixing an archaic printing method with current automation and connectivity features? Because why not. It was a blind spot to be explored!
+...why bother mixing an archaic printing method with current automation and connectivity features? Because why not? It was a technological blind spot to be explored!
 
 
 
-# How does it work?
+# ⚙️ How does it work?
 
 An ESP32 commands the label production and also serves an on demand web application to any device connected in a local network. Neither Internet is needed, nor installing any app.
 
@@ -56,24 +58,24 @@ The web app provides text validation, special characters, a preview of the exact
 The label production itself uses the same mechanical principles as the original machine did, but is now automated. A stepper motor feeds the tape while another selects the appropriate character on the carousel according to a home position acquired by hall sensor. Then a servo motor imprints each character by pressing the carousel to the tape. That happens successively until the end of the desired content, when there is a special character position to cut the label. A light blinks to ask for the label to be picked.
 
 
-# Key features
-## Practicality
+# 💡 Features
+### 🌟 *Highlights*
 - No need for internet, app installation, data cables or drivers;
 - Use from any device that is connected to a local network and has a web browser: desktop, tablet, smartphone;
 - Compatible with cheap 9mm generic DYMO-compatible tape;
 
-## Web app
+### 📱 Web app
 > IMG GIF: overview, margins, validation
 
 - Instant preview: what you see is what you’ll get;
 - Real time check for character validity;
 - Label length estimation;
-- Margin modes: tight, small (1 space each side) or full (max length);
+- Margin modes: tight, small (1 space each side) or full (max input length);
 - Buttons for special characters: ♡  ☆  ♪  $ @
 - Reeling function: for when a new tape reel must be installed;
 - Manual commands: feed & cut;
 
-## Device
+### 🔌 Device
 > IMG overview
 > IMG OLED display
 
@@ -84,52 +86,54 @@ The label production itself uses the same mechanical principles as the original 
 - Real time progress;
 
 
+# 🛠️ To do
+- [ ] Bugs
+    - [ ] (device) The machine seldom mistakes the correct letter (rare), seems related to processing hiccups.
+    - [ ] (device) Restarts occur occasionally, and it seems related to processing peaks that trigger the task watchdog.
+    - [ ] (app, device) Sometimes the status feedback (reel, cut, feed, print) does not update correctly and gets stuck.
+    - [ ] (app, device) Frequently the font serving from the ESP32 takes more time than usual and the web app starts without the correct aspect, eventually getting stuck in that state.
+- [ ]  Manufactured PCB.
 
-# Iterations
-
-**I - Experiment (March 2021)**
+***<details><summary>🕓 See the previous development phases 🕕</summary>***
+<p>
+    
+### I - Experiment (March 2021)
 - [x] Centered carousel with oversized NEMA stepper
 - [x] Carousel homing with infrared sensor + one missing “teeth” led erratic results
 - [x] Testing with servo, but it was too weak to press the tape
 - [x] Using Arduino mega, communication via serial
 
-**II - Communication**
+### II - Communication
 - [x] Experiments using ESP8266 with self served app + receiving commands, still isolated from the main functionality
 - [x] Wifi manager
 - [x] First sketches for the web app user interface
 
-**III - Printing Proof**
+###  III - Printing Proof
 - [x] Migration for the ESP32
 - [x] Dual core tasks: one serves the network/app and the other controls all physical operations
 - [x] Stronger servo resulted on successful tag printing
 - [x] Hall sensor for homing with precision
 - [x] Carousel direction on clockwise only to avoid tape screwing
 
-**IV - Consistency and Usability**
+###  IV - Consistency and Usability
 - [x] More compact device, with smaller stepper motor for the carousel
 - [x] OLED display to help on configuration and feedback
 - [x] Improvements on web app usability and visuals
 
-**V - Optimization, Extras and Documentation (May 2022)**
+### V - Optimization, Extras and Documentation (May 2022)
 - [x] Implemented special symbols
 - [x] Few printing optimizations
 - [x] Documentation with texts, schemes, photos and video
+    
+</p>
+</details>
 
 
 
-# To do
-- [ ] Bug fix
-    - [ ] (device) The machine seldom mistakes the correct letter, seems related to processing hiccups
-    - [ ] (device) Restarts occur sometimes, and it seems related to processing peaks that trigger the task watchdog
-    - [ ] (app, device) Sometimes the status feedback (reel, cut, feed, print) does not update correctly and gets stuck
-    - [ ] (app, device) Frequently the font serving from the ESP32 takes more time than usual and the web app starts without the correct aspect, eventually getting stuck
-- [ ]  Manufactured PCB
 
+# 🧩 List of components
 
-
-# List of components
-
-The estimated cost is around $70 (USD) without shipping.
+<!--The estimated cost is around $70 (USD) without shipping.-->
  
 | TYPE | PART - DESCRIPTION | QTY |
 | :--- |  :--- | :---: |
@@ -144,7 +148,7 @@ The estimated cost is around $70 (USD) without shipping.
 | structure | hex nut - M3 | 10 |
 | structure | washer - M3 | 9 |
 | structure | silicone pad feet - 8x2mm | 4 |
-| mechanic | spring - 7 ⌀ x 6mm length | 1 |
+| mechanic | spring - 7mm ⌀ x 6mm length | 1 |
 | mechanic | pressing carousel - MOTEX / CIDY | 1 |
 | mechanic | bearing - 608ZZ | 1 |
 | mechanic | bearing - 623ZZ | 2 |
@@ -174,34 +178,40 @@ The estimated cost is around $70 (USD) without shipping.
 | harness | female connector - 3 pin 0.1" pitch dupont | 4 |
 | harness | female connector - 4 pin 0.1" pitch dupont | 2 |
   
-**For more info, please access the [B.O.M. spreadsheet](https://docs.google.com/spreadsheets/d/1Xqc29A99QCQw1OPSw2hl-alj2u_e9j2tNaFo3Z4aVT0/edit?usp=sharing).**
+*For more info, please access the [B.O.M. spreadsheet](https://docs.google.com/spreadsheets/d/1Xqc29A99QCQw1OPSw2hl-alj2u_e9j2tNaFo3Z4aVT0/edit?usp=sharing).*
 
 
 
-# Electronics
+# ⚡ Electronics
 
 > IMG schematics
 
-**Power:**
-  - 7-12 volts to be provided by an external power supply with at least 35w to deal with servo peaks current while pressing the label. It supplies the stepper drivers directly.
-  - 6v out of the L7806 step down and is provided for both the servo and hall sensor.
-  - 3.3v is provided by the ESP32 WROOM board (as in its logical ports).
+### Power
+  - *7-12v* to be provided by an external power supply with at least 35w to deal with servo peaks current while pressing the label. It supplies the stepper drivers directly.
+  - *6v* out of the L7806 step down and is provided for both the servo and hall sensor.
+  - *3.3v* is provided by the ESP32 WROOM board (as in its logical ports).
 
-**Logic Level:** as the ESP32 uses 3.3v logic, we need this conversion for parts that are running on higher voltage (servo and hall sensor).
+### Logic Level
+- as the ESP32 uses 3.3v logic, we need this conversion for parts that are running on higher voltage (servo and hall sensor).
 
-**Press:** the servo uses 6v, higher voltages tend to damage it.
+### Press
+- the servo uses 6v, higher voltages tend to damage it.
 
-**Carousel:** NEMA stepper, driver and a hall sensor to match the position origin.
+### Carousel
+- NEMA stepper, driver and a hall sensor to match the position origin.
 
-**Wifi reset:** a tact button that when pressed while booting, clears the saved credentials.
+### Wifi reset
+- a tact button that when pressed while booting, clears the saved credentials.
 
-**Feeder:** reduced stepper motor and its driver.
+### Feeder
+- reduced stepper motor along with its standard driver.
 
-**User interface:** running on 3.3v an I²C OLED display and two LEDs (no need for resistors).
+### User interface
+- running on 3.3v an I²C OLED display and two LEDs (no need for resistors).
 
 
 
-# 3D printing
+# 🧵 3D printing
 > IMG exploded
 
 16 parts in total, using approx 200g of PETG filament.
@@ -224,17 +234,17 @@ The estimated cost is around $70 (USD) without shipping.
 - O_carousel_coupling_2
 - P_press
 
-### Suggested settings
+### Settings
 - layer height: 0.25mm
-- wall line count: 3
-- top/bottom layers: 4
 - infill: 20%
+- wall line count: 3 + 1 (Cura usually adds the later together with the infill)
+- top/bottom layers: 4
 
 *PS: some parts might need support.*
 
 
 
-# Libraries
+# 📚 Libraries
 
 Framework: arduino
 
@@ -253,6 +263,10 @@ Environment: nodemcu-32s @3.3.2
 - [ricmoo/QRCode@^0.0.1](https://github.com/ricmoo/QRCode) 
 
 
+# License
 
+MIT @ [Andrei Speridião](https://github.com/andreisperid/)
 
-## For more info & projects, you are more than welcome to visit [andrei.cc](https://andrei.cc)
+If you ever build one, I would love to know ;)
+
+## ...and you are more than welcome to visit [andrei.cc](https://andrei.cc) !
