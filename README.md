@@ -2,22 +2,29 @@
 
 Andrei Speridião 2022 - http://andrei.cc 
 
-## What is it?
+# What is it?
 
 > 1. étiquette f (plural étiquettes) tag, label 
 > 2. etiquette, prescribed behavior 
 
 E-TKT is a DIY label maker that mixes both old fashioned and contemporary technology to create something as simple as... Labels!
 
-[See a video of it working](https://youtu.be/5hv-2kIJUVc)
+[See it working!](https://youtu.be/5hv-2kIJUVc)
 
-## Table of contents
+# Table of contents
 
-xx
+- [Why?](#why)
+- [How does it work?](#how-does-it-work)
+- [Key Features](#key-features)
+- [Iterations](#iterations)
+- [To do](#to-do)
+- [List of components](#list-of-components)
+- [3D printing](#3d-printing)
+- [Libraries](#libraries)
 
 
 
-## Why?
+# Why?
 
 **TLDR: curiosity, technical challenge and of course organizing stuff.*
 
@@ -38,7 +45,7 @@ Why bother mixing an archaic printing method with current automation and connect
 
 
 
-## How does it work?
+# How does it work?
 
 An ESP32 commands the label production and also serves an on demand web application to any device connected in a local network. Neither Internet is needed, nor installing any app.
 
@@ -46,49 +53,39 @@ The whole process of connecting the E-TKT machine to a local network and then la
 
 The web app provides text validation, special characters, a preview of the exact size of the tape, an option to select the desired lateral margins and also real-time feedback during the printing (also present on the device screen). There are also commands for attaching a new reel, manually feeding and cutting the tape.
 
-The label production itself uses the same mechanical principles as the original machine did, but is now automated. A stepper motor feeds the tape while another selects the appropriate character on the magazine according to a hall sensor homing. Then a servo motor imprints each character by pressing the carousel to the tape. That happens successively until the end of the desired content, when there is a special position to cut the label. A light blinks to ask for the label to be picked.
+The label production itself uses the same mechanical principles as the original machine did, but is now automated. A stepper motor feeds the tape while another selects the appropriate character on the carousel according to a home position acquired by hall sensor. Then a servo motor imprints each character by pressing the carousel to the tape. That happens successively until the end of the desired content, when there is a special character position to cut the label. A light blinks to ask for the label to be picked.
 
 
+# Key features
+## Practicality
+- No need for internet, app installation, data cables or drivers;
+- Use from any device that is connected to a local network and has a web browser: desktop, tablet, smartphone;
+- Compatible with cheap 9mm generic DYMO-compatible tape;
+
+## Web app
+> IMG GIF: overview, margins, validation
+
+- Instant preview: what you see is what you’ll get;
+- Real time check for character validity;
+- Label length estimation;
+- Margin modes: tight, small (1 space each side) or full (max length);
+- Buttons for special characters: ♡  ☆  ♪  $ @
+- Reeling function: for when a new tape reel must be installed;
+- Manual commands: feed & cut;
 
 ## Device
 > IMG overview
 > IMG OLED display
 
-
-
-## Web app
-> IMG GIF: overview, margins, validation
-
-
-
-## Key Features
-**Connectivity**
-- No need for internet, app installation, data cables or drivers;
-- Use from any device that is connected to a local network and has a web browser: desktop, tablet, smartphone;
-
-**User Interface**
-  - Web app
-    - Instant preview: what you see is what you’ll get;
-    - Real time check for character validity;
-    - Label length estimation;
-    - Margin modes: tight, small (1 space each side) or full (max length);
-    - Buttons for special characters: ♡  ☆  ♪  $ @
-    - Reeling function: for when a new tape reel must be installed;
-    - Manual commands: feed / cut;
-
-  - Device
-    - OLED screen + LED feedback:
-    - Instructions for configuring the wifi;
-    - QR code/URL for easily accessing the web app;
-    - Real time progress;
-
-**Practicality**
-- Compatible with 9mm generic DYMO-compatible tape;
 - Minimum label size to allow for picking it up;
+- OLED screen + LED feedback:
+- Instructions for configuring the wifi;
+- QR code/URL for easily accessing the web app;
+- Real time progress;
 
 
 
-## Development phases
+# Iterations
 
 **I - Experiment (March 2021)**
 - [x] Centered carousel with oversized NEMA stepper
@@ -113,28 +110,29 @@ The label production itself uses the same mechanical principles as the original 
 - [x] OLED display to help on configuration and feedback
 - [x] Improvements on web app usability and visuals
 
-**V - Optimization and Extras**
+**V - Optimization, Extras and Documentation (May 2022)**
 - [x] Implemented special symbols
 - [x] Few printing optimizations
+- [x] Documentation with texts, schemes, photos and video
 
 
 
-## To do (June 2022):
-- [ ] Bug fixing
+# To do
+- [ ] Bug fix
     - [ ] (device) The machine seldom mistakes the correct letter, seems related to processing hiccups
     - [ ] (device) Restarts occur sometimes, and it seems related to processing peaks that trigger the task watchdog
-    - [ ] (app) Sometimes the status feedback (reel, cut, feed, print) does not update correctly and gets stuck
-    - [ ] (app) Frequently the font serving from the ESP32 takes more time than usual and the web app starts without the correct aspect, eventually getting stuck
+    - [ ] (app, device) Sometimes the status feedback (reel, cut, feed, print) does not update correctly and gets stuck
+    - [ ] (app, device) Frequently the font serving from the ESP32 takes more time than usual and the web app starts without the correct aspect, eventually getting stuck
 - [ ]  Manufactured PCB
 
 
 
-## List of components
+# List of components
 
 The estimated cost is around $70 (USD) without shipping.
-
+ 
 | TYPE | PART - DESCRIPTION | QTY |
-| ------------- | ------------- | ------------- |
+| :--- |  :--- | :---: |
 | structure | 3D print filament - PETG (~200g used) | 0.2 |
 | structure | screw - M3x40mm | 1 |
 | structure | screw - M3x20mm | 17 |
@@ -175,40 +173,40 @@ The estimated cost is around $70 (USD) without shipping.
 | harness | female connector - 8 pin 0.1" pitch dupont | 1 |
 | harness | female connector - 3 pin 0.1" pitch dupont | 4 |
 | harness | female connector - 4 pin 0.1" pitch dupont | 2 |
+  
+**For more info, please access the [B.O.M. spreadsheet](https://docs.google.com/spreadsheets/d/1Xqc29A99QCQw1OPSw2hl-alj2u_e9j2tNaFo3Z4aVT0/edit?usp=sharing).**
 
-For more info, please access the B.O.M. spreadsheet.
 
 
-
-## Electronics
+# Electronics
 
 > IMG schematics
 
-- Power:
+**Power:**
   - 7-12 volts to be provided by an external power supply with at least 35w to deal with servo peaks current while pressing the label. It supplies the stepper drivers directly.
   - 6v out of the L7806 step down and is provided for both the servo and hall sensor.
   - 3.3v is provided by the ESP32 WROOM board (as in its logical ports).
 
-- Logic Level: as the ESP32 uses 3.3v logic, we need this conversion for parts that are running on higher voltage (servo and hall sensor).
+**Logic Level:** as the ESP32 uses 3.3v logic, we need this conversion for parts that are running on higher voltage (servo and hall sensor).
 
-- Press: the servo uses 6v, higher voltages tend to damage it.
+**Press:** the servo uses 6v, higher voltages tend to damage it.
 
-- Carousel: NEMA stepper, driver and a hall sensor to match the position origin.
+**Carousel:** NEMA stepper, driver and a hall sensor to match the position origin.
 
-- Wifi reset: a tact button that when pressed while booting, clears the saved credentials.
+**Wifi reset:** a tact button that when pressed while booting, clears the saved credentials.
 
-- Feeder: reduced stepper motor and its driver.
+**Feeder:** reduced stepper motor and its driver.
 
-- User interface: running on 3.3v an I²C OLED display and two LEDs (no need for resistors).
+**User interface:** running on 3.3v an I²C OLED display and two LEDs (no need for resistors).
 
 
 
-## 3D printing
-16 parts in total, using approx 200g of PETG filament.
-
+# 3D printing
 > IMG exploded
 
-### List of parts:
+16 parts in total, using approx 200g of PETG filament.
+
+### List of parts
 - A_bottom
 - B_wall
 - C_wall_track
@@ -226,7 +224,7 @@ For more info, please access the B.O.M. spreadsheet.
 - O_carousel_coupling_2
 - P_press
 
-**Suggested settings:**
+### Suggested settings
 - layer height: 0.25mm
 - wall line count: 3
 - top/bottom layers: 4
@@ -236,7 +234,7 @@ For more info, please access the B.O.M. spreadsheet.
 
 
 
-## Libraries used
+# Libraries
 
 Framework: arduino
 
@@ -257,4 +255,4 @@ Environment: nodemcu-32s @3.3.2
 
 
 
-# For more info & projects, you are more than welcome to visit andrei.cc
+## For more info & projects, you are more than welcome to visit [andrei.cc](https://andrei.cc)
