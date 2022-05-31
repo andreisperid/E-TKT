@@ -10,7 +10,19 @@
 <p align="center">Andrei Speridião 2022 - http://andrei.cc</p>
 
 
-## What is it?
+# table of contents
+
+- [what is it?](#-what-is-it)
+- [why?](#-why)
+- [how does it work?](#%EF%B8%8F-how-does-it-work)
+- [features](#-features)
+- [components](#-components)
+- [3D printing](#-3d-printing)
+- [to do](#%EF%B8%8F-to-do)
+- [libraries](#-libraries)
+- [license](#%EF%B8%8F-license)
+
+# 🙃 what is it?
 
 > ### *étiquette f (plural étiquettes)*
 > ["ticket, memorandum, attach, stick, pierce, sting, to be sharp, goad, puncture, attach, nail"](https://en.wiktionary.org/wiki/%C3%A9tiquette#French)
@@ -21,19 +33,9 @@ E-TKT is a DIY label maker that mixes both old fashioned and contemporary techno
 
 [![🎥 see it working 🎥](https://user-images.githubusercontent.com/15098003/171185500-8a63297c-487c-4900-b6d2-5c67298541d4.png)](https://www.youtube.com/watch?v=5hv-2kIJUVc "🎥 see it working 🎥")
 
-# Table of contents
-
-- [Why?](#-why)
-- [How does it work?](#%EF%B8%8F-how-does-it-work)
-- [Features](#-features)
-- [List of components](#-list-of-components)
-- [3D printing](#-3d-printing)
-- [To do](#%EF%B8%8F-to-do)
-- [Libraries](#-libraries)
 
 
-
-# 🤔 Why?
+# 🤔 why?
 
 ### *TLDR: curiosity, technical challenge and of course organizing stuff.*
 
@@ -58,7 +60,7 @@ Finally, when creating the project video I've realized that "anachronism" is wha
 
 
 
-# ⚙️ How does it work?
+# ⚙️ how does it work?
 ![how](https://user-images.githubusercontent.com/15098003/171194737-37861a1f-fba7-404c-b987-5b3d26e704f3.png)
 
 An ESP32 commands the label production and also serves an on demand web application to any device connected in a local network. Neither Internet is needed, nor installing any app.
@@ -70,13 +72,13 @@ The web app provides text validation, special characters, a preview of the exact
 The label production itself uses the same mechanical principles as the original machine did, but is now automated. A stepper motor feeds the tape while another selects the appropriate character on the carousel according to a home position acquired by hall sensor. Then a servo motor imprints each character by pressing the carousel to the tape. That happens successively until the end of the desired content, when there is a special character position to cut the label. A light blinks to ask for the label to be picked.
 
 
-# 💡 Features
-### 🌟 *Highlights*
+# 💡 features
+## 🌟 *highlights*
 - No need for internet, app installation, data cables or drivers;
 - Use from any device that is connected to a local network and has a web browser: desktop, tablet, smartphone;
 - Compatible with cheap 9mm generic DYMO-compatible tape;
 
-### 📱 Web app
+## 📱 web app
 
 <img src="https://user-images.githubusercontent.com/15098003/171068984-5492a5b2-0eec-4714-9bf8-0055f606ac5b.gif" height="600">
 
@@ -88,7 +90,7 @@ The label production itself uses the same mechanical principles as the original 
 - Reeling function: for when a new tape reel must be installed;
 - Manual commands: feed & cut;
 
-### 🔌 Device
+## 🔌 device
 ![8522_t](https://user-images.githubusercontent.com/15098003/171065272-df92a233-937b-404c-a1b7-b58c65ff6560.jpg)
 ![8574_t](https://user-images.githubusercontent.com/15098003/171067234-45f603e2-b86b-484a-a918-976d7dfe89cd.jpg)<img src="https://user-images.githubusercontent.com/15098003/171069105-5f6ff133-97fa-4558-84bd-1174a9965873.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171069109-fd11ad4a-c32e-40f8-b43b-75f63577aefb.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171069110-bae5d936-b745-4c0f-98dc-123e3d544d0c.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171069111-e2f2c641-3e2e-4332-af1f-f96e201be519.jpg" width="50%">
 ![8501_t](https://user-images.githubusercontent.com/15098003/171069838-1836ead2-5ab6-490b-a2e7-acff03536e2e.jpg)
@@ -102,7 +104,7 @@ The label production itself uses the same mechanical principles as the original 
 - Real time progress;
 
 
-# 🧩 List of components
+# 🧩 components
 
 The estimated cost is around $70 (USD) without shipping, as of May 2022.
  
@@ -151,7 +153,7 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 | 41 | consumable | - | label tape - 9mm DYMO compatible | 1 | [link](http://aliexpress.com/item/1005001525284316.html) |
 
 
-# ⚡ Electronics
+# ⚡ electronics
 
 ![Schematic_e-tkt_2022-05-30](https://user-images.githubusercontent.com/15098003/171064999-262a4c68-01ae-4122-8584-5d784ebf6408.png)
 
@@ -218,7 +220,7 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 
 
 
-# 🛠️ To do
+# 🛠️ to do
 - [ ] Bugs
     - [ ] (device) The machine seldom mistakes the correct letter (rare), seems related to processing hiccups.
     - [ ] (device) Restarts occur occasionally, and it seems related to processing peaks that trigger the task watchdog.
@@ -226,13 +228,12 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
     - [ ] (app, device) Frequently the font serving from the ESP32 takes more time than usual and the web app starts without the correct aspect, eventually getting stuck in that state.
 - [ ]  Manufactured PCB.
 
-***<details><summary>🕓 See the previous development phases 🕕</summary>***
+***<details><summary> A bit futher into the process 🌑🌘🌗🌖🌕 </summary>***
 <p>
-    
+
 ### I - Experiment (March 2021)
-- [x] Centered carousel with oversized NEMA stepper
 - [x] Carousel homing with infrared sensor + one missing “teeth” led erratic results
-- [x] Testing with servo, but it was too weak to press the tape
+- [x] Testing with SG-90 servo, but it was too weak to press the tape
 - [x] Using Arduino mega, communication via serial
 
 ### II - Communication
@@ -241,15 +242,17 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 - [x] First sketches for the web app user interface
 
 ###  III - Printing Proof
-- [x] Migration for the ESP32
 - [x] Dual core tasks: one serves the network/app and the other controls all physical operations
-- [x] Stronger servo resulted on successful tag printing
+- [x] Stronger MG-996R servo resulted on successful tag printing
 - [x] Hall sensor for homing with precision
 - [x] Carousel direction on clockwise only to avoid tape screwing
+- [x] Migration for the ESP32
 
 ###  IV - Consistency and Usability
 - [x] More compact device, with smaller stepper motor for the carousel
+- [x] Tested using NFC to open web app on smartphone, failed (security standards)
 - [x] OLED display to help on configuration and feedback
+- [x] QR code as an alternative to quickly open web app
 - [x] Improvements on web app usability and visuals
 
 ### V - Optimization, Extras and Documentation (May 2022)
@@ -262,7 +265,7 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 
 
 
-# 📚 Libraries
+# 📚 libraries
 
 Framework: arduino
 
@@ -282,7 +285,7 @@ Environment: nodemcu-32s @3.3.2
 
 
 
-# License
+# ⚖️ license
 
 MIT @ [Andrei Speridião](https://github.com/andreisperid/)
 
