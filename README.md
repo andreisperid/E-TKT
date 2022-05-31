@@ -1,8 +1,10 @@
+
+<img src="https://user-images.githubusercontent.com/15098003/171070706-99fe1fe8-9f13-4c46-bbfd-12cd1c7b775d.gif" width="1012">
+
 <h1 align="center">
-    📦 E-TKT: anachronic label maker 📦
+    E-TKT: anachronic label maker
 </h1>
 
-![8522_t](https://user-images.githubusercontent.com/15098003/171065272-df92a233-937b-404c-a1b7-b58c65ff6560.jpg)
 
 <p align="center">Andrei Speridião 2022 - http://andrei.cc</p>
 
@@ -55,8 +57,7 @@ Finally, when creating the project video I've realized that "anachronism" is wha
 
 
 # ⚙️ How does it work?
-
-
+![iso](https://user-images.githubusercontent.com/15098003/171071002-84388f74-b020-4557-b1fd-3f7846287a33.png)
 
 An ESP32 commands the label production and also serves an on demand web application to any device connected in a local network. Neither Internet is needed, nor installing any app.
 
@@ -86,7 +87,10 @@ The label production itself uses the same mechanical principles as the original 
 - Manual commands: feed & cut;
 
 ### 🔌 Device
+![8522_t](https://user-images.githubusercontent.com/15098003/171065272-df92a233-937b-404c-a1b7-b58c65ff6560.jpg)
 ![8574_t](https://user-images.githubusercontent.com/15098003/171067234-45f603e2-b86b-484a-a918-976d7dfe89cd.jpg)<img src="https://user-images.githubusercontent.com/15098003/171069105-5f6ff133-97fa-4558-84bd-1174a9965873.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171069109-fd11ad4a-c32e-40f8-b43b-75f63577aefb.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171069110-bae5d936-b745-4c0f-98dc-123e3d544d0c.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171069111-e2f2c641-3e2e-4332-af1f-f96e201be519.jpg" width="50%">
+![8501_t](https://user-images.githubusercontent.com/15098003/171069838-1836ead2-5ab6-490b-a2e7-acff03536e2e.jpg)
+
 
 
 - Minimum label size to allow for picking it up;
