@@ -19,7 +19,7 @@
 
 E-TKT is a DIY label maker that mixes both old fashioned and contemporary technology to create something as simple as... Labels!
 
-[![🎥 see it working 🎥](https://user-images.githubusercontent.com/15098003/171185500-8a63297c-487c-4900-b6d2-5c67298541d4.png)](https://www.youtube.com/watch?v=5hv-2kIJUVc "Video Title")
+[![🎥 see it working 🎥](https://user-images.githubusercontent.com/15098003/171185500-8a63297c-487c-4900-b6d2-5c67298541d4.png)](https://www.youtube.com/watch?v=5hv-2kIJUVc "🎥 see it working 🎥")
 
 # Table of contents
 
@@ -37,11 +37,13 @@ E-TKT is a DIY label maker that mixes both old fashioned and contemporary techno
 
 ### *TLDR: curiosity, technical challenge and of course organizing stuff.*
 
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/15098003/171187101-0a5633a8-f852-488e-8685-b5fae7079eef.png" width="40%">    
+</p>
+
 The initial spark for this project came from an ordinary handheld [labeling device](https://www.aliexpress.com/item/3256801648218535.html) that I bought to organize my workshop. I was ***VERY UPSET*** when I noticed that it was basically rubbish, getting broken and unusable after just a few operations.
 
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/15098003/171067977-48377e3e-fc34-4ae4-ac9e-2fb68dccdffd.png" width="25%">
-</p>
+
 
 I knew I could easily buy a common electronic thermal label printer, but something about the vintage embossed finish fascinated me. Furthermore, even though the pressing mechanism was poorly made, the characters' carousel was pretty sturdy and sharp. So I thought: can I build over its principles to create a functional device? If so, then why not make it physical-digital?
 
@@ -57,7 +59,7 @@ Finally, when creating the project video I've realized that "anachronism" is wha
 
 
 # ⚙️ How does it work?
-![iso](https://user-images.githubusercontent.com/15098003/171071002-84388f74-b020-4557-b1fd-3f7846287a33.png)
+![how](https://user-images.githubusercontent.com/15098003/171194737-37861a1f-fba7-404c-b987-5b3d26e704f3.png)
 
 An ESP32 commands the label production and also serves an on demand web application to any device connected in a local network. Neither Internet is needed, nor installing any app.
 
@@ -105,7 +107,7 @@ The label production itself uses the same mechanical principles as the original 
 The estimated cost is around $70 (USD) without shipping, as of May 2022.
  
 | ID | TYPE | SUBSYSTEM | PART - DESCRIPTION | QTY | REF | 
-| :---: | :--- | :--- |  :--- | :---: | :---: |
+| :---: | :---: | :---: |  :--- | :---: | :---: |
 | 1 | structure | - | 3D print filament - PETG (~200g used) | 0.2 | [link](http://prusa3d.com/product/prusament-petg-jet-black-1kg/) |
 | 2 | structure | - | screw - M3x40mm | 1 | [link](http://aliexpress.com/item/2261799963738734.html) |
 | 3 | structure | - | screw - M3x20mm | 17 | [link](http://aliexpress.com/item/2261799963738734.html) |
