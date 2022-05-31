@@ -39,9 +39,8 @@ E-TKT is a DIY label maker that mixes both old fashioned and contemporary techno
 
 ### *TLDR: curiosity, technical challenge and of course organizing stuff.*
 
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/15098003/171187101-0a5633a8-f852-488e-8685-b5fae7079eef.png" width="40%">    
-</p>
+![motex3](https://user-images.githubusercontent.com/15098003/171213081-fbdf82dc-e752-46eb-81d8-d3f7b8e25f01.png)
+
 
 The initial spark for this project came from an ordinary handheld [labeling device](https://www.aliexpress.com/item/3256801648218535.html) that I bought to organize my workshop. I was ***VERY UPSET*** when I noticed that it was basically rubbish, getting broken and unusable after just a few operations.
 
