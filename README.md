@@ -10,7 +10,7 @@
 <p align="center">Andrei Speridião 2022 - http://andrei.cc</p>
 
 
-# table of contents
+### table of contents
 
 - [what is it?](#-what-is-it)
 - [why?](#-why)
@@ -221,12 +221,8 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 
 
 # 🛠️ to do
-- [ ] Bugs
-    - [ ] (device) The machine seldom mistakes the correct letter (rare), seems related to processing hiccups.
-    - [ ] (device) Restarts occur occasionally, and it seems related to processing peaks that trigger the task watchdog.
-    - [ ] (app, device) Sometimes the status feedback (reel, cut, feed, print) does not update correctly and gets stuck.
-    - [ ] (app, device) Frequently the font serving from the ESP32 takes more time than usual and the web app starts without the correct aspect, eventually getting stuck in that state.
-- [ ]  Manufactured PCB.
+- [ ] [Bugfix](https://github.com/andreisperid/E-TKT/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
+- [ ] Manufactured PCB
 
 ***<details><summary> A bit futher into the process 🌑🌘🌗🌖🌕 </summary>***
 <p>
