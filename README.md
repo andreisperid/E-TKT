@@ -48,14 +48,16 @@ The initial spark for this project came from an ordinary handheld [labeling devi
 
 I knew I could easily buy a common electronic thermal label printer, but something about the vintage embossed finish fascinated me. Furthermore, even though the pressing mechanism was poorly made, the characters' carousel was pretty sturdy and sharp. So I thought: can I build over its principles to create a functional device? If so, then why not make it physical-digital?
 
-Throughout the process I have constantly questioned what made me develop this ambiguous device, with no clear answer.
+...why bother mixing an archaic printing method with current automation and connectivity features? Because why not? It was a technological blind spot to be explored!
+
+
+Then, throughout the process I have constantly questioned what made me develop this ambiguous device, with no clear answer.
 
 Finally, when creating the project video I've realized that "anachronism" is what I’ve been attracted to. According to [Wikipedia](https://en.wikipedia.org/wiki/Anachronism):
-> “a chronological inconsistency in some arrangements, especially a juxtaposition of people, events, objects, language terms and customs from different time periods”.
+> “An ***anachronism*** (from the Greek ἀνά ana, 'against' and χρόνος khronos, 'time') is a chronological inconsistency in some arrangements, especially a juxtaposition of people, events, objects, language terms and customs from different time periods”.
 
 ### The point is: even though the process is digitalized, the resulting label is totally old school and there is no easy way of telling if it wasn't made in the traditional way.
 
-...why bother mixing an archaic printing method with current automation and connectivity features? Because why not? It was a technological blind spot to be explored!
 
 
 
@@ -90,9 +92,10 @@ The label production itself uses the same mechanical principles as the original 
 - Manual commands: feed & cut;
 
 ## 🔌 device
-![8522_t](https://user-images.githubusercontent.com/15098003/171065272-df92a233-937b-404c-a1b7-b58c65ff6560.jpg)
-![8574_t](https://user-images.githubusercontent.com/15098003/171067234-45f603e2-b86b-484a-a918-976d7dfe89cd.jpg)<img src="https://user-images.githubusercontent.com/15098003/171069105-5f6ff133-97fa-4558-84bd-1174a9965873.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171069109-fd11ad4a-c32e-40f8-b43b-75f63577aefb.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171069110-bae5d936-b745-4c0f-98dc-123e3d544d0c.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171069111-e2f2c641-3e2e-4332-af1f-f96e201be519.jpg" width="50%">
-![8501_t](https://user-images.githubusercontent.com/15098003/171069838-1836ead2-5ab6-490b-a2e7-acff03536e2e.jpg)
+
+![low8522](https://user-images.githubusercontent.com/15098003/171266088-96cdada7-feb2-47cc-8ad4-93bbcee7d791.jpg)
+![low8574](https://user-images.githubusercontent.com/15098003/171266147-481b7937-f424-4fb8-99b4-e4c7cdd9c04e.jpg) <img src="https://user-images.githubusercontent.com/15098003/171266274-88a4455d-5064-4241-94b7-64bf6cca8c19.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171266279-9fba37e5-3a4a-443e-a092-287b132ff902.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171266280-09c19b4f-2e5e-44a0-8182-578a272c22d8.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171266283-dd538716-9d20-46f3-8733-c52f74d23a5d.jpg" width="50%">
+![low8501](https://user-images.githubusercontent.com/15098003/171266285-7bf15ca4-3f81-48df-9882-8588755c188a.jpg)
 
 
 
@@ -224,33 +227,48 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 - [ ] Manufactured PCB
 
 ***<details><summary> A bit futher into the process 🌑🌘🌗🌖🌕 </summary>***
-<p>
-
-### I - Experiment (March 2021)
+<p> 
+    
+### I - Experiment (Mar/2021)
+    
+<img src="https://user-images.githubusercontent.com/15098003/171269435-a1eabe78-d058-4b14-b9b8-7042359a4fe9.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266690-c338b383-6c45-4988-a514-cbe023b817e1.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266692-844232aa-3745-4fb7-bd0b-297d777bfdfe.jpg" width="25%">
+    
 - [x] Carousel homing with infrared sensor + one missing “teeth” led erratic results
 - [x] Testing with SG-90 servo, but it was too weak to press the tape
 - [x] Using Arduino mega, communication via serial
 
-### II - Communication
+### II - Communication (Mar/2021)
+    
+ <img src="https://user-images.githubusercontent.com/15098003/171271137-047c1efe-4b0d-4ffa-89ae-fdf83de84ba9.jpg" width="25%">    
+    
 - [x] Experiments using ESP8266 with self served app + receiving commands, still isolated from the main functionality
 - [x] Wifi manager
 - [x] First sketches for the web app user interface
 
-###  III - Printing Proof
+###  III - Printing Proof (Mar-Jun/2021)
+    
+<img src="https://user-images.githubusercontent.com/15098003/171270262-9f8ceb2b-e115-4352-a3b1-6360cd4fbad0.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171267768-e6e015c3-7fb8-4503-b86c-f03fbfc35ec0.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171270457-baede1ce-9c57-4d44-8273-3d6d641cf2dc.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171267777-4ca52132-f6d2-474c-9dab-73be09f6ba98.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171270251-9266059e-45cc-42d0-b61b-a94420f4c889.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171270255-0aaaba71-c84d-4d2f-8185-9c065bfe8207.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171270257-b90879b7-23a1-4bcd-b342-f9718806bfac.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171268968-bc88c09d-b3c5-4562-9fdf-482efd6d7768.jpg" width="25%">
+    
 - [x] Dual core tasks: one serves the network/app and the other controls all physical operations
 - [x] Stronger MG-996R servo resulted on successful tag printing
 - [x] Hall sensor for homing with precision
 - [x] Carousel direction on clockwise only to avoid tape screwing
 - [x] Migration for the ESP32
-
-###  IV - Consistency and Usability
+    
+###  IV - Consistency and Usability (Sept-Oct/2021)
+    
+<img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266690-c338b383-6c45-4988-a514-cbe023b817e1.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266692-844232aa-3745-4fb7-bd0b-297d777bfdfe.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%">
+    
 - [x] More compact device, with smaller stepper motor for the carousel
 - [x] Tested using NFC to open web app on smartphone, failed (security standards)
 - [x] OLED display to help on configuration and feedback
 - [x] QR code as an alternative to quickly open web app
 - [x] Improvements on web app usability and visuals
-
-### V - Optimization, Extras and Documentation (May 2022)
+    
+### V - Optimization, Extras and Documentation (May/2022)
+    
+<img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266690-c338b383-6c45-4988-a514-cbe023b817e1.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266692-844232aa-3745-4fb7-bd0b-297d777bfdfe.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%">  
+    
 - [x] Implemented special symbols
 - [x] Few printing optimizations
 - [x] Documentation with texts, schemes, photos and video
@@ -286,4 +304,4 @@ MIT @ [Andrei Speridião](https://github.com/andreisperid/)
 
 If you ever build one, I would love to know ;)
 
-## ...and you are more than welcome to visit [andrei.cc](https://andrei.cc) !
+## ...for more: [andrei.cc](https://andrei.cc)
