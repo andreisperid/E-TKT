@@ -226,55 +226,54 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 - [ ] [Bugfix](https://github.com/andreisperid/E-TKT/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 - [ ] Manufactured PCB
 
-***<details><summary> A bit futher into the process 🌑🌘🌗🌖🌕 </summary>***
-<p> 
-    
-### I - Experiment (Mar/2021)
-    
-<img src="https://user-images.githubusercontent.com/15098003/171269435-a1eabe78-d058-4b14-b9b8-7042359a4fe9.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266690-c338b383-6c45-4988-a514-cbe023b817e1.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266692-844232aa-3745-4fb7-bd0b-297d777bfdfe.jpg" width="25%">
-    
-- [x] Carousel homing with infrared sensor + one missing “teeth” led erratic results
-- [x] Testing with SG-90 servo, but it was too weak to press the tape
-- [x] Using Arduino mega, communication via serial
 
-### II - Communication (Mar/2021)
-    
- <img src="https://user-images.githubusercontent.com/15098003/171271137-047c1efe-4b0d-4ffa-89ae-fdf83de84ba9.jpg" width="25%">    
-    
-- [x] Experiments using ESP8266 with self served app + receiving commands, still isolated from the main functionality
-- [x] Wifi manager
-- [x] First sketches for the web app user interface
+# 🌑 process 🌘🌗🌖🌕
 
-###  III - Printing Proof (Mar-Jun/2021)
-    
-<img src="https://user-images.githubusercontent.com/15098003/171270262-9f8ceb2b-e115-4352-a3b1-6360cd4fbad0.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171267768-e6e015c3-7fb8-4503-b86c-f03fbfc35ec0.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171270457-baede1ce-9c57-4d44-8273-3d6d641cf2dc.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171267777-4ca52132-f6d2-474c-9dab-73be09f6ba98.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171270251-9266059e-45cc-42d0-b61b-a94420f4c889.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171270255-0aaaba71-c84d-4d2f-8185-9c065bfe8207.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171270257-b90879b7-23a1-4bcd-b342-f9718806bfac.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171268968-bc88c09d-b3c5-4562-9fdf-482efd6d7768.jpg" width="25%">
-    
-- [x] Dual core tasks: one serves the network/app and the other controls all physical operations
-- [x] Stronger MG-996R servo resulted on successful tag printing
-- [x] Hall sensor for homing with precision
-- [x] Carousel direction on clockwise only to avoid tape screwing
-- [x] Migration for the ESP32
-    
-###  IV - Consistency and Usability (Sept-Oct/2021)
-    
-<img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266690-c338b383-6c45-4988-a514-cbe023b817e1.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266692-844232aa-3745-4fb7-bd0b-297d777bfdfe.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%">
-    
-- [x] More compact device, with smaller stepper motor for the carousel
-- [x] Tested using NFC to open web app on smartphone, failed (security standards)
-- [x] OLED display to help on configuration and feedback
-- [x] QR code as an alternative to quickly open web app
-- [x] Improvements on web app usability and visuals
-    
-### V - Optimization, Extras and Documentation (May/2022)
-    
-<img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266690-c338b383-6c45-4988-a514-cbe023b817e1.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266692-844232aa-3745-4fb7-bd0b-297d777bfdfe.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%">  
-    
-- [x] Implemented special symbols
-- [x] Few printing optimizations
-- [x] Documentation with texts, schemes, photos and video
-    
-</p>
+***<details><summary> I - Experiment (Mar/2021) </summary>***    
+<img src="https://user-images.githubusercontent.com/15098003/171269435-a1eabe78-d058-4b14-b9b8-7042359a4fe9.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266690-c338b383-6c45-4988-a514-cbe023b817e1.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266692-844232aa-3745-4fb7-bd0b-297d777bfdfe.jpg" width="25%"> 
+- Using Arduino mega, communication via serial   
+- Carousel homing with infrared sensor + one missing “teeth” led erratic results
+- Testing with SG-90 servo, but it was too weak to press the tape
 </details>
+    
+***<details><summary> II - Communication (Mar/2021) </summary>*** 
+ <img src="https://user-images.githubusercontent.com/15098003/171271137-047c1efe-4b0d-4ffa-89ae-fdf83de84ba9.jpg" width="25%">        
+- Experiments using ESP8266 with self served app + receiving commands, still isolated from the main functionality
+- Wifi manager
+- First sketches for the web app user interface
+</details>
+
+***<details><summary> III - Printing Proof (Mar-Jun/2021) </summary>***
+<img src="https://user-images.githubusercontent.com/15098003/171270262-9f8ceb2b-e115-4352-a3b1-6360cd4fbad0.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171267768-e6e015c3-7fb8-4503-b86c-f03fbfc35ec0.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171270457-baede1ce-9c57-4d44-8273-3d6d641cf2dc.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171267777-4ca52132-f6d2-474c-9dab-73be09f6ba98.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171270251-9266059e-45cc-42d0-b61b-a94420f4c889.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171270255-0aaaba71-c84d-4d2f-8185-9c065bfe8207.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171270257-b90879b7-23a1-4bcd-b342-f9718806bfac.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171268968-bc88c09d-b3c5-4562-9fdf-482efd6d7768.jpg" width="25%">    
+- Stronger MG-996R servo resulted on successful tag printing
+- Hall sensor for homing with precision
+- Carousel direction on clockwise only to avoid tape screwing
+- Migration for the ESP32
+- Dual core tasks: one serves the network/app and the other controls all physical operations
+</details>
+
+***<details><summary> IV - Consistency and Usability (Sep-Oct/2021) </summary>***    
+
+    
+<img src="https://user-images.githubusercontent.com/15098003/171294518-0ee089ec-255e-46a0-abe0-e298e0d07006.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171293788-a3c86e39-3c88-48ff-a122-75b7ea9d374d.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171293793-1dca584e-916c-40a4-add9-b05708c3230d.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171293818-2b2414f0-f8f0-498c-aa39-45508902d81a.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171293826-48109b19-11f2-4779-9642-5519e0dd244f.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171293852-4b092ac5-6451-4703-9160-5ec2a5f6b692.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171293895-25f8f618-5549-4cfc-b32f-48ae933e61ac.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171294180-9392b450-8d6c-4aad-9176-0f81f5f763c9.jpg" width="25%">  
+- More compact device, with smaller stepper motor for the carousel
+- Tested using NFC to open web app on smartphone, failed (security standards)
+- OLED display to help on configuration and feedback
+- QR code as an alternative to quickly open web app
+- Improvements on web app usability and visuals
+ </details>
+
+***<details><summary> V - Optimization, Extras and Documentation (May/2022) </summary>***  
+- Implemented special symbols
+- Few printing optimizations
+- Documentation with texts, schemes, photos and video
+</details>  
+
+
+***<details><summary> Extra - printing improvements along the way  </summary>***
+<img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266690-c338b383-6c45-4988-a514-cbe023b817e1.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266692-844232aa-3745-4fb7-bd0b-297d777bfdfe.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%">
+</details>  
+
 
 
 
