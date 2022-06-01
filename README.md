@@ -16,6 +16,7 @@
 - [components](#-components)
 - [3D printing](#-3d-printing)
 - [to do](#%EF%B8%8F-to-do)
+- [process](#-process-)
 - [libraries](#-libraries)
 - [license](#%EF%B8%8F-license)
 
