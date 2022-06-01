@@ -45,7 +45,7 @@ I knew I could easily buy a common electronic thermal label printer, but somethi
 ...why bother mixing an archaic printing method with current automation and connectivity features? Because *why not?* It was a technological blind spot to be explored!
 
 # 🤓 *...anachronism*
-I've later realized that "anachronism" is what I’ve been attracted to. According to [Wikipedia](https://en.wikipedia.org/wiki/Anachronism):
+I've later realized that it was what I’ve been attracted to. According to [Wikipedia](https://en.wikipedia.org/wiki/Anachronism):
 > “An ***anachronism*** (from the Greek ἀνά ana, 'against' and χρόνος khronos, 'time') is a chronological inconsistency in some arrangements, especially a juxtaposition of people, events, objects, language terms and customs from different time periods”.
 
 ### The point is: even though the process is digitalized, *the resulting label is totally old school* and there is no easy way of telling if it wasn't made in the traditional way.
