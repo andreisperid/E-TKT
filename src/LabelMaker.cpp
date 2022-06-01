@@ -48,7 +48,6 @@ int sensorState;
 int threshold = 128;
 int currentCharPosition = -1;
 int deltaPosition;
-bool reverseCalibration;
 
 // wifi reset
 const int wifiResetPin = 13;
@@ -60,7 +59,6 @@ const int stepsPerRevolutionChar = 200 * MICROSTEP_Char;
 AccelStepper stepperFeed(MICROSTEP_Feed, 15, 4, 2, 16);
 AccelStepper stepperChar(1, 33, 32);
 #define enableCharStepper 25
-int fullCycle;
 float stepsPerChar;
 
 // servo
@@ -103,9 +101,7 @@ char prevChar = 'J';
 int charHome = 21;
 bool waitingLabel = false;
 
-String headerCommand;
 bool busy = false;
-String operationStatus;
 
 String parameter = "";
 String value = "";
