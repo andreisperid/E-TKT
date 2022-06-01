@@ -42,9 +42,9 @@ E-TKT is a DIY label maker that mixes both old fashioned and contemporary techno
 ![motex3](https://user-images.githubusercontent.com/15098003/171213081-fbdf82dc-e752-46eb-81d8-d3f7b8e25f01.png)
 
 
-The initial spark for this project came from an ordinary handheld [labeling device](https://www.aliexpress.com/item/3256801648218535.html) that I bought to organize my workshop. I was ***VERY UPSET*** when I noticed that it was basically rubbish, getting broken and unusable after just a few operations.
+The initial spark for this project came from an ordinary handheld [labeling device](https://www.aliexpress.com/item/3256801648218535.html) that I bought to organize my workshop. I was ***VERY UPSET*** when I noticed that it was basically rubbish, getting broken and unusable after just a few operations. I even tried to fix and reinforce it, but the flaw was unavoidable as this part was crucial for feeding the tape forward and the part was too weak.
 
-
+![low_DSC8695 copy annotated](https://user-images.githubusercontent.com/15098003/171303466-703fb695-e1d0-488c-8f9b-58dd55291529.jpg)
 
 I knew I could easily buy a common electronic thermal label printer, but something about the vintage embossed finish fascinated me. Furthermore, even though the pressing mechanism was poorly made, the characters' carousel was pretty sturdy and sharp. So I thought: can I build over its principles to create a functional device? If so, then why not make it physical-digital?
 
@@ -52,6 +52,8 @@ I knew I could easily buy a common electronic thermal label printer, but somethi
 
 
 Then, throughout the process I have constantly questioned what made me develop this ambiguous device, with no clear answer.
+
+# *...ANACHRONISM*
 
 Finally, when creating the project video I've realized that "anachronism" is what I’ve been attracted to. According to [Wikipedia](https://en.wikipedia.org/wiki/Anachronism):
 > “An ***anachronism*** (from the Greek ἀνά ana, 'against' and χρόνος khronos, 'time') is a chronological inconsistency in some arrangements, especially a juxtaposition of people, events, objects, language terms and customs from different time periods”.
@@ -270,8 +272,13 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 </details>  
 
 
-***<details><summary> Extra - printing improvements along the way  </summary>***
-<img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266690-c338b383-6c45-4988-a514-cbe023b817e1.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266692-844232aa-3745-4fb7-bd0b-297d777bfdfe.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%">
+***<details><summary> 🦝 - Extras </summary>***
+ ## 🔤 label printing improvements along the way
+![low_DSC8701 copy 2](https://user-images.githubusercontent.com/15098003/171303016-91d4d050-4065-4da9-8bd4-f7c15ec60e50.jpg)
+
+## 🤸 all the 3d printed iterations
+![low_DSC8689 copy](https://user-images.githubusercontent.com/15098003/171303045-1c3f8f94-6da7-49a5-89ae-ab4718799bdb.jpg)
+
 </details>  
 
 
