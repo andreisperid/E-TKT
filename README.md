@@ -1,3 +1,4 @@
+<br>
 
 ![teaser_4](https://user-images.githubusercontent.com/15098003/171178685-e226b7ec-bc1c-44df-a134-f5b71171801a.gif)
 
@@ -7,6 +8,7 @@
 
 <p align="center">Andrei Speridião 2022 - http://andrei.cc</p>
 
+<br>
 
 ### table of contents
 - [what is it?](#-what-is-it)
@@ -20,6 +22,7 @@
 - [libraries](#-libraries)
 - [license](#%EF%B8%8F-license)
 
+<br>
 
 # 🙃 what is it?
 > ### *étiquette f (plural étiquettes)*
@@ -27,17 +30,22 @@
 > 1. tag, label 
 > 2. prescribed behavior
 
+<br>
+
 E-TKT is a DIY label maker that mixes both old fashioned and contemporary technology to create something as simple as... Labels!
+
+<br>
 
 [![🎥 see it working 🎥](https://user-images.githubusercontent.com/15098003/171185500-8a63297c-487c-4900-b6d2-5c67298541d4.png)](https://www.youtube.com/watch?v=5hv-2kIJUVc "🎥 see it working 🎥")
 
+<br>
 
 # 🤔 why?
 ### *TLDR: curiosity, technical challenge and of course organizing stuff.*
 
 ![motex3](https://user-images.githubusercontent.com/15098003/171213081-fbdf82dc-e752-46eb-81d8-d3f7b8e25f01.png)
 
-The initial spark for this project came from an ordinary handheld [labeling device](https://www.aliexpress.com/item/3256801648218535.html) that I bought to organize my workshop. I was ***VERY UPSET*** when I noticed that it was basically rubbish, getting broken and unusable after just a few operations. I even tried to fix and reinforce it, but the flaw was unavoidable as this part was crucial for feeding the tape forward and the part was too weak.
+The initial spark for this project came from an ordinary handheld [labeling device](https://www.aliexpress.com/item/3256801648218535.html) that I bought to organize my workshop. I was ***VERY UPSET*** when I noticed that it was basically rubbish, getting broken and unusable after just a few operations. This little plastic hook (circled in red) grabs a gated cog (the white plastic part below) to feed the tape forward. I tried to fix and reinforce it, but the failure was unavoidable because there seems to be a critical flaw in the project: it is too weak for the lateral resistance imposed.
 
 ![low_DSC8695 copy annotated](https://user-images.githubusercontent.com/15098003/171303466-703fb695-e1d0-488c-8f9b-58dd55291529.jpg)
 
@@ -45,12 +53,15 @@ I knew I could easily buy a common electronic thermal label printer, but somethi
 
 ...why bother mixing an archaic printing method with current automation and connectivity features? Because *why not?* It was a technological blind spot to be explored!
 
-# 🤓 *...anachronism*
+<br>
+
+# *...anachronism* 🤓
 I've later realized that it was what I’ve been attracted to. According to [Wikipedia](https://en.wikipedia.org/wiki/Anachronism):
 > “An ***anachronism*** (from the Greek ἀνά ana, 'against' and χρόνος khronos, 'time') is a chronological inconsistency in some arrangements, especially a juxtaposition of people, events, objects, language terms and customs from different time periods”.
 
 ### The point is: even though the process is digitalized, *the resulting label is totally old school* and there is no easy way of telling if it wasn't made in the traditional way.
 
+<br>
 
 # ⚙️ how does it work?
 ![how](https://user-images.githubusercontent.com/15098003/171194737-37861a1f-fba7-404c-b987-5b3d26e704f3.png)
@@ -65,6 +76,7 @@ The *web app* provides text validation, special characters, a preview of the exa
 
 The label production itself uses the same mechanical principles as the original machine did, but is now automated. A stepper motor feeds the tape while another selects the appropriate character on the carousel according to a home position acquired by hall sensor. Then a servo motor imprints each character by pressing the carousel to the tape. That happens successively until the end of the desired content, when there is a special character position to cut the label. A light blinks to ask for the label to be picked.
 
+<br>
 
 # 💡 features
 ## 🌟 *highlights*
@@ -83,6 +95,8 @@ The label production itself uses the same mechanical principles as the original 
 - Reeling function: for when a new tape reel must be installed;
 - Manual commands: feed & cut;
 
+<br>
+
 ## 🔌 device
 ![low8522](https://user-images.githubusercontent.com/15098003/171266088-96cdada7-feb2-47cc-8ad4-93bbcee7d791.jpg)
 ![low8574](https://user-images.githubusercontent.com/15098003/171266147-481b7937-f424-4fb8-99b4-e4c7cdd9c04e.jpg) <img src="https://user-images.githubusercontent.com/15098003/171266274-88a4455d-5064-4241-94b7-64bf6cca8c19.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171266279-9fba37e5-3a4a-443e-a092-287b132ff902.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171266280-09c19b4f-2e5e-44a0-8182-578a272c22d8.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/171266283-dd538716-9d20-46f3-8733-c52f74d23a5d.jpg" width="50%">
@@ -94,6 +108,7 @@ The label production itself uses the same mechanical principles as the original 
 - QR code/URL for easily accessing the web app;
 - Real time progress;
 
+<br>
 
 # 🧩 components
 
@@ -143,6 +158,7 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 | 40 | harness | - | female connector - 4 pin 0.1" pitch dupont | 2 | [link](http://aliexpress.com/item/3256802073547679.html) |
 | 41 | consumable | - | label tape - 9mm DYMO compatible | 1 | [link](http://aliexpress.com/item/1005001525284316.html) |
 
+<br>
 
 # ⚡ electronics
 
@@ -171,7 +187,7 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 ### User interface
 - Running on 3.3v an I²C OLED display and two LEDs (no need for resistors).
 
-
+<br>
 
 # 🧵 3D printing
 ### 16 parts in total, using approx 200g of PETG filament.
@@ -202,11 +218,13 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 - Wall line count: 3 + 1 (Cura usually adds the later together with the infill)
 - Top/bottom layers: 4
 
+<br>
 
 # 🛠️ to do
 - [ ] [Bugfix](https://github.com/andreisperid/E-TKT/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 - [ ] Manufactured PCB
 
+<br>
 
 # 🌑 process 🌘🌗🌖🌕
 
@@ -214,7 +232,9 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 <img src="https://user-images.githubusercontent.com/15098003/171269435-a1eabe78-d058-4b14-b9b8-7042359a4fe9.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266687-53a73713-336d-4699-8519-36c1fee7fe87.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266690-c338b383-6c45-4988-a514-cbe023b817e1.jpg" width="25%"><img src="https://user-images.githubusercontent.com/15098003/171266692-844232aa-3745-4fb7-bd0b-297d777bfdfe.jpg" width="25%"> 
 - Using Arduino mega, communication via serial.
 - Carousel homing with infrared sensor + one missing “teeth” led to inconsistent results and misalignment.
-- Testing with SG-90 servo, but it was too weak to press the tape.
+- Testing with SG-90 servo, but it was too weak to press the tape.    
+<br>
+    
 </details>
     
 ***<details><summary> II - Communication (Mar/2021) </summary>*** 
@@ -222,6 +242,8 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 - Experiments using ESP8266 with self served app + receiving commands, still isolated from the main functionality.
 - Wifi manager.
 - First sketches for the web app user interface.
+<br>
+    
 </details>
 
 ***<details><summary> III - Printing Proof (Mar-Jun/2021) </summary>***
@@ -231,6 +253,8 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 - Carousel direction on clockwise only to avoid tape screwing.
 - Migration for the ESP32.
 - Dual core tasks: one serves the network/app and the other controls all physical operations.
+<br>
+    
 </details>
 
 ***<details><summary> IV - Consistency and Usability (Sep-Oct/2021) </summary>***       
@@ -240,22 +264,29 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 - OLED display to help on configuration and feedback.
 - QR code as an alternative to quickly open web app.
 - Improvements on web app usability and visuals.
+<br>    
+    
  </details>
 
 ***<details><summary> V - Optimization, Extras and Documentation (May/2022) </summary>***  
 - Implemented special symbols.
 - Few printing optimizations.
 - Documentation with texts, schemes, photos and video.
+<br>
+    
 </details>  
 
 ***<details><summary> 🦝 - Extras </summary>***
  ## 🔤 label printing improvements along the way
 ![low_DSC8701 copy 2](https://user-images.githubusercontent.com/15098003/171303016-91d4d050-4065-4da9-8bd4-f7c15ec60e50.jpg)
-
+    
+<br>
+    
 ## 🤸 all the 3d printed iterations
 ![low_DSC8689 copy](https://user-images.githubusercontent.com/15098003/171303045-1c3f8f94-6da7-49a5-89ae-ab4718799bdb.jpg)
 </details>  
 
+<br>
 
 # 📚 libraries
 
@@ -270,6 +301,7 @@ Environment: NODEMCU-32s @3.3.2
 - [olikraus/U8g2@2.28.8](https://github.com/olikraus/U8g2)
 - [ricmoo/QRCode@0.0.1](https://github.com/ricmoo/QRCode) 
 
+<br>
 
 # ⚖️ license
 
