@@ -36,7 +36,7 @@ E-TKT is a DIY label maker that mixes both old fashioned and contemporary techno
 
 <br>
 
-[![🎥 see it working 🎥](https://user-images.githubusercontent.com/15098003/171185500-8a63297c-487c-4900-b6d2-5c67298541d4.png)](https://www.youtube.com/watch?v=5hv-2kIJUVc "🎥 see it working 🎥")
+[![🎥 see it working 🎥](https://user-images.githubusercontent.com/15098003/171185500-8a63297c-487c-4900-b6d2-5c67298541d4.png)](https://www.youtube.com/watch?v=F0E5adLQ-AY "🎥 see it working 🎥")
 
 <br>
 
@@ -45,11 +45,13 @@ E-TKT is a DIY label maker that mixes both old fashioned and contemporary techno
 
 ![motex3](https://user-images.githubusercontent.com/15098003/171213081-fbdf82dc-e752-46eb-81d8-d3f7b8e25f01.png)
 
-The initial spark for this project came from an ordinary handheld [labeling device](https://www.aliexpress.com/item/3256801648218535.html) that I bought to organize my workshop. I was ***VERY UPSET*** when I noticed that it was basically rubbish, getting broken and unusable after just a few operations. This little plastic hook (circled in red) grabs a gated cog (the white plastic part below) to feed the tape forward. I tried to fix and reinforce it, but the failure was unavoidable because there seems to be a critical flaw in the project: it is too weak for the lateral resistance imposed.
+The initial spark for this project came from an ordinary manual [labeling device](https://www.aliexpress.com/item/3256801648218535.html) that I bought to organize my workshop. I was ***VERY UPSET*** when I noticed that it was basically rubbish, getting broken and unusable after just a few operations. This little plastic hook (circled in red) grabs a gated cog (the white plastic part below) to feed the tape forward. I tried to fix and reinforce it, but the failure was unavoidable because there seems to be a critical flaw in the project: it is too weak for the lateral resistance imposed.
 
 ![low_DSC8695 copy annotated](https://user-images.githubusercontent.com/15098003/171303466-703fb695-e1d0-488c-8f9b-58dd55291529.jpg)
 
-I knew I could easily buy a common electronic thermal label printer, but something about the *vintage embossed finish* fascinated me. Furthermore, even though the pressing mechanism was poorly made, the characters' carousel was pretty sturdy and sharp. So I thought: can I build over its principles to create a functional device? If so, then why not make it *physical-digital?*
+I knew I could easily buy a brand new modern electronic thermal label printer ([such as Brother](https://www.brother-usa.com/products/pth110bp)), but something about the vintage embossed finish fascinated me. Also, these new models use expensive [proprietary cartridges](https://www.brother-usa.com/products/tze335) that create a lot of trash after use.
+
+After all, even though the pressing mechanism was poorly made, the characters' carousel was pretty sturdy and sharp. So I thought: can I build over its principles to create a functional device? If so, then why not make it *physical-digital?*
 
 ...why bother mixing an archaic printing method with current automation and connectivity features? Because *why not?* It was a technological blind spot to be explored!
 
