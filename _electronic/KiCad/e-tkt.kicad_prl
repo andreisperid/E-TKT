@@ -1,7 +1,7 @@
 {
   "board": {
-    "active_layer": 44,
-    "active_layer_preset": "All Layers",
+    "active_layer": 0,
+    "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_nets": [],
     "high_contrast_mode": 0,
@@ -10,7 +10,7 @@
       "pads": 1.0,
       "tracks": 1.0,
       "vias": 1.0,
-      "zones": 0.6
+      "zones": 0.5199999809265137
     },
     "ratsnest_display_mode": 0,
     "selection_filter": {
@@ -36,13 +36,11 @@
       8,
       9,
       10,
-      11,
       12,
       13,
       14,
       15,
       16,
-      17,
       18,
       19,
       20,
