@@ -123,7 +123,8 @@
         0.25,
         0.5,
         1.0,
-        1.5
+        1.5,
+        2.0
       ],
       "via_dimensions": [
         {
@@ -444,7 +445,7 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "e-tkt_2.step",
       "vrml": ""
     },
     "page_layout_descr_file": ""
