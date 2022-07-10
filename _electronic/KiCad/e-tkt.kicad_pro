@@ -446,7 +446,7 @@
       "netlist": "",
       "specctra_dsn": "",
       "step": "e-tkt_2.step",
-      "vrml": ""
+      "vrml": "e-tkt.wrl"
     },
     "page_layout_descr_file": ""
   },
