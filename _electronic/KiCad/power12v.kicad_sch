@@ -1336,7 +1336,7 @@
     (property "Value" "Barrel_Jack_Switch" (id 1) (at 88.9 82.55 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Footprint" "Connector_BarrelJack:BarrelJack_GCT_DCJ200-10-A_Horizontal" (id 2) (at 90.17 89.916 0)
+    (property "Footprint" "SnapEDA Library:BarrelJack_GCT_DCJ200-10-A_Horizontal" (id 2) (at 90.17 89.916 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://br.mouser.com/datasheet/2/837/DCJ200_10-2888303.pdf" (id 3) (at 90.17 89.916 0)
