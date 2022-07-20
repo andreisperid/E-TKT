@@ -1,6 +1,6 @@
 (kicad_sch (version 20211123) (generator eeschema)
 
-  (uuid fbb90e7c-e74b-4162-8a1f-31c9a82bd41a)
+  (uuid bf68d3c0-3864-4b10-9eb9-d6b9c0bf0054)
 
   (paper "A4")
 
@@ -320,7 +320,6 @@
   (no_connect (at 123.19 107.95) (uuid c140c196-ad2b-4688-b3eb-d62c9a631f40))
   (no_connect (at 158.75 115.57) (uuid c453edfd-b7ce-4fbb-98bd-3691c5a3b3b6))
   (no_connect (at 123.19 105.41) (uuid cb2d8606-4d5e-4b55-8ed6-aa93242a2538))
-  (no_connect (at 158.75 123.19) (uuid f13a370a-27e1-422c-ab58-d9d9b29a36bc))
 
   (wire (pts (xy 160.02 92.71) (xy 156.21 92.71))
     (stroke (width 0) (type default) (color 0 0 0 0))
@@ -353,10 +352,6 @@
   (wire (pts (xy 158.75 115.57) (xy 156.21 115.57))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 1ec4949c-e7c7-4832-8fac-2f5ce1535f5a)
-  )
-  (wire (pts (xy 158.75 123.19) (xy 156.21 123.19))
-    (stroke (width 0) (type default) (color 0 0 0 0))
-    (uuid 23090473-30bb-4af7-ad73-cce7408ae622)
   )
   (wire (pts (xy 123.19 82.55) (xy 125.73 82.55))
     (stroke (width 0) (type default) (color 0 0 0 0))
@@ -413,6 +408,10 @@
   (wire (pts (xy 140.97 67.31) (xy 140.97 69.85))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 8173b220-8772-4c8b-9d2f-4bdb6c8bd1ce)
+  )
+  (wire (pts (xy 156.21 123.19) (xy 160.02 123.19))
+    (stroke (width 0) (type default) (color 0 0 0 0))
+    (uuid 82e56e8f-23bc-4dba-917b-5e815442559b)
   )
   (wire (pts (xy 160.02 82.55) (xy 156.21 82.55))
     (stroke (width 0) (type default) (color 0 0 0 0))
@@ -507,6 +506,10 @@
   (hierarchical_label "IO5 LED END OUT" (shape input) (at 160.02 87.63 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 40aa1a95-5295-4943-9e19-ff5c59c0e6dd)
+  )
+  (hierarchical_label "IO27 BUZZER OUT" (shape input) (at 160.02 123.19 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 58124ab6-8206-4591-8d88-14f256579a26)
   )
   (hierarchical_label "IO3 RXD IN" (shape input) (at 160.02 82.55 0)
     (effects (font (size 1.27 1.27)) (justify left))
