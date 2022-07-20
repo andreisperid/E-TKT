@@ -496,6 +496,58 @@
     [
       "9f001140-4433-4565-aea0-4a74283269e6",
       "6V Power"
+    ],
+    [
+      "ab008ac4-72ad-4687-86ad-8fa342b57840",
+      "12V Power"
+    ],
+    [
+      "3d4a375b-875d-4fc4-a866-a7c8d291032e",
+      "3V3 Power"
+    ],
+    [
+      "1d8f268c-7b21-408e-bc34-126c2ab734fe",
+      "USB-C 2.0"
+    ],
+    [
+      "500f785f-7d37-4530-93ef-964340f250e0",
+      "Serial"
+    ],
+    [
+      "53dc24b1-e06e-42b0-9cce-919318864537",
+      "Boot"
+    ],
+    [
+      "973f9b7f-d992-45f9-a125-51db85018136",
+      "MCU"
+    ],
+    [
+      "101993a2-8c13-4c99-b45a-f486b8a836ae",
+      "Char Stepper"
+    ],
+    [
+      "f455ead3-36df-4bbc-bff6-27228632d6c9",
+      "Feed Stepper"
+    ],
+    [
+      "2d0c1513-867c-4f44-88ad-09ecf55e026a",
+      "Wifi Reset"
+    ],
+    [
+      "e114063c-c6b9-4008-930a-c1b2e1caea2c",
+      "Level Shift"
+    ],
+    [
+      "80181399-56c9-4858-bcd2-be6de4dbffde",
+      "Test Pads"
+    ],
+    [
+      "6b620b21-f9f4-45f9-ae29-09e80b0a55df",
+      "External Flashing"
+    ],
+    [
+      "7bf025fc-a57d-4f41-9c31-fcca97a0dd34",
+      "Connectors"
     ]
   ],
   "text_variables": {}
