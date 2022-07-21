@@ -2308,7 +2308,7 @@
       (reference "C_MCU2") (unit 1) (value "22uF 12V 1mOhm") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
     (path "/101993a2-8c13-4c99-b45a-f486b8a836ae/4c1bc314-5895-4441-bc6f-2d2a249bfe23"
-      (reference "C_NEMA1") (unit 1) (value "100uF 25V") (footprint "Capacitor_SMD:CP_Elec_6.3x5.9")
+      (reference "C_NEMA1") (unit 1) (value "100uF 25V") (footprint "Capacitor_SMD:CP_Elec_6.3x7.7")
     )
     (path "/101993a2-8c13-4c99-b45a-f486b8a836ae/3faed348-87ae-4aa0-834c-e83b753cd129"
       (reference "C_NEMA2") (unit 1) (value "10uF 12V 5mOhm") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
@@ -2503,25 +2503,25 @@
       (reference "LS1") (unit 1) (value "CSS-0575A-SMT") (footprint "SnapEDA Library:CUI_CSS-0575A-SMT")
     )
     (path "/53dc24b1-e06e-42b0-9cce-919318864537/d0b882d5-6209-48b2-a22c-6f0e264e9332"
-      (reference "Q_AUTO1") (unit 1) (value "SS8050") (footprint "Package_TO_SOT_SMD:SOT-23")
+      (reference "Q_AUTO1") (unit 1) (value "SS8050") (footprint "Package_TO_SOT_SMD:SOT-23_Handsoldering")
     )
     (path "/53dc24b1-e06e-42b0-9cce-919318864537/3c886608-4d88-45c0-b068-a6fcc805878d"
-      (reference "Q_AUTO2") (unit 1) (value "SS8050") (footprint "Package_TO_SOT_SMD:SOT-23")
+      (reference "Q_AUTO2") (unit 1) (value "SS8050") (footprint "Package_TO_SOT_SMD:SOT-23_Handsoldering")
     )
     (path "/e114063c-c6b9-4008-930a-c1b2e1caea2c/78080aad-3d11-4723-8b7b-123580aa2bd6"
-      (reference "Q_HALL1") (unit 1) (value "BSS138") (footprint "Package_TO_SOT_SMD:SOT-23")
+      (reference "Q_HALL1") (unit 1) (value "BSS138LT3G") (footprint "Package_TO_SOT_SMD:SOT-23_Handsoldering")
     )
     (path "/ab008ac4-72ad-4687-86ad-8fa342b57840/31888d71-a910-43e3-86b4-828fb2c3a7da"
-      (reference "Q_POW1") (unit 1) (value "SQ2351ES-T1_GE3") (footprint "Package_TO_SOT_SMD:SOT-23")
+      (reference "Q_POW1") (unit 1) (value "SQ2351ES-T1_GE3") (footprint "Package_TO_SOT_SMD:SOT-23_Handsoldering")
     )
     (path "/ab008ac4-72ad-4687-86ad-8fa342b57840/f562e358-c278-4a32-864f-f165e5e1d305"
-      (reference "Q_POW2") (unit 1) (value "MMBT3904,215") (footprint "Package_TO_SOT_SMD:SOT-23")
+      (reference "Q_POW2") (unit 1) (value "MMBT3904,215") (footprint "Package_TO_SOT_SMD:SOT-23_Handsoldering")
     )
     (path "/ab008ac4-72ad-4687-86ad-8fa342b57840/18aeaf11-7384-4f97-9de4-c3e2548c13a3"
-      (reference "Q_POW3") (unit 1) (value "MMBT3904,215") (footprint "Package_TO_SOT_SMD:SOT-23")
+      (reference "Q_POW3") (unit 1) (value "MMBT3904,215") (footprint "Package_TO_SOT_SMD:SOT-23_Handsoldering")
     )
     (path "/e114063c-c6b9-4008-930a-c1b2e1caea2c/f18a3846-54b4-4e42-8645-c44e11c79473"
-      (reference "Q_SERVO1") (unit 1) (value "BSS138") (footprint "Package_TO_SOT_SMD:SOT-23")
+      (reference "Q_SERVO1") (unit 1) (value "BSS138LT3G") (footprint "Package_TO_SOT_SMD:SOT-23_Handsoldering")
     )
     (path "/53dc24b1-e06e-42b0-9cce-919318864537/0740a5b7-3995-49a8-992f-0d0bcc6361c2"
       (reference "R_AUTO1") (unit 1) (value "10K (5%)") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
@@ -2656,7 +2656,7 @@
       (reference "U_MCU1") (unit 1) (value "ESP32-WROOM-32") (footprint "RF_Module:ESP32-WROOM-32")
     )
     (path "/9f001140-4433-4565-aea0-4a74283269e6/c75ce27b-3a9c-4f13-a193-2ed9cbff747c"
-      (reference "U_POW1") (unit 1) (value "~") (footprint "Package_TO_SOT_SMD:SOT-23-6")
+      (reference "U_POW1") (unit 1) (value "~") (footprint "Package_TO_SOT_SMD:SOT-23-6_Handsoldering")
     )
     (path "/3d4a375b-875d-4fc4-a866-a7c8d291032e/204f0a5e-e713-4078-ac53-5dc1aa436217"
       (reference "U_POW2") (unit 1) (value "AZ1117CH-3.3TRG1") (footprint "Package_TO_SOT_SMD:SOT-223")

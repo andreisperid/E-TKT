@@ -872,7 +872,7 @@
     (property "Value" "100uF 25V" (id 1) (at 186.69 91.44 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.9" (id 2) (at 183.8452 93.98 0)
+    (property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7" (id 2) (at 183.8452 93.98 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://br.mouser.com/datasheet/2/420/MVERA_e-2509142.pdf" (id 3) (at 182.88 90.17 0)
