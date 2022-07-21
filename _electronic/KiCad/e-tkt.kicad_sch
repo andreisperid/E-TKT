@@ -2328,11 +2328,11 @@
     (path "/9f001140-4433-4565-aea0-4a74283269e6/7678b119-0902-4017-9554-38ba53c4fdb1"
       (reference "C_POW_BST1") (unit 1) (value "0.1uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
-    (path "/9f001140-4433-4565-aea0-4a74283269e6/4c138899-24f6-4346-84a3-079ab48bfd51"
-      (reference "C_POW_BST?") (unit 1) (value "0.1uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
-    )
     (path "/9f001140-4433-4565-aea0-4a74283269e6/522178cd-7448-4933-9e06-766ff3399aa0"
-      (reference "C_POW_BST?") (unit 1) (value "0.33uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
+      (reference "C_POW_BST2") (unit 1) (value "0.33uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
+    )
+    (path "/9f001140-4433-4565-aea0-4a74283269e6/4c138899-24f6-4346-84a3-079ab48bfd51"
+      (reference "C_POW_BST3") (unit 1) (value "0.1uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
     (path "/9f001140-4433-4565-aea0-4a74283269e6/2650722c-9362-4b86-aae3-128504da3aed"
       (reference "C_POW_IN1") (unit 1) (value "10uF 25V") (footprint "Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder")
@@ -2665,7 +2665,7 @@
       (reference "U_SER1") (unit 1) (value "FT231XS-R") (footprint "Package_SO:SSOP-20_3.9x8.7mm_P0.635mm")
     )
     (path "/f455ead3-36df-4bbc-bff6-27228632d6c9/e566ba4a-b84d-4765-935f-fd04b0e7ec2f"
-      (reference "U_STP1") (unit 1) (value "ULN2003") (footprint "Package_SO:SOIC-16W_5.3x10.2mm_P1.27mm")
+      (reference "U_STP1") (unit 1) (value "ULN2003") (footprint "Package_SO:SOIC-16_3.9x9.9mm_P1.27mm")
     )
     (path "/1d8f268c-7b21-408e-bc34-126c2ab734fe/e34a5990-e484-4969-b183-08abe8cec98f"
       (reference "U_USB1") (unit 1) (value "USB6B1") (footprint "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm")
