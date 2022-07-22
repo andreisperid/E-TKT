@@ -4,6 +4,13 @@
 
   (paper "A4")
 
+  (title_block
+    (title "E-TKT")
+    (date "2022-07-21")
+    (rev "3")
+    (company "Andrei Speridiao")
+  )
+
   (lib_symbols
     (symbol "2022-07-12_23-59-33:B3FS-1000" (pin_names (offset 0.254)) (in_bom yes) (on_board yes)
       (property "Reference" "SW" (id 0) (at 20.32 10.16 0)

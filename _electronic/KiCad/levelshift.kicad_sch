@@ -4,6 +4,13 @@
 
   (paper "A4")
 
+  (title_block
+    (title "E-TKT")
+    (date "2022-07-21")
+    (rev "3")
+    (company "Andrei Speridiao")
+  )
+
   (lib_symbols
     (symbol "Device:LED" (pin_numbers hide) (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
       (property "Reference" "D" (id 0) (at 0 2.54 0)
