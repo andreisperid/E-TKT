@@ -7,3 +7,5 @@ include/
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+e-tkt-backups/
+fp-info-cache
