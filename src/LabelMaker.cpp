@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// ~~~~~~IMPORTANT: do not forget to upload the files in "data" folder via SPIFFS
+// ~~~~~~ IMPORTANT: do not forget to upload the files in "data" folder via SPIFFS ~~~~~~
 
 #include <Arduino.h>
 #include <AccelStepper.h>
@@ -35,7 +35,10 @@
 #include "SPIFFS.h"
 #include <qrcode.h>
 #include <U8g2lib.h>
+#include <ESP32Tone.h>
 
+#include "etktLogo.cpp"
+#include "pitches.cpp"
 
 // HARDWARE ------------------------------------------------------------------------
 
@@ -43,40 +46,47 @@
 #define MICROSTEP_Char 16
 
 // home sensor
-int sensorPin = 34;
+#define sensorPin 34
 int sensorState;
-int threshold = 128;
+#define threshold 128
 int currentCharPosition = -1;
 int deltaPosition;
 
 // wifi reset
-const int wifiResetPin = 13;
+#define wifiResetPin 13
 
 // steppers
-const int stepsPerRevolutionFeed = 4076;
+#define stepsPerRevolutionFeed 4076
 const int stepsPerRevolutionChar = 200 * MICROSTEP_Char;
 
-AccelStepper stepperFeed(MICROSTEP_Feed, 15, 4, 2, 16);
-AccelStepper stepperChar(1, 33, 32);
+AccelStepper stepperFeed(MICROSTEP_Feed, 15, 2, 16, 4);
+AccelStepper stepperChar(1, 32, 33);
 #define enableCharStepper 25
 float stepsPerChar;
+#define calibrateChar 0.8f
 
 // servo
 Servo myServo;
-const int servoPin = 14;
-int restAngle = 55;
-int peakAngle = 20;
-#define strongAngle 13
-#define lightAngle 17
+#define servoPin 14
+#define restAngle 50 // prev 42 / 55
+int peakAngle;
+// #define strongAngle 16 // 13
+// #define lightAngle 20  // 17
+
+#define strongAngle 22 // 13
+#define lightAngle 22  // 17
 
 // oled
-U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
+U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 #define Lcd_X 128
 #define Lcd_Y 64
 
 // leds
 #define ledFinish 5
 #define ledChar 17
+
+// buzzer
+#define buzzerPin 27
 
 // DATA ----------------------------------------------------------------------------
 
@@ -96,12 +106,22 @@ char charSet[charQuantity] = {
 	'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '<', '>',
 	'~', '|', '@'};
 
+int etktNotes[8] = {
+	44, 44, 16, 2, 31, 22, 31, 44};
+
+int charNoteSet[charQuantity + 1] = {
+	NOTE_A4, NOTE_AS4, NOTE_B4, NOTE_C5, NOTE_CS5, NOTE_D5, NOTE_DS5, NOTE_E5, NOTE_F5, NOTE_FS5,
+	NOTE_G5, NOTE_GS5, NOTE_A5, NOTE_AS5, NOTE_B5, NOTE_C6, NOTE_CS6, NOTE_D6, NOTE_DS6, NOTE_E6,
+	NOTE_F6, NOTE_FS6, NOTE_G6, NOTE_GS6, NOTE_A6, NOTE_AS6, NOTE_B6, NOTE_C7, NOTE_CS7, NOTE_D7,
+	NOTE_DS7, NOTE_E7, NOTE_F7, NOTE_FS7, NOTE_G7, NOTE_GS7, NOTE_A7, NOTE_AS7, NOTE_B7, NOTE_C8,
+	NOTE_CS8, NOTE_D8, NOTE_DS8, 0};
+
 String labelString;
 char prevChar = 'J';
 int charHome = 21;
 bool waitingLabel = false;
 
-bool busy = false;
+volatile bool busy = false;
 
 String parameter = "";
 String value = "";
@@ -117,13 +137,13 @@ String webProgress = " 0";
 
 // qr code
 const int QRcode_Version = 3; //  set the version (range 1->40)
-const int QRcode_ECC = 0;	  //  set the Error Correction level (range 0-3) or symbolic (ECC_LOW, ECC_MEDIUM, ECC_QUARTILE and ECC_HIGH)
+const int QRcode_ECC = 2;	  //  set the Error Correction level (range 0-3) or symbolic (ECC_LOW, ECC_MEDIUM, ECC_QUARTILE and ECC_HIGH)
 QRCode qrcode;				  //  create the QR code
 String displaySSID = "";
 String displayIP = "";
 
 // ------------------------------------------------------------------------------------------------
-// LEDS -------------------------------------------------------------------------
+// LEDS ---------------------------------------------------------------------------
 
 void lightFinished()
 {
@@ -149,31 +169,57 @@ void lightChar(float state)
 	analogWrite(ledChar, state * 128);
 }
 
+// ------------------------------------------------------------------------------------------------
+// BUZZER -------------------------------------------------------------------------
+
+void sound(int frequency = 2000, int duration = 1000)
+{
+	tone(buzzerPin, frequency, duration);
+}
+
+void labelMusic(String label)
+{
+	int length = label.length();
+
+	for (int i = 0; i < length; i++)
+	{
+		for (int j = 0; j < charQuantity; j++)
+		{
+			if (label[i] == charSet[j])
+			{
+				Serial.println(charNoteSet[j]);
+				tone(buzzerPin, charNoteSet[j], 50);
+			}
+		}
+		delay(50);
+	}
+}
+
 // DISPLAY -------------------------------------------------------------------------
 
-void displayClear()
+void displayClear(int color = 0)
 {
 	// empty pixels
-	for (uint8_t y = 0; y < 32; y++)
+	for (uint8_t y = 0; y < 64; y++)
 	{
 		for (uint8_t x = 0; x < 128; x++)
 		{
-			u8g2.setDrawColor(0); // change 0 to make QR code with black background
+			u8g2.setDrawColor(color); // change 0 to make QR code with black background
 			u8g2.drawPixel(x, y);
 		}
 	}
 	delay(100); // transfer internal memory to the display
+
+	u8g2.setDrawColor(color == 0 ? 1 : 0);
+	u8g2.setFont(u8g2_font_6x13_te);
 }
 
 void displayInitialize()
 {
 	u8g2.begin();
 	u8g2.clearBuffer();
-	u8g2.setFlipMode(1);
-	u8g2.setContrast(64); // set OLED brightness(0->255)
+	u8g2.setContrast(8); // set OLED brightness(0->255)
 	displayClear();
-
-	u8g2.setFont(u8g2_font_6x13_te); // 9 pixel height
 	u8g2.setDrawColor(1);
 }
 
@@ -181,38 +227,75 @@ void displaySplash()
 {
 	displayInitialize();
 
+	// invert colors
+	displayClear(1);
+
+	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
+	u8g2.setDrawColor(0);
+	u8g2.drawStr(40, 53, "andrei.cc");
+	u8g2.sendBuffer();
+
+	u8g2.setDrawColor(1);
+
+	int n = 1;
+
 	// animated splash
-	for (int i = 128; i > 18; i = i - 2)
+	for (int i = 128; i > 7; i = i - 18)
 	{
-		u8g2.setFont(u8g2_font_inr21_mf);
-		u8g2.drawStr(i, 29, "E-TKT");
-		u8g2.sendBuffer();
-		delay(1);		
+		for (int j = 0; j < 18; j += 9)
+		{
+			u8g2.drawXBM(i - j - 11, 8, 128, 32, etktLogo);
+			u8g2.sendBuffer();
+
+			// Serial.println(i-j);
+		}
+		if (charNoteSet[etktNotes[n]] != 44)
+		{
+			sound(charNoteSet[etktNotes[n]], 200);
+		}
+		n++;
 	}
+
+	u8g2.setDrawColor(2);
+	u8g2.drawBox(0, 0, 128, 64);
+	u8g2.sendBuffer();
+	sound(3000, 150);
 }
 
 void displayConfig()
 {
-	displayInitialize();
-	u8g2.setFont(u8g2_font_6x13_te);
-	u8g2.drawStr(0, 12, "Connect to the");
-	u8g2.drawStr(0, 29, "\"E-TKT\" wifi network");
+	displayClear();
+
+	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
+	u8g2.drawStr(15, 12, "WI-FI SETUP");
+	u8g2.drawStr(3, 32, "Please, connect to");
+	u8g2.drawStr(3, 47, "the \"E-TKT\" network...");
+
+	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+	u8g2.drawGlyph(3, 12, 0x011a); // connected
+
 	u8g2.sendBuffer();
 }
 
 void displayReset()
 {
-	displayInitialize();
-	u8g2.setFont(u8g2_font_6x13_te);
-	u8g2.drawStr(0, 12, "Connection cleared");
-	u8g2.drawStr(0, 29, "Release button");
+	displayClear();
+
+	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
+	u8g2.drawStr(15, 12, "WI-FI RESET");
+	u8g2.drawStr(3, 32, "Connection cleared!");
+	u8g2.drawStr(3, 47, "Release the button.");
+
+	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+	u8g2.drawGlyph(3, 12, 0x00cd);
+
 	u8g2.sendBuffer();
 }
 
 void displayQRCode()
 {
-	displayInitialize();
 	displayClear();
+	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
 
 	uint8_t qrcodeData[qrcode_getBufferSize(QRcode_Version)];
 
@@ -221,33 +304,51 @@ void displayQRCode()
 		u8g2.setDrawColor(1);
 
 		//--------------------------------------------
+
+		u8g2.drawStr(6, 15, "E-TKT v1.0");
+		u8g2.setDrawColor(2);
+		u8g2.drawBox(3, 3, 55, 15);
+		u8g2.setDrawColor(1);
+
+		u8g2.drawStr(3, 33, "ready @");
+
+		String resizeSSID;
+		if (displaySSID.length() > 8)
+		{
+			resizeSSID = displaySSID.substring(0, 7) + "...";
+		}
+		else
+		{
+			resizeSSID = displaySSID;
+		}
+		const char *d = resizeSSID.c_str();
+		u8g2.drawStr(14, 47, d); // connected
+
 		const char *b = displayIP.c_str();
-		u8g2.drawStr(0, 31, b); // write something to the internal memory
+		u8g2.drawStr(3, 61, b);
 
-		String displayIPfull = "http://" + displayIP;
-		const char *c = displayIPfull.c_str();
-
-		const char *d = displaySSID.c_str();
-		u8g2.drawStr(11, 12, d); // connected
 		u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
-		u8g2.drawGlyph(0, 12, 0x00f8); // connected
+		u8g2.drawGlyph(3, 47, 0x00f8); // connected
 
+
+		String ipFull = "http://" + displayIP;
+		const char *c = ipFull.c_str();
 		qrcode_initText(&qrcode, qrcodeData, QRcode_Version, QRcode_ECC, c); // ARK address
 
 		// qr code background
-		for (uint8_t y = 0; y < 31; y++)
+		for (uint8_t y = 0; y < 64; y++)
 		{
-			for (uint8_t x = 0; x < 31; x++)
+			for (uint8_t x = 0; x < 64; x++)
 			{
-				u8g2.setDrawColor(1); // change 0 to make QR code with black background
-				u8g2.drawPixel(x + 127 - 32, y);
+				u8g2.setDrawColor(0);
+				u8g2.drawPixel(x + 128 - 64, y);
 			}
 		}
 
-		//--------------------------------------------		
+		//--------------------------------------------
 		// setup the top right corner of the QRcode
-		uint8_t x0 = 128 - 32;
-		uint8_t y0 = 1; // 16 is the start of the blue portion OLED in the yellow/blue split 64x128 OLED
+		uint8_t x0 = 128 - 64 + 6;
+		uint8_t y0 = 3; // 16 is the start of the blue portion OLED in the yellow/blue split 64x128 OLED
 
 		//--------------------------------------------
 		// display QRcode
@@ -256,15 +357,18 @@ void displayQRCode()
 			for (uint8_t x = 0; x < qrcode.size; x++)
 			{
 
-				if (qrcode_getModule(&qrcode, x, y) == 0)
+				int newX = x0 + (x * 2);
+				int newY = y0 + (y * 2);
+
+				if (qrcode_getModule(&qrcode, x, y))
 				{
 					u8g2.setDrawColor(1);
-					u8g2.drawPixel(x0 + x, y0 + y);
+					u8g2.drawBox(newX, newY, 2, 2);
 				}
 				else
 				{
 					u8g2.setDrawColor(0);
-					u8g2.drawPixel(x0 + x, y0 + y);
+					u8g2.drawBox(newX, newY, 2, 2);
 				}
 			}
 		}
@@ -275,45 +379,104 @@ void displayQRCode()
 
 void displayProgress(float total, float actual, String label)
 {
+	displayClear();
+
+	u8g2.setDrawColor(1);
+
+	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
+	u8g2.drawStr(15, 12, "PRINTING");
+	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+	u8g2.drawGlyph(3, 12, 0x0081);
+
+	u8g2.setFont(u8g2_font_6x13_te);
+	const char *c = label.c_str();
+	u8g2.drawStr(0, 36, c);
+
+	u8g2.setDrawColor(2);
+	u8g2.drawBox(0, 21, (actual)*6, 21);
+
+	// u8g2.drawBox(0, 31, 128, 2);
+
+	// u8g2.setDrawColor(0);
+	// u8g2.drawBox(label.length() * 6, 5, 128, 21);
+
 	float progress = actual / total;
 	String progressString = String(progress * 95, 0);
 	webProgress = progressString;
 	progressString.concat("%");
 	const char *p = progressString.c_str();
-	u8g2.drawStr(0, 12, p);
-
-	u8g2.setDrawColor(0);
-	u8g2.drawHLine(0, 16, 128);
-	u8g2.drawHLine(0, 17, 128);
-
 	u8g2.setDrawColor(1);
-	u8g2.drawHLine(0, 16, (total - actual) * 6);
-	u8g2.drawHLine(0, 17, (total - actual) * 6);
+	u8g2.drawStr(6, 60, p);
 
-	u8g2.setDrawColor(1);
-	u8g2.drawHLine(0, 16, 5);
-	u8g2.drawHLine(0, 17, 5);
-
-	u8g2.setDrawColor(1);
-	const char *c = label.c_str();
-	u8g2.drawStr(0, 31, c);
 	u8g2.sendBuffer();
 }
 
 void displayFinished()
 {
-	displayInitialize();
+	displayClear(1);
+	u8g2.setDrawColor(0);
+	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
 	webProgress = "finished";
+	u8g2.drawStr(42, 37, "FINISHED!");
 
-	u8g2.setFont(u8g2_font_9x15_te);   // 9 pixel height
-	u8g2.drawStr(24, 24, "Finished!"); // write something to the internal memory
-	u8g2.sendBuffer();				   // transfer internal memory to the display
+	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+	u8g2.drawGlyph(27, 37, 0x0073);
+	u8g2.drawGlyph(90, 37, 0x0073);
+
+	u8g2.sendBuffer();
+}
+
+void displayCut()
+{
+	displayClear(0);
+	u8g2.setDrawColor(1);
+	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
+	u8g2.drawStr(44, 37, "CUTTING");
+
+	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+	u8g2.drawGlyph(26, 37, 0x00f2);
+	u8g2.drawGlyph(90, 37, 0x00f2);
+
+	u8g2.sendBuffer();
+}
+
+void displayFeed()
+{
+	displayClear(0);
+	u8g2.setDrawColor(1);
+	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
+	u8g2.drawStr(44, 37, "FEEDING");
+
+	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+	u8g2.drawGlyph(26, 37, 0x006e);
+	u8g2.drawGlyph(90, 37, 0x006e);
+
+	u8g2.sendBuffer();
+}
+
+void displayReel()
+{
+	displayClear(0);
+	u8g2.setDrawColor(1);
+	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
+	u8g2.drawStr(44, 37, "REELING");
+
+	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+	u8g2.drawGlyph(26, 37, 0x00d5);
+	u8g2.drawGlyph(90, 37, 0x00d5);
+
+	// u8g2.drawHLine(0, 32, 128);
+	// u8g2.drawVLine(64, 0, 64);
+
+	u8g2.sendBuffer();
 }
 
 // HARDWARE ------------------------------------------------------------------------
 
 void setHome()
 {
+	Serial.println("home");
+
 	sensorState = analogRead(sensorPin);
 
 	if (sensorState < threshold)
@@ -328,11 +491,12 @@ void setHome()
 	{
 		sensorState = analogRead(sensorPin);
 		stepperChar.run();
+		delayMicroseconds(100); // TODO less intrusive way to avoid freeze?
 	}
 	stepperChar.setCurrentPosition(0);
 	sensorState = analogRead(sensorPin);
 
-	stepperChar.runToNewPosition(stepsPerChar * 0.75f);
+	stepperChar.runToNewPosition(-stepsPerChar * calibrateChar);
 	stepperChar.run();
 	stepperChar.setCurrentPosition(0);
 	currentCharPosition = charHome;
@@ -342,9 +506,12 @@ void setHome()
 
 void feedLabel()
 {
+
+	Serial.println("feed");
+
 	stepperFeed.enableOutputs();
 	delay(10);
-	stepperFeed.runToNewPosition(stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8);
+	stepperFeed.runToNewPosition((stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8) * 1);
 	delay(10);
 	stepperFeed.disableOutputs();
 
@@ -353,7 +520,9 @@ void feedLabel()
 
 void pressLabel(bool strong = false)
 {
-	int delayFactor;
+	// Serial.println("press");
+
+	int delayFactor = 0;
 
 	if (strong)
 	{
@@ -363,42 +532,31 @@ void pressLabel(bool strong = false)
 	else
 	{
 		peakAngle = lightAngle;
-		delayFactor = 1;
+		delayFactor = 0;
 	}
-
 	lightChar(1.0f);
 
-	for (int pos = restAngle; pos > peakAngle; pos--)
+	for (int pos = restAngle; pos >= peakAngle; pos--)
 	{
 		myServo.write(pos);
 		delay(delayFactor);
 	}
-	myServo.write(peakAngle);
-	delay(50);
-	myServo.write(peakAngle);
-	delay(50);
-	myServo.write(peakAngle);
-	delay(50);
-	myServo.write(peakAngle);
-	delay(50);
-	myServo.write(peakAngle);
-	delay(50);
+	for (int i = 0; i < 5; i++)
+	{
+		myServo.write(peakAngle);
+		delay(50);
+	}
 
-	for (int pos = peakAngle; pos < restAngle; pos++)
+	for (int pos = peakAngle; pos <= restAngle; pos++)
 	{
 		myServo.write(pos);
 		delay(delayFactor);
 	}
-	myServo.write(restAngle);
-	delay(50);
-	myServo.write(restAngle);
-	delay(50);
-	myServo.write(restAngle);
-	delay(50);
-	myServo.write(restAngle);
-	delay(50);
-	myServo.write(restAngle);
-	delay(50);
+	for (int i = 0; i < 5; i++)
+	{
+		myServo.write(restAngle);
+		delay(50);
+	}
 
 	lightChar(0.2f);
 }
@@ -406,6 +564,8 @@ void pressLabel(bool strong = false)
 void goToCharacter(char c)
 {
 	setHome();
+
+	Serial.println("char");
 
 	if (c == '0')
 	{
@@ -430,7 +590,8 @@ void goToCharacter(char c)
 		deltaPosition += 43;
 	}
 
-	stepperChar.runToNewPosition(-stepsPerChar * deltaPosition);
+	stepperChar.runToNewPosition(-stepsPerChar * (deltaPosition)); // TODO FIX ALIGNMENT  + (c == '*' ? 0.25 : 0)
+
 	delay(25);
 }
 
@@ -446,9 +607,12 @@ void cutLabel()
 
 void writeLabel(String label)
 {
-	digitalWrite(enableCharStepper, LOW);
+	stepperChar.enableOutputs();
 	myServo.write(restAngle);
 	delay(500);
+
+	Serial.print("print ");
+	Serial.println(label);
 
 	// all possible characters: $-.23456789*abcdefghijklmnopqrstuvwxyz♡☆♪€@
 
@@ -468,7 +632,10 @@ void writeLabel(String label)
 	displayInitialize();
 	displayProgress(labelLength, 0, label);
 
-	feedLabel();
+	labelMusic(label);
+
+	// feedLabel();
+	delay(500);
 
 	for (int i = 0; i < labelLength; i++)
 	{
@@ -478,14 +645,15 @@ void writeLabel(String label)
 			goToCharacter(label[i]);
 			prevChar = label[i];
 		}
-		// delay(100);
 
 		if (label[i] != ' ' && label[i] != '_')
 		{
-			pressLabel();
+			// pressLabel();
+			delay(500);
 		}
 
-		feedLabel();
+		// feedLabel();
+		delay(500);
 
 		displayProgress(labelLength, i + 1, label);
 	}
@@ -495,19 +663,20 @@ void writeLabel(String label)
 		int spaceDelta = 6 - labelLength;
 		for (int i = 0; i < spaceDelta; i++)
 		{
-			feedLabel();
+			// feedLabel();
+			delay(500);
 		}
 	}
-	cutLabel();
+	// cutLabel();
 
 	lightChar(0.0f);
 
 	// reset server parameters
 	parameter = "";
 	value = "";
-	digitalWrite(enableCharStepper, HIGH);
-
 	myServo.write(restAngle);
+
+	stepperChar.disableOutputs();
 
 	displayFinished();
 	lightFinished();
@@ -533,81 +702,96 @@ void readSerial()
 
 void processor(void *parameters)
 {
-	String label = value;
-	label.toUpperCase();
-
-	if (parameter == "feed" && label == "")
+	for (;;)
 	{
-		busy = true;
-		analogWrite(ledFinish, 32);
-		digitalWrite(enableCharStepper, LOW);
-		myServo.write(restAngle);
-		delay(500);
+		String label = value;
+		label.toUpperCase();
 
-		feedLabel();
-
-		parameter = "";
-		value = "";
-		digitalWrite(enableCharStepper, HIGH);
-		myServo.write(restAngle);
-
-		busy = false;
-		webProgress = "finished";
-		delay(500);
-		webProgress = " 0";
-		analogWrite(ledFinish, 0);
-		lightChar(0.0f);
-		vTaskDelete(processorTaskHandle);
-	}
-	else if (parameter == "reel" && label == "")
-	{
-		busy = true;
-		analogWrite(ledFinish, 32);
-		digitalWrite(enableCharStepper, LOW);
-		myServo.write(restAngle);
-		delay(500);
-
-		for (int i = 0; i < 16; i++)
+		if (parameter == "feed" && label == "")
 		{
+			busy = true;
+
+			displayInitialize();
+			displayFeed();
+
+			analogWrite(ledFinish, 32);
+			myServo.write(restAngle);
+			delay(500);
+
 			feedLabel();
+
+			parameter = "";
+			value = "";
+			stepperChar.disableOutputs();
+			myServo.write(restAngle);
+
+			busy = false;
+			webProgress = "finished";
+			delay(500);
+			webProgress = " 0";
+			analogWrite(ledFinish, 0);
+			lightChar(0.0f);
+			displayQRCode();
+			vTaskDelete(processorTaskHandle);
 		}
+		else if (parameter == "reel" && label == "")
+		{
+			busy = true;
 
-		parameter = "";
-		value = "";
-		digitalWrite(enableCharStepper, HIGH);
-		busy = false;
-		webProgress = "finished";
-		delay(500);
-		webProgress = " 0";
-		analogWrite(ledFinish, 0);
-		lightChar(0.0f);
-		vTaskDelete(processorTaskHandle);
-	}
-	else if (parameter == "cut" && label == "")
-	{
-		busy = true;
-		lightChar(0.2f);
-		digitalWrite(enableCharStepper, LOW);
-		myServo.write(restAngle);
-		delay(500);
+			displayInitialize();
+			displayReel();
+			analogWrite(ledFinish, 32);
+			myServo.write(restAngle);
+			delay(500);
 
-		cutLabel();
+			for (int i = 0; i < 16; i++)
+			{
+				feedLabel();
+			}
 
-		parameter = "";
-		value = "";
-		digitalWrite(enableCharStepper, HIGH);
-		busy = false;
-		webProgress = "finished";
-		delay(500);
-		webProgress = " 0";
-		lightChar(0.0f);
-		vTaskDelete(processorTaskHandle);
-	}
-	else if (parameter == "tag" && label != "")
-	{
-		busy = true;
-		writeLabel(label);
-		busy = false;
+			parameter = "";
+			value = "";
+			stepperChar.enableOutputs();
+			busy = false;
+			webProgress = "finished";
+			delay(500);
+			webProgress = " 0";
+			analogWrite(ledFinish, 0);
+			lightChar(0.0f);
+			displayQRCode();
+			vTaskDelete(processorTaskHandle);
+		}
+		else if (parameter == "cut" && label == "")
+		{
+			busy = true;	
+
+			displayInitialize();		
+			displayCut();
+
+			lightChar(0.2f);
+			stepperChar.enableOutputs();
+			myServo.write(restAngle);
+			delay(500);
+
+			cutLabel();
+
+			parameter = "";
+			value = "";
+			stepperChar.disableOutputs();
+			busy = false;
+			webProgress = "finished";
+			delay(500);
+			webProgress = " 0";
+			lightChar(0.0f);
+			displayQRCode();
+			vTaskDelete(processorTaskHandle);
+		}
+		else if (parameter == "tag" && label != "")
+		{
+			busy = true;
+			writeLabel(label);
+			busy = false;
+		}
 	}
 }
 
@@ -732,8 +916,7 @@ void wifiManager()
 	AsyncWiFiManager wifiManager(&server, &dns);
 
 	bool wifiReset = digitalRead(wifiResetPin);
-
-	if (wifiReset)
+	if (!wifiReset)
 	{
 		clearWifiCredentials();
 	}
@@ -776,10 +959,11 @@ void wifiManager()
 // CORE
 void setup()
 {
-	// Serial.begin(9600);
+	Serial.begin(115200);
+	Serial.println("setup");
 
 	pinMode(sensorPin, INPUT_PULLUP);
-	pinMode(wifiResetPin, INPUT_PULLDOWN);
+	pinMode(wifiResetPin, INPUT);
 	pinMode(ledChar, OUTPUT);
 	pinMode(ledFinish, OUTPUT);
 	pinMode(enableCharStepper, OUTPUT);
@@ -787,27 +971,68 @@ void setup()
 	analogWrite(ledChar, 0);
 	analogWrite(ledFinish, 0);
 
+	stepperFeed.setMaxSpeed(1000000);
+	stepperFeed.setAcceleration(1000); // 6000
+
 	digitalWrite(enableCharStepper, HIGH);
-
-	stepperFeed.setMaxSpeed(100000);
-	stepperFeed.setAcceleration(3000);
-	stepperChar.setMaxSpeed(300 * MICROSTEP_Char);
-	stepperChar.setAcceleration(10000 * MICROSTEP_Char);
-
+	stepperChar.setMaxSpeed(20000 * MICROSTEP_Char);
+	stepperChar.setAcceleration(1000 * MICROSTEP_Char);
 	stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
+	stepperChar.setPinsInverted(true, false, true);
+	stepperChar.setEnablePin(enableCharStepper);
+	stepperChar.disableOutputs();
+
+	myServo.attach(servoPin);
+	myServo.write(restAngle);
+	delay(100);
 
 	displayInitialize();
 	displayClear();
 	displaySplash();
 
 	wifiManager();
-	delay(500); // time for the task to start
-
-	myServo.attach(servoPin);
-	myServo.write(restAngle);
-	delay(500);
+	delay(2000); // time for the task to start
 }
 
 void loop()
 {
+	// feedLabel();
+
+	// digitalWrite(enableCharStepper, LOW);
+
+	// stepperChar.setCurrentPosition(0);
+	// stepperChar.runToNewPosition(2000);
+	// stepperChar.run();
+	// delay(200);
+
+	// digitalWrite(enableCharStepper, HIGH);
+
+	// pressLabel();
+
+	// delay(500);
+
+	// displaySplash();
+	// delay(2000);
+	// displayReset();
+	// delay(2000);
+	// displayConfig();
+	// delay(2000);
+	// displayIP = "192.168.255.255";
+	// displaySSID = "Wifi Network";
+	// displayQRCode();
+	// delay(2000);
+	// displayProgress(7, 5, " TESTE ");
+	// delay(5000);
+	// displayFinished();
+	// delay(2000);
+
+
+
+	// displayCut();
+	// delay(2000);
+	// displayFeed();
+	// delay(2000);
+	// displayReel();
+	// delay(2000);
+
 }
