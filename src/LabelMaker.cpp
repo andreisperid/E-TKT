@@ -88,6 +88,13 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 // buzzer
 #define buzzerPin 27
 
+// DEBUG ----------------------------------------------------------------------------
+#define do_cut true
+#define do_press true
+#define do_char true
+#define do_feed true
+#define do_sound true
+
 // DATA ----------------------------------------------------------------------------
 
 // char
@@ -251,7 +258,11 @@ void displaySplash()
 		}
 		if (charNoteSet[etktNotes[n]] != 44)
 		{
+#ifdef do_sound
 			sound(charNoteSet[etktNotes[n]], 200);
+#else
+			delay(200);
+#endif
 		}
 		n++;
 	}
@@ -259,7 +270,12 @@ void displaySplash()
 	u8g2.setDrawColor(2);
 	u8g2.drawBox(0, 0, 128, 64);
 	u8g2.sendBuffer();
+
+#ifdef do_sound
 	sound(3000, 150);
+#else
+	delay(150);
+#endif
 }
 
 void displayConfig()
@@ -329,7 +345,6 @@ void displayQRCode()
 
 		u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
 		u8g2.drawGlyph(3, 47, 0x00f8); // connected
-
 
 		String ipFull = "http://" + displayIP;
 		const char *c = ipFull.c_str();
@@ -632,27 +647,46 @@ void writeLabel(String label)
 	displayInitialize();
 	displayProgress(labelLength, 0, label);
 
+#ifdef do_sound
 	labelMusic(label);
+#else
+	delay(200);
+#endif
 
-	// feedLabel();
+#ifdef do_feed
+	feedLabel();
+#else
 	delay(500);
+#endif
 
 	for (int i = 0; i < labelLength; i++)
 	{
 
 		if (label[i] != ' ' && label[i] != '_' && label[i] != prevChar)
 		{
+#ifdef do_char
 			goToCharacter(label[i]);
+#else
+			delay(500);
+#endif
 			prevChar = label[i];
 		}
 
 		if (label[i] != ' ' && label[i] != '_')
 		{
-			// pressLabel();
+
+#ifdef do_press
+			pressLabel();
+#else
 			delay(500);
+#endif
 		}
 
-		// feedLabel();
+#ifdef do_feed
+		feedLabel();
+#else
+		delay(500);
+#endif
 		delay(500);
 
 		displayProgress(labelLength, i + 1, label);
@@ -663,11 +697,19 @@ void writeLabel(String label)
 		int spaceDelta = 6 - labelLength;
 		for (int i = 0; i < spaceDelta; i++)
 		{
-			// feedLabel();
+#ifdef do_feed
+			feedLabel();
+#else
 			delay(500);
+#endif
 		}
 	}
-	// cutLabel();
+
+#ifdef do_cut
+	cutLabel();
+#else
+	delay(500);
+#endif
 
 	lightChar(0.0f);
 
@@ -718,7 +760,11 @@ void processor(void *parameters)
 			myServo.write(restAngle);
 			delay(500);
 
+#ifdef do_feed
 			feedLabel();
+#else
+			delay(500);
+#endif
 
 			parameter = "";
 			value = "";
@@ -746,7 +792,11 @@ void processor(void *parameters)
 
 			for (int i = 0; i < 16; i++)
 			{
+#ifdef do_feed
 				feedLabel();
+#else
+				delay(500);
+#endif
 			}
 
 			parameter = "";
@@ -763,9 +813,9 @@ void processor(void *parameters)
 		}
 		else if (parameter == "cut" && label == "")
 		{
-			busy = true;	
+			busy = true;
 
-			displayInitialize();		
+			displayInitialize();
 			displayCut();
 
 			lightChar(0.2f);
@@ -773,7 +823,11 @@ void processor(void *parameters)
 			myServo.write(restAngle);
 			delay(500);
 
+#ifdef do_cut
 			cutLabel();
+#else
+			delay(500);
+#endif
 
 			parameter = "";
 			value = "";
@@ -1023,16 +1077,13 @@ void loop()
 	// delay(2000);
 	// displayProgress(7, 5, " TESTE ");
 	// delay(5000);
+
 	// displayFinished();
 	// delay(2000);
-
-
-
 	// displayCut();
 	// delay(2000);
 	// displayFeed();
 	// delay(2000);
 	// displayReel();
 	// delay(2000);
-
 }
