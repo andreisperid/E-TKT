@@ -22,6 +22,9 @@
 
 // ~~~~~~ IMPORTANT: do not forget to upload the files in "data" folder via SPIFFS ~~~~~~
 
+// libraries
+
+// TODO REVIEW/CLEANUP LIBRARIES
 #include <Arduino.h>
 #include <AccelStepper.h>
 #include <ESP32Servo.h>
@@ -30,15 +33,18 @@
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include <ESPAsyncWiFiManager.h>
-#include <DNSServer.h>
-#include <ESPmDNS.h>
+// #include <DNSServer.h> // remove?
+// #include <ESPmDNS.h> // remove?
 #include "SPIFFS.h"
 #include <qrcode.h>
 #include <U8g2lib.h>
 #include <ESP32Tone.h>
+#include <Preferences.h>
 
-#include "etktLogo.cpp"
-#include "pitches.cpp"
+// extension files
+
+#include "etktLogo.cpp" // etkt logo
+#include "pitches.cpp"	// list of notes
 
 // HARDWARE ------------------------------------------------------------------------
 
@@ -63,7 +69,7 @@ AccelStepper stepperFeed(MICROSTEP_Feed, 15, 2, 16, 4);
 AccelStepper stepperChar(1, 32, 33);
 #define enableCharStepper 25
 float stepsPerChar;
-#define calibrateChar 0.8f
+// #define calibrateChar 0.8f
 
 // servo
 Servo myServo;
@@ -94,6 +100,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 #define do_char true
 #define do_feed true
 #define do_sound true
+#define do_serial true
 
 // DATA ----------------------------------------------------------------------------
 
@@ -133,6 +140,14 @@ volatile bool busy = false;
 String parameter = "";
 String value = "";
 TaskHandle_t processorTaskHandle = NULL;
+
+Preferences preferences;
+#define defaultAlign 5 // 1 to 9, 5 is the middle
+#define defaultForce 1 // 1 to 9
+int alignFactor = defaultAlign;
+int forceFactor = defaultForce;
+int newAlign = defaultAlign;
+int newForce = defaultForce;
 
 // COMMUNICATION -------------------------------------------------------------------
 
@@ -194,7 +209,9 @@ void labelMusic(String label)
 		{
 			if (label[i] == charSet[j])
 			{
+#ifdef do_serial
 				Serial.println(charNoteSet[j]);
+#endif
 				tone(buzzerPin, charNoteSet[j], 50);
 			}
 		}
@@ -253,8 +270,6 @@ void displaySplash()
 		{
 			u8g2.drawXBM(i - j - 11, 8, 128, 32, etktLogo);
 			u8g2.sendBuffer();
-
-			// Serial.println(i-j);
 		}
 		if (charNoteSet[etktNotes[n]] != 44)
 		{
@@ -321,12 +336,12 @@ void displayQRCode()
 
 		//--------------------------------------------
 
-		u8g2.drawStr(6, 15, "E-TKT v1.0");
+		u8g2.drawStr(14, 15, "E-TKT");
 		u8g2.setDrawColor(2);
-		u8g2.drawBox(3, 3, 55, 15);
+		u8g2.drawFrame(3, 3, 50, 15);
 		u8g2.setDrawColor(1);
 
-		u8g2.drawStr(3, 33, "ready @");
+		u8g2.drawStr(14, 31, "ready");
 
 		String resizeSSID;
 		if (displaySSID.length() > 8)
@@ -338,13 +353,14 @@ void displayQRCode()
 			resizeSSID = displaySSID;
 		}
 		const char *d = resizeSSID.c_str();
-		u8g2.drawStr(14, 47, d); // connected
+		u8g2.drawStr(14, 46, d); // connected
 
 		const char *b = displayIP.c_str();
 		u8g2.drawStr(3, 61, b);
 
 		u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
-		u8g2.drawGlyph(3, 47, 0x00f8); // connected
+		u8g2.drawGlyph(3, 46, 0x00f8); // connected
+		u8g2.drawGlyph(3, 31, 0x0073);
 
 		String ipFull = "http://" + displayIP;
 		const char *c = ipFull.c_str();
@@ -486,12 +502,72 @@ void displayReel()
 	u8g2.sendBuffer();
 }
 
+void displayTest(int a, int f)
+{
+	displayClear(0);
+	u8g2.setDrawColor(1);
+	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
+	u8g2.drawStr(44, 37, "TESTING");
+	// u8g2.drawStr(44, 37, "ALIGN " + (char)a + " FORCE " + (char)f);
+
+	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+	u8g2.drawGlyph(26, 37, 0x00d5); // SETTINGS LOGO ??
+	u8g2.drawGlyph(90, 37, 0x00d5); // SETTINGS LOGO ??
+
+	// u8g2.drawHLine(0, 32, 128);
+	// u8g2.drawVLine(64, 0, 64);
+
+	u8g2.sendBuffer();
+}
+
+void displaySettings(int a, int f)
+{
+	displayClear(0);
+	u8g2.setDrawColor(1);
+	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
+	u8g2.drawStr(47, 17, "SAVED!");
+
+	String alignString = "ALIGN: ";
+	alignString.concat(a);
+	const char *alignChar = alignString.c_str();
+	u8g2.drawStr(44, 37, alignChar);
+
+	String forceString = "FORCE: ";
+	forceString.concat(f);
+	const char *forceChar = forceString.c_str();
+	u8g2.drawStr(42, 57, forceChar);
+
+	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
+	u8g2.drawGlyph(33, 16, 0x0073);
+	u8g2.drawGlyph(83, 16, 0x0073);
+
+	// u8g2.drawHLine(0, 32, 128);
+	// u8g2.drawVLine(64, 0, 64);
+
+	u8g2.sendBuffer();
+	delay(3000);
+}
+
+void displayReboot(){
+	displayClear(0);
+
+	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
+	u8g2.drawStr(38, 37, "REBOOTING...");
+
+	// u8g2.drawHLine(0, 32, 128);
+	// u8g2.drawVLine(64, 0, 64);
+
+	u8g2.sendBuffer();
+	delay(2000);
+}
+
 // HARDWARE ------------------------------------------------------------------------
 
-void setHome()
+void setHome(int align = alignFactor)
 {
+#ifdef do_serial
 	Serial.println("home");
-
+#endif
 	sensorState = analogRead(sensorPin);
 
 	if (sensorState < threshold)
@@ -511,7 +587,8 @@ void setHome()
 	stepperChar.setCurrentPosition(0);
 	sensorState = analogRead(sensorPin);
 
-	stepperChar.runToNewPosition(-stepsPerChar * calibrateChar);
+	// stepperChar.runToNewPosition(-stepsPerChar * calibrateChar);
+	stepperChar.runToNewPosition(-stepsPerChar * align);
 	stepperChar.run();
 	stepperChar.setCurrentPosition(0);
 	currentCharPosition = charHome;
@@ -519,24 +596,33 @@ void setHome()
 	delay(100);
 }
 
-void feedLabel()
+void feedLabel(int repeat = 1)
 {
-
-	Serial.println("feed");
+#ifdef do_serial
+	Serial.print("feed ");
+	Serial.print(repeat);
+	Serial.println("x");
+#endif
 
 	stepperFeed.enableOutputs();
 	delay(10);
-	stepperFeed.runToNewPosition((stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8) * 1);
-	delay(10);
+
+	for (int i = 0; i < repeat; i++)
+	{
+		stepperFeed.runToNewPosition((stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8) * 1);
+		delay(10);
+	}
+
 	stepperFeed.disableOutputs();
 
 	delay(20);
 }
 
-void pressLabel(bool strong = false)
+void pressLabel(bool strong = false, int force = forceFactor)
 {
-	// Serial.println("press");
-
+#ifdef do_serial
+	Serial.println("press");
+#endif
 	int delayFactor = 0;
 
 	if (strong)
@@ -578,9 +664,12 @@ void pressLabel(bool strong = false)
 
 void goToCharacter(char c)
 {
-	setHome();
 
+#ifdef do_serial
 	Serial.println("char");
+#endif
+
+	setHome();
 
 	if (c == '0')
 	{
@@ -605,7 +694,7 @@ void goToCharacter(char c)
 		deltaPosition += 43;
 	}
 
-	stepperChar.runToNewPosition(-stepsPerChar * (deltaPosition)); // TODO FIX ALIGNMENT  + (c == '*' ? 0.25 : 0)
+	stepperChar.runToNewPosition(-stepsPerChar * deltaPosition); // TODO FIX ALIGNMENT  + (c == '*' ? 0.25 : 0)
 
 	delay(25);
 }
@@ -626,8 +715,10 @@ void writeLabel(String label)
 	myServo.write(restAngle);
 	delay(500);
 
+#ifdef do_serial
 	Serial.print("print ");
 	Serial.println(label);
+#endif
 
 	// all possible characters: $-.23456789*abcdefghijklmnopqrstuvwxyz♡☆♪€@
 
@@ -741,15 +832,92 @@ void readSerial()
 }
 
 // DATA ----------------------------------------------------------------------------
+void loadSettings()
+{
+	preferences.begin("calibration", false);
+
+	// check if align and force values are stored
+	int a = preferences.getUInt("align", 0);
+	if (a == 0)
+	{
+		preferences.putUInt("align", defaultAlign);
+	}
+	int f = preferences.getUInt("force", 0);
+	if (f == 0)
+	{
+		preferences.putUInt("force", defaultForce);
+	}
+
+	alignFactor = preferences.getUInt("align", 0);
+	forceFactor = preferences.getUInt("force", 0);
+
+#ifdef do_serial
+	Serial.print("loaded align ");
+	Serial.print(alignFactor);
+	Serial.print(" and force ");
+	Serial.println(forceFactor);
+#endif
+
+	preferences.end();
+}
+
+void testSettings(int tempAlign, int tempForce)
+{
+#ifdef do_serial
+	Serial.print("testing align ");
+	Serial.print(tempAlign);
+	Serial.print(" and force ");
+	Serial.println(tempForce);
+#endif
+
+	feedLabel(4);
+	setHome(tempAlign);
+	goToCharacter('M');
+	pressLabel(tempForce);
+	feedLabel(3);
+}
+
+void saveSettings(int tempAlign, int tempForce)
+{
+	preferences.begin("calibration", false);
+
+	preferences.putUInt("align", tempAlign);
+	preferences.putUInt("force", tempForce);
+
+	alignFactor = tempAlign;
+	forceFactor = tempForce;
+
+#ifdef do_serial
+	Serial.print("saved align ");
+	Serial.print(alignFactor);
+	Serial.print(" and force ");
+	Serial.println(forceFactor);
+#endif
+
+	preferences.end();
+}
+
+void interpretSettings()
+{
+	// interpret parameters
+	String a = value.substring(0, 1);
+	String f = value.substring(2, 3);
+	newAlign = (int)a.toInt();
+	newForce = (int)f.toInt();
+
+#ifdef do_serial
+	Serial.print("align: ");
+	Serial.print(newAlign);
+	Serial.print(", force: ");
+	Serial.println(newForce);
+#endif
+}
 
 void processor(void *parameters)
 {
 	for (;;)
 	{
-		String label = value;
-		label.toUpperCase();
-
-		if (parameter == "feed" && label == "")
+		if (parameter == "feed")
 		{
 			busy = true;
 
@@ -780,7 +948,7 @@ void processor(void *parameters)
 			displayQRCode();
 			vTaskDelete(processorTaskHandle);
 		}
-		else if (parameter == "reel" && label == "")
+		else if (parameter == "reel")
 		{
 			busy = true;
 
@@ -811,7 +979,7 @@ void processor(void *parameters)
 			displayQRCode();
 			vTaskDelete(processorTaskHandle);
 		}
-		else if (parameter == "cut" && label == "")
+		else if (parameter == "cut")
 		{
 			busy = true;
 
@@ -840,11 +1008,73 @@ void processor(void *parameters)
 			displayQRCode();
 			vTaskDelete(processorTaskHandle);
 		}
-		else if (parameter == "tag" && label != "")
+		else if (parameter == "tag" && value != "")
 		{
 			busy = true;
+			String label = value;
+			label.toUpperCase();
 			writeLabel(label);
 			busy = false;
+		}
+		else if (parameter == "test" && value != "")
+		{
+			busy = true;
+			interpretSettings();
+
+#ifdef do_serial
+			Serial.println("testing temporary settings");
+#endif
+
+			displayInitialize();
+			displayTest(newAlign, newForce);
+			analogWrite(ledFinish, 32);
+
+			testSettings(newAlign, newForce);
+
+			newAlign = 0;
+			newForce = 0;
+			value = "";
+
+			webProgress = "finished";
+			delay(500);
+			webProgress = " 0";
+			analogWrite(ledFinish, 0);
+			lightChar(0.0f);
+			displayQRCode();
+
+			busy = false;
+			vTaskDelete(processorTaskHandle);
+		}
+		else if (parameter == "save" && value != "")
+		{
+			busy = true;
+			interpretSettings();
+
+#ifdef do_serial
+			Serial.println("saving settings");
+#endif
+
+			displayInitialize();
+			displaySettings(newAlign, newForce);
+			analogWrite(ledFinish, 32);
+
+			saveSettings(newAlign, newForce);
+
+			newAlign = 0;
+			newForce = 0;
+			value = "";
+
+			displayReboot();
+
+			webProgress = "finished";
+			delay(500);
+			webProgress = " 0";
+			analogWrite(ledFinish, 0);
+			lightChar(0.0f);
+			busy = false;
+			// vTaskDelete(processorTaskHandle);
+			delay(500);
+			ESP.restart();
 		}
 	}
 }
@@ -891,7 +1121,9 @@ void initialize()
 					  }
 					  else
 					  {
-						  //   Serial.println("<< DENYING, BUSY >>");
+#ifdef do_serial
+						Serial.println("<< DENYING, BUSY >>");
+#endif
 					  }
 				  }
 				  request->send(SPIFFS, "/index.html", String(), false); });
@@ -907,9 +1139,6 @@ void initialize()
 	// route to load fonts
 	server.on("/fontwhite.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/fontwhite.ttf", "font"); });
-	// route to load fonts
-	server.on("/fontblack.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/fontblack.ttf", "font"); });
 
 	// route to favicon
 	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -923,13 +1152,9 @@ void initialize()
 	server.on("/manifest.json", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/manifest.json", "image"); });
 
-	// route to webapp icon
-	server.on("/icon192.png", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/icon192.png", "image"); });
-
-	// route to webapp icon
-	server.on("/icon512.png", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/icon512.png", "image"); });
+	// route to isometric image
+	server.on("/iso.png", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/iso.png", "image"); });
 
 	// check printing status
 	server.on("/status", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -942,7 +1167,10 @@ void initialize()
 void configModeCallback(AsyncWiFiManager *myWiFiManager)
 {
 	displayConfig();
+
+#ifdef do_serial
 	Serial.println(myWiFiManager->getConfigPortalSSID());
+#endif
 }
 
 void clearWifiCredentials()
@@ -953,11 +1181,15 @@ void clearWifiCredentials()
 	delay(2000);		 // wait a bit
 	if (esp_wifi_restore() != ESP_OK)
 	{
-		// Serial.println("WiFi is not initialized by esp_wifi_init ");
+#ifdef do_serial
+		Serial.println("WiFi is not initialized by esp_wifi_init ");
+#endif
 	}
 	else
 	{
-		// Serial.println("WiFi Configurations Cleared!");
+#ifdef do_serial
+		Serial.println("WiFi Configurations Cleared!");
+#endif
 	}
 	displayReset();
 	delay(1500);
@@ -992,11 +1224,11 @@ void wifiManager()
 		delay(1000);
 	}
 
-	if (!MDNS.begin("e-tkt"))
-	{
-		// Serial.println("Error starting mDNS");
-		return;
-	}
+	// if (!MDNS.begin("e-tkt"))
+	// {
+	// 	// Serial.println("Error starting mDNS");
+	// 	return;
+	// }
 
 	// if you get here you have connected to the WiFi
 	// Serial.println("connected!");
@@ -1013,8 +1245,12 @@ void wifiManager()
 // CORE
 void setup()
 {
+#ifdef do_serial
 	Serial.begin(115200);
 	Serial.println("setup");
+#endif
+
+	loadSettings();
 
 	pinMode(sensorPin, INPUT_PULLUP);
 	pinMode(wifiResetPin, INPUT);
@@ -1065,6 +1301,9 @@ void loop()
 
 	// delay(500);
 
+
+	// display tests
+
 	// displaySplash();
 	// delay(2000);
 	// displayReset();
@@ -1085,5 +1324,10 @@ void loop()
 	// displayFeed();
 	// delay(2000);
 	// displayReel();
+	// delay(2000);
+
+	// displaySettings(1, 2);	
+	// delay(2000);
+	// displayReboot();
 	// delay(2000);
 }

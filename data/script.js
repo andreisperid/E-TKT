@@ -5,6 +5,8 @@ let treatedLabel = "";
 let clear = false;
 let minSize = 7;
 let caretPosition = 0;
+let align;
+let force;
 
 function toggleVisibility(x, y, openedLabel, closedLabel) {
   if (x.style.visibility === "hidden") {
@@ -176,6 +178,21 @@ function clearField() {
   textField.focus();
 }
 
+function changeField(action, fieldName) {
+  const field = document.getElementById(fieldName);
+  let currentValue = 0
+  currentValue = field.value;
+
+  
+  if (action == "add" && currentValue + 1 <= field.max) {
+    currentValue++;
+    field.value = currentValue;
+  } else if (action == "remove" && currentValue - 1 >= field.min) {
+    currentValue--;
+    field.value = currentValue;
+  }
+}
+
 function insertIntoField(specialChar) {
   const textarea = document.getElementById("text-input");
   textarea.focus();
@@ -222,13 +239,28 @@ function useRegex(input) {
   return regex.test(input);
 }
 
+function toggleSettings() {
+  let state = document.getElementById("settings-frame").style.visibility;
+  // console.log(state);
+
+  if (state === "hidden") {
+    document.getElementById("settings-frame").style.visibility = "visible";
+    document.getElementById("main-frame").style.visibility = "hidden";
+  } else {
+    document.getElementById("settings-frame").style.visibility = "hidden";
+    document.getElementById("main-frame").style.visibility = "visible";
+  }
+}
+
 function reelCommand() {
   if (
     confirm(
       "Confirm loading a new reel?\n\nPlease make sure the tape is touching the cog."
     )
   ) {
+    toggleSettings();
     document.getElementById("reel-button").disabled = true;
+    document.getElementById("setup-button").disabled = true;
     document.getElementById("feed-button").disabled = true;
     document.getElementById("cut-button").disabled = true;
     document.getElementById("submit-button").disabled = true;
@@ -268,9 +300,61 @@ function cutCommand() {
   busy = true;
 }
 
+function testCommand() {
+  document.getElementById("add-align-button").disabled = true;
+  document.getElementById("remove-align-button").disabled = true;
+  document.getElementById("add-force-button").disabled = true;
+  document.getElementById("remove-force-button").disabled = true;
+  
+  document.getElementById("reel-button").disabled = true;
+  document.getElementById("align-field").disabled = true;
+  document.getElementById("force-field").disabled = true;
+  document.getElementById("test-button").disabled = true;
+  document.getElementById("cancel-button").disabled = true;
+  document.getElementById("save-button").disabled = true;
+  align = document.getElementById("align-field").value;
+  force = document.getElementById("force-field").value;
+
+  console.log("test / align: " + align + ", force: " + force);
+
+  var xhr = new XMLHttpRequest();
+  // xhr.open("GET", "/&?" + "test", true);
+
+  xhr.open("GET", "/&?" + "test=" + align + "," + force, true);
+
+  xhr.send();
+  command = "test";
+  busy = true;
+}
+
+function settingsCommand() {
+  align = document.getElementById("align-field").value;
+  force = document.getElementById("force-field").value;
+
+  console.log("settings / align (" + align + ") force (" + force + ")");
+
+  if (
+    confirm(
+      "Confirm saving align [" + align + "] and force [" + force + "] settings?"
+    )
+  ) {
+    console.log("settings sent");
+    var xhr = new XMLHttpRequest();
+    // xhr.open("GET", "/&?" + "settings", true);
+    xhr.open("GET", "/&?" + "save=" + align + "," + force, true);
+    xhr.send();
+    command = "test";
+    busy = true;
+
+    // confirm saving?
+
+    toggleSettings();
+  }
+}
+
 setInterval(function () {
   getData();
-}, 100);
+}, 100); // lower rate?
 
 function getData() {
   const textField = document.getElementById("text-input");
@@ -305,6 +389,7 @@ function getData() {
           (this.responseText === "" ? " 0" : this.responseText) + "%";
 
         if (this.responseText === "finished") {
+          // main
           document.getElementById("progress-bar").style.width = 0;
           document.getElementById("submit-button").value = " Print label! ";
           document.getElementById("text-input").disabled = false;
@@ -315,6 +400,14 @@ function getData() {
           document.getElementById("reel-button").disabled = false;
           document.getElementById("feed-button").disabled = false;
           document.getElementById("cut-button").disabled = false;
+
+          // settings
+          document.getElementById("align-field").disabled = false;
+          document.getElementById("force-field").disabled = false;
+          document.getElementById("test-button").disabled = false;
+          document.getElementById("cancel-button").disabled = false;
+          document.getElementById("save-button").disabled = false;
+
           busy = false;
         }
       }

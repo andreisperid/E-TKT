@@ -4,7 +4,7 @@
   color: #000000;
 }
 * {
-  font-family: "Impact Label Reversed";
+  font-family: "Impact Label Reversed", sans-serif;
   font-size: 22px;
   color: white;
   text-decoration: none;
@@ -42,8 +42,8 @@ h3 {
 }
 a {
   font-size: 18px;
-  color: #777777;
-  opacity: 0.5;
+  color: #aaa;
+  opacity: 0.6;
   filter: drop-shadow(0px 0px 20px #FFF);  
 }
 a:hover {
@@ -169,6 +169,36 @@ input[type="button"]:disabled {
 }
 
 
+#setup-button{
+  color: rgb(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+#setup-button:disabled{
+  color: rgb(255, 255, 255);
+  border-color: rgba(128, 128, 128, 0.25);
+}
+
+
+.align{
+  color: rgb(220, 100, 255);
+  border-color: rgba(220, 100, 255, 0.25)
+}
+.align:disabled{
+  color: rgba(220, 100, 255, 0.25);
+  border-color: rgba(220, 100, 255, 0.25);
+}
+
+.force{
+  color: rgb(80, 255, 255);
+  border-color: rgba(80, 255, 255, 0.25)
+}
+.force:disabled{
+  color: rgba(80, 255, 255, 0.25);
+  border-color: rgba(80, 255, 255, 0.25);
+}
+
+
+
 #background {
   position: fixed;
   top: 0px;
@@ -195,6 +225,7 @@ input[type="button"]:disabled {
     rgb(8, 8, 8) 90%
   );
 }
+
 
 #splash {
   width: 100vw;
