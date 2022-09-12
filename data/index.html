@@ -4,36 +4,15 @@
     <meta charset="utf-8" />
     <title>E-TKT</title>
 
-    <link
-      rel="preload"
-      href="./splash.png"
-      as="image"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="preload"
-      href="./fontwhite.ttf"
-      as="font"
-      crossorigin="anonymous"
-    />
-    <link rel="preload" href="./style.css" as="style" crossorigin="anonymous" />
-    <link
-      rel="preload"
-      href="./script.js"
-      as="script"
-      crossorigin="anonymous"
-    />
+    <link rel="preload" href="./splash.png" as="image" crossorigin="anonymous" />
+    <link rel="preload" href="./fontwhite.ttf" as="font" crossorigin="anonymous" />
+    <!-- <link rel="preload" href="./style.css" as="style" crossorigin="anonymous" />
+    <link rel="preload" href="./script.js" as="script" crossorigin="anonymous" /> -->
 
-    <meta
-      name="viewport"
-      content="width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=0"
-    />
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=0" />
     <meta name="theme-color" content="#000000" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="style.css" />
@@ -52,37 +31,20 @@
         margin: 0px;
         padding: 0px;
         display: flex;
-        flex-direction: column;
-        /* justify-content: space-between; */
+        flex-direction: column; /* justify-content: space-between; */
       "
     >
       <div id="background"></div>
 
       <div
-        style="
-          display: box;
-          width: 300px;
-          margin-right: auto;
-          margin-left: auto;
-          margin-top: 50px;
-          padding: 20px;
-        "
+        style="display: box; width: 300px; margin-right: auto; margin-left: auto; margin-top: 50px; padding: 20px"
         id="frame"
       >
-        <form
-          action="none"
-          method="post"
-          autocomplete="off"
-          novalidate
-          onsubmit="return false"
-        >
+        <form action="none" method="post" autocomplete="off" novalidate onsubmit="return false">
           <div id="main-frame">
             <h1 style="text-align: center; transform: rotate(-1deg)">E-TKT</h1>
             <h2 style="text-align: center; margin-top: 5px">label maker</h2>
-            <div
-              id="single-column"
-              style="margin-top: 45px; position: relative"
-            >
+            <div id="single-column" style="margin-top: 45px; position: relative">
               <div style="position: absolute; top: 0; left: 0">
                 <input
                   type="text"
@@ -117,40 +79,19 @@
               </div>
             </div>
 
-            <div
-              id="single-column"
-              style="margin: 5px 0 5px 0; justify-content: center"
-            >
+            <div id="single-column" style="margin: 5px 0 5px 0; justify-content: center">
               <div id="hint">A-Z 0-9 space . -</div>
             </div>
 
             <div id="single-column" style="margin: 5px 0 15px 0; height: 36px">
               <div>
-                <input
-                  type="button"
-                  id="emoji-button"
-                  value="♡"
-                  tabindex="-1"
-                  onclick="insertIntoField('♡')"
-                />
+                <input type="button" id="emoji-button" value="♡" tabindex="-1" onclick="insertIntoField('♡')" />
               </div>
               <div>
-                <input
-                  type="button"
-                  id="emoji-button"
-                  value="☆"
-                  tabindex="-1"
-                  onclick="insertIntoField('☆')"
-                />
+                <input type="button" id="emoji-button" value="☆" tabindex="-1" onclick="insertIntoField('☆')" />
               </div>
               <div>
-                <input
-                  type="button"
-                  id="emoji-button"
-                  value="♪"
-                  tabindex="-1"
-                  onclick="insertIntoField('♪')"
-                />
+                <input type="button" id="emoji-button" value="♪" tabindex="-1" onclick="insertIntoField('♪')" />
               </div>
               <div>
                 <input
@@ -174,27 +115,13 @@
               </div>
             </div>
 
-            <div
-              id="single-column"
-              style="margin-top: 0px; padding-top: 0px; height: 36px"
-            >
+            <div id="single-column" style="margin-top: 0px; padding-top: 0px; height: 36px">
               <div style="width: 55px">
-                <input
-                  type="button"
-                  id="clear-button"
-                  onclick="clearField()"
-                  value=" x "
-                  disabled
-                  tabindex="-1"
-                />
+                <input type="button" id="clear-button" onclick="clearField()" value=" x " disabled tabindex="-1" />
               </div>
 
               <div style="width: 50%">
-                <select
-                  type="range"
-                  id="mode-dropdown"
-                  onchange="return formKeyHandler(event), calculateLength()"
-                >
+                <select type="range" id="mode-dropdown" onchange="return formKeyHandler(event), calculateLength()">
                   <option value="tight">tight</option>
                   <option value="margin" selected>margin</option>
                   <option value="full">full</option>
@@ -218,14 +145,8 @@
               </div>
             </div>
 
-            <div
-              id="single-column"
-              style="margin-top: 15px; padding: 0 3px 0 3px"
-            >
-              <div
-                id="progress-bar"
-                style="background: white; height: 2px; width: 0%"
-              ></div>
+            <div id="single-column" style="margin-top: 15px; padding: 0 3px 0 3px">
+              <div id="progress-bar" style="background: white; height: 2px; width: 0%"></div>
             </div>
             <div id="single-column" style="margin-top: 0px; padding-top: 0">
               <div style="width: 100%; height: 60px">
@@ -243,15 +164,7 @@
 
             <!-- extras section -->
 
-            <div
-              id="single-column"
-              style="
-                margin-top: 0px;
-                padding-bottom: 0px;
-                padding-top: 15px;
-                height: 36px;
-              "
-            >
+            <div id="single-column" style="margin-top: 0px; padding-bottom: 0px; padding-top: 15px; height: 36px">
               <div>
                 <input
                   type="button"
@@ -263,22 +176,10 @@
                 />
               </div>
               <div>
-                <input
-                  type="button"
-                  id="cut-button"
-                  onclick="cutCommand()"
-                  value=" CUT "
-                  tabindex="-1"
-                />
+                <input type="button" id="cut-button" onclick="cutCommand()" value=" CUT " tabindex="-1" />
               </div>
               <div>
-                <input
-                  type="button"
-                  id="feed-button"
-                  onclick="feedCommand()"
-                  value=" FEED "
-                  tabindex="-1"
-                />
+                <input type="button" id="feed-button" onclick="feedCommand()" value=" FEED " tabindex="-1" />
               </div>
             </div>
           </div>
@@ -320,27 +221,13 @@
             </div>
             <div
               id="single-column"
-              style="
-                display: flex;
-                margin: auto;
-                justify-content: space-between;
-                padding: 0px;
-                margin-top: 15px;
-              "
+              style="display: flex; margin: auto; justify-content: space-between; padding: 0px; margin-top: 15px"
             >
               <div>
-                <h1 style="color: white; font-size: 36px; margin: 0px">
-                  SETUP
-                </h1>
+                <h1 style="color: white; font-size: 36px; margin: 0px">SETUP</h1>
               </div>
               <div>
-                <input
-                  type="button"
-                  id="reel-button"
-                  onclick="reelCommand()"
-                  value=" NEW REEL "
-                  tabindex="-1"
-                />
+                <input type="button" id="reel-button" onclick="reelCommand()" value=" NEW REEL " tabindex="-1" />
               </div>
             </div>
             <div
@@ -369,20 +256,10 @@
             >
               <div>
                 <div
-                  style="
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    align-items: center;
-                  "
+                  style="display: flex; flex-direction: row; justify-content: center; align-items: center"
                   id="align-div"
                 >
-                  <div
-                    style="margin-right: 10px; font-size: 18px"
-                    class="align"
-                  >
-                    wheel align
-                  </div>
+                  <div style="margin-right: 10px; font-size: 18px" class="align">wheel align</div>
                   <div>
                     <input
                       type="button"
@@ -401,13 +278,8 @@
                       name="align-field"
                       min="1"
                       max="9"
-                      value="5"
-                      style="
-                        text-align: center;
-                        width: 30px;
-                        border: 0px;
-                        font-size: 30px;
-                      "
+                      value=""
+                      style="text-align: center; width: 30px; border: 0px; font-size: 30px"
                       disabled
                     />
                   </div>
@@ -434,12 +306,7 @@
                   "
                   id="force-div"
                 >
-                  <div
-                    style="margin-right: 10px; font-size: 18px"
-                    class="force"
-                  >
-                    press force
-                  </div>
+                  <div style="margin-right: 10px; font-size: 18px" class="force">press force</div>
                   <div>
                     <input
                       type="button"
@@ -458,13 +325,8 @@
                       name="force-field"
                       min="1"
                       max="9"
-                      value="1"
-                      style="
-                        text-align: center;
-                        width: 30px;
-                        border: 0px;
-                        font-size: 30px;
-                      "
+                      value=""
+                      style="text-align: center; width: 30px; border: 0px; font-size: 30px"
                       disabled
                     />
                   </div>
@@ -482,52 +344,70 @@
                 </div>
               </div>
 
-              <div>
-                <input
+              <div
+                style="
+                  margin-left: 10px;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  position: relative;
+                "
+              >
+                <button
                   type="button"
-                  id="test-button"
-                  onclick="testCommand()"
+                  id="test-full-button"
+                  onclick="testCommand(true)"
                   value="test"
                   tabindex="-1"
-                  style="
-                    width: 75px;
-                    height: 100%;
-                    justify-self: flex-end;
-                    margin-left: 10px;
-                  "
+                  style="width: 75px; height: 100%; position: relative; bottom: 0px"
+                >
+                  <br /><br />test
+                </button>
+                <input
+                  type="button"
+                  id="test-align-button"
+                  onclick="testCommand(false)"
+                  value="test"
+                  tabindex="-1"
+                  style="width: 65px; height: 32px; position: absolute; top: 5px"
                 />
               </div>
             </div>
 
             <div
               id="single-column"
-              style="
-                display: flex;
-                justify-content: space-between;
-                margin: 0px;
-                padding-bottom: 0px;
-                padding-top: 30px;
-              "
+              style="display: flex; justify-content: space-between; margin: 0px; padding-bottom: 0px; padding-top: 30px"
             >
               <div style="width: 45%">
-                <input
-                  type="button"
-                  id="cancel-button"
-                  value="cancel"
-                  onclick="toggleSettings()"
-                  tabindex="-1"
-                />
+                <input type="button" id="cancel-button" value="cancel" onclick="toggleSettings()" tabindex="-1" />
               </div>
               <div style="width: 45%">
-                <input
-                  type="button"
-                  id="save-button"
-                  value="save"
-                  onclick="settingsCommand()"
-                  tabindex="-1"
-                />
+                <input type="button" id="save-button" value="save" onclick="settingsCommand()" tabindex="-1" />
               </div>
             </div>
+          </div>
+
+          <!-- refresh modal -->
+          <div
+            style="
+              visibility: hidden;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              position: absolute;
+              top: 0px;
+              bottom: 0px;
+              left: 0px;
+              right: 0px;
+              margin: auto;
+              padding: 20px;
+              z-index: 999;
+            "
+            id="refresh-frame"
+          >
+            <div style="margin-bottom: 10px">REBOOTING...</div>
+            <div id="countdown">15</div>
           </div>
         </form>
       </div>
