@@ -9,7 +9,12 @@ let force;
 let alignTemp;
 let forceTemp;
 
-window.load = document.getElementById("text-input").focus();
+window.load = startupRoutine();
+
+function startupRoutine() {
+  document.getElementById("text-input").focus();
+  retrieveSettings();
+}
 
 function retrieveSettings() {
   // console.log("trying to retrieve settings...");
@@ -260,7 +265,7 @@ function useRegex(input) {
 
 function toggleSettings(safe = true) {
   let state = document.getElementById("settings-frame").style.visibility;
-  
+
   retrieveSettings();
   console.log(state);
   console.log(align + " / " + alignTemp + " / / " + force + " / " + forceTemp);
@@ -278,12 +283,14 @@ function toggleSettings(safe = true) {
       forceTemp = force;
     }
   }
-
-
 }
 
 function reelCommand() {
-  if (confirm("Confirm loading a new reel?\n\nPlease make sure the tape is touching the cog. \n\n PS: unsaved align and force settings will be lost.")) {
+  if (
+    confirm(
+      "Confirm loading a new reel?\n\nPlease make sure the tape is touching the cog. \n\n PS: unsaved align and force settings will be lost."
+    )
+  ) {
     toggleSettings(false);
     document.getElementById("reel-button").disabled = true;
     document.getElementById("setup-button").disabled = true;
