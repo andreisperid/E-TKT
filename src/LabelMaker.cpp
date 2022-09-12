@@ -21,8 +21,12 @@
 // SOFTWARE.
 
 //
+// for more information, please visit https://github.com/andreisperid/E-TKT
+//
 
-// ~~~~~~ IMPORTANT: do not forget to upload the files in "data" folder via SPIFFS ~~~~~~
+// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+// ~~~~~ IMPORTANT: do not forget to upload the files in "data" folder using SPIFFS ~~~~~
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 // libraries
 #include <Arduino.h>
@@ -40,28 +44,27 @@
 #include <Preferences.h>
 
 // extension files
-#include "etktLogo.cpp" // etkt logo
-#include "pitches.cpp"	// list of notes
+#include "etktLogo.cpp" // etkt logo in binary format
+#include "pitches.cpp"	// list of notes and their frequencies
 
 // HARDWARE -----------------------------------------------------------------------
 
 #define MICROSTEP_Feed 8
-#define MICROSTEP_Char 16
+#define MICROSTEP_Char 16 // for more precision, maximum available microsteps for the character stepper
 
 // home sensor
-#define sensorPin 34
+#define sensorPin 34 // hall sensor
 int sensorState;
-#define threshold 128
+#define threshold 128 // between 0 and 1023
 int currentCharPosition = -1;
 int deltaPosition;
 
 // wifi reset
-#define wifiResetPin 13
+#define wifiResetPin 13 // tact switch
 
 // steppers
 #define stepsPerRevolutionFeed 4076
 const int stepsPerRevolutionChar = 200 * MICROSTEP_Char;
-
 AccelStepper stepperFeed(MICROSTEP_Feed, 15, 2, 16, 4);
 AccelStepper stepperChar(1, 32, 33);
 #define enableCharStepper 25
@@ -70,14 +73,11 @@ float stepsPerChar;
 // servo
 Servo myServo;
 #define servoPin 14
-#define restAngle 50 // prev 55
+#define restAngle 50
+#define targetAngle 22
 int peakAngle;
-// #define strongAngle 16 // 13
-// #define lightAngle 20  // 17
 
-#define targetAngle 22 // 17
-
-// oled
+// oled display
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 #define Lcd_X 128
 #define Lcd_Y 64
@@ -90,24 +90,30 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 #define buzzerPin 27
 
 // DEBUG --------------------------------------------------------------------------
-#define do_cut true
-#define do_press true
-#define do_char true
-#define do_feed true
-#define do_sound true
-#define do_serial true
+// comment lines individually to isolate functions
+
+#define do_cut
+#define do_press
+#define do_char
+#define do_feed
+#define do_sound
+// #define do_wifi_debug
+// #define do_serial
 
 // DATA ---------------------------------------------------------------------------
 
 // char
-#define charQuantity 43
+#define charQuantity 43 // the amount of teeth/characters in the carousel
 
 // conversion table to prevent multichar error
+// complex chars gets transformed into simple ones (not present in the carousel) to ease transmission and parsing
 // ♡ ... <
 // ☆ ... >
 // ♪ ... ~
 // € ... |
 
+// list of characters in the caroulsel
+// important: keep in mind the home is always on 21st character (J)
 char charSet[charQuantity] = {
 	'$', '-', '.', '2', '3', '4', '5', '6', '7', '8',
 	'9', '*', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
@@ -115,27 +121,18 @@ char charSet[charQuantity] = {
 	'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '<', '>',
 	'~', '|', '@'};
 
-int etktNotes[8] = {
-	44, 44, 16, 2, 31, 22, 31, 44};
-
-int charNoteSet[charQuantity + 1] = {
-	NOTE_A4, NOTE_AS4, NOTE_B4, NOTE_C5, NOTE_CS5, NOTE_D5, NOTE_DS5, NOTE_E5, NOTE_F5, NOTE_FS5,
-	NOTE_G5, NOTE_GS5, NOTE_A5, NOTE_AS5, NOTE_B5, NOTE_C6, NOTE_CS6, NOTE_D6, NOTE_DS6, NOTE_E6,
-	NOTE_F6, NOTE_FS6, NOTE_G6, NOTE_GS6, NOTE_A6, NOTE_AS6, NOTE_B6, NOTE_C7, NOTE_CS7, NOTE_D7,
-	NOTE_DS7, NOTE_E7, NOTE_F7, NOTE_FS7, NOTE_G7, NOTE_GS7, NOTE_A7, NOTE_AS7, NOTE_B7, NOTE_C8,
-	NOTE_CS8, NOTE_D8, NOTE_DS8, 0};
-
 String labelString;
 char prevChar = 'J';
-int charHome = 21;
+const int charHome = 21;
 bool waitingLabel = false;
 
-volatile bool busy = false;
+volatile bool busy = false; // volatile as the variable is read by both cores (0 and 1)
 
 String parameter = "";
 String value = "";
-TaskHandle_t processorTaskHandle = NULL;
+TaskHandle_t processorTaskHandle = NULL; // for dual core operation
 
+// memory storage for align and force settings
 Preferences preferences;
 #define defaultAlign 5 // 1 to 9, 5 is the mid value
 #define defaultForce 1 // 1 to 9
@@ -144,6 +141,18 @@ int forceFactor = defaultForce;
 int newAlign = defaultAlign;
 int newForce = defaultForce;
 String combinedSettings = "x";
+
+// E-TKT musical signature
+int etktNotes[8] = {
+	44, 44, 16, 2, 31, 22, 31, 44};
+
+// selected musical scale for playing tunes
+int charNoteSet[charQuantity + 1] = {
+	NOTE_A4, NOTE_AS4, NOTE_B4, NOTE_C5, NOTE_CS5, NOTE_D5, NOTE_DS5, NOTE_E5, NOTE_F5, NOTE_FS5,
+	NOTE_G5, NOTE_GS5, NOTE_A5, NOTE_AS5, NOTE_B5, NOTE_C6, NOTE_CS6, NOTE_D6, NOTE_DS6, NOTE_E6,
+	NOTE_F6, NOTE_FS6, NOTE_G6, NOTE_GS6, NOTE_A6, NOTE_AS6, NOTE_B6, NOTE_C7, NOTE_CS7, NOTE_D7,
+	NOTE_DS7, NOTE_E7, NOTE_F7, NOTE_FS7, NOTE_G7, NOTE_GS7, NOTE_A7, NOTE_AS7, NOTE_B7, NOTE_C8,
+	NOTE_CS8, NOTE_D8, NOTE_DS8, 0};
 
 // --------------------------------------------------------------------------------
 // COMMUNICATION ------------------------------------------------------------------
@@ -154,7 +163,7 @@ DNSServer dns;
 
 String webProgress = " 0";
 
-// qr code
+// qr code for accessing the webapp
 const int QRcode_Version = 3; //  set the version (range 1->40)
 const int QRcode_ECC = 2;	  //  set the Error Correction level (range 0-3) or symbolic (ECC_LOW, ECC_MEDIUM, ECC_QUARTILE and ECC_HIGH)
 QRCode qrcode;				  //  create the QR code
@@ -166,6 +175,8 @@ String displayIP = "";
 
 void lightFinished()
 {
+	// lights up when the label has finished printing
+
 	bool state = true;
 	for (int i = 0; i < 10; i++)
 	{
@@ -185,6 +196,8 @@ void lightFinished()
 
 void lightChar(float state)
 {
+	// lights up when the character is pressed against the tape
+
 	analogWrite(ledChar, state * 128);
 }
 
@@ -198,6 +211,8 @@ void sound(int frequency = 2000, int duration = 1000)
 
 void labelMusic(String label)
 {
+	// plays a music according to the label letters
+
 	int length = label.length();
 
 	for (int i = 0; i < length; i++)
@@ -209,7 +224,7 @@ void labelMusic(String label)
 #ifdef do_serial
 				Serial.println(charNoteSet[j]);
 #endif
-				tone(buzzerPin, charNoteSet[j], 50);
+				tone(buzzerPin, charNoteSet[j], 100);
 			}
 		}
 		delay(50);
@@ -221,16 +236,17 @@ void labelMusic(String label)
 
 void displayClear(int color = 0)
 {
-	// empty pixels
+	// paints all pixels according to the desired target color
+
 	for (uint8_t y = 0; y < 64; y++)
 	{
 		for (uint8_t x = 0; x < 128; x++)
 		{
-			u8g2.setDrawColor(color); // change 0 to make QR code with black background
+			u8g2.setDrawColor(color);
 			u8g2.drawPixel(x, y);
 		}
 	}
-	delay(100); // transfer internal memory to the display
+	delay(100);
 
 	u8g2.setDrawColor(color == 0 ? 1 : 0);
 	u8g2.setFont(u8g2_font_6x13_te);
@@ -238,15 +254,19 @@ void displayClear(int color = 0)
 
 void displayInitialize()
 {
+	// starts and sets up the display
+
 	u8g2.begin();
 	u8g2.clearBuffer();
-	u8g2.setContrast(8); // set OLED brightness(0->255)
+	u8g2.setContrast(8); // 0 > 255
 	displayClear();
 	u8g2.setDrawColor(1);
 }
 
 void displaySplash()
 {
+	// initial start screen
+
 	displayInitialize();
 
 	// invert colors
@@ -280,6 +300,7 @@ void displaySplash()
 		n++;
 	}
 
+	// draw a box with subtractive color
 	u8g2.setDrawColor(2);
 	u8g2.drawBox(0, 0, 128, 64);
 	u8g2.sendBuffer();
@@ -293,6 +314,8 @@ void displaySplash()
 
 void displayConfig()
 {
+	// screen for the wifi configuration mode
+
 	displayClear();
 
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
@@ -301,13 +324,15 @@ void displayConfig()
 	u8g2.drawStr(3, 47, "the \"E-TKT\" network...");
 
 	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
-	u8g2.drawGlyph(3, 12, 0x011a); // connected
+	u8g2.drawGlyph(3, 12, 0x011a);
 
 	u8g2.sendBuffer();
 }
 
 void displayReset()
 {
+	// screen for the wifi configuration reset confirmation
+
 	displayClear();
 
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
@@ -323,6 +348,8 @@ void displayReset()
 
 void displayQRCode()
 {
+	// main screen with qr code, network and attributed ip
+
 	displayClear();
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
 
@@ -331,8 +358,6 @@ void displayQRCode()
 	if (displayIP != "")
 	{
 		u8g2.setDrawColor(1);
-
-		//--------------------------------------------
 
 		u8g2.drawStr(14, 15, "E-TKT");
 		u8g2.setDrawColor(2);
@@ -351,18 +376,18 @@ void displayQRCode()
 			resizeSSID = displaySSID;
 		}
 		const char *d = resizeSSID.c_str();
-		u8g2.drawStr(14, 46, d); // connected
+		u8g2.drawStr(14, 46, d);
 
 		const char *b = displayIP.c_str();
 		u8g2.drawStr(3, 61, b);
 
 		u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
-		u8g2.drawGlyph(3, 46, 0x00f8); // connected
+		u8g2.drawGlyph(3, 46, 0x00f8);
 		u8g2.drawGlyph(3, 31, 0x0073);
 
 		String ipFull = "http://" + displayIP;
 		const char *c = ipFull.c_str();
-		qrcode_initText(&qrcode, qrcodeData, QRcode_Version, QRcode_ECC, c); // ARK address
+		qrcode_initText(&qrcode, qrcodeData, QRcode_Version, QRcode_ECC, c);
 
 		// qr code background
 		for (uint8_t y = 0; y < 64; y++)
@@ -374,12 +399,10 @@ void displayQRCode()
 			}
 		}
 
-		//--------------------------------------------
 		// setup the top right corner of the QRcode
 		uint8_t x0 = 128 - 64 + 6;
-		uint8_t y0 = 3; // 16 is the start of the blue portion OLED in the yellow/blue split 64x128 OLED
+		uint8_t y0 = 3;
 
-		//--------------------------------------------
 		// display QRcode
 		for (uint8_t y = 0; y < qrcode.size; y++)
 		{
@@ -408,6 +431,8 @@ void displayQRCode()
 
 void displayProgress(float total, float actual, String label)
 {
+	// screen with the label being printed and its progress
+
 	displayClear();
 
 	u8g2.setDrawColor(1);
@@ -424,11 +449,6 @@ void displayProgress(float total, float actual, String label)
 	u8g2.setDrawColor(2);
 	u8g2.drawBox(0, 21, (actual)*6, 21);
 
-	// u8g2.drawBox(0, 31, 128, 2);
-
-	// u8g2.setDrawColor(0);
-	// u8g2.drawBox(label.length() * 6, 5, 128, 21);
-
 	float progress = actual / total;
 	String progressString = String(progress * 95, 0);
 	webProgress = progressString;
@@ -442,6 +462,8 @@ void displayProgress(float total, float actual, String label)
 
 void displayFinished()
 {
+	// screen with finish confirmation
+
 	displayClear(1);
 	u8g2.setDrawColor(0);
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
@@ -457,6 +479,8 @@ void displayFinished()
 
 void displayCut()
 {
+	// screen for manual cut mode
+
 	displayClear(0);
 	u8g2.setDrawColor(1);
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
@@ -471,6 +495,8 @@ void displayCut()
 
 void displayFeed()
 {
+	// screen for manual feed mode
+
 	displayClear(0);
 	u8g2.setDrawColor(1);
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
@@ -485,6 +511,8 @@ void displayFeed()
 
 void displayReel()
 {
+	// screen for reeling mode
+
 	displayClear(0);
 	u8g2.setDrawColor(1);
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
@@ -494,32 +522,29 @@ void displayReel()
 	u8g2.drawGlyph(26, 37, 0x00d5);
 	u8g2.drawGlyph(90, 37, 0x00d5);
 
-	// u8g2.drawHLine(0, 32, 128);
-	// u8g2.drawVLine(64, 0, 64);
-
 	u8g2.sendBuffer();
 }
 
 void displayTest(int a, int f)
 {
+	// screen for settings test mode
+
 	displayClear(0);
 	u8g2.setDrawColor(1);
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
 	u8g2.drawStr(44, 37, "TESTING");
-	// u8g2.drawStr(44, 37, "ALIGN " + (char)a + " FORCE " + (char)f);
 
 	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
-	u8g2.drawGlyph(26, 37, 0x00d5); // SETTINGS LOGO ??
-	u8g2.drawGlyph(90, 37, 0x00d5); // SETTINGS LOGO ??
-
-	// u8g2.drawHLine(0, 32, 128);
-	// u8g2.drawVLine(64, 0, 64);
+	u8g2.drawGlyph(26, 37, 0x0073);
+	u8g2.drawGlyph(90, 37, 0x0073);
 
 	u8g2.sendBuffer();
 }
 
 void displaySettings(int a, int f)
 {
+	// screen for settings save mode
+
 	displayClear(0);
 	u8g2.setDrawColor(1);
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
@@ -539,22 +564,18 @@ void displaySettings(int a, int f)
 	u8g2.drawGlyph(33, 16, 0x0073);
 	u8g2.drawGlyph(83, 16, 0x0073);
 
-	// u8g2.drawHLine(0, 32, 128);
-	// u8g2.drawVLine(64, 0, 64);
-
 	u8g2.sendBuffer();
 	delay(3000);
 }
 
 void displayReboot()
 {
+	// screen for imminent reboot
+
 	displayClear(0);
 
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
 	u8g2.drawStr(38, 37, "REBOOTING...");
-
-	// u8g2.drawHLine(0, 32, 128);
-	// u8g2.drawVLine(64, 0, 64);
 
 	u8g2.sendBuffer();
 	delay(2000);
@@ -565,10 +586,11 @@ void displayReboot()
 
 void setHome(int align = alignFactor)
 {
+	// runs the char stepper clockwise until triggering the hall sensor, then call it home at char 21
+
 	float a = (align - 5.0f) / 10.0f;
 
 #ifdef do_serial
-
 	Serial.print("align: ");
 	Serial.println(align);
 
@@ -590,12 +612,11 @@ void setHome(int align = alignFactor)
 	{
 		sensorState = analogRead(sensorPin);
 		stepperChar.run();
-		delayMicroseconds(100); // TODO less intrusive way to avoid freeze?
+		delayMicroseconds(100); // TODO: less intrusive way to avoid triggering watchdog?
 	}
 	stepperChar.setCurrentPosition(0);
 	sensorState = analogRead(sensorPin);
 
-	// stepperChar.runToNewPosition(-stepsPerChar * calibrateChar);
 	stepperChar.runToNewPosition(-stepsPerChar + (stepsPerChar * a));
 	stepperChar.run();
 	stepperChar.setCurrentPosition(0);
@@ -606,6 +627,8 @@ void setHome(int align = alignFactor)
 
 void feedLabel(int repeat = 1)
 {
+	// runs the feed stepper by a specific amount to push the tape forward
+
 #ifdef do_serial
 	Serial.print("feed ");
 	Serial.print(repeat);
@@ -628,9 +651,12 @@ void feedLabel(int repeat = 1)
 
 void pressLabel(bool strong = false, int force = forceFactor, bool slow = false)
 {
+	// press the label
+
 #ifdef do_serial
 	Serial.println("press");
 #endif
+
 	int delayFactor = 0;
 
 	if (strong)
@@ -643,14 +669,14 @@ void pressLabel(bool strong = false, int force = forceFactor, bool slow = false)
 		peakAngle = targetAngle + 9 - force;
 		delayFactor = slow ? 100 : 0;
 	}
-	lightChar(1.0f);
+	lightChar(1.0f); // lights up the char led
 
 	for (int pos = restAngle; pos >= peakAngle; pos--)
 	{
 		myServo.write(pos);
 		delay(delayFactor);
 	}
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++) // to make sure the servo has reached the peak position
 	{
 		myServo.write(peakAngle);
 		delay(50);
@@ -661,24 +687,27 @@ void pressLabel(bool strong = false, int force = forceFactor, bool slow = false)
 		myServo.write(pos);
 		delay(delayFactor);
 	}
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++) // to make sure the servo has reached the rest position
 	{
 		myServo.write(restAngle);
 		delay(50);
 	}
 
-	lightChar(0.2f);
+	lightChar(0.2f); // dims the char led
 }
 
 void goToCharacter(char c, int override = alignFactor)
 {
+	// reaches out for a specific character
 
 #ifdef do_serial
 	Serial.println("char");
 #endif
 
+	// calls home everytime to avoid accumulating errors
 	setHome(override);
 
+	// optimizes O and 0, I and 1
 	if (c == '0')
 	{
 		c = 'O';
@@ -688,6 +717,7 @@ void goToCharacter(char c, int override = alignFactor)
 		c = 'I';
 	}
 
+	// matches the character to the list and gets delta steps from home
 	for (int i = 0; i < charQuantity; i++)
 	{
 		if (c == charSet[i])
@@ -702,13 +732,16 @@ void goToCharacter(char c, int override = alignFactor)
 		deltaPosition += 43;
 	}
 
-	stepperChar.runToNewPosition(-stepsPerChar * deltaPosition); // TODO FIX ALIGNMENT  + (c == '*' ? 0.25 : 0)
+	// runs char stepper clockwise to reach the target position
+	stepperChar.runToNewPosition(-stepsPerChar * deltaPosition);
 
 	delay(25);
 }
 
 void cutLabel()
 {
+	// moves to a specific char (*) then presses label three times (more vigorously)
+
 	goToCharacter('*');
 
 	for (int i = 0; i < 3; i++)
@@ -719,6 +752,9 @@ void cutLabel()
 
 void writeLabel(String label)
 {
+	// manages entirely a particular label printing process, from start to end (task kill)
+
+	// enables servo and char stepper
 	stepperChar.enableOutputs();
 	myServo.write(restAngle);
 	delay(500);
@@ -735,6 +771,7 @@ void writeLabel(String label)
 	setHome();
 	lightChar(0.2f);
 
+	// the webapp uses underscores instead of spaces, here they are changed back to spaces
 	for (int i = 0; i < labelLength; i++)
 	{
 		if (label[i] == '_')
@@ -758,10 +795,10 @@ void writeLabel(String label)
 	delay(500);
 #endif
 
+	//
 	for (int i = 0; i < labelLength; i++)
 	{
-
-		if (label[i] != ' ' && label[i] != '_' && label[i] != prevChar)
+		if (label[i] != ' ' && label[i] != '_' && label[i] != prevChar) // skip char seeking on repeated characters or on spaces
 		{
 #ifdef do_char
 			goToCharacter(label[i]);
@@ -771,7 +808,7 @@ void writeLabel(String label)
 			prevChar = label[i];
 		}
 
-		if (label[i] != ' ' && label[i] != '_')
+		if (label[i] != ' ' && label[i] != '_') // skip pressing on label spaces
 		{
 
 #ifdef do_press
@@ -791,7 +828,7 @@ void writeLabel(String label)
 		displayProgress(labelLength, i + 1, label);
 	}
 
-	if (labelLength < 6 && labelLength != 1)
+	if (labelLength < 6 && labelLength != 1) // minimum label length to make sure the user can grab it
 	{
 		int spaceDelta = 6 - labelLength;
 		for (int i = 0; i < spaceDelta; i++)
@@ -823,20 +860,7 @@ void writeLabel(String label)
 	lightFinished();
 	busy = false;
 	displayQRCode();
-	vTaskDelete(processorTaskHandle);
-}
-
-void readSerial()
-{
-	if (!waitingLabel)
-	{
-		waitingLabel = true;
-	}
-	while (Serial.available())
-	{
-		labelString = Serial.readStringUntil('\n');
-		waitingLabel = false;
-	}
+	vTaskDelete(processorTaskHandle); // delete task
 }
 
 // --------------------------------------------------------------------------------
@@ -844,9 +868,11 @@ void readSerial()
 
 void loadSettings()
 {
+	// load settings from internal memory
+
 	preferences.begin("calibration", false);
 
-	// check if align and force values are stored in memory
+	// check if are there any align and force values stored in memory
 	int a = preferences.getUInt("align", 0);
 	if (a == 0)
 	{
@@ -873,6 +899,8 @@ void loadSettings()
 
 void testSettings(int tempAlign, int tempForce, bool full = true)
 {
+	// test settings (align or align + force) without writing to the memory
+
 #ifdef do_serial
 	Serial.print("testing align ");
 	Serial.print(tempAlign);
@@ -917,6 +945,8 @@ void testSettings(int tempAlign, int tempForce, bool full = true)
 
 void saveSettings(int tempAlign, int tempForce)
 {
+	// save settings to memory
+
 	preferences.begin("calibration", false);
 
 	preferences.putUInt("align", tempAlign);
@@ -937,7 +967,7 @@ void saveSettings(int tempAlign, int tempForce)
 
 void interpretSettings()
 {
-	// interpret parameters
+	// interpret strings coming from the web app
 	String a = value.substring(0, 1);
 	String f = value.substring(2, 3);
 	newAlign = (int)a.toInt();
@@ -953,10 +983,13 @@ void interpretSettings()
 
 void processor(void *parameters)
 {
+	// receives and treats commands from the webapp
+
 	for (;;)
 	{
 		if (parameter == "feed")
 		{
+			// feeds the tape by 1 character length
 			busy = true;
 
 			displayInitialize();
@@ -984,10 +1017,11 @@ void processor(void *parameters)
 			analogWrite(ledFinish, 0);
 			lightChar(0.0f);
 			displayQRCode();
-			vTaskDelete(processorTaskHandle);
+			vTaskDelete(processorTaskHandle); // delete task
 		}
 		else if (parameter == "reel")
 		{
+			// feeds the tape in a fixed length from the cog to the press
 			busy = true;
 
 			displayInitialize();
@@ -1015,10 +1049,11 @@ void processor(void *parameters)
 			analogWrite(ledFinish, 0);
 			lightChar(0.0f);
 			displayQRCode();
-			vTaskDelete(processorTaskHandle);
+			vTaskDelete(processorTaskHandle); // delete task
 		}
 		else if (parameter == "cut")
 		{
+			// manually cuts the tape in the current tape position
 			busy = true;
 
 			displayInitialize();
@@ -1044,10 +1079,12 @@ void processor(void *parameters)
 			webProgress = " 0";
 			lightChar(0.0f);
 			displayQRCode();
-			vTaskDelete(processorTaskHandle);
+			vTaskDelete(processorTaskHandle); // delete task
 		}
 		else if (parameter == "tag" && value != "")
 		{
+			// prints a tag
+
 			busy = true;
 			String label = value;
 			label.toUpperCase();
@@ -1056,6 +1093,8 @@ void processor(void *parameters)
 		}
 		else if ((parameter == "testalign" || parameter == "testfull") && value != "")
 		{
+			// tests the settings chosen in the web app
+
 			busy = true;
 			interpretSettings();
 
@@ -1100,10 +1139,11 @@ void processor(void *parameters)
 			displayQRCode();
 
 			busy = false;
-			vTaskDelete(processorTaskHandle);
+			vTaskDelete(processorTaskHandle); // delete task
 		}
 		else if (parameter == "save" && value != "")
 		{
+			// save the settings from the web app
 			busy = true;
 			interpretSettings();
 
@@ -1131,7 +1171,7 @@ void processor(void *parameters)
 			lightChar(0.0f);
 			busy = false;
 			delay(500);
-			ESP.restart();
+			ESP.restart(); // instead of deleting task, reboots
 		}
 	}
 }
@@ -1149,11 +1189,13 @@ void initialize()
 	// Initialize SPIFFS
 	if (!SPIFFS.begin())
 	{
-		// Serial.println("An Error has occurred while mounting SPIFFS");
+#ifdef do_serial
+		Serial.println("An Error has occurred while mounting SPIFFS");
+#endif
 		return;
 	}
 
-	// Route for root / web page
+	// route for web app
 	server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/index.html", String(), false); });
 
@@ -1167,25 +1209,38 @@ void initialize()
 					  parameter = p->name();
 					  value = p->value();
 
+					  // if not currently busy, creates a task for a single label print on core 0, that will be killed upon completion
+					  // the wifi and web app keeps running on core 1
 					  if (!busy)
 					  {
 						  xTaskCreatePinnedToCore(
-							  processor,			/* function that implements the task */
-							  "processorTask",		/* name of the task */
-							  10000,				/* number of words to be allocated to use on task  */
-							  NULL,					/* parameter to be input on the task (can be NULL) */
-							  1,					/* priority for the task (0 to N) */
-							  &processorTaskHandle, /* reference to the task (can be NULL) */
-							  0);					/* core 0 */
+							  processor,			// the processor() function that processes the inputs
+							  "processorTask",		// name of the task 
+							  10000,				// number of words to be allocated to use on task  
+							  NULL,					// parameter to be input on the task (can be NULL) 
+							  1,					// priority for the task (0 to N) 
+							  &processorTaskHandle, // reference to the task (can be NULL) 
+							  0);					// core 0
 					  }
-					  else
-					  {
-#ifdef do_serial
-						Serial.println("<< DENYING, BUSY >>");
-#endif
-					  }
+// 					  else
+// 					  {
+// #ifdef do_serial
+// 						Serial.println("<< DENYING, BUSY >>");
+// #endif
+// 					  }
 				  }
 				  request->send(SPIFFS, "/index.html", String(), false); });
+
+	// check printing status
+	server.on("/status", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(200, "text/plane", webProgress); });
+
+	// provide stored settings
+	server.on("/settings", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(200, "text/plane", combinedSettings);  Serial.print("giving combinedSettings: ");  Serial.print(combinedSettings); });
+
+	// ----------------------------------------------------------------------------
+	// asset serving --------------------------------------------------------------
 
 	// route to load style.css file
 	server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -1211,17 +1266,9 @@ void initialize()
 	server.on("/manifest.json", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/manifest.json", "image"); });
 
-	// route to isometric image
+	// route to settings image
 	server.on("/iso.png", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/iso.png", "image"); });
-
-	// check printing status
-	server.on("/status", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(200, "text/plane", webProgress); });
-
-	// provide stored settings
-	server.on("/settings", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(200, "text/plane", combinedSettings);  Serial.print("giving combinedSettings: ");  Serial.print(combinedSettings); });
 
 	// start server
 	server.begin();
@@ -1229,6 +1276,8 @@ void initialize()
 
 void configModeCallback(AsyncWiFiManager *myWiFiManager)
 {
+	// captive portal to configure SSID and password
+
 	displayConfig();
 
 #ifdef do_serial
@@ -1240,8 +1289,10 @@ void clearWifiCredentials()
 {
 	// load the flash-saved configs
 	wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
-	esp_wifi_init(&cfg); // initiate and allocate wifi resources (does not matter if connection fails)
+	esp_wifi_init(&cfg); // initiate and allocate wifi resources
 	delay(2000);		 // wait a bit
+
+	// clear credentials if button is pressed
 	if (esp_wifi_restore() != ESP_OK)
 	{
 #ifdef do_serial
@@ -1261,7 +1312,7 @@ void clearWifiCredentials()
 
 void wifiManager()
 {
-	// Local intialization. Once its business is done, there is no need to keep it around
+	// local intialization. once its business is done, there is no need to keep it around
 	AsyncWiFiManager wifiManager(&server, &dns);
 
 	bool wifiReset = digitalRead(wifiResetPin);
@@ -1273,7 +1324,11 @@ void wifiManager()
 	// set callback that gets called when connecting to previous WiFi fails, and enters Access Point mode
 	wifiManager.setAPCallback(configModeCallback);
 
+#ifdef do_wifi_debug
+	wifiManager.setDebugOutput(true);
+#else
 	wifiManager.setDebugOutput(false);
+#endif
 
 	// fetches ssid and pass and tries to connect
 	// if it does not connect it starts an access point with the specified name
@@ -1287,6 +1342,7 @@ void wifiManager()
 		delay(1000);
 	}
 
+	// TODO: pending idea to access the device from a dns name, but Android doesn't support that yet
 	// if (!MDNS.begin("e-tkt"))
 	// {
 	// 	// Serial.println("Error starting mDNS");
@@ -1294,11 +1350,15 @@ void wifiManager()
 	// }
 
 	// if you get here you have connected to the WiFi
-	// Serial.println("connected!");
 	displayIP = WiFi.localIP().toString();
-	// Serial.println(displayIP);
 	displaySSID = WiFi.SSID();
-	// Serial.println(displaySSID);
+	
+#ifdef do_wifi_debug
+	Serial.print("connected at ");
+	Serial.print(displayIP);
+	Serial.print(" with password ");
+	Serial.println(displaySSID);
+#endif
 
 	displayQRCode();
 
@@ -1316,18 +1376,22 @@ void setup()
 
 	loadSettings();
 
+	// set pins
 	pinMode(sensorPin, INPUT_PULLUP);
 	pinMode(wifiResetPin, INPUT);
 	pinMode(ledChar, OUTPUT);
 	pinMode(ledFinish, OUTPUT);
 	pinMode(enableCharStepper, OUTPUT);
 
+	// turns of the leds
 	analogWrite(ledChar, 0);
 	analogWrite(ledFinish, 0);
 
+	// set feed stepper
 	stepperFeed.setMaxSpeed(1000000);
 	stepperFeed.setAcceleration(1000); // 6000?
 
+	// set char stepper
 	digitalWrite(enableCharStepper, HIGH);
 	stepperChar.setMaxSpeed(20000 * MICROSTEP_Char);
 	stepperChar.setAcceleration(1000 * MICROSTEP_Char);
@@ -1336,34 +1400,24 @@ void setup()
 	stepperChar.setEnablePin(enableCharStepper);
 	stepperChar.disableOutputs();
 
+	// set  servo
 	myServo.attach(servoPin);
 	myServo.write(restAngle);
 	delay(100);
 
+	// set  display
 	displayInitialize();
 	displayClear();
 	displaySplash();
 
+	// start wifi > comment both to avoid entering the main loop
 	wifiManager();
 	delay(2000); // time for the task to start
 }
 
 void loop()
 {
-	// feedLabel();
-
-	// digitalWrite(enableCharStepper, LOW);
-
-	// stepperChar.setCurrentPosition(0);
-	// stepperChar.runToNewPosition(2000);
-	// stepperChar.run();
-	// delay(200);
-
-	// digitalWrite(enableCharStepper, HIGH);
-
-	// pressLabel();
-
-	// delay(500);
+	// the loop should be empty
 
 	// display tests
 

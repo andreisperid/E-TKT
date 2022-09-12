@@ -62,7 +62,6 @@ input {
   padding: 3px 0 4px 0;
   margin: 0px;
   width: 100%;
-  /* caret-shape: underscore; */
 }
 button {
   color: white;
@@ -73,7 +72,6 @@ button {
   padding: 3px 0 4px 0;
   margin: 0px;
   width: 100%;
-  /* caret-shape: underscore; */
 }
 #text-input {
   outline: 10px inset #44444444;
@@ -95,8 +93,6 @@ button {
 #mode-dropdown {
   outline: none;
   border-color: rgb(0, 102, 255);
-  border-width: 1.5px;
-  /* border-radius: 3px; */
   border-width: 0 1.5px 0 1.5px;
   border-style: dashed;
   font-size: 21px;

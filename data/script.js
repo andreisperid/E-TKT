@@ -17,6 +17,8 @@ function startupRoutine() {
 }
 
 function retrieveSettings() {
+  // retrieve settings from the device
+
   // console.log("trying to retrieve settings...");
 
   var xhttp = new XMLHttpRequest();
@@ -37,19 +39,9 @@ function retrieveSettings() {
   xhttp.send();
 }
 
-function toggleVisibility(x, y, openedLabel, closedLabel) {
-  if (x.style.visibility === "hidden") {
-    x.style.visibility = "visible";
-    x.style.height = "unset";
-    y.innerHTML = openedLabel;
-  } else if (x.style.visibility === "visible") {
-    x.style.visibility = "hidden";
-    x.style.height = "0px";
-    y.innerHTML = closedLabel;
-  }
-}
-
 function calculateLength() {
+  // calculates the label length based on the number of characters (including spaces)
+
   let label = document.getElementById("length-label");
 
   // console.log(treatedLabel);
@@ -61,7 +53,9 @@ function calculateLength() {
   }
 }
 
-function tagCommand() {
+function labelCommand() {
+  // sends the label to the device
+
   let fieldValue = document.getElementById("text-input").value;
 
   if (useRegex(fieldValue)) {
@@ -82,6 +76,8 @@ function tagCommand() {
 }
 
 function drawHelper() {
+  // draws visual helper with label length taking options into account
+
   let field = document.getElementById("text-input");
   let fieldValue = field.value;
   let space = "X";
@@ -140,6 +136,8 @@ function drawHelper() {
 }
 
 function validateField() {
+  // instantly validates label field by blocking buttons and giving visual feedback
+
   let field = document.getElementById("text-input");
   let fieldValue = field.value;
 
@@ -164,6 +162,8 @@ function validateField() {
 }
 
 function formKeyHandler(e) {
+  // sends the form by using the enter key
+
   let keynum;
   if (window.event && e != null) {
     keynum = e.keyCode;
@@ -179,6 +179,8 @@ function formKeyHandler(e) {
 }
 
 function clearField() {
+  // clears the label field and restore default button and form states
+
   clear = true;
   const textField = document.getElementById("text-input");
 
@@ -201,11 +203,15 @@ function clearField() {
 }
 
 function updateTempValues() {
+  // updates the temporary setting values
+
   align = document.getElementById("align-field").value;
   force = document.getElementById("force-field").value;
 }
 
 function changeField(action, fieldName) {
+  // incremental / decremental buttons for the align and force settings
+
   const field = document.getElementById(fieldName);
   let currentValue = 0;
   currentValue = field.value;
@@ -221,6 +227,8 @@ function changeField(action, fieldName) {
 }
 
 function insertIntoField(specialChar) {
+  // inserts special emoji character in the label form
+
   const textarea = document.getElementById("text-input");
   textarea.focus();
 
@@ -251,7 +259,10 @@ function insertIntoField(specialChar) {
 }
 
 function useRegex(input) {
-  //  emojis / symbols
+  // test for suported characters
+  // $-.23456789*abcdefghijklmnopqrstuvwxyz♡☆♪€@
+
+  //  supported emoji:
   // 	♡
   // 	☆
   // 	♪
@@ -264,13 +275,15 @@ function useRegex(input) {
 }
 
 function toggleSettings(safe = true) {
+  // shows/hide settings page
+
   let state = document.getElementById("settings-frame").style.visibility;
 
-  retrieveSettings();
-  console.log(state);
-  console.log(align + " / " + alignTemp + " / / " + force + " / " + forceTemp);
+  // console.log(state);
+  // console.log(align + " / " + alignTemp + " / / " + force + " / " + forceTemp);
 
   if (state === "hidden") {
+    retrieveSettings();
     alignTemp = align;
     forceTemp = force;
     document.getElementById("settings-frame").style.visibility = "visible";
@@ -286,9 +299,11 @@ function toggleSettings(safe = true) {
 }
 
 function reelCommand() {
+  // sends reel command to the device
+
   if (
     confirm(
-      "Confirm loading a new reel?\n\nPlease make sure the tape is touching the cog. \n\n PS: unsaved align and force settings will be lost."
+      "Confirm loading a new reel?\n\nPlease make sure the tape is touching the cog. \n\n Important: unsaved align and force settings will be lost."
     )
   ) {
     toggleSettings(false);
@@ -307,6 +322,8 @@ function reelCommand() {
 }
 
 function feedCommand() {
+  // sends feed command to the device
+
   document.getElementById("reel-button").disabled = true;
   document.getElementById("feed-button").disabled = true;
   document.getElementById("cut-button").disabled = true;
@@ -320,6 +337,8 @@ function feedCommand() {
 }
 
 function cutCommand() {
+  // sends cut command to the device
+
   document.getElementById("reel-button").disabled = true;
   document.getElementById("feed-button").disabled = true;
   document.getElementById("cut-button").disabled = true;
@@ -334,6 +353,8 @@ function cutCommand() {
 }
 
 function testCommand(testFull) {
+  // sends test command to the device
+
   document.getElementById("add-align-button").disabled = true;
   document.getElementById("remove-align-button").disabled = true;
   document.getElementById("add-force-button").disabled = true;
@@ -368,6 +389,8 @@ function testCommand(testFull) {
 }
 
 function settingsCommand() {
+  // sends settings save command to the device, and triggers self restart in 15 seconds
+
   align = document.getElementById("align-field").value;
   force = document.getElementById("force-field").value;
 
@@ -406,6 +429,9 @@ setInterval(function () {
 }, 100); // lower rate?
 
 function getData() {
+
+  // gets progress data from the device and disable buttons while busy
+
   const textField = document.getElementById("text-input");
   // console.log("getting data");
   // console.log(textField.value == "");
