@@ -1,7 +1,7 @@
 remote_theme: just-the-docs/just-the-docs@v0.4.0.rc2
 color_scheme: dark
 
-logo: "/_assets/logo.png"
+logo: "_assets/logo.png"
 
 
 footer_content: "Copyright &copy; 2022 Andrei Speridião. Distributed by an <a href=\"https://github.com/andreisperid/E-TKT/blob/main/LICENSE">MIT license</a> "
