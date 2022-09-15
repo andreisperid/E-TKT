@@ -3,7 +3,6 @@ layout: default
 title: How does it work?
 nav_order: 4
 description: "E-TKT"
-permalink: /
 ---
 
 # ⚙️ how does it work?
