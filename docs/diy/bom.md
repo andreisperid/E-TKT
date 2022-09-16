@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Bill of materials
+title: bill of materials
 nav_order: 4
 description: "E-TKT"
 parent: 🛠️ do it yourself!

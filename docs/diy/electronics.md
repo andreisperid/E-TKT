@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Electronics
+title: electronics
 nav_order: 3
 description: "E-TKT"
 parent: 🛠️ do it yourself!
