@@ -22,7 +22,7 @@ $base-button-color: $grey-dk-250;
 $code-background-color: $grey-dk-250;
 $search-background-color: $grey-dk-250;
 $table-background-color: $grey-dk-250;
-$feedback-color: darken($sidebar-color, 3%);
+$feedback-color: lighten($sidebar-color, 5%);
 
 .warning {
     padding: 10px;
