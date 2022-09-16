@@ -9,10 +9,10 @@ parent: ⚖️ credits
 # 📚 **libraries**
 
 ### Framework
-Arduino
+- Arduino
 
 ### Environment
-NODEMCU-32s @3.3.2
+- NODEMCU-32s @3.3.2
 
 ### Thank you for the library developers below!
 - [waspinator/AccelStepper@1.61](https://github.com/waspinator/AccelStepper )
