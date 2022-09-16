@@ -10,7 +10,7 @@ permalink: /
 <h1 align="center">
     E-TKT: anachronic label maker
 </h1>
-<p align="center">Andrei Speridião 2022 - http://andrei.cc</p>
+<h6 align="center">Andrei Speridião 2022 - <a href="https://andrei.cc">andrei.cc</a> </h6>
 
 ### *étiquette f (plural étiquettes)*
 > ["ticket, memorandum, attach, stick, pierce, sting, to be sharp, goad, puncture, attach, nail"](https://en.wiktionary.org/wiki/%C3%A9tiquette#French)
