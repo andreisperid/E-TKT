@@ -4,7 +4,7 @@ title: 🤓 about
 nav_order: 3
 description: "E-TKT"
 ---
-# 🤔 why?
+# 🤔 **why?**
 ### *TLDR: curiosity, technical challenge and of course organizing stuff.*
 
 ![motex3](https://user-images.githubusercontent.com/15098003/171213081-fbdf82dc-e752-46eb-81d8-d3f7b8e25f01.png)
@@ -19,7 +19,6 @@ After all, even though the pressing mechanism was poorly made, the characters' c
 
 ...why bother mixing an archaic printing method with current automation and connectivity features? Because *why not?* It was a technological blind spot to be explored!
 
-<br>
 
 # *...anachronism* 🤓
 I've later realized that it was what I’ve been attracted to. According to [Wikipedia](https://en.wikipedia.org/wiki/Anachronism):
