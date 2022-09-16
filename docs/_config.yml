@@ -22,3 +22,38 @@ last_edit_timestamp: true # show or hide edit time - page must have `last_modifi
 last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
 
 color_scheme: dark
+
+
+
+# Enable or disable heading anchors
+heading_anchors: true
+
+# Aux links for the upper right navigation
+aux_links:
+  "E-TKT on GitHub":
+    - "//github.com/andreisperid/E-TKT"
+  "OSHWA certification":
+    - "//certification.oshwa.org/br000010.html"
+
+# Makes Aux links open in a new tab. Default is false
+aux_links_new_tab: true
+
+# Sort order for navigation links
+# nav_sort: case_insensitive # default, equivalent to nil
+nav_sort: case_sensitive # Capital letters sorted before lowercase
+
+# External navigation links
+nav_external_links:
+  - title: E-TKT on GitHub
+    url: https://github.com/andreisperid/E-TKT
+    
+
+
+
+# Footer "Edit this page on GitHub" link text
+gh_edit_link: true # show or hide edit this page link
+gh_edit_link_text: "Edit this page on GitHub"
+gh_edit_repository: "https://github.com/andreisperid/E-TKT/blob/main/docs/" # the github URL for your repo
+gh_edit_branch: "main" # the branch that your docs is served from
+# gh_edit_source: docs # the source that your files originate from
+gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
