@@ -1,16 +1,18 @@
 $etkt-blue-100: #182536;
 $etkt-blue-300: #0b111a;
+$etkt-blue-500: #030508;
 $etkt-yellow-100: #e7dac9;
-$etkt-yellow-300: #85745e;
+$etkt-yellow-300: #c8bbaa;
+$etkt-yellow-600: #85745e;
 
-$body-background-color: $etkt-blue-100;
+$body-background-color: $etkt-blue-300;
 $body-heading-color: $etkt-yellow-300;
 $btn-primary-color: $etkt-yellow-100;
 $link-color: $etkt-yellow-100;
 
 // Copied from JTD dark theme
-$sidebar-color: $etkt-blue-300;
-$border-color: $grey-dk-200;
+$sidebar-color: $etkt-blue-500;
+$border-color: $grey-dk-400;
 
 $body-text-color: $grey-lt-300;
 $nav-child-link-color: $grey-dk-000;
