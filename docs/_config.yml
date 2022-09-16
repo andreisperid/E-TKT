@@ -30,8 +30,10 @@ heading_anchors: true
 
 # Aux links for the upper right navigation
 aux_links:
-  "E-TKT on GitHub":
-    - "//github.com/andreisperid/E-TKT"
+  "GitHub":
+    - "//github.com/andreisperid/E-TKT":
+  "OSHWA":
+    - "//certification.oshwa.org/br000010.html"
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: true
@@ -40,20 +42,16 @@ aux_links_new_tab: true
 # nav_sort: case_insensitive # default, equivalent to nil
 nav_sort: case_sensitive # Capital letters sorted before lowercase
 
-# External navigation links
-nav_external_links:
-  - title: GitHub
-    url: https://github.com/andreisperid/E-TKT
-  - title: OSHWA certification
-    url: https://certification.oshwa.org/br000010.html
-    
-
+# # External navigation links
+# nav_external_links:
+#   - title: GitHub
+#     url: https://github.com/andreisperid/E-TKT   
 
 
 # Footer "Edit this page on GitHub" link text
-gh_edit_link: true # show or hide edit this page link
-gh_edit_link_text: "Edit this page on GitHub"
-gh_edit_repository: "https://github.com/andreisperid/E-TKT/blob/main/docs/" # the github URL for your repo
-gh_edit_branch: "main" # the branch that your docs is served from
+# gh_edit_link: true # show or hide edit this page link
+# gh_edit_link_text: "Edit this page on GitHub"
+# gh_edit_repository: "https://github.com/andreisperid/E-TKT/docs/" # the github URL for your repo
+# gh_edit_branch: "main" # the branch that your docs is served from
 # gh_edit_source: docs # the source that your files originate from
-gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
+# gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
