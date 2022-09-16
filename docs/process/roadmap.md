@@ -7,5 +7,5 @@ parent: 🧬 process
 ---
 
 # 🛣️ roadmap
-- [ ] [Bugfix](https://github.com/andreisperid/E-TKT/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
+- [ ] 🐛 [Bugfix](https://github.com/andreisperid/E-TKT/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 - [ ] Manufactured PCB
