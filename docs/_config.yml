@@ -1,16 +1,9 @@
 title: E-TKT
 description: Anachronic label maker
 
-# remote_theme: just-the-docs/just-the-docs@v0.4.0.rc2
-remote_theme: pmarsceill/just-the-docs
-
-
-
+remote_theme: just-the-docs/just-the-docs@v0.4.0.rc2
 
 logo: "/assets/logo.png"
-
-
-
 
 # Footer content
 # appears at the bottom of every page's main content
