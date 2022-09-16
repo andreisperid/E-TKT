@@ -1,25 +1,31 @@
 $etkt-blue-100: #182536;
 $etkt-blue-300: #0b111a;
-
 $etkt-yellow-100: #e7dac9;
 $etkt-yellow-300: #85745e;
 
-
 $body-background-color: $etkt-blue-100;
-$sidebar-color: $etkt-blue-100;
+$body-heading-color: $etkt-yellow-300;
+$btn-primary-color: $etkt-yellow-100;
+$link-color: $etkt-yellow-100;
 
+// Copied from JTD dark theme
+$sidebar-color: $etkt-blue-300;
+$border-color: $grey-dk-200;
 
-// The following highlight theme is more legible than that used for the light color scheme
+$body-text-color: $grey-lt-300;
+$nav-child-link-color: $grey-dk-000;
+$search-result-preview-color: $grey-dk-000;
+$base-button-color: $grey-dk-250;
 
-// @import "./vendor/OneDarkJekyll/syntax-one-dark";
-// $code-background-color: #282c34;
+$code-background-color: $grey-dk-250;
+$search-background-color: $grey-dk-250;
+$table-background-color: $grey-dk-250;
+$feedback-color: darken($sidebar-color, 3%);
 
-@import "./vendor/OneDarkJekyll/syntax-one-dark-vivid";
-
-$code-background-color: #31343f;
-
-// @import "./vendor/OneDarkJekyll/syntax-firewatch";
-// $code-background-color: #282c34;
-
-// @import "./vendor/OneDarkJekyll/syntax-firewatch-green";
-// $code-background-color: #282c34;
+.warning {
+    padding: 10px;
+    background-color: darken($etkt-yellow-300, 30%);
+    border-width: 1px;
+    border-color: $etkt-yellow-300;
+    border-style: solid;    
+  }
