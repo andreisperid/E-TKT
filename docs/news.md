@@ -6,6 +6,7 @@ description: "E-TKT"
 ---
 
 # 📰 news - August 2022
+<br>
 - E-TKT is a [finalist at the Hackaday Prize 2022, in the Hack it Back category](https://hackaday.com/2022/08/09/2022-hackaday-prize-congratulations-to-the-winners-of-the-hack-it-back-challenge/);
 - Project of the week on [Maker Update #289](https://www.youtube.com/watch?v=3jpaBhROYGc), by [Donald Bell](https://twitter.com/donald);
 - It has also been featured at [Hackaday](https://hackaday.com/2022/06/15/diy-automated-printer-kerchunks-out-classic-embossed-labels/), [Make](https://makezine.com/article/maker-news/old-school-label-making-new-school-interface/) and [Hackster](https://www.hackster.io/news/e-tkt-prints-embossed-labels-with-the-power-of-iot-5ad25299cf22);
