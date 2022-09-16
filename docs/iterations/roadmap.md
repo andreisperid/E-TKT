@@ -8,8 +8,10 @@ parent: 🧬 iterations
 
 # 🚀 **roadmap**
 
-### 🐛 bugfix
+## 🐛 bugfix
 - [here](https://github.com/andreisperid/E-TKT/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
+
+## features
 
 ### 📌 planned
 - [x] manufactured PCB
