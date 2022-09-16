@@ -9,13 +9,13 @@ parent: 🧬 iterations
 # 🚀 **roadmap**
 
 ## 🐛 bugfix
-- [ ] [🎯 here](https://github.com/andreisperid/E-TKT/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
+[🎯 here](https://github.com/andreisperid/E-TKT/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
 ## features
 
 ### 📌 planned
-- [x] manufactured PCB
-- [x] documentation
+- ~~manufactured PCB~~
+- ~~documentation~~
 
 ### 🎈 nice to have
-- [ ] adjustable kerning
+- adjustable kerning
