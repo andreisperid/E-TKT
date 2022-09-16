@@ -10,7 +10,7 @@ permalink: /
 <h1 align="center">
     E-TKT: anachronic label maker
 </h1>
-<h6 align="center">Andrei Speridião 2022 - http://andrei.cc</h6>
+<h4 align="center">Andrei Speridião 2022 - <a href="https://andrei.cc">andrei.cc</a> </h4>
 
 <!-- # 🙃 what is it? -->
 ### *étiquette f (plural étiquettes)*
