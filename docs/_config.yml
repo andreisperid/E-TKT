@@ -31,7 +31,7 @@ heading_anchors: true
 # Aux links for the upper right navigation
 aux_links:
   "GitHub":
-    - "//github.com/andreisperid/E-TKT":
+    - "//github.com/andreisperid/E-TKT"
   "OSHWA":
     - "//certification.oshwa.org/br000010.html"
 
