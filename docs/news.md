@@ -8,7 +8,7 @@ description: "E-TKT"
 # 📰 **news**
 
 ### September, 2022
-- - ⚠️ A manufactured PCB is being developed and the files are already committed, ***but they are still a work in progress. Aka: not stable and with issues.*** I'm working on that at this moment. Meanwhile, please refer to the (legacy documentation)[https://github.com/andreisperid/E-TKT] for reference;
+- ⚠️ A manufactured PCB is being developed and the files are already committed, ***but they are still a work in progress. Aka: not stable and with issues.*** I'm working on that at this moment. Meanwhile, please refer to the [legacy documentation](https://github.com/andreisperid/E-TKT) for reference;
 
 ### August, 2022
 - E-TKT is a [finalist at the Hackaday Prize 2022, in the Hack it Back category](https://hackaday.com/2022/08/09/2022-hackaday-prize-congratulations-to-the-winners-of-the-hack-it-back-challenge/);
