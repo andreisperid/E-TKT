@@ -15,7 +15,7 @@ logo: "/assets/logo.png"
 back_to_top: true
 back_to_top_text: "Back to top"
 
-footer_content: "Copyright &copy; 2022 Andrei Speridião. Distributed by an <a href=\"https://github.com/andreisperid/E-TKT/blob/main/LICENSE\">MIT license.</a>"
+footer_content: "Copyright &copy; 2022 Andrei Speridião - <a href=\"https://andrei.cc">andrei.cc</a> - Distributed by an <a href=\"https://github.com/andreisperid/E-TKT/blob/main/LICENSE\">MIT license.</a>"
 
 # Footer last edited timestamp
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
@@ -32,8 +32,6 @@ heading_anchors: true
 aux_links:
   "E-TKT on GitHub":
     - "//github.com/andreisperid/E-TKT"
-  "OSHWA certification":
-    - "//certification.oshwa.org/br000010.html"
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: true
@@ -44,8 +42,10 @@ nav_sort: case_sensitive # Capital letters sorted before lowercase
 
 # External navigation links
 nav_external_links:
-  - title: E-TKT on GitHub
+  - title: GitHub
     url: https://github.com/andreisperid/E-TKT
+  - title: OSHWA certification
+    url: https://certification.oshwa.org/br000010.html
     
 
 
