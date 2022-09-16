@@ -6,7 +6,7 @@ description: "E-TKT"
 parent: 🛠️ do it yourself!
 ---
 
-## ✔️ bill of materials
+# ☑️ bill of materials
 
 The estimated cost is around $70 (USD) without shipping, as of May 2022.
  
