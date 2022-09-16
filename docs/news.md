@@ -3,7 +3,7 @@ layout: default
 title: 📰 news
 nav_order: 2
 description: "E-TKT"
-last_modified_date: "213123"
+last_modified_date: date
 ---
 
 # 📰 **news**
