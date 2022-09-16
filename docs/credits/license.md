@@ -1,6 +1,6 @@
 ---
 layout: default
-title: License
+title: license
 nav_order: 2
 description: "E-TKT"
 parent: ⚖️ credits
