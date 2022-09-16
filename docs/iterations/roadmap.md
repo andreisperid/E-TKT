@@ -12,8 +12,8 @@ parent: 🧬 iterations
 
 ## features
 ### 📌 planned
-	~~manufactured PCB~~
-	~~documentation~~
+  ~~manufactured PCB~~
+  ~~documentation~~
 
 ### 🎈 nice to have
-	adjustable kerning
+  adjustable kerning
