@@ -7,7 +7,7 @@ parent: 🛠️ do it yourself!
 ---
 
 # 🧵 3D printing
-<br>
+
 ### 16 parts in total, using approx 200g of PETG filament.
 ![exploded](https://user-images.githubusercontent.com/15098003/171068151-33b3fd52-b4f0-49f8-ad5a-521146b65bbb.png)
 
