@@ -1,7 +1,11 @@
 title: E-TKT
 description: Anachronic label maker
 
-remote_theme: just-the-docs/just-the-docs@v0.4.0.rc2
+# remote_theme: just-the-docs/just-the-docs@v0.4.0.rc2
+remote_theme: pmarsceill/just-the-docs
+
+
+
 
 logo: "/assets/logo.png"
 
