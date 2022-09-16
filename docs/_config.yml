@@ -31,6 +31,8 @@ aux_links:
     - "//github.com/andreisperid/E-TKT"
   "OSHWA":
     - "//certification.oshwa.org/br000010.html"
+  "andrei.cc":
+    - "//andrei.cc"
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: true
@@ -40,9 +42,9 @@ aux_links_new_tab: true
 nav_sort: case_sensitive # Capital letters sorted before lowercase
 
 # # External navigation links
-nav_external_links:
-  - title: andrei.cc
-    url: https://andrei.cc
+# nav_external_links:
+#   - title: andrei.cc
+#     url: https://andrei.cc
 
 
 # Footer "Edit this page on GitHub" link text
