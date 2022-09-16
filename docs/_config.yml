@@ -43,9 +43,9 @@ aux_links_new_tab: true
 nav_sort: case_sensitive # Capital letters sorted before lowercase
 
 # # External navigation links
-# nav_external_links:
-#   - title: GitHub
-#     url: https://github.com/andreisperid/E-TKT   
+nav_external_links:
+  - title: andrei.cc
+    url: https://andrei.cc
 
 
 # Footer "Edit this page on GitHub" link text
