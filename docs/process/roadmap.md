@@ -7,5 +7,12 @@ parent: 🧬 process
 ---
 
 # 🚀 roadmap
-- [ ] 🐛 [Bugfix](https://github.com/andreisperid/E-TKT/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
-- [ ] Manufactured PCB
+
+### 🐛 bugfix
+- here (https://github.com/andreisperid/E-TKT/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
+
+### 📌 planned
+- [x] Manufactured PCB
+
+### 🎈 nice to have
+- [ ] Adjustable kerning
