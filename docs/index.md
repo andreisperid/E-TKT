@@ -28,9 +28,4 @@ permalink: /
 
 E-TKT is a DIY label maker that mixes both old fashioned and contemporary technology to create something as simple as... Labels!
 
-<br>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/F0E5adLQ-AY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
-[![🎥 see it working 🎥](https://user-images.githubusercontent.com/15098003/171185500-8a63297c-487c-4900-b6d2-5c67298541d4.png)](https://www.youtube.com/watch?v=F0E5adLQ-AY "🎥 see it working 🎥")
+<iframe  width="100%" height="350" src="https://www.youtube.com/embed/F0E5adLQ-AY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
