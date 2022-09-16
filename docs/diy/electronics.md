@@ -6,7 +6,7 @@ description: "E-TKT"
 parent: 🛠️ do it yourself!
 ---
 
-# ⚡ electronics
+# ⚡ **electronics**
 
 ### Schematics
 

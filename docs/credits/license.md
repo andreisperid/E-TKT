@@ -6,7 +6,7 @@ description: "E-TKT"
 parent: ⚖️ credits
 ---
 
-# ⚖️ license
+# ⚖️ **license**
 
 MIT @ [Andrei Speridião](https://github.com/andreisperid/)
 

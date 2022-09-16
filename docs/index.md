@@ -12,7 +12,6 @@ permalink: /
 </h1>
 <p align="center">Andrei Speridião 2022 - http://andrei.cc</p>
 
-<!-- # 🙃 what is it? -->
 ### *étiquette f (plural étiquettes)*
 > ["ticket, memorandum, attach, stick, pierce, sting, to be sharp, goad, puncture, attach, nail"](https://en.wiktionary.org/wiki/%C3%A9tiquette#French)
 > 1. tag, label 

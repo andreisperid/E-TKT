@@ -5,7 +5,7 @@ nav_order: 5
 description: "E-TKT"
 ---
 
-# 💡 features
+# 💡 **features**
 
 ## 🌟 *highlights*
 - No need for internet, app installation, data cables or drivers;

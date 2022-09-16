@@ -6,12 +6,15 @@ description: "E-TKT"
 parent: ⚖️ credits
 ---
 
-# 📚 libraries
+# 📚 **libraries**
 
-Framework: Arduino
+### Framework
+Arduino
 
-Environment: NODEMCU-32s @3.3.2
+### Environment
+NODEMCU-32s @3.3.2
 
+### Thank you for the library developers below!
 - [waspinator/AccelStepper@1.61](https://github.com/waspinator/AccelStepper )
 - [madhephaestus/ESP32Servo@0.9.0](https://github.com/madhephaestus/ESP32Servo )
 - [ottowinter/ESPAsyncWebServer-esphome@1.2.7](https://github.com/me-no-dev/ESPAsyncWebServer)
