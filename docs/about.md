@@ -1,6 +1,6 @@
 ---
 layout: default
-title: About
+title: 🤓 about
 nav_order: 3
 description: "E-TKT"
 ---

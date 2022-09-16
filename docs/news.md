@@ -1,6 +1,6 @@
 ---
 layout: default
-title: News
+title: 📰 news
 nav_order: 2
 description: "E-TKT"
 ---

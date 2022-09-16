@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Features
+title: 💡 features
 nav_order: 5
 description: "E-TKT"
 ---

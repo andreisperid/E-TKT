@@ -1,6 +1,6 @@
 ---
 layout: default
-title: How does it work?
+title: ⚙️ how does it work?
 nav_order: 4
 description: "E-TKT"
 ---
