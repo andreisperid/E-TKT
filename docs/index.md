@@ -4,7 +4,6 @@ title: Home
 nav_order: 1
 description: "E-TKT"
 permalink: /
-last_modified_date
 ---
 
 <br>
