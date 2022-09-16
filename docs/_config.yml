@@ -1,10 +1,9 @@
 title: E-TKT
 description: Anachronic label maker
 
-
 remote_theme: just-the-docs/just-the-docs@v0.4.0.rc2
 
-logo: "/_assets/logo.png"
+logo: "/docs/_assets/logo.png"
 
 
 
@@ -16,7 +15,7 @@ logo: "/_assets/logo.png"
 back_to_top: true
 back_to_top_text: "Back to top"
 
-# footer_content: "Copyright &copy; 2022 Andrei Speridião. Distributed by an <a href=\"https://github.com/andreisperid/E-TKT/blob/main/LICENSE">MIT license.</a>"
+# footer_content: "Copyright &copy; 2022 Andrei Speridião. Distributed by an <a href=\"https://github.com/andreisperid/E-TKT/blob/main/LICENSE">MIT license.</a>\"
 
 # Footer last edited timestamp
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
