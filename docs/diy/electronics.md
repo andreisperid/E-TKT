@@ -6,7 +6,7 @@ description: "E-TKT"
 parent: 🛠️ do it yourself!
 ---
 
-# ⚡ electronics / schematics
+## ⚡ electronics / schematics
 
 ![Schematic_e-tkt_2022-05-30](https://user-images.githubusercontent.com/15098003/171064999-262a4c68-01ae-4122-8584-5d784ebf6408.png)
 
