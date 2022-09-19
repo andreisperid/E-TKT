@@ -1,11 +1,11 @@
 ---
 layout: default
-title: 📰 news
+title: 🎯 news
 nav_order: 2
 description: "E-TKT"
 ---
 
-# 📰 **news**
+# 🎯 **news**
 
 ### September, 2022
 - ⚠️ A manufactured PCB is being developed and the files are already committed, ***but they are still a work in progress. Aka: not stable and with issues.*** I'm working on that at this moment. Meanwhile, please refer to the [legacy documentation](https://github.com/andreisperid/E-TKT) for reference;
