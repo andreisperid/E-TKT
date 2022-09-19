@@ -17,8 +17,7 @@ Only when fully assembled and revised:
 
 ----
 
-
-## ***<< attention is needed here, please >>***
+# *<< attention is needed here, please >>*
 
 Check the letter "?" position: if the letter is totally inside, then proceed to the step 4.
 
@@ -47,7 +46,6 @@ Also, when turning the machine on, the press angle should be as there would be a
 
 
 ### 🕐 when you are happy with the result, click save and wait for the machine to reboot.
-
-...
+<br>
 
 # 🎉 you are now ready to label around! 🎉
