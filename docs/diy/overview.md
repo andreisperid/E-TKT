@@ -28,7 +28,7 @@ Very simple process, but please don't forget to add the data files together with
 After making sure the system is working properly, you can proceed to cable management and physically mounting the parts together.
 
 ### Calibrate
-The final step makes sure the carousel letters are aligned to the tape and working along with the right pressing force. There is a handy calibration mode built-in and acessible by the web app ;)
+The final step makes sure the carousel letters are aligned to the tape and works along with the right pressing force. There is a handy calibration mode built-in and accessible by the web app ;)
 
 
 *PS: the PCB order along with the components and it's assembly might be outsourced by using a turnkey PCB service, but it is funnier to DIY to learn by doing!*
