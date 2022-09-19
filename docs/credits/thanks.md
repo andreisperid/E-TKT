@@ -9,7 +9,7 @@ parent: ⚖️ credits
 # **thanks**
 
 ### Especially to
-- **Ana Marini:** for the initial idea of having embossed labels, which started all the process (and the motivation throughout the development process);
+- **[Ana Marini](https://anamarini.com/):** for the initial idea of having embossed labels, which started all the process (and the motivation throughout the development process);
 - **[Wesley Lee](https://github.com/wes06):** for the assistance on the PCB design, manufacture and assembly;
 - **José Speridião Junior:** for several tips that improved the printing mechanics, leading to better labels.
 
@@ -20,3 +20,6 @@ parent: ⚖️ credits
 - [28BYJ-48 - 5V by Pablo Galarce](https://grabcad.com/library/stepper-motor-28byj-48-5v-dc-1)
 - [ULN2003 by Aron Rubin](https://grabcad.com/library/uln2003-unipolar-stepper-driver-board-1)
 - [MG-995 by Hasanain Shuja](https://grabcad.com/library/hobby-servo-motors-for-rc-cars-planes-etc-1)
+
+And for everyone that contributed with constructive critics and cool ideas at any point in time.
+
