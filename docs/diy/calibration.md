@@ -15,7 +15,9 @@ Only when fully assembled and revised:
 2. after the splash screen the machine will home by rotating until the magnet meets the hall sensor;
 3. wait until it is finished and then...
 
-<< attention is needed here, please >>
+----
+
+### ***<< attention is needed here, please >>***
 
 Check the letter "?" position: if the letter is totally inside, then proceed to the step 4.
 
@@ -37,4 +39,12 @@ Also, when turning the machine on, the press angle should be as there would be a
 11. adjust the values and test to make sure it is alright;
 
 ### Force
-13. now we will adjust the peak servo angle
+12. now we will adjust the peak servo angle, that will determine if the letter will be lightly or heavily pressed against the tape;
+13. the default value is 1 in a scale from 1 to 9;
+14. increase it one at a time and hit the big test button;
+15. take the opportunity to see if the alignment is correct, and if not adjust it too;
+
+
+### 🕐 when the result it acceptable, click save and wait for the machine to reboot.
+
+### 🎉 Congrats, you are now ready to label the world! 🎉
