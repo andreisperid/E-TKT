@@ -13,7 +13,7 @@ parent: ⚖️ credits
 - **José Speridião Junior:** for several insights that improved the printing mechanics, leading to better labels.
 - **[Wesley Lee](https://wes.am):** for the assistance on the PCB design, manufacture and assembly;
 
-### For the [authors](https://andreisperid.github.io/E-TKT/credits/libraries.html) of the libraries used
+### For the authors of the [libraries](https://andreisperid.github.io/E-TKT/credits/libraries.html) used
 
 ### For the authors of 3D models used throughout the process
 - [LED TFT 0.96 inch 64x128 by Mih Kov](https://grabcad.com/library/oled-tft-0-96-inch-64x128-monochrome-i2c-1)
