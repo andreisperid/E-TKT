@@ -17,9 +17,9 @@ Only when fully assembled and revised:
 
 ## << attention is needed here, please >>
 
-Check the letter "?" position: if the letter is totally inside, then proceed to the step 4.
+Check the letter "?" position: if the letter is totally inside the window (ideally roughly centered), then proceed to the step 4.
 
-***In case the letter "?" is not totally inside the window, you must >>TURN OFF<< the machine and delicately adjust the hall sensor lateral position so that when the machine is homed, the letter "?" is fully inside.***
+***In case the letter "?" is not totally inside the window, you must << TURN OFF >> the machine and delicately adjust the hall sensor lateral position so that when the machine is homed, the letter "?" is fully inside.***
 
 Also, when turning the machine on, the press angle should be as there would be approximately one milimeter between it and the X_cube. If it is not, then you might need to redo the assembly step #?? or adjust the rest_angle on the firmware.  
 
