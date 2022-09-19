@@ -11,9 +11,9 @@ parent: 🛠️ do it yourself!
 This final part of the process will make sure the letter alignment is finely adjusted, and together with the correct imprinting pressure.
 
 Only when fully assembled and revised:
-1. turn your E-TKT on;
-1. after the splash screen the machine will home by rotating until the magnet meets the hall sensor;
-1. wait until it is finished and then...
+- turn your E-TKT on;
+- after the splash screen the machine will home by rotating until the magnet meets the hall sensor;
+- wait until it is finished and then...
 
 ## << attention is needed here, please >>
 
@@ -25,25 +25,27 @@ Also, when turning the machine on, the press angle should be as there would be a
 
 ----
 
- 4. check the display and follow the instructions to connect the machine to your local area network;
- 5. again, follow the display to open the web app (IP or QR code) and when loaded click on "settings";
- 6. you will see a xray of the machine, and now we will take care of the first part of the calibration which is the alignment (magenta).
+- check the display and follow the instructions to connect the machine to your local area network;
+- again, follow the display to open the web app (IP or QR code) and when loaded click on "settings";
+- you will see a xray of the machine, and now we will take care of the first part of the calibration which is the alignment (magenta).
 
 ### Alignment
- 7. the align values ranges from 1 to 9, having 5 as a default (middle).
- 8. now click the "TEST" button to the right side of "align";
- 9. the machine will slowly and lightly press the carousel letter;
- 10. the goal is to have the press to be fully aligned with the character, that should also be right in the middle of the character window;
- 11. adjust the values and test to make sure it is alright;
+- the align values ranges from 1 to 9, having 5 as a default (middle).
+- now click the "TEST" button to the right side of "align";
+- the machine will slowly and lightly press the carousel letter;
+- the goal is to have the press to be fully aligned with the character, that should also be right in the middle of the character window;
+- adjust the values and test to make sure it is alright;
 
 ### Force
- 12. now we will adjust the peak servo angle, that will determine if the letter will be lightly or heavily pressed against the tape;
- 13. the default value is 1 in a scale from 1 to 9;
- 14. increase it one at a time and hit the big test button;
- 15. take the opportunity to see if the alignment is correct, and if not adjust it too;
+- now we will adjust the peak servo angle, that will determine if the letter will be lightly or heavily pressed against the tape;
+- the default value is 1 in a scale from 1 to 9;
+- increase it one at a time and hit the big test button;
+- take the opportunity to see if the alignment is correct, and if not adjust it too;
 
 
 ### 🕐 when you are happy with the result, click save and wait for the machine to reboot.
 <br>
 
 # 🎉 you are now ready to label around! 🎉
+
+<br>
