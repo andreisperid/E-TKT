@@ -14,8 +14,10 @@ parent: 🧬 iterations
 ### 📌 planned
 - ~~manufactured PCB~~
 - ~~documentation~~
+- ~~letter calibration~~
 
 ### 🎈 nice to have
 - adjustable kerning
 - adaptive kerning
 - random kerning
+- interchangeable letter's carousel
