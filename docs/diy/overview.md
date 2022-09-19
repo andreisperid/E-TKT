@@ -25,7 +25,7 @@ Don't forget to order a stencil for the front face (not needed for the back) tog
 Very simple process, but please don't forget to add the data files together with the firmware.
 
 ### Assemble the whole package
-After making sure the system is working properly, you can proceed to shorten the cables and physically mount the parts together.
+After making sure the system is working properly, you can proceed to cable management and physically mounting the parts together.
 
 ### Calibrate
 The final step makes sure the carousel letters are aligned to the tape and working along with the right pressing force. There is a handy calibration mode built-in and acessible by the web app ;)
