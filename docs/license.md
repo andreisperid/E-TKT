@@ -1,9 +1,8 @@
 ---
 layout: default
 title: license
-nav_order: 2
+nav_order: 8
 description: "E-TKT"
-parent: ⚖️ credits
 ---
 
 # ⚖️ **license**
