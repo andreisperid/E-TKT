@@ -18,7 +18,7 @@ It's design was oriented to *low cost manufacturing* (4 layers). The two interna
 ### Order components
 You might need to search for *alternative drop-in replacements* (same specs & footprint) as right now there is a general shortage for semiconductors.
 
-### Mount the components into the received PCB
+### Mount the components on the PCB
 Don't forget to *order a stencil for the front face* (not needed for the back) together with the PCB. You can place the components manually in the PCB and then use a home electrical oven/toaster to solder the SMD components. Next, there are PTH headers in the back face and a single SMD electrolytical capacitor that will be easy to deal with a simple soldering station.
 
 ### Install the firmware
