@@ -10,8 +10,8 @@ parent: ⚖️ credits
 
 ### Especially to
 - **[Ana Marini](https://anamarini.com/):** for the initial idea of having embossed labels, which started all the process (and the motivation throughout the development process);
+- **José Speridião Junior:** for several insights that improved the printing mechanics, leading to better labels.
 - **[Wesley Lee](https://wes.am):** for the assistance on the PCB design, manufacture and assembly;
-- **José Speridião Junior:** for several tips that improved the printing mechanics, leading to better labels.
 
 ### For the [authors](https://andreisperid.github.io/E-TKT/credits/libraries.html) of the libraries used
 
