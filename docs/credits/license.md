@@ -8,6 +8,16 @@ parent: ⚖️ credits
 
 # ⚖️ **license**
 
-MIT @ [Andrei Speridião](https://github.com/andreisperid/)
+[E-TKT by Andrei Speridião, 2022](https://github.com/andreisperid/)
 
-If you ever build one, I would love to know ;)
+### Software
+MIT
+
+### Hardware
+TBD
+
+### Documentation
+TBD
+
+
+If you ever build one, [I would love to know](mailto:hi@andrei.cc) ;)
