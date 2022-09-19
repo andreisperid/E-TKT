@@ -1,13 +1,13 @@
 ---
 layout: default
-title: license
+title: ⚖️ license
 nav_order: 8
 description: "E-TKT"
 ---
 
 # ⚖️ **license**
 
-[E-TKT by Andrei Speridião, 2022](https://github.com/andreisperid/)
+E-TKT by [Andrei Speridião](https://github.com/andreisperid/), 2022
 
 ### Software
 MIT
@@ -17,6 +17,7 @@ TBD
 
 ### Documentation
 TBD
+
 
 
 If you ever build one, [I would love to know](mailto:hi@andrei.cc) ;)
