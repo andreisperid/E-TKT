@@ -15,7 +15,7 @@ I highly recommend you to have a *3d printer accessible* as you might need to te
 ### Order a PCB
 It's design was oriented to *low cost manufacturing* (4 layers). The two internal layers are ground planes, so it might work with only 2 layers for even lower costs (but it wasn't tested).
 
-### Order components
+### Buy components
 You might need to search for *alternative drop-in replacements* (same specs & footprint) as right now there is a general shortage for semiconductors.
 
 ### Mount the components on the PCB
