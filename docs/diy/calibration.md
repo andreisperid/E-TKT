@@ -17,7 +17,7 @@ Only when fully assembled and revised:
 
 ----
 
-### ***<< attention is needed here, please >>***
+## ***<< attention is needed here, please >>***
 
 Check the letter "?" position: if the letter is totally inside, then proceed to the step 4.
 
