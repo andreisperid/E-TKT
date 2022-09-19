@@ -45,6 +45,9 @@ Also, when turning the machine on, the press angle should be as there would be a
 15. take the opportunity to see if the alignment is correct, and if not adjust it too;
 
 
-### 🕐 when the result it acceptable, click save and wait for the machine to reboot.
+### 🕐 when you are happy with the result, click save and wait for the machine to reboot.
 
-### 🎉 Congrats, you are now ready to label the world! 🎉
+...
+
+# 🎉 Congrats, you are now ready to label the world! 🎉
+<br>
