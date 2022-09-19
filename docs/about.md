@@ -5,13 +5,11 @@ nav_order: 3
 description: "E-TKT"
 ---
 
-
+# 🤓 **what?**
 ## *étiquette f (plural étiquettes)*
 > ["ticket, memorandum, attach, stick, pierce, sting, to be sharp, goad, puncture, attach, nail"](https://en.wiktionary.org/wiki/%C3%A9tiquette#French)
 > 1. tag, label 
 > 2. prescribed behavior
-
-
 
 # 🤔 **why?**
 ### *TLDR: curiosity, technical challenge and of course organizing stuff.*
