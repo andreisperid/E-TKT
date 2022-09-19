@@ -50,4 +50,3 @@ Also, when turning the machine on, the press angle should be as there would be a
 ...
 
 # 🎉 Congrats, you are now ready to label the world! 🎉
-<br>
