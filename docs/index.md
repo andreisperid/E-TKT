@@ -11,8 +11,8 @@ permalink: /
     E-TKT: anachronic label maker
 </h1>
 <h6 align="center">Andrei Speridião 2022 - <a href="https://andrei.cc">andrei.cc</a> </h6>
-
-<p align="center"><img width="150px" src="https://user-images.githubusercontent.com/15098003/191094349-1365897e-3fb5-4a83-951e-a10630c27bd5.png"></p>
+<br>
+<p align="center"><img width="100px" style="opacity: 0.75;" src="https://user-images.githubusercontent.com/15098003/191094349-1365897e-3fb5-4a83-951e-a10630c27bd5.png"></p>
 
 ### *étiquette f (plural étiquettes)*
 > ["ticket, memorandum, attach, stick, pierce, sting, to be sharp, goad, puncture, attach, nail"](https://en.wiktionary.org/wiki/%C3%A9tiquette#French)
