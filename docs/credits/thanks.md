@@ -15,11 +15,11 @@ parent: ⚖️ credits
 
 ### For the [authors](https://andreisperid.github.io/E-TKT/credits/libraries.html) of the libraries used
 
-### 3D models used throughout the process
+### For the authors of 3D models used throughout the process
 - [LED TFT 0.96 inch 64x128 by Mih Kov](https://grabcad.com/library/oled-tft-0-96-inch-64x128-monochrome-i2c-1)
 - [28BYJ-48 - 5V by Pablo Galarce](https://grabcad.com/library/stepper-motor-28byj-48-5v-dc-1)
 - [ULN2003 by Aron Rubin](https://grabcad.com/library/uln2003-unipolar-stepper-driver-board-1)
 - [MG-995 by Hasanain Shuja](https://grabcad.com/library/hobby-servo-motors-for-rc-cars-planes-etc-1)
 
-And for everyone that contributed with constructive critics and cool ideas at any point in time.
+And finally to everyone that contributed with constructive critics and cool ideas at any point in time.
 
