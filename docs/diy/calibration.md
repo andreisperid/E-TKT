@@ -11,9 +11,9 @@ parent: 🛠️ do it yourself!
 This final part of the process will make sure the letter alignment is finely adjusted, and together with the correct imprinting pressure.
 
 Only when fully assembled and revised:
- 1. turn your E-TKT on;
- 2. after the splash screen the machine will home by rotating until the magnet meets the hall sensor;
- 3. wait until it is finished and then...
+1.1. turn your E-TKT on;
+1.2. after the splash screen the machine will home by rotating until the magnet meets the hall sensor;
+1.3. wait until it is finished and then...
 
 ## << attention is needed here, please >>
 
