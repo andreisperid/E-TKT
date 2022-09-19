@@ -24,6 +24,7 @@ parent: 🛠️ do it yourself!
 - fix the X_wall into the X_bottom by using two M3x?? screws;
 - attach the X_pillar to the X_bottom by using one M3x?? screw;
 - carefully, snap the X_wall_track between the X_wall and X_pillar;
+- connect the stepper cable (5 vias) to the PCB with the red wire aligned to the arrow (?);
 
 ### PCB with pillars and hall sensor
 - create a 90 degree angle for the Y_hall sensor;
@@ -33,9 +34,22 @@ parent: 🛠️ do it yourself!
 - proceed to screw three M3x?? to the X_bottom;
 
 ### Servo
-- attach the servo to the X_bottom with two M3x?? screws, washers and nuts
+- attach the servo to the X_bottom with two M3x?? screws, washers and nuts;
 - pass it's flat cable to the other side of the wall;
 
-### Top
+### Display
 - solder a 4 vias flat cable to the Y_display and crimp a 4 via dupont connector to the other extremity;
 - place the Y_display in the slot observing that the wires hould come from the outermost side, then enclose it with the X_display and two M3x?? screws.
+
+### LEDs
+- place one Y_LED into the press slot and make a cable (~??mm) with a 2 vias dupont connnector in the other end;
+- do the same for the end slot, but with a (~??mm) cable;
+
+## Feed press
+- place the bearings surrounded by M3 washers and fix them with one M3x?? screw and nut.
+
+## Top
+- 
+
+
+
