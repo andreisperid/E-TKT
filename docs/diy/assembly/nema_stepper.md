@@ -1,10 +1,11 @@
 ---
 layout: default
 title: 1. NEMA stepper
-nav_order: 6
 description: "E-TKT"
-grandparent: 🛠️ do it yourself!
+
 parent: 🧩 assembly
+grand_parent: 🛠️ do it yourself!
+nav_order: 1
 ---
 
 # 1. NEMA stepper
