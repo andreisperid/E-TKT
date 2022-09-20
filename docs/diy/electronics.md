@@ -23,7 +23,7 @@ parent: 🛠️ do it yourself!
 ### Press
 - The servo uses 6v, higher voltages tend to damage it.
 
-### Carousel
+### Daisy wheel
 - NEMA stepper, driver and a hall sensor to match the position origin.
 
 ### Wifi reset
