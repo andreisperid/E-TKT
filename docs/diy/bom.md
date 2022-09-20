@@ -1,6 +1,6 @@
 ---
 layout: default
-title: bill of materials
+title: ☑️ bill of materials
 nav_order: 4
 description: "E-TKT"
 parent: 🛠️ do it yourself!
@@ -8,7 +8,7 @@ parent: 🛠️ do it yourself!
 
 # ☑️ **bill of materials**
 
-The estimated cost is around $70 (USD) without shipping, as of May 2022.
+The estimated cost is around $70 (USD) without shipping and taxes, as of May 2022.
  
 ## Structure & mechanic
  
