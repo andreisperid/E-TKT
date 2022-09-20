@@ -1,6 +1,6 @@
 ---
 layout: default
-title: libraries
+title: 📚 libraries
 nav_order: 1
 description: "E-TKT"
 parent: 🏅 credits
