@@ -30,5 +30,6 @@ After making sure the system is working properly, you can proceed to *cable mana
 ### 7. Calibrate
 The final step makes sure the carousel letters are aligned to the tape and works along with the right pressing force. There is a handy *calibration mode built-in the web app* ;)
 
+<br>
 
-*PS: the PCB order along with the components and it's assembly (parts 2, 3 and 4) might be outsourced by using a turnkey PCB service, but it is funnier to DIY to learn by doing!*
+*PS: the PCB order along with the components and it's assembly (steps 2, 3 and 4) might be outsourced by using a turnkey PCB service, but it is funnier to DIY to learn by doing!*
