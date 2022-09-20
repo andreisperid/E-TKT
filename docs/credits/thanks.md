@@ -1,12 +1,12 @@
 ---
 layout: default
-title: thanks
+title: 🙂 thanks
 nav_order: 3
 description: "E-TKT"
 parent: 🏅 credits
 ---
 
-# **thanks**
+# ** 🙂 thanks**
 
 ### Especially to
 - **[Ana Marini](https://anamarini.com/):** for the initial idea of having embossed labels, which started all the process (and the motivation throughout the development process);
