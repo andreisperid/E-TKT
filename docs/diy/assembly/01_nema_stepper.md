@@ -8,7 +8,7 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 1
 ---
 
-# 1. NEMA stepper
+# **1. NEMA stepper**
 
 1. attach the Y_stepper motor into the X_bottom with four M3x?? screws while observing that the header direction must look to the PCB;
 2. place the Y_stepper motor into the X_wall by using two M3x?? screws, M3 washers and nuts;
