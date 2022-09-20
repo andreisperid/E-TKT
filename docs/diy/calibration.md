@@ -1,6 +1,6 @@
 ---
 layout: default
-title: calibration
+title: ⏱️ calibration
 nav_order: 8
 description: "E-TKT"
 parent: 🛠️ do it yourself!
