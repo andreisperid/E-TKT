@@ -24,17 +24,17 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 | 10 | structure | - | washer - M3 | 9 | [link](http://aliexpress.com/item/3256801295230574.html) |
 | 11 | structure | - | silicone pad feet - 8x2mm | 4 | [link](http://aliexpress.com/item/2251832637568894.html) |
 | 12 | mechanic | extruder | spring - 7mm ⌀ x 6mm length | 1 | [link](http://aliexpress.com/item/4001179419287.html) |
-| 13 | mechanic | carousel | pressing carousel - MOTEX / CIDY | 1 | [link](http://aliexpress.com/item/3256803798622137.html) |
-| 14 | mechanic | carousel | bearing - 608ZZ | 1 | [link](http://aliexpress.com/item/1005001813219171.html) |
+| 13 | mechanic | daisy wheel | pressing carousel - MOTEX / CIDY | 1 | [link](http://aliexpress.com/item/3256803798622137.html) |
+| 14 | mechanic | daisy wheel | bearing - 608ZZ | 1 | [link](http://aliexpress.com/item/1005001813219171.html) |
 | 15 | mechanic | extruder | bearing - 623ZZ | 2 | [link](http://aliexpress.com/item/1005001813219171.html) |
 | 16 | mechanic | extruder | extruder gear - MK8 40 teeth / 5mm axis | 1 | [link](http://aliexpress.com/item/2255800252771556.html) |
 | 17 | electronic | - | dual side prototyping PCB - 0.1" pitch - 50x70x1.6mm | 1 | [link](http://aliexpress.com/item/4000062405721.html) |
-| 18 | electronic | carousel | hall sensor - KY-003 | 1 | [link](http://aliexpress.com/item/2251832475321023.html) |
-| 19 | electronic | carousel | stepper motor - NEMA 17HS4023 | 1 | [link](http://aliexpress.com/item/2251832620474591.html) |
-| 20 | electronic | carousel | stepper driver - A4988 | 1 | [link](http://aliexpress.com/item/3256801435362018.html) |
+| 18 | electronic | daisy wheel | hall sensor - KY-003 | 1 | [link](http://aliexpress.com/item/2251832475321023.html) |
+| 19 | electronic | daisy wheel | stepper motor - NEMA 17HS4023 | 1 | [link](http://aliexpress.com/item/2251832620474591.html) |
+| 20 | electronic | daisy wheel | stepper driver - A4988 | 1 | [link](http://aliexpress.com/item/3256801435362018.html) |
 | 21 | electronic | extruder | stepper motor (28BYJ-48 5V) & driver (ULN2003) | 1 | [link](http://aliexpress.com/item/1005003353402464.html) |
 | 22 | electronic | press | servo - Towerpro MG-996R | 1 | [link](http://aliexpress.com/item/2251832857187114.html) |
-| 23 | electronic | carousel | neodymium magnet - 2mm ⌀ x 3mm length | 1 | [link](http://aliexpress.com/item/3256803632497346.html) |
+| 23 | electronic | daisy wheel | neodymium magnet - 2mm ⌀ x 3mm length | 1 | [link](http://aliexpress.com/item/3256803632497346.html) |
 | 24 | electronic | - | ESP32 WROOM nodeMCU | 1 | [link](http://aliexpress.com/item/2251832741952874.html) |
 | 25 | electronic | level | 4-channel I2C-safe Bi-directional Logic Level Converter - BSS138 | 1 | [link](http://adafruit.com/product/757) |
 | 26 | electronic | UI | OLED screen - 128x32px 0.91" | 1 | [link](http://aliexpress.com/item/32927682460.html) |
