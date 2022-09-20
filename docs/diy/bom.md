@@ -10,6 +10,8 @@ parent: 🛠️ do it yourself!
 
 The estimated cost is around $70 (USD) without shipping, as of May 2022.
  
+## Structure
+ 
 | # | TYPE | SUBSYSTEM | PART - DESCRIPTION | QTY | REF | 
 | :---: | :---: | :---: |  :--- | :---: | :---: |
 | 1 | structure | - | 3D print filament - PETG (~200g used) | 0.2 | [link](http://prusa3d.com/product/prusament-petg-jet-black-1kg/) |
@@ -28,6 +30,11 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 | 14 | mechanic | daisy wheel | bearing - 608ZZ | 1 | [link](http://aliexpress.com/item/1005001813219171.html) |
 | 15 | mechanic | extruder | bearing - 623ZZ | 2 | [link](http://aliexpress.com/item/1005001813219171.html) |
 | 16 | mechanic | extruder | extruder gear - MK8 40 teeth / 5mm axis | 1 | [link](http://aliexpress.com/item/2255800252771556.html) |
+
+## Sensors & actuators
+
+| # | TYPE | SUBSYSTEM | PART - DESCRIPTION | QTY | REF | 
+| :---: | :---: | :---: |  :--- | :---: | :---: |
 | 17 | electronic | - | dual side prototyping PCB - 0.1" pitch - 50x70x1.6mm | 1 | [link](http://aliexpress.com/item/4000062405721.html) |
 | 18 | electronic | daisy wheel | hall sensor - KY-003 | 1 | [link](http://aliexpress.com/item/2251832475321023.html) |
 | 19 | electronic | daisy wheel | stepper motor - NEMA 17HS4023 | 1 | [link](http://aliexpress.com/item/2251832620474591.html) |
@@ -35,6 +42,11 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 | 21 | electronic | extruder | stepper motor (28BYJ-48 5V) & driver (ULN2003) | 1 | [link](http://aliexpress.com/item/1005003353402464.html) |
 | 22 | electronic | press | servo - Towerpro MG-996R | 1 | [link](http://aliexpress.com/item/2251832857187114.html) |
 | 23 | electronic | daisy wheel | neodymium magnet - 2mm ⌀ x 3mm length | 1 | [link](http://aliexpress.com/item/3256803632497346.html) |
+
+## PCB components
+
+| # | TYPE | SUBSYSTEM | PART - DESCRIPTION | QTY | REF | 
+| :---: | :---: | :---: |  :--- | :---: | :---: |
 | 24 | electronic | - | ESP32 WROOM nodeMCU | 1 | [link](http://aliexpress.com/item/2251832741952874.html) |
 | 25 | electronic | level | 4-channel I2C-safe Bi-directional Logic Level Converter - BSS138 | 1 | [link](http://adafruit.com/product/757) |
 | 26 | electronic | UI | OLED screen - 128x32px 0.91" | 1 | [link](http://aliexpress.com/item/32927682460.html) |
@@ -44,6 +56,11 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 | 30 | electronic | power | DC-005 Power Jack Socket | 1 | [link](http://aliexpress.com/item/2251801542561009.html) |
 | 31 | electronic | wifi reset | tact switch - 6x6x4.5 | 1 | [link](http://aliexpress.com/item/3256802537583003.html) |
 | 32 | electronic | - | wiring - solid (prototype) | 1 | link |
+
+## Harness
+
+| # | TYPE | SUBSYSTEM | PART - DESCRIPTION | QTY | REF | 
+| :---: | :---: | :---: |  :--- | :---: | :---: |
 | 33 | harness | - | USB type-A to micro-B data cable | 1 | [link](http://aliexpress.com/item/2255800229926282.html) |
 | 34 | harness | - | wiring (harnesses) - flexible, flat | 1 | [link](http://aliexpress.com/item/2251832639497810.html) |
 | 35 | harness | - | header jumper connector | 1 | [link](http://aliexpress.com/item/2251801839907761.html) |
@@ -52,4 +69,9 @@ The estimated cost is around $70 (USD) without shipping, as of May 2022.
 | 38 | harness | - | female connector - 8 pin 0.1" pitch dupont | 1 | [link](http://aliexpress.com/item/3256802073547679.html) |
 | 39 | harness | - | female connector - 3 pin 0.1" pitch dupont | 4 | [link](http://aliexpress.com/item/3256802073547679.html) |
 | 40 | harness | - | female connector - 4 pin 0.1" pitch dupont | 2 | [link](http://aliexpress.com/item/3256802073547679.html) |
+
+## Consumables
+
+| # | TYPE | SUBSYSTEM | PART - DESCRIPTION | QTY | REF | 
+| :---: | :---: | :---: |  :--- | :---: | :---: |
 | 41 | consumable | - | label tape - 9mm DYMO compatible | 1 | [link](http://aliexpress.com/item/1005001525284316.html) |
