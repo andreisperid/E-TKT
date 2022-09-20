@@ -22,7 +22,7 @@ The initial spark for this project came from an ordinary manual [labeling device
 
 I knew I could easily buy a brand new modern electronic thermal label printer ([such as Brother](https://www.brother-usa.com/products/pth110bp)), but something about the vintage embossed finish fascinated me. Also, these new models use expensive [proprietary cartridges](https://www.brother-usa.com/products/tze335) that create a lot of trash after use.
 
-After all, even though the pressing mechanism was poorly made, the characters' carousel was pretty sturdy and sharp. So I thought: can I build over its principles to create a functional device? If so, then why not make it *physical-digital?*
+After all, even though the pressing mechanism was poorly made, the daisy wheel was pretty sturdy and sharp. So I thought: can I build over its principles to create a functional device? If so, then why not make it *physical-digital?*
 
 ...why bother mixing an archaic printing method with current automation and connectivity features? Because *why not?* It was a technological blind spot to be explored!
 
