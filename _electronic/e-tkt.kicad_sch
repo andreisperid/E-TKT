@@ -2296,10 +2296,10 @@
       (reference "A_NEMA1") (unit 1) (value "8+8 pin") (footprint "SnapEDA Library:Pololu_Breakout-16_15.2x20.3mm")
     )
     (path "/53dc24b1-e06e-42b0-9cce-919318864537/c161ff46-3126-42d4-ac2d-a86add82b65e"
-      (reference "C_ENA1") (unit 1) (value "0.1uF 10V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
+      (reference "C_ENA1") (unit 1) (value "0.1uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
     (path "/973f9b7f-d992-45f9-a125-51db85018136/f7b9dc4e-25db-4f7d-b53a-a08893c49db9"
-      (reference "C_MCU1") (unit 1) (value "0.1uF 10V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
+      (reference "C_MCU1") (unit 1) (value "0.1uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
     (path "/973f9b7f-d992-45f9-a125-51db85018136/dc229927-f30d-409c-88da-38e68c862312"
       (reference "C_MCU2") (unit 1) (value "22uF 12V 1mOhm") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
@@ -2356,10 +2356,10 @@
       (reference "C_POW_OUT5") (unit 1) (value "22uF 25V") (footprint "Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder")
     )
     (path "/53dc24b1-e06e-42b0-9cce-919318864537/c708e976-d434-4784-8384-a21eac2e20cc"
-      (reference "C_RST1") (unit 1) (value "0.1uF 10V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
+      (reference "C_RST1") (unit 1) (value "0.1uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
     (path "/500f785f-7d37-4530-93ef-964340f250e0/7973b215-7cc6-42e6-9f62-72893fdc9d0d"
-      (reference "C_SER1") (unit 1) (value "0.1uF 10V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
+      (reference "C_SER1") (unit 1) (value "0.1uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
     (path "/500f785f-7d37-4530-93ef-964340f250e0/29215e2e-bd3e-478f-8c8a-2609da7e48de"
       (reference "C_SER2") (unit 1) (value "47pF 5V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
@@ -2368,7 +2368,7 @@
       (reference "C_SER3") (unit 1) (value "47pF 5V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
     (path "/500f785f-7d37-4530-93ef-964340f250e0/2081b96f-afcb-4d48-92e0-0afa94e3d654"
-      (reference "C_SER4") (unit 1) (value "0.1uF 10V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
+      (reference "C_SER4") (unit 1) (value "0.1uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
     (path "/500f785f-7d37-4530-93ef-964340f250e0/17ea23e4-e247-480d-b27f-7fbf4e1edc2d"
       (reference "C_SER5") (unit 1) (value "10uF 12V 5mOhm") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
@@ -2377,7 +2377,7 @@
       (reference "C_STP1") (unit 1) (value "10uF 12V 5mOhm") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
     (path "/2d0c1513-867c-4f44-88ad-09ecf55e026a/e556f49f-3ca3-4708-9529-34e4fc07b98f"
-      (reference "C_WIFI1") (unit 1) (value "0.1uF 10V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
+      (reference "C_WIFI1") (unit 1) (value "0.1uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
     (path "/e114063c-c6b9-4008-930a-c1b2e1caea2c/3ab15ea9-8194-4b52-b3d0-a1e539a82e90"
       (reference "D_HALL1") (unit 1) (value "LED white") (footprint "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder")
@@ -2491,7 +2491,7 @@
       (reference "J_USB1") (unit 1) (value "USB4105-GF-A") (footprint "SnapEDA Library:GCT_USB4105-GF-A")
     )
     (path "/9f001140-4433-4565-aea0-4a74283269e6/3d9a19f4-1559-4a12-a0b2-77168e4bbf96"
-      (reference "L1") (unit 1) (value "~") (footprint "SRP6060FA:SRP6060FA-4R7M")
+      (reference "L1") (unit 1) (value "SRP6060FA-100M") (footprint "SRP6060FA:SRP6060FA-4R7M")
     )
     (path "/b9a08064-5ae8-4a06-9ac0-67609fb8976b"
       (reference "LS1") (unit 1) (value "CSS-0575A-SMT") (footprint "SnapEDA Library:CUI_CSS-0575A-SMT")
