@@ -23,14 +23,14 @@ parent: 🛠️ do it yourself!
 - I_top ***(support only in the K_top_tapefeed area)***
 - J_top_screenholder
 - K_top_tapefeed ***(support)***
-- L_caroulsel_cube
-- M_carousel_hallholder
-- N_carousel_coupling_1
-- O_carousel_coupling_2
+- L_daisywheel_cube
+- M_daisywheel_hallholder
+- N_daisywheel_coupling_1
+- O_daisywheel_coupling_2
 - P_press
     
 ### 🎛️ Settings
-- Layer height: 0.25mm
+- Layer height: 0.20mm
 - Infill: 20%
 - Wall line count: 3 + 1 (Cura usually adds the later together with the infill)
-- Top/bottom layers: 4
+- Top/bottom layers: 5
