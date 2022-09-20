@@ -21,4 +21,4 @@ parent: 🏅 credits
 - [ULN2003 by Aron Rubin](https://grabcad.com/library/uln2003-unipolar-stepper-driver-board-1);
 - [MG-995 by Hasanain Shuja](https://grabcad.com/library/hobby-servo-motors-for-rc-cars-planes-etc-1);
 
-& last but not least, to everyone that contributed with constructive critics and cool ideas at any point in time!
+& last but not least, to everyone that contributed with constructive critics and cool ideas!
