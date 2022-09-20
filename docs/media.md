@@ -30,5 +30,3 @@ description: "E-TKT"
 ### <a href="https://hackaday.com/2022/06/15/diy-automated-printer-kerchunks-out-classic-embossed-labels/" target="_blank">Hackaday</a>
 "DIY AUTOMATED PRINTER KERCHUNKS OUT CLASSIC EMBOSSED LABELS"<br>
 *by Dan Maloney on June 15, 2022*
-
-----
