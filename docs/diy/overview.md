@@ -13,13 +13,13 @@ To make your own E-TKT you will need to:
 I highly recommend you to have a *3d printer accessible* as you might need to test and tweak the printing settings, since this project demands a certain precision in the fittings;
   
 ### 2. order a PCB
-It's design was oriented to *low cost manufacturing* (4 layers). The two internal layers are ground planes, so it might work with only 2 layers for even lower costs (but it wasn't tested).
+It's design was oriented to *low cost manufacturing* (4 layers). The two internal layers are ground planes, so it might work with only 2 layers for even lower costs (but it wasn't tested). Don't forget to *order a stencil for the front face* (not needed for the back) together with the PCB.
 
 ### 3. buy components
 For some electronic parts, you might need to search for alternative *drop-in replacements* (same specs & footprint) as right now there is a general shortage for semiconductors.
 
 ### 4. mount the components on the PCB
-Don't forget to *order a stencil for the front face* (not needed for the back) together with the PCB. You can place the components manually in the PCB and then use a home electrical oven/toaster to solder the SMD components. Next, there are PTH headers in the back face and a single SMD electrolytical capacitor that will be easy to deal with a simple soldering station.
+You can place the components manually in the PCB and then use a home electrical oven/toaster to solder the SMD components. There are PTH headers in the back face and a single SMD electrolytical capacitor that will be easy to deal with a simple soldering station.
 
 ### 5. install the firmware
 Very simple process, but please don't forget to *add the data files* together with the firmware.
