@@ -9,7 +9,7 @@ description: "E-TKT"
 
 ----
 
-### <a href="https://www.youtube.com/watch?v=3jpaBhROYGc" target="_blank">Maker Update</a> (project of the week)
+### <a href="https://www.youtube.com/watch?v=3jpaBhROYGc" target="_blank">Digi-Key Maker Update</a> (project of the week)
 "Ep.289 - Stamp of aproval"<br>
 *by Donald Bell on June 30, 2022*
 
