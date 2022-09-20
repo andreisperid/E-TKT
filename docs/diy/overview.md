@@ -16,7 +16,7 @@ I highly recommend you to have a *3d printer accessible* as you might need to te
 It's design was oriented to *low cost manufacturing* (4 layers). The two internal layers are ground planes, so it might work with only 2 layers for even lower costs (but it wasn't tested).
 
 ### Buy components
-For some electronic parts, you might need to search for *alternative drop-in replacements* (same specs & footprint) as right now there is a general shortage for semiconductors.
+For some electronic parts, you might need to search for alternative *drop-in replacements* (same specs & footprint) as right now there is a general shortage for semiconductors.
 
 ### Mount the components on the PCB
 Don't forget to *order a stencil for the front face* (not needed for the back) together with the PCB. You can place the components manually in the PCB and then use a home electrical oven/toaster to solder the SMD components. Next, there are PTH headers in the back face and a single SMD electrolytical capacitor that will be easy to deal with a simple soldering station.
