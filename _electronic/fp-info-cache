@@ -1,4 +1,4 @@
-21177104237200303
+21183742773581484
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -78918,6 +78918,20 @@ Integrated Circuit
 8
 8
 SamacSys_Parts
+PCM12SMTR
+PCM12SMTR-1
+Switch
+0
+7
+7
+SamacSys_Parts
+SOIC127P600X170-8N
+SO-8(Thickness=1.7mm)
+Integrated Circuit
+0
+8
+8
+SamacSys_Parts
 SP320501ETG
 SP3205-01ETG-3
 Diode ESD (Uni-directional)
@@ -79408,6 +79422,13 @@ KMR621NG
 4
 4
 SnapEDA Library
+LED_WS2812-2020
+
+
+0
+4
+4
+SnapEDA Library
 Pololu_Breakout-16_15.2x20.3mm
 Pololu Breakout 16-pin 15.2x20.3mm 0.6x0.8\
 Pololu Breakout
@@ -79449,6 +79470,13 @@ SW_1101M2S3CQE2
 0
 3
 3
+SnapEDA Library
+SW_EVQ-P7J01P
+
+
+0
+4
+4
 SnapEDA Library
 SW_JS202011JCQN
 

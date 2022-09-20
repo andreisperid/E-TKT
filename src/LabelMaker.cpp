@@ -1405,13 +1405,13 @@ void setup()
 	myServo.write(restAngle);
 	delay(100);
 
+	setHome(); // initial home for reference
+
 	// set  display
 	displayInitialize();
 	displayClear();
 	displaySplash();
 	
-	setHome(); // initial home for reference
-
 	// start wifi > comment both to avoid entering the main loop
 	wifiManager();
 	delay(2000); // time for the task to start
