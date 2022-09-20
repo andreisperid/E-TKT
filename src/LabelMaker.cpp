@@ -1409,10 +1409,13 @@ void setup()
 	displayInitialize();
 	displayClear();
 	displaySplash();
+	
+	setHome(); // initial home for reference
 
 	// start wifi > comment both to avoid entering the main loop
 	wifiManager();
 	delay(2000); // time for the task to start
+
 }
 
 void loop()
