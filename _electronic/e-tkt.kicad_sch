@@ -774,7 +774,7 @@
     (uuid ffdbd204-77d4-41f8-9033-6c982fef7501)
   )
 
-  (text "TEST PADS" (at 184.15 20.32 0)
+  (text "PADS" (at 184.15 20.32 0)
     (effects (font (size 3 3) italic) (justify left bottom))
     (uuid 08bcec8d-a047-497a-a5a8-a1fcbe1a1b0c)
   )
@@ -959,10 +959,10 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "IO0 RESET" (shape input) (at 67.31 109.22 0) (fields_autoplaced)
+  (global_label "IO0 DFU" (shape input) (at 67.31 109.22 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 69ce4cf6-cb88-4b21-88ef-5239fd094058)
-    (property "Intersheet References" "${INTERSHEET_REFS}" (id 0) (at 79.5807 109.1406 0)
+    (property "Intersheet References" "${INTERSHEET_REFS}" (id 0) (at 77.5245 109.1406 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
@@ -1029,10 +1029,10 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "IO0 RESET" (shape input) (at 107.95 58.42 180) (fields_autoplaced)
+  (global_label "IO0 DFU" (shape input) (at 107.95 58.42 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 9bce8edf-bcce-4c53-ab72-bc11cca46355)
-    (property "Intersheet References" "${INTERSHEET_REFS}" (id 0) (at 95.6793 58.4994 0)
+    (property "Intersheet References" "${INTERSHEET_REFS}" (id 0) (at 97.7355 58.3406 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -1707,7 +1707,7 @@
     (property "Sheet file" "boot.kicad_sch" (id 1) (at 25.4 118.6946 0)
       (effects (font (size 1.27 1.27)) (justify left top))
     )
-    (pin "RESET OUT" input (at 63.5 109.22 0)
+    (pin "DFU OUT" input (at 63.5 109.22 0)
       (effects (font (size 1.27 1.27)) (justify right))
       (uuid 164bf84a-f07f-4630-ac39-55bb9786db5b)
     )
@@ -1887,7 +1887,7 @@
       (effects (font (size 1.27 1.27)) (justify right))
       (uuid 3e7b5100-279a-4a63-8429-85e78574146a)
     )
-    (pin "IO27 BUZZER OUT" input (at 149.86 83.82 0)
+    (pin "IO26 BUZZER OUT" input (at 149.86 83.82 0)
       (effects (font (size 1.27 1.27)) (justify right))
       (uuid a7d07e2c-1644-4ab3-bdb3-54488129d3be)
     )
@@ -2099,6 +2099,9 @@
     (path "/13b4b8e1-9c71-4c24-9a80-5ca3e71dd01d"
       (reference "#PWR0128") (unit 1) (value "+6V") (footprint "")
     )
+    (path "/101993a2-8c13-4c99-b45a-f486b8a836ae/4741fdff-cf20-405c-8df9-b0efece63751"
+      (reference "#PWR0129") (unit 1) (value "GNDREF") (footprint "")
+    )
     (path "/101993a2-8c13-4c99-b45a-f486b8a836ae/b2ca76e4-3a79-40a6-bbdf-055e674ad637"
       (reference "#PWR0130") (unit 1) (value "GNDREF") (footprint "")
     )
@@ -2213,11 +2216,11 @@
     (path "/47a01bed-9bbf-4b19-99e0-83f6cac92406"
       (reference "#PWR0188") (unit 1) (value "+12V") (footprint "")
     )
-    (path "/101993a2-8c13-4c99-b45a-f486b8a836ae/b900f311-a484-4187-a9ac-83ef2eca9cdf"
-      (reference "#PWR0194") (unit 1) (value "GNDREF") (footprint "")
-    )
     (path "/101993a2-8c13-4c99-b45a-f486b8a836ae/c73cd793-7bb6-49a6-8bf3-bf2dc45d0e58"
       (reference "A_NEMA1") (unit 1) (value "8+8 pin") (footprint "SnapEDA Library:Pololu_Breakout-16_15.2x20.3mm")
+    )
+    (path "/53dc24b1-e06e-42b0-9cce-919318864537/c708e976-d434-4784-8384-a21eac2e20cc"
+      (reference "C_DFU1") (unit 1) (value "0.1uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
     (path "/53dc24b1-e06e-42b0-9cce-919318864537/c161ff46-3126-42d4-ac2d-a86add82b65e"
       (reference "C_ENA1") (unit 1) (value "0.1uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
@@ -2275,9 +2278,6 @@
     )
     (path "/9f001140-4433-4565-aea0-4a74283269e6/73b29581-40fb-4e9b-9a1b-285534ca16cc"
       (reference "C_POW_OUT5") (unit 1) (value "22uF 25V") (footprint "Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder")
-    )
-    (path "/53dc24b1-e06e-42b0-9cce-919318864537/c708e976-d434-4784-8384-a21eac2e20cc"
-      (reference "C_RST1") (unit 1) (value "0.1uF 50V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
     )
     (path "/500f785f-7d37-4530-93ef-964340f250e0/29215e2e-bd3e-478f-8c8a-2609da7e48de"
       (reference "C_SER2") (unit 1) (value "47pF 5V") (footprint "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder")
@@ -2414,6 +2414,9 @@
     (path "/53dc24b1-e06e-42b0-9cce-919318864537/bb905ed0-09c3-4d1b-b6fc-df4482044a3e"
       (reference "R_AUTO2") (unit 1) (value "10K (5%)") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
     )
+    (path "/53dc24b1-e06e-42b0-9cce-919318864537/80289846-45bb-4f7e-8a56-6a469cee6e49"
+      (reference "R_DFU1") (unit 1) (value "10K (5%)") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
+    )
     (path "/53dc24b1-e06e-42b0-9cce-919318864537/f9878306-6ebd-4529-86fc-8fe33906cf59"
       (reference "R_ENA1") (unit 1) (value "10K (5%)") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
     )
@@ -2446,9 +2449,6 @@
     )
     (path "/9f001140-4433-4565-aea0-4a74283269e6/aacf9f28-7bd6-46de-bca3-059369a47de9"
       (reference "R_POW_FFB1") (unit 1) (value "11K") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
-    )
-    (path "/53dc24b1-e06e-42b0-9cce-919318864537/80289846-45bb-4f7e-8a56-6a469cee6e49"
-      (reference "R_RST1") (unit 1) (value "10K (5%)") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
     )
     (path "/500f785f-7d37-4530-93ef-964340f250e0/1d27ab48-a640-4f47-bc17-bdcd69db5732"
       (reference "R_RX1") (unit 1) (value "27R") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
@@ -2495,29 +2495,14 @@
     (path "/2d0c1513-867c-4f44-88ad-09ecf55e026a/6d3f4f17-9a58-4bfb-b390-79f0a6634f9a"
       (reference "R_WIFI1") (unit 1) (value "10K(5%)") (footprint "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder")
     )
+    (path "/53dc24b1-e06e-42b0-9cce-919318864537/d348eb6c-e41c-436a-ae0e-698c5c035baa"
+      (reference "SW_DFU1") (unit 1) (value "B3FS-1000") (footprint "b3fs:B3FS-1000")
+    )
     (path "/53dc24b1-e06e-42b0-9cce-919318864537/a455153a-05f9-4e85-901e-8958d4f3b17b"
       (reference "SW_ENA1") (unit 1) (value "B3FS-1000") (footprint "b3fs:B3FS-1000")
     )
-    (path "/53dc24b1-e06e-42b0-9cce-919318864537/d348eb6c-e41c-436a-ae0e-698c5c035baa"
-      (reference "SW_RST1") (unit 1) (value "B3FS-1000") (footprint "b3fs:B3FS-1000")
-    )
     (path "/2d0c1513-867c-4f44-88ad-09ecf55e026a/29887617-5bc0-4b32-ac51-e4008f4b493b"
       (reference "SW_WIFI1") (unit 1) (value "B3FS-1000") (footprint "b3fs:B3FS-1000")
-    )
-    (path "/80181399-56c9-4858-bcd2-be6de4dbffde/a2ae1716-c872-45b0-ada9-012773e72e0e"
-      (reference "TP_3.3v1") (unit 1) (value "TestPoint") (footprint "TestPoint:TestPoint_Pad_D1.0mm")
-    )
-    (path "/80181399-56c9-4858-bcd2-be6de4dbffde/7dfcde2e-43b0-42d7-8f37-7932f448318d"
-      (reference "TP_5v1") (unit 1) (value "TestPoint") (footprint "TestPoint:TestPoint_Pad_D1.0mm")
-    )
-    (path "/80181399-56c9-4858-bcd2-be6de4dbffde/0d1cefda-0da1-419e-8d72-b6b1e29406d4"
-      (reference "TP_6v1") (unit 1) (value "TestPoint") (footprint "TestPoint:TestPoint_Pad_D1.0mm")
-    )
-    (path "/80181399-56c9-4858-bcd2-be6de4dbffde/8cef06b1-cb55-4287-a2c1-e0e76cd67f80"
-      (reference "TP_12v1") (unit 1) (value "TestPoint") (footprint "TestPoint:TestPoint_Pad_D1.0mm")
-    )
-    (path "/80181399-56c9-4858-bcd2-be6de4dbffde/c13fc93a-0972-4a87-8f24-0804bf570334"
-      (reference "TP_GND3") (unit 1) (value "TestPoint") (footprint "TestPoint:TestPoint_Pad_D1.0mm")
     )
     (path "/973f9b7f-d992-45f9-a125-51db85018136/fdecbef2-8cfc-4ede-8ea0-7a11182a7ade"
       (reference "U_MCU1") (unit 1) (value "ESP32-WROOM-32") (footprint "RF_Module:ESP32-WROOM-32")
