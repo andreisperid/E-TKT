@@ -14,7 +14,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
  
  
 | ID | TYPE | SPEC | REF | QTY |
-| :---: | :---: | :--- | :--- | :---: |
+| :---: | :--- | :--- | :--- | :---: |
 |  1 | 3D print | filament — PETG | [link](http://prusa3d.com/product/prusament-petg-jet-black-1kg/) | ~200g |
 |  2 | screw | cyl. hex steel — M3x40mm | [link](http://aliexpress.com/item/2261799963738734.html) |  |
 |  3 | screw | cyl. hex steel — M3x20mm | [link](http://aliexpress.com/item/2261799963738734.html) |  |
@@ -35,19 +35,19 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
  
 ## B. sensors & actuators
 
-| ID | SUBSYSTEM | PART - DESCRIPTION | QTY | REF | 
-| :---: | :---: |  :--- | :---: | :---: 
-| 1 | daisy wheel | hall sensor - KY-003 | 1 | [link](http://aliexpress.com/item/2251832475321023.html) |
-| 2 | daisy wheel | stepper motor - NEMA 17HS4023 | 1 | [link](http://aliexpress.com/item/2251832620474591.html) |
-| 3 | daisy wheel | stepper driver - A4988 | 1 | [link](http://aliexpress.com/item/3256801435362018.html) |
-| 4 | extruder | stepper motor (28BYJ-48 5V) & driver (ULN2003) | 1 | [link](http://aliexpress.com/item/1005003353402464.html) |
-| 5 | press | servo - Towerpro MG-996R | 1 | [link](http://aliexpress.com/item/2251832857187114.html) |
-| 6 | daisy wheel | neodymium magnet - 2mm ⌀ x 3mm length | 1 | [link](http://aliexpress.com/item/3256803632497346.html) |
+| ID | TYPE | SPEC | REF | QTY |
+| :---: | :--- | :--- | :--- | :---: |
+| 1 | hall sensor - KY-003 |[link](http://aliexpress.com/item/2251832475321023.html) | 1 | 
+| 2 | stepper motor - NEMA 17HS4023 | [link](http://aliexpress.com/item/2251832620474591.html) | 1 |
+| 3 | stepper driver - A4988 | [link](http://aliexpress.com/item/3256801435362018.html) | 1 |
+| 4 | stepper motor (28BYJ-48 5V) & driver (ULN2003) |[link](http://aliexpress.com/item/1005003353402464.html) | 1 | 
+| 5 | servo - Towerpro MG-996R |[link](http://aliexpress.com/item/2251832857187114.html) | 1 | 
+| 6 | neodymium magnet - 2mm ⌀ x 3mm length | [link](http://aliexpress.com/item/3256803632497346.html) | 1 |
 
 ## C. PCB & components
 
 | ID | TYPE | SPEC — PACKAGE | REF | QTY |
-| :---: | :---: | :--- | :--- | :---: |
+| :---: | :--- | :--- | :--- | :---: |
 |  1 | PCB | 4 layer, FR4, black + front stencil — 99.57 mm x 76.2 mm | | 1 |
 |  2 | MCU | ESP32 — WROOM-32D (SMD) | [ESP32-WROOM-32D-N4](https://www.findchips.com/search/ESP32-WROOM-32D-N4) | 1 |
 |  3 | SERIAL | USB Interface, Full Serial UART — SSOP-20 3.9x8.7mm (SMD) | [FT231XS-R](https://www.findchips.com/search/FT231XS-R) | 1 |
@@ -88,20 +88,19 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 
 ## D. harnesses
 
-| ID | SUBSYSTEM | PART - DESCRIPTION | QTY | REF | 
-| :---: | :---: |  :--- | :---: | :---: |
-| 1 | - | USB type-A to micro-B data cable | 1 | [link](http://aliexpress.com/item/2255800229926282.html) |
-| 2 | - | wiring (harnesses) - flexible, flat | 1 | [link](http://aliexpress.com/item/2251832639497810.html) |
-| 3 | - | header jumper connector | 1 | [link](http://aliexpress.com/item/2251801839907761.html) |
-| 4 | - | male header - 0.1" pitch | 2 | [link](http://aliexpress.com/item/2251832538163556.html) |
-| 5 | - | female header - 0.1" pitch | 2 | [link](http://aliexpress.com/item/2251832538163556.html) |
-| 6 | - | female connector - 8 pin 0.1" pitch dupont | 1 | [link](http://aliexpress.com/item/3256802073547679.html) |
-| 7 | - | female connector - 3 pin 0.1" pitch dupont | 4 | [link](http://aliexpress.com/item/3256802073547679.html) |
-| 8 | - | female connector - 4 pin 0.1" pitch dupont | 2 | [link](http://aliexpress.com/item/3256802073547679.html) |
+| ID | TYPE | SPEC | REF | QTY |
+| :---: | :--- | :--- | :--- | :---: |
+| 1 | cable | USB type-A to micro-B data cable | [link](http://aliexpress.com/item/2255800229926282.html) | 1 |
+| 2 | flexible wiring | flat | [link](http://aliexpress.com/item/2251832639497810.html) | 1 |
+| 4 | header | male header - 0.1" pitch | [link](http://aliexpress.com/item/2251832538163556.html) | 2 |
+| 5 | header | female header - 0.1" pitch | [link](http://aliexpress.com/item/2251832538163556.html) | 2 |
+| 6 | connector | female  - 8 pin 0.1" pitch dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 1 |
+| 7 | connector | female connector - 3 pin 0.1" pitch dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 4 |
+| 8 | connector | female connector - 4 pin 0.1" pitch dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 2 |
 
 ## E. other
 
-| ID | SUBSYSTEM | PART - DESCRIPTION | QTY | REF | 
-| :---: | :---: |  :--- | :---: | :---: |
-| 1 | power | 12v 3A (real) | 1 | |
-| 2 | consumables | label tape - 9mm DYMO compatible | 🦝 | [link](http://aliexpress.com/item/1005001525284316.html) |
+| ID | TYPE | SPEC | REF | QTY |
+| :---: | :--- | :--- | :--- | :---: |
+| 1 | power | 12v 3A (real) | | 1 |
+| 2 | consumables | label tape - 9mm DYMO compatible | [link](http://aliexpress.com/item/1005001525284316.html) | 🦝 |
