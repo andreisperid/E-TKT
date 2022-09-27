@@ -33,24 +33,6 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | 15 | extruder gear | MK8 40 teeth / 5mm axis | [link](http://aliexpress.com/item/2255800252771556.html) | 1 |
 
  
-| ID | SUBSYSTEM | PART - DESCRIPTION | QTY | REF | 
-| :---: | :---: |  :--- | :---: | :---: |
-| 1 | - | t  -  () | 0.2 |  |
-| 2 | - | screw - M3x40mm | 1 | [link](http://aliexpress.com/item/2261799963738734.html) |
-| 3 | - | screw - M3x20mm | 17 | [link](http://aliexpress.com/item/2261799963738734.html) |
-| 4 | - | screw - M3x18mm | 3 | [link](http://aliexpress.com/item/2261799963738734.html) |
-| 5 | - | screw - M3x16mm | 2 | [link](http://aliexpress.com/item/2261799963738734.html) |
-| 6 | - | screw - M3x8mm | 6 | [link](http://aliexpress.com/item/2261799963738734.html) |
-| 7 | - | screw - M3x6mm | 10 | [link](http://aliexpress.com/item/2261799963738734.html) |
-| 8 | - | screw - M4x12mm | 1 | [link](http://aliexpress.com/item/2261799963738734.html) |
-| 9 | - | hex nut - M3 | 10 | [link](http://aliexpress.com/item/1005001966426139.html) |
-| 10 | - | washer - M3 | 9 | [link](http://aliexpress.com/item/3256801295230574.html) |
-| 11 | - | silicone pad feet - 8x2mm | 4 | [link](http://aliexpress.com/item/2251832637568894.html) |
-| 12 | daisy wheel | daisy wheel - MOTEX / CIDY | 1 | [link](http://aliexpress.com/item/3256803798622137.html) |
-| 13 | daisy wheel | bearing - 608ZZ | 1 | [link](http://aliexpress.com/item/1005001813219171.html) |
-| 14 | extruder | bearing - 623ZZ | 2 | [link](http://aliexpress.com/item/1005001813219171.html) |
-| 15 | extruder | extruder gear - MK8 40 teeth / 5mm axis | 1 | [link](http://aliexpress.com/item/2255800252771556.html) |
-
 ## B. sensors & actuators
 
 | ID | SUBSYSTEM | PART - DESCRIPTION | QTY | REF | 
