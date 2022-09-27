@@ -9,23 +9,22 @@ parent: 🛠️ do it yourself!
 # ☑️ **bill of materials**
 
 The estimated cost is around $?? (USD) without shipping and taxes, as of October 2022.
- 
- 
+
+
 ## A. structure & mechanic 
 
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :---: | :---: |
-|  1 | 3D print | filament — PETG | [link](http://prusa3d.com/product/prusament-petg-jet-black-1kg/) | ~200g |
-|  2 | screw | cyl. hex steel — M3x40mm | [link](http://aliexpress.com/item/2261799963738734.html) |  |
-|  3 | screw | cyl. hex steel — M3x20mm | [link](http://aliexpress.com/item/2261799963738734.html) |  |
-|  4 | screw | cyl. hex steel — M3x18mm | [link](http://aliexpress.com/item/2261799963738734.html) |  | 
-|  5 | screw | cyl. hex steel — M3x16mm | [link](http://aliexpress.com/item/2261799963738734.html) |  |
-|  6 | screw | cyl. hex steel — M3x8mm | [link](http://aliexpress.com/item/2261799963738734.html) |  | 
-|  7 | screw | cyl. hex steel — M3x6mm | [link](http://aliexpress.com/item/2261799963738734.html) |  | 
-|  8 | screw | cyl. hex steel — M4x12mm | [link](http://aliexpress.com/item/2261799963738734.html) | 1 | 
-|  9 | nut | hex steel — M3 | [link](http://aliexpress.com/item/1005001966426139.html) |  | 
-| 10 | washer | steel — M3 | [link](http://aliexpress.com/item/3256801295230574.html) |  | 
-| 10 | washer | steel — M4 | [link](http://aliexpress.com/item/3256801295230574.html) | 1 | 
+|  1 | 3D print | filament — PETG | [link](http://prusa3d.com/product/prusament-petg-jet-black-1kg/) | ~220g |
+|  2 | screw, cyl. hex | M3x40mm | [link](http://aliexpress.com/item/2261799963738734.html) | 1 |
+|  3 | screw, cyl. hex | M3x20mm | [link](http://aliexpress.com/item/2261799963738734.html) | 23 |
+|  5 | screw, cyl. hex | M3x16mm | [link](http://aliexpress.com/item/2261799963738734.html) | 2 |
+|  5 | screw, cyl. hex | M3x10mm | [link](http://aliexpress.com/item/2261799963738734.html) | 4 |
+|  7 | screw, cyl. hex | M3x6mm | [link](http://aliexpress.com/item/2261799963738734.html) | 11 | 
+|  8 | screw, cyl. hex | M4x10mm | [link](http://aliexpress.com/item/2261799963738734.html) | 1 | 
+|  9 | nut, hex | M3 | [link](http://aliexpress.com/item/1005001966426139.html) | 10 | 
+| 10 | washer | M3 | [link](http://aliexpress.com/item/3256801295230574.html) | 9 | 
+| 10 | washer | M6 | [link](http://aliexpress.com/item/3256801295230574.html) | 1 | 
 | 11 | silicone pad feet | 8x2mm | [link](http://aliexpress.com/item/2251832637568894.html) | 4 | 
 | 12 | daisy wheel | MOTEX / CIDY |  [link](https://www.aliexpress.com/item/1005004489017299.html) | 1 | 
 | 13 | bearing | 608ZZ | [link](http://aliexpress.com/item/1005001813219171.html) | 1 | 
@@ -38,9 +37,9 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :---: | :---: |
 | 1 | hall sensor (breakout) | Keyes KY 003 | [link](http://aliexpress.com/item/2251832475321023.html) | 1 | 
-| 2 | stepper motor | NEMA 17HS4023 | [link](http://aliexpress.com/item/2251832620474591.html) | 1 |
-| 3 | stepper driver (breakout) | A4988 | [link](http://aliexpress.com/item/3256801435362018.html) | 1 |
-| 4 | stepper motor | 28BYJ-48 12V | [link](http://aliexpress.com/item/1005003353402464.html) | 1 | 
+| 2 | stepper driver (breakout) | A4988 | [link](http://aliexpress.com/item/3256801435362018.html) | 1 |
+| 3 | stepper motor | NEMA 17HS4023 | [link](http://aliexpress.com/item/2251832620474591.html) | 1 |
+| 4 | stepper motor | 28BYJ-48 12V | [link](https://www.aliexpress.com/item/1005003708064424.html) | 1 | 
 | 5 | servo | Towerpro MG-996R | [link](http://aliexpress.com/item/2251832857187114.html) | 1 | 
 | 6 | neodymium magnet | 2mm ⌀ x 3mm length | [link](http://aliexpress.com/item/3256803632497346.html) | 1 |
 
