@@ -10,7 +10,9 @@ parent: 🛠️ do it yourself!
 
 The estimated cost is around $?? (USD) without shipping and taxes, as of October 2022.
  
+ 
 ## A. structure & mechanic 
+
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :--- | :---: |
 |  1 | 3D print | filament — PETG | [link](http://prusa3d.com/product/prusament-petg-jet-black-1kg/) | ~200g |
@@ -32,6 +34,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 
  
 ## B. sensors & actuators
+
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :--- | :---: |
 | 1 | hall sensor (breakout) | Keyes KY 003 | [link](http://aliexpress.com/item/2251832475321023.html) | 1 | 
@@ -41,7 +44,9 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | 5 | servo | Towerpro MG-996R | [link](http://aliexpress.com/item/2251832857187114.html) | 1 | 
 | 6 | neodymium magnet | 2mm ⌀ x 3mm length | [link](http://aliexpress.com/item/3256803632497346.html) | 1 |
 
+
 ## C. PCB & components
+
 | ID | TYPE | SPEC — PACKAGE | REF | QTY |
 | :---: | :--- | :--- | :--- | :---: |
 |  1 | PCB | 4 layer, FR4, black + front stencil — 99.57 mm x 76.2 mm | | 1 |
@@ -83,6 +88,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 		
 
 ## D. harnesses
+
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :--- | :---: |
 | 1 | cable | USB A to C data cable | [link]() | 1 |
@@ -93,7 +99,9 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | 7 | connector | female - 1x03 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 4 |
 | 8 | connector | female - 1x04 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 2 |
 
+
 ## E. other
+
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :--- | :---: |
 | 1 | power | 12v 3A (real) | [link]() | 1 |
