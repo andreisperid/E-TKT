@@ -8,6 +8,8 @@ parent: 🛠️ do it yourself!
 
 # 🗺️ **overview & tips**
 
+<blueprint image, isometric>
+
 To make your own E-TKT you will need to:
 ### 1. 3D print
 I highly recommend you to have a *3d printer accessible* as you might need to test and tweak the printing settings, since this project demands a certain precision in the fittings;
