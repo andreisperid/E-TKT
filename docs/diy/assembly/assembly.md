@@ -9,3 +9,5 @@ has_children: true
 ---
 
 # 🧩 **assembly**
+
+<exploded view, with each children page with a closeup>
