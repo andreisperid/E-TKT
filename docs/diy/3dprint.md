@@ -11,6 +11,8 @@ parent: 🛠️ do it yourself!
 ### 16 parts in total, using approximately 220g of PETG filament.
 ![exploded](https://user-images.githubusercontent.com/15098003/171068151-33b3fd52-b4f0-49f8-ad5a-521146b65bbb.png)
 
+<embed sketchfab 3D model, with annotations>
+
 ### 📐 All the .stl provided are in the correct orientation for optimal printing:
 - A_bottom \*
 - B_wall \*
