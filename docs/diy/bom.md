@@ -61,7 +61,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | 13 | FERRITE | 40 Ohms 5A | 0805 (SMD) | [MH2029-400Y](https://www.findchips.com/search/MH2029-400Y) | 1 |
 | 14 | FUSE | 6V 750mA | 0805 (SMD) | [0ZCK0075FF2E](https://www.findchips.com/search/0ZCK0075FF2E) | 1 |
 | 15 | LED | LED white | 0603 (SMD) | [SMLD12WBN1W1](https://www.findchips.com/search/SMLD12WBN1W1) | 12 |
-| 16 | CONNECTOR | USB-C 2.0 | GCT USB4105-GF-A | [GCT USB4105-GF-A](https://www.findchips.com/search/GCT USB4105-GF-A) | 1 |
+| 16 | CONNECTOR | USB-C 2.0 | GCT USB4105-GF-A | [GCT USB4105-GF-A](https://www.findchips.com/search/USB4105-GF-A) | 1 |
 | 17 | CONNECTOR | Barrel Jack 2mm/6.3mm, 5A 20V | DCJ200 | [DCJ200-10-A-K1-K](https://www.findchips.com/search/DCJ200-10-A-K1-K) | 1 |
 | 18 | CONNECTOR | Conn_01x02_Male | Header 1x02 P2.54mm Vertical | [M20-9990245](https://www.findchips.com/search/M20-9990245) | 2 |
 | 19 | CONNECTOR | Conn_01x03_Male | Header 1x03 P2.54mm Vertical | [M20-9990346](https://www.findchips.com/search/M20-9990346) | 1 |
