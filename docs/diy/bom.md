@@ -16,12 +16,12 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :---: | :---: |
 |  1 | 3D print | filament — PETG | [link](http://prusa3d.com/product/prusament-petg-jet-black-1kg/) | ~220g |
-|  2 | screw, cyl. hex | M3x40mm | [link](http://aliexpress.com/item/2261799963738734.html) | 1 |
-|  3 | screw, cyl. hex | M3x20mm | [link](http://aliexpress.com/item/2261799963738734.html) | 23 |
-|  5 | screw, cyl. hex | M3x16mm | [link](http://aliexpress.com/item/2261799963738734.html) | 2 |
-|  5 | screw, cyl. hex | M3x10mm | [link](http://aliexpress.com/item/2261799963738734.html) | 4 |
-|  7 | screw, cyl. hex | M3x6mm | [link](http://aliexpress.com/item/2261799963738734.html) | 11 | 
-|  8 | screw, cyl. hex | M4x10mm | [link](http://aliexpress.com/item/2261799963738734.html) | 1 | 
+|  2 | screw, cyl. allen | M3x40mm | [link](http://aliexpress.com/item/2261799963738734.html) | 1 |
+|  3 | screw, cyl. allen | M3x20mm | [link](http://aliexpress.com/item/2261799963738734.html) | 23 |
+|  5 | screw, cyl. allen | M3x16mm | [link](http://aliexpress.com/item/2261799963738734.html) | 2 |
+|  5 | screw, cyl. allen | M3x10mm | [link](http://aliexpress.com/item/2261799963738734.html) | 4 |
+|  7 | screw, cyl. allen | M3x6mm | [link](http://aliexpress.com/item/2261799963738734.html) | 11 | 
+|  8 | screw, cyl. allen | M4x10mm | [link](http://aliexpress.com/item/2261799963738734.html) | 1 | 
 |  9 | nut, hex | M3 | [link](http://aliexpress.com/item/1005001966426139.html) | 10 | 
 | 10 | washer | M3 | [link](http://aliexpress.com/item/3256801295230574.html) | 9 | 
 | 10 | washer | M6 | [link](http://aliexpress.com/item/3256801295230574.html) | 1 | 
