@@ -14,7 +14,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 ## A. structure & mechanic 
 
 | ID | TYPE | SPEC | REF | QTY |
-| :---: | :--- | :--- | :--- | :---: |
+| :---: | :--- | :--- | :---: | :---: |
 |  1 | 3D print | filament — PETG | [link](http://prusa3d.com/product/prusament-petg-jet-black-1kg/) | ~200g |
 |  2 | screw | cyl. hex steel — M3x40mm | [link](http://aliexpress.com/item/2261799963738734.html) |  |
 |  3 | screw | cyl. hex steel — M3x20mm | [link](http://aliexpress.com/item/2261799963738734.html) |  |
@@ -36,7 +36,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 ## B. sensors & actuators
 
 | ID | TYPE | SPEC | REF | QTY |
-| :---: | :--- | :--- | :--- | :---: |
+| :---: | :--- | :--- | :---: | :---: |
 | 1 | hall sensor (breakout) | Keyes KY 003 | [link](http://aliexpress.com/item/2251832475321023.html) | 1 | 
 | 2 | stepper motor | NEMA 17HS4023 | [link](http://aliexpress.com/item/2251832620474591.html) | 1 |
 | 3 | stepper driver (breakout) | A4988 | [link](http://aliexpress.com/item/3256801435362018.html) | 1 |
@@ -48,7 +48,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 ## C. PCB & components
 
 | ID | TYPE | SPEC — PACKAGE | REF | QTY |
-| :---: | :--- | :--- | :--- | :---: |
+| :---: | :--- | :--- | :---: | :---: |
 |  1 | PCB | 4 layer, FR4, black + front stencil — 99.57 mm x 76.2 mm | | 1 |
 |  2 | MCU | ESP32 — WROOM-32D (SMD) | [ESP32-WROOM-32D-N4](https://www.findchips.com/search/ESP32-WROOM-32D-N4) | 1 |
 |  3 | SERIAL | USB Interface, Full Serial UART — SSOP-20 3.9x8.7mm (SMD) | [FT231XS-R](https://www.findchips.com/search/FT231XS-R) | 1 |
@@ -90,7 +90,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 ## D. harnesses
 
 | ID | TYPE | SPEC | REF | QTY |
-| :---: | :--- | :--- | :--- | :---: |
+| :---: | :--- | :--- | :---: | :---: |
 | 1 | cable | USB A to C data cable | [link]() | 1 |
 | 2 | wiring | flat, flexible | [link](http://aliexpress.com/item/2251832639497810.html) | 1 |
 | 4 | header | male header - 0.1" pitch | [link](http://aliexpress.com/item/2251832538163556.html) | 2 |
@@ -103,6 +103,6 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 ## E. other
 
 | ID | TYPE | SPEC | REF | QTY |
-| :---: | :--- | :--- | :--- | :---: |
+| :---: | :--- | :--- | :---: | :---: |
 | 1 | power | 12v 3A (real) | [link]() | 1 |
 | 2 | label tape | 9mm DYMO-compatible | [link](http://aliexpress.com/item/1005001525284316.html) | 🦝 |
