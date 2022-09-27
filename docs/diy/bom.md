@@ -10,9 +10,7 @@ parent: 🛠️ do it yourself!
 
 The estimated cost is around $?? (USD) without shipping and taxes, as of October 2022.
  
-## A. structure & mechanic
- 
- 
+## A. structure & mechanic 
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :--- | :---: |
 |  1 | 3D print | filament — PETG | [link](http://prusa3d.com/product/prusament-petg-jet-black-1kg/) | ~200g |
@@ -34,18 +32,16 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 
  
 ## B. sensors & actuators
-
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :--- | :---: |
-| 1 | hall sensor - KY-003 |[link](http://aliexpress.com/item/2251832475321023.html) | 1 | 
-| 2 | stepper motor - NEMA 17HS4023 | [link](http://aliexpress.com/item/2251832620474591.html) | 1 |
-| 3 | stepper driver - A4988 | [link](http://aliexpress.com/item/3256801435362018.html) | 1 |
-| 4 | stepper motor (28BYJ-48 5V) & driver (ULN2003) |[link](http://aliexpress.com/item/1005003353402464.html) | 1 | 
-| 5 | servo - Towerpro MG-996R |[link](http://aliexpress.com/item/2251832857187114.html) | 1 | 
-| 6 | neodymium magnet - 2mm ⌀ x 3mm length | [link](http://aliexpress.com/item/3256803632497346.html) | 1 |
+| 1 | hall sensor (breakout) | Keyes KY 003 | [link](http://aliexpress.com/item/2251832475321023.html) | 1 | 
+| 2 | stepper motor | NEMA 17HS4023 | [link](http://aliexpress.com/item/2251832620474591.html) | 1 |
+| 3 | stepper driver (breakout) | A4988 | [link](http://aliexpress.com/item/3256801435362018.html) | 1 |
+| 4 | stepper motor | 28BYJ-48 12V | [link](http://aliexpress.com/item/1005003353402464.html) | 1 | 
+| 5 | servo | Towerpro MG-996R | [link](http://aliexpress.com/item/2251832857187114.html) | 1 | 
+| 6 | neodymium magnet | 2mm ⌀ x 3mm length | [link](http://aliexpress.com/item/3256803632497346.html) | 1 |
 
 ## C. PCB & components
-
 | ID | TYPE | SPEC — PACKAGE | REF | QTY |
 | :---: | :--- | :--- | :--- | :---: |
 |  1 | PCB | 4 layer, FR4, black + front stencil — 99.57 mm x 76.2 mm | | 1 |
@@ -87,7 +83,6 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 		
 
 ## D. harnesses
-
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :--- | :---: |
 | 1 | cable | USB type-A to micro-B data cable | [link](http://aliexpress.com/item/2255800229926282.html) | 1 |
@@ -99,7 +94,6 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | 8 | connector | female connector - 4 pin 0.1" pitch dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 2 |
 
 ## E. other
-
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :--- | :---: |
 | 1 | power | 12v 3A (real) | | 1 |
