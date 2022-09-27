@@ -66,7 +66,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | 16 | CONNECTOR | USB-C 2.0 — GCT USB4105-GF-A | [GCT USB4105-GF-A](https://www.findchips.com/search/USB4105-GF-A) | 1 |
 | 17 | CONNECTOR | Barrel Jack 2mm/6.3mm, 5A 20V — DCJ200 | [DCJ200-10-A-K1-K](https://www.findchips.com/search/DCJ200-10-A-K1-K) | 1 |
 | 18 | CONNECTOR | Conn_01x02_Male — Header 1x02 P2.54mm Vertical | [M20-9990245](https://www.findchips.com/search/M20-9990245) | 2 |
-| 19 | CONNECTOR | Conn_01x03_Male — Header 1x03 P2.54mm Vertical | [M20-9990346](https://www.findchips.com/search/M20-9990346) | 1 |/
+| 19 | CONNECTOR | Conn_01x03_Male — Header 1x03 P2.54mm Vertical | [M20-9990346](https://www.findchips.com/search/M20-9990346) | 1 |
 | 20 | CONNECTOR | Conn_01x04_Male — Header 1x04 P2.54mm Vertical | [M20-9770446](https://www.findchips.com/search/M20-9770446) | 1 |
 | 21 | CONNECTOR | Conn_01x05_Male — Header 1x05 P2.54mm Vertical | [M20-9990546](https://www.findchips.com/search/M20-9990546) | 1 |
 | 22 | CONNECTOR | Conn_01x04_Male — Header 1x04 P2.54mm Horizontal | [M20-9750446](https://www.findchips.com/search/M20-9750446) | 1 |
