@@ -85,16 +85,16 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 ## D. harnesses
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :--- | :---: |
-| 1 | cable | USB type-A to micro-B data cable | [link](http://aliexpress.com/item/2255800229926282.html) | 1 |
-| 2 | flexible wiring | flat | [link](http://aliexpress.com/item/2251832639497810.html) | 1 |
+| 1 | cable | USB A to C data cable | [link]() | 1 |
+| 2 | wiring | flat, flexible | [link](http://aliexpress.com/item/2251832639497810.html) | 1 |
 | 4 | header | male header - 0.1" pitch | [link](http://aliexpress.com/item/2251832538163556.html) | 2 |
 | 5 | header | female header - 0.1" pitch | [link](http://aliexpress.com/item/2251832538163556.html) | 2 |
-| 6 | connector | female  - 8 pin 0.1" pitch dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 1 |
-| 7 | connector | female connector - 3 pin 0.1" pitch dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 4 |
-| 8 | connector | female connector - 4 pin 0.1" pitch dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 2 |
+| 6 | connector | female - 1x08 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 1 |
+| 7 | connector | female - 1x03 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 4 |
+| 8 | connector | female - 1x04 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 2 |
 
 ## E. other
 | ID | TYPE | SPEC | REF | QTY |
 | :---: | :--- | :--- | :--- | :---: |
-| 1 | power | 12v 3A (real) | | 1 |
-| 2 | consumables | label tape - 9mm DYMO compatible | [link](http://aliexpress.com/item/1005001525284316.html) | 🦝 |
+| 1 | power | 12v 3A (real) | [link]() | 1 |
+| 2 | label tape | 9mm DYMO-compatible | [link](http://aliexpress.com/item/1005001525284316.html) | 🦝 |
