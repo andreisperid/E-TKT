@@ -40,9 +40,9 @@ aux_links_new_tab: true
 nav_sort: case_sensitive # Capital letters sorted before lowercase
 
 # # External navigation links
-# nav_external_links:
-#   - title: andrei.cc
-#     url: https://andrei.cc
+nav_external_links:
+  - title: 🙂 donate
+    url: https://www.paypal.com/donate/?business=U5QYSBT2TLZL8&no_recurring=0&currency_code=USD
 
 
 # Footer "Edit this page on GitHub" link text
