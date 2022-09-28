@@ -445,7 +445,7 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "e-tkt_2.step",
+      "step": "export/3d/e-tkt.step",
       "vrml": "e-tkt.wrl"
     },
     "page_layout_descr_file": ""
