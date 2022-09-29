@@ -9,7 +9,7 @@ parent: 🏅 credits
 # 🙂 **thanks**
 
 ### Especially to
-- **[Ana Marini](https://anamarini.com/):** for the initial idea of having embossed labels, which started all the process (and the motivation throughout the development process);
+- **[Ana Marini](https://anamarini.com/):** for the initial idea of having embossed labels, which started all the process (and the motivation all along);
 - **José Speridião Junior:** for several insights that improved the printing mechanics, leading to better labels;
 - **[Wesley Lee](https://wes.am):** for the assistance on the PCB design, manufacture and assembly;
 
