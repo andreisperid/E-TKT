@@ -44,7 +44,8 @@ parent: 🛠️ do it yourself!
 | 4 | stepper motor | 28BYJ-48 12V | [link](https://www.aliexpress.com/item/1005003708064424.html) | 1 | 
 | 5 | servo | Towerpro MG-996R | [link](http://aliexpress.com/item/2251832857187114.html) | 1 | 
 | 6 | neodymium magnet | 2mm ⌀ x 3mm length | [link](http://aliexpress.com/item/3256803632497346.html) | 1 |
-| 7 | LED | Clear white —	DIP 2x5x7mm | [link](https://www.aliexpress.com/item/1005003347290499.html?gatewayAdapt=4itemAdapt) | 1 |
+| 7 | LED | Clear white —	DIP 2x5x7mm | [link](https://www.aliexpress.com/item/1005003347290499.html) | 1 |
+| 8 | OLED display | 128x64, monochrome white — 4 pin I²C | [link](https://www.aliexpress.com/item/1005003484018034.html) | 1 |
 
 ----
 
