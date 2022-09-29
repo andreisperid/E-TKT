@@ -8,8 +8,9 @@ parent: 🛠️ do it yourself!
 
 # ☑️ **bill of materials**
 
-The estimated cost is around $?? (USD) without shipping and taxes, as of October 2022.
+💬 *The estimated cost is around $?? (USD) without shipping and taxes, as of October 2022.*
 
+----
 
 ## A. structure & mechanic 
 
@@ -31,6 +32,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | 14 | bearing | 623ZZ | [link](http://aliexpress.com/item/1005001813219171.html) | 2 | 
 | 15 | extruder gear | MK8 40 teeth / 5mm axis | [link](http://aliexpress.com/item/2255800252771556.html) | 1 |
 
+----
  
 ## B. sensors & actuators
 
@@ -44,6 +46,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | 6 | neodymium magnet | 2mm ⌀ x 3mm length | [link](http://aliexpress.com/item/3256803632497346.html) | 1 |
 | 7 | LED | Clear white —	DIP 2x5x7mm | [link](https://www.aliexpress.com/item/1005003347290499.html?gatewayAdapt=4itemAdapt) | 1 |
 
+----
 
 ## C. PCB & components
 
@@ -96,6 +99,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | ALT2 | capacitor | Ceramic 0.1uF 50V — 0603 (SMD) | [C1608X7R1H104K080AA](https://www.findchips.com/search/C1608X7R1H104K080AA) | 1 |
 | ALT3 | regulator | Linear 6v 1.5A — TO-220 | [L7806CV](https://www.findchips.com/search/L7806CV) | 1 |
 
+----
 
 ## D. harnesses
 
@@ -109,6 +113,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | 7 | connector | female - 1x03 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 4 |
 | 8 | connector | female - 1x04 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 2 |
 
+----
 
 ## E. other
 
