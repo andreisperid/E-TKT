@@ -9,8 +9,9 @@ parent: 🛠️ do it yourself!
 # 🧵 **3D printing**
 
 ### 16 parts in total, using approximately 220g of PETG filament.
-> 💬 you can find both the STL and source files in the [3d_print](https://github.com/andreisperid/E-TKT/tree/main/_3dprint) folder.
+💬 *you can find both the STL and source files in the [3d_print](https://github.com/andreisperid/E-TKT/tree/main/_3dprint) folder.*
 
+----
 
 <div class="sketchfab-embed-wrapper"> 
  <iframe title="E-TKT: 3D printing" width="100%" height="600px" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/af2f40abf97d477f9c3f3be6128178a7/embed?autostart=1"> </iframe> 
