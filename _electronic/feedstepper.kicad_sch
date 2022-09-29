@@ -5,9 +5,9 @@
   (paper "A4")
 
   (title_block
-    (title "E-TKT")
-    (date "2022-07-21")
-    (rev "3")
+    (title "E-TKT v1.0")
+    (date "2022-09-29")
+    (rev "4")
     (company "Andrei Speridiao")
   )
 
@@ -724,7 +724,7 @@
     (uuid fbef33c7-d3ed-49fd-a585-e4ff7974ca55)
   )
 
-  (text "optional" (at 134.62 87.63 0)
+  (text "optional LED feedback" (at 134.62 87.63 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid e17ff97a-1243-431e-b936-70cde56fb077)
   )

@@ -5,9 +5,9 @@
   (paper "A4")
 
   (title_block
-    (title "E-TKT")
-    (date "2022-07-21")
-    (rev "3")
+    (title "E-TKT v1.0")
+    (date "2022-09-29")
+    (rev "4")
     (company "Andrei Speridiao")
   )
 
@@ -689,7 +689,7 @@
     (uuid fd195543-6f90-4f73-a388-b68ef15d176f)
   )
 
-  (text "optional alternative:\n7806 linear regulator" (at 149.86 67.31 0)
+  (text "alternative 6V output:\n7806 linear regulator" (at 149.86 67.31 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 18941214-e9c5-48ad-8bdb-9f67ae9ccfb9)
   )
@@ -710,7 +710,7 @@
   (symbol (lib_id "Connector:TestPoint") (at 170.18 73.66 270) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 141af5fb-8652-4a21-a0a8-bcbc7640f184)
-    (property "Reference" "J_12v_ALT6V" (id 0) (at 175.26 73.66 90)
+    (property "Reference" "J_12v_ALT6V1" (id 0) (at 175.26 73.66 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "TestPoint" (id 1) (at 175.26 73.66 90)
@@ -858,7 +858,7 @@
   (symbol (lib_id "Connector:TestPoint") (at 189.23 77.47 0) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 21e11354-cb62-4cc5-918e-6586b07cda59)
-    (property "Reference" "J_GND_ALT6V" (id 0) (at 189.23 71.12 0))
+    (property "Reference" "J_GND_ALT6V1" (id 0) (at 189.23 71.12 0))
     (property "Value" "TestPoint" (id 1) (at 189.23 72.39 90)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
@@ -1065,7 +1065,7 @@
   (symbol (lib_id "Connector:TestPoint") (at 208.28 73.66 90) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 5787ec46-6505-49d4-a0a4-ef8cba819874)
-    (property "Reference" "J_6v_ALT6V" (id 0) (at 203.2 73.66 90)
+    (property "Reference" "J_6v_ALT6V1" (id 0) (at 203.2 73.66 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "TestPoint" (id 1) (at 203.2 73.66 90)
