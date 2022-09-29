@@ -10,4 +10,5 @@ has_children: true
 
 # 🧩 **assembly**
 
-<exploded view, with each children page with a closeup>
+![exploded_001](https://user-images.githubusercontent.com/15098003/193154389-70540c41-fc35-4498-ae2d-bc653e294724.png)
+
