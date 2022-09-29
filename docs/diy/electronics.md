@@ -22,10 +22,10 @@ parent: 🛠️ do it yourself!
 <img width="25%" src="https://user-images.githubusercontent.com/15098003/193071414-60c6b8d1-a408-4636-970f-516105952620.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071446-c8ad1838-c0e3-43a6-938a-168fd1d36d60.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071449-e0617bdb-d3d9-4312-b82b-2f735cb272e8.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071444-545b5f12-a920-4734-ae05-dccdc0a62cc8.png">
 </p>
 
-- **Front (F.Cu)**: mixed signals and power + ground plane;
+- **Front (F.Cu)**: most components + mixed signals & power + ground plane;
 - **Inner 1 (In1.Cu)**: ground plane;
 - **Inner 2 (In2.Cu)**: 6V plane;
-- **Back (B.Cu)**: mixed signals and power + ground plane.
+- **Back (B.Cu)**: few components + headers + mixed signals and power + ground plane.
 
 ----
 
