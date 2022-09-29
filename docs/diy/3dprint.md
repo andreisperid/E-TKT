@@ -15,36 +15,23 @@ parent: 🛠️ do it yourself!
 </div>
 
 
-## 📐 All the .stl provided are in the correct orientation for optimal printing:
+### 📐 All the .stl provided are in the correct orientation for optimal printing:
 
-### 1. bottom:
 - A_bottom \*
-
-### 2. wall assembly:
 - B_wall \*
 - C_wall_track \*
-
-### 3, 4, 5, 6. pillars:
 - D_pillar
 - E_pillar
 - F_pillar
 - G_pillar
-
-### 7. nema assembly:
 - H_nema_cover
 - I_nema_wheel_hub
-
-### 8. top assembly:
 - J_top \*
 - K_top_screenholder
 - L_top_tapefeeder
 - M_top_wheel_cover
-
-### 9. wheel assembly
 - N_wheel_coupling_bottom
 - O_wheel_coupling_top
-
-### 10. press:
 - P_press
  
 ***\* needs support***
