@@ -85,7 +85,14 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | 35 | resistor | Thick Film 2K — 0603 (SMD) | [ERJ-3EKF2001V](https://www.findchips.com/search/ERJ-3EKF2001V) | 1 |
 | 36 | resistor | Thick Film 100R — 0603 (SMD) | [ERJ-3EKF1000V](https://www.findchips.com/search/ERJ-3EKF1000V) | 6 |
 | 37 | resistor | Thick Film 27R — 0603 (SMD) | [ERJ-3EKF27R0V](https://www.findchips.com/search/ERJ-3EKF27R0V) | 4 |
-		
+
+### \* Alternative 6V power
+| ID | TYPE | SPEC — PACKAGE | REF | QTY |
+| :---: | :--- | :--- | :---: | :---: |
+| ALT 1 | capacitor | Ceramic 0.33uF 50V — 0603 (SMD) | [CGA3E3X7R1H334M080AB](https://www.findchips.com/search/CGA3E3X7R1H334M080AB) | 1 |
+| ALT 2 | capacitor | Ceramic 0.1uF 50V — 0603 (SMD) | [C1608X7R1H104K080AA](https://www.findchips.com/search/C1608X7R1H104K080AA) | 1 |
+| ALT 3 | regulator | Linear 6v 1.5A — TO-220 | [L7806CV](https://www.findchips.com/search/L7806CV) | 1 |
+
 
 ## D. harnesses
 
