@@ -11,7 +11,7 @@ parent: 🛠️ do it yourself!
 ### 16 parts in total, using approximately 220g of PETG filament.
 
 <div class="sketchfab-embed-wrapper"> 
- <iframe title="E-TKT: 3D printing" width="100%" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/af2f40abf97d477f9c3f3be6128178a7/embed?autostart=1"> </iframe> 
+ <iframe title="E-TKT: 3D printing" width="100%" height="600px" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/af2f40abf97d477f9c3f3be6128178a7/embed?autostart=1"> </iframe> 
 </div>
 
 
