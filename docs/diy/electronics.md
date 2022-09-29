@@ -27,7 +27,7 @@ parent: 🛠️ do it yourself!
 
 ## Schematics
 ![image](https://user-images.githubusercontent.com/15098003/193071371-ac9c6aa6-0b87-4183-b6b2-9ccb1d030f1d.png)
-*[here](https://github.com/andreisperid/E-TKT/tree/main/_electronic/)*
+*[link to the schematics](https://github.com/andreisperid/E-TKT/tree/main/_electronic/)*
 
 ### Power rails
   - ***12V*** needs to be provided by an external power supply with at least 3A (real) to deal with servo peaks current while pressing the label. It supplies both the stepper drivers directly.
