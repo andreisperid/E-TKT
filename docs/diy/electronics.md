@@ -8,7 +8,8 @@ parent: 🛠️ do it yourself!
 
 # ⚡ **electronics**
 
-💬 you can find the KiCad v6 source files, PDF schematics and gerbers in the [electronic](https://github.com/andreisperid/E-TKT/tree/main/_electronic/) folder.
+    💬 you can find the KiCad v6 source files, PDF schematics and gerbers in the
+    [electronic](https://github.com/andreisperid/E-TKT/tree/main/_electronic/) folder.
 
 ## Board
 <img width="50%" src="https://user-images.githubusercontent.com/15098003/193073510-e8ca0f93-9d0d-4541-8dd6-37c3eacae061.png"><img width="50%" src="https://user-images.githubusercontent.com/15098003/193073505-1d91c3db-753d-4110-8e7a-523b866b203b.png">
