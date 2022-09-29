@@ -10,11 +10,11 @@ parent: 🛠️ do it yourself!
 
 You can find the KiCad v6 source files, PDF schematics and gerbers in the [electronic](https://github.com/andreisperid/E-TKT/tree/main/_electronic/) folder.
 
-### Board
+## Board
 <img width="50%" src="https://user-images.githubusercontent.com/15098003/193073510-e8ca0f93-9d0d-4541-8dd6-37c3eacae061.png"><img width="50%" src="https://user-images.githubusercontent.com/15098003/193073505-1d91c3db-753d-4110-8e7a-523b866b203b.png">
 
 
-### Layers
+## Layers
 <p align="center">  
 <img width="25%" src="https://user-images.githubusercontent.com/15098003/193071414-60c6b8d1-a408-4636-970f-516105952620.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071446-c8ad1838-c0e3-43a6-938a-168fd1d36d60.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071449-e0617bdb-d3d9-4312-b82b-2f735cb272e8.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071444-545b5f12-a920-4734-ae05-dccdc0a62cc8.png">
 </p>
@@ -25,7 +25,7 @@ You can find the KiCad v6 source files, PDF schematics and gerbers in the [elect
 - **Back (B.Cu)**: mixed signals and power + ground plane.
 
 
-### Schematics
+## Schematics
 ![image](https://user-images.githubusercontent.com/15098003/193071371-ac9c6aa6-0b87-4183-b6b2-9ccb1d030f1d.png)
   
 ### Power rails
