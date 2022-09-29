@@ -88,7 +88,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | 37 | resistor | Thick Film 27R — 0603 (SMD) | [ERJ-3EKF27R0V](https://www.findchips.com/search/ERJ-3EKF27R0V) | 4 |
 
 
-### \* Alternative 6V power
+### \* *Alternative 6V power*
 
 | ID | TYPE | SPEC — PACKAGE | REF | QTY |
 | :---: | :--- | :--- | :---: | :---: |
