@@ -42,6 +42,7 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 | 4 | stepper motor | 28BYJ-48 12V | [link](https://www.aliexpress.com/item/1005003708064424.html) | 1 | 
 | 5 | servo | Towerpro MG-996R | [link](http://aliexpress.com/item/2251832857187114.html) | 1 | 
 | 6 | neodymium magnet | 2mm ⌀ x 3mm length | [link](http://aliexpress.com/item/3256803632497346.html) | 1 |
+| 7 | LED | Clear white —	DIP 2x5x7mm | [link](https://www.aliexpress.com/item/1005003347290499.html?gatewayAdapt=4itemAdapt) | 1 |
 
 
 ## C. PCB & components
@@ -89,9 +90,9 @@ The estimated cost is around $?? (USD) without shipping and taxes, as of October
 ### \* Alternative 6V power
 | ID | TYPE | SPEC — PACKAGE | REF | QTY |
 | :---: | :--- | :--- | :---: | :---: |
-| ALT 1 | capacitor | Ceramic 0.33uF 50V — 0603 (SMD) | [CGA3E3X7R1H334M080AB](https://www.findchips.com/search/CGA3E3X7R1H334M080AB) | 1 |
-| ALT 2 | capacitor | Ceramic 0.1uF 50V — 0603 (SMD) | [C1608X7R1H104K080AA](https://www.findchips.com/search/C1608X7R1H104K080AA) | 1 |
-| ALT 3 | regulator | Linear 6v 1.5A — TO-220 | [L7806CV](https://www.findchips.com/search/L7806CV) | 1 |
+| ALT1 | capacitor | Ceramic 0.33uF 50V — 0603 (SMD) | [CGA3E3X7R1H334M080AB](https://www.findchips.com/search/CGA3E3X7R1H334M080AB) | 1 |
+| ALT2 | capacitor | Ceramic 0.1uF 50V — 0603 (SMD) | [C1608X7R1H104K080AA](https://www.findchips.com/search/C1608X7R1H104K080AA) | 1 |
+| ALT3 | regulator | Linear 6v 1.5A — TO-220 | [L7806CV](https://www.findchips.com/search/L7806CV) | 1 |
 
 
 ## D. harnesses
