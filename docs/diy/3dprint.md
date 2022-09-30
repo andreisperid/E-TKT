@@ -28,7 +28,7 @@ parent: 🛠️ do it yourself!
 - E_pillar
 - F_pillar
 - G_pillar
-- H_nema_cover
+- H_nema_cover \*
 - I_nema_wheel_hub
 - J_top \*
 - K_top_screenholder
