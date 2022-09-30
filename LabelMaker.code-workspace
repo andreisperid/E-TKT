@@ -17,7 +17,8 @@
 			"type_traits": "cpp",
 			"utility": "cpp",
 			"random": "cpp",
-			"string": "cpp"
+			"string": "cpp",
+			"memory": "cpp"
 		}
 	}
 }
