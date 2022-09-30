@@ -79,10 +79,10 @@ parent: 🛠️ do it yourself!
 | connector | Conn_01x03_Female — Socket 1x03 P2.54mm Vertical | [M20-7820346](https://www.findchips.com/search/M20-7820346) | 1 |
 | connector | Conn_02x08_Female — Socket 2x08 P2.54mm Vertical (A4988) | [M20-7820842](https://www.findchips.com/search/M20-7820842) | 2 |
 | capacitor | Electrolytical 100uF 25V — 6.3x7.7 (SMD) | [EMVE250ADA101MF80G](https://www.findchips.com/search/EMVE250ADA101MF80G) | 1 |
-| capacitor | Ceramic 22uF 25V — 1210 (SMD) | [C3225X7R1E226M250AB](https://www.findchips.com/search/C3225X7R1E226M250AB) | 8 |
-| capacitor | Ceramic 10uF 12V — 0603 (SMD) | [GRM188Z71A106KA73D](https://www.findchips.com/search/GRM188Z71A106KA73D) | 6 |
-| capacitor | Ceramic 0.1uF 50V — 0603 (SMD) | [C1608X7R1H104K080AA](https://www.findchips.com/search/C1608X7R1H104K080AA) | 6 |
-| capacitor | Ceramic 47pF 5V — 0603 (SMD) | [CGA3E2C0G1H470J080AA](https://www.findchips.com/search/CGA3E2C0G1H470J080AA) | 3 |
+| capacitor | Ceramic 22uF 25V X7R — 1210 (SMD) | [C3225X7R1E226M250AB](https://www.findchips.com/search/C3225X7R1E226M250AB) | 8 |
+| capacitor | Ceramic 10uF 12V X7R — 0603 (SMD) | [GRM188Z71A106KA73D](https://www.findchips.com/search/GRM188Z71A106KA73D) | 6 |
+| capacitor | Ceramic 0.1uF 50V X7R — 0603 (SMD) | [C1608X7R1H104K080AA](https://www.findchips.com/search/C1608X7R1H104K080AA) | 6 |
+| capacitor | Ceramic 47pF 5V X7R — 0603 (SMD) | [CGA3E2C0G1H470J080AA](https://www.findchips.com/search/CGA3E2C0G1H470J080AA) | 3 |
 | resistor | Thick Film 100K — 0603 (SMD) | [ERJ-3EKF1003V](https://www.findchips.com/search/ERJ-3EKF1003V) | 1 |
 | resistor | Thick Film 11K — 0603 (SMD) | [ERJ-3EKF1102V](https://www.findchips.com/search/ERJ-3EKF1102V) | 1 |
 | resistor | Thick Film 10K — 0603 (SMD) | [ERJ-3EKF1002V](https://www.findchips.com/search/ERJ-3EKF1002V) | 9 |
@@ -96,8 +96,8 @@ parent: 🛠️ do it yourself!
 
 | TYPE | SPEC — PACKAGE | REF | QTY |
 | :--- | :--- | :---: | :---: |
-| capacitor | Ceramic 0.33uF 50V — 0603 (SMD) | [CGA3E3X7R1H334M080AB](https://www.findchips.com/search/CGA3E3X7R1H334M080AB) | 1 |
-| capacitor | Ceramic 0.1uF 50V — 0603 (SMD) | [C1608X7R1H104K080AA](https://www.findchips.com/search/C1608X7R1H104K080AA) | 1 |
+| capacitor | Ceramic 0.33uF 50V X7R — 0603 (SMD) | [CGA3E3X7R1H334M080AB](https://www.findchips.com/search/CGA3E3X7R1H334M080AB) | 1 |
+| capacitor | Ceramic 0.1uF 50V X7R — 0603 (SMD) | [C1608X7R1H104K080AA](https://www.findchips.com/search/C1608X7R1H104K080AA) | 1 |
 | regulator | Linear 6v 1.5A — TO-220 | [L7806CV](https://www.findchips.com/search/L7806CV) | 1 |
 
 ----
