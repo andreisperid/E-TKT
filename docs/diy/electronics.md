@@ -17,29 +17,16 @@ parent: 🛠️ do it yourself!
 
 ----
 
-## Stackup
-<p align="center">  
-<img width="25%" src="https://user-images.githubusercontent.com/15098003/193071414-60c6b8d1-a408-4636-970f-516105952620.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071446-c8ad1838-c0e3-43a6-938a-168fd1d36d60.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071449-e0617bdb-d3d9-4312-b82b-2f735cb272e8.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071444-545b5f12-a920-4734-ae05-dccdc0a62cc8.png">
-</p>
-
-- **Front (F.Cu)**: most components + mixed signals & power + ground plane;
-- **Inner 1 (In1.Cu)**: ground plane;
-- **Inner 2 (In2.Cu)**: 6V plane;
-- **Back (B.Cu)**: few components + headers + mixed signals and power + ground plane.
-
-----
-
 ## Schematics
 ![image](https://user-images.githubusercontent.com/15098003/193071371-ac9c6aa6-0b87-4183-b6b2-9ccb1d030f1d.png)  
 <p align="right">
   <a href="https://github.com/andreisperid/E-TKT/tree/main/_electronic/" target="_blank">
     <i>🔎 see larger</i>
   </a>
-</p>
-  
-  
+</p>  
 
 ----
+
 ## Subsystems
 
 ### Power
@@ -58,8 +45,6 @@ parent: 🛠️ do it yourself!
 ### Serial USB communication
 - An FT231XS-R is used for flashing the firmware through an USB-C 2.0 port.
 
-
-
 ### Label press
 - The MG996-R servo has a maximum constant voltage of 6V. Constant higher tension tends to damage it.
 
@@ -77,3 +62,17 @@ parent: 🛠️ do it yourself!
 
 ### Buzzer
 - Optional magnetic buzzer that plays notes for audible feedback.
+
+----
+
+## Stackup
+<p align="center">  
+<img width="25%" src="https://user-images.githubusercontent.com/15098003/193071414-60c6b8d1-a408-4636-970f-516105952620.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071446-c8ad1838-c0e3-43a6-938a-168fd1d36d60.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071449-e0617bdb-d3d9-4312-b82b-2f735cb272e8.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071444-545b5f12-a920-4734-ae05-dccdc0a62cc8.png">
+</p>
+
+- **Front (F.Cu)**: most components + mixed signals & power + ground plane;
+- **Inner 1 (In1.Cu)**: ground plane;
+- **Inner 2 (In2.Cu)**: 6V plane;
+- **Back (B.Cu)**: few components + headers + mixed signals and power + ground plane.
+
+
