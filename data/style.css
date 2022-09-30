@@ -4,7 +4,7 @@
   color: #000000;
 }
 * {
-  font-family: "Impact Label Reversed";
+  font-family: "Impact Label Reversed", sans-serif;
   font-size: 22px;
   color: white;
   text-decoration: none;
@@ -27,9 +27,9 @@ h3 {
 h1 {
   font-size: 55px;
   margin: 0px;
-  color:rgb(194, 194, 194);
+  color: rgb(194, 194, 194);
   opacity: 1;
-  filter: drop-shadow(-2px -2px 2px rgba(255, 255, 255, 0.35));  
+  filter: drop-shadow(-2px -2px 2px rgba(255, 255, 255, 0.35));
 }
 h2 {
   font-size: 23px;
@@ -42,9 +42,9 @@ h3 {
 }
 a {
   font-size: 18px;
-  color: #777777;
-  opacity: 0.5;
-  filter: drop-shadow(0px 0px 20px #FFF);  
+  color: #aaa;
+  opacity: 0.6;
+  filter: drop-shadow(0px 0px 20px #fff);
 }
 a:hover {
   opacity: 1;
@@ -62,7 +62,16 @@ input {
   padding: 3px 0 4px 0;
   margin: 0px;
   width: 100%;
-  /* caret-shape: underscore; */
+}
+button {
+  color: white;
+  background: none;
+  border-color: #77777766;
+  border-width: 2px;
+  border-radius: 3px;
+  padding: 3px 0 4px 0;
+  margin: 0px;
+  width: 100%;
 }
 #text-input {
   outline: 10px inset #44444444;
@@ -74,7 +83,7 @@ input {
   width: 100%;
   text-align: center;
   font-size: 25px;
-  filter: drop-shadow(0px 0px 40px #FFF);  
+  filter: drop-shadow(0px 0px 40px #fff);
   caret-color: "white";
 }
 #text-input:focus {
@@ -84,12 +93,11 @@ input {
 #mode-dropdown {
   outline: none;
   border-color: rgb(0, 102, 255);
-  border-width: 1.5px;
-  /* border-radius: 3px; */
-  border-width: 0 1.5px 0 1.5px; border-style: dashed;
+  border-width: 0 1.5px 0 1.5px;
+  border-style: dashed;
   font-size: 21px;
   background: black;
-  height: 36px;  
+  height: 36px;
   width: 100%;
   text-align: center;
 }
@@ -111,8 +119,11 @@ input[type="button"]:disabled {
   color: #333333;
 }
 
+button:disabled {
+  color: #333333;
+}
 
-#emoji-button{
+#emoji-button {
   color: rgb(255, 255, 255, 0.75);
   border-color: rgb(255, 255, 255, 0.15);
   font-size: 18px;
@@ -121,53 +132,78 @@ input[type="button"]:disabled {
   border-width: 1.5px;
 }
 
-
-#clear-button{
+#clear-button {
   color: rgb(255, 0, 0);
   border-color: rgba(255, 0, 0, 0.55);
 }
-#clear-button:disabled{
+#clear-button:disabled {
   color: rgba(255, 0, 0, 0.25);
   border-color: rgba(255, 0, 0, 0.15);
 }
 
-#reel-button{
-  color: rgba(0, 151, 81, 1.0);
+#reel-button {
+  color: rgba(0, 151, 81, 1);
   border-color: rgba(0, 151, 81, 0.25);
 }
-#reel-button:disabled{
+#reel-button:disabled {
   color: rgba(0, 151, 81, 0.25);
-  border-color:rgba(0, 151, 81, 0.25);
+  border-color: rgba(0, 151, 81, 0.25);
 }
 
-#feed-button{
+#feed-button {
   color: rgba(255, 166, 0, 1);
   border-color: rgba(255, 166, 0, 0.25);
 }
-#feed-button:disabled{
+#feed-button:disabled {
   color: rgba(255, 166, 0, 0.25);
   border-color: rgba(255, 166, 0, 0.25);
 }
 
-#cut-button{
+#cut-button {
   border-style: dashed;
   color: rgba(0, 102, 255, 1);
-  border-color: rgba(0, 102, 255, 0.25)
+  border-color: rgba(0, 102, 255, 0.25);
 }
-#cut-button:disabled{
+#cut-button:disabled {
   color: rgba(0, 102, 255, 0.25);
   border-color: rgba(0, 102, 255, 0.25);
 }
 
-#submit-button{
+#submit-button {
   color: rgb(255, 255, 255);
   border-color: rgba(255, 255, 255, 0.5);
 }
-#submit-button:disabled{
+#submit-button:disabled {
   color: rgb(255, 255, 255);
   border-color: rgba(128, 128, 128, 0.25);
 }
 
+#setup-button {
+  color: rgb(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+#setup-button:disabled {
+  color: rgb(255, 255, 255, 0.25);
+  border-color: rgba(128, 128, 128, 0.25);
+}
+
+.align {
+  color: rgb(220, 100, 255);
+  border-color: rgba(220, 100, 255, 0.25);
+}
+.align:disabled {
+  color: rgba(220, 100, 255, 0.25);
+  border-color: rgba(220, 100, 255, 0.25);
+}
+
+.force {
+  color: rgb(80, 255, 255);
+  border-color: rgba(80, 255, 255, 0.25);
+}
+.force:disabled {
+  color: rgba(80, 255, 255, 0.25);
+  border-color: rgba(80, 255, 255, 0.25);
+}
 
 #background {
   position: fixed;
@@ -180,20 +216,13 @@ input[type="button"]:disabled {
   z-index: -1;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(
-    rgb(0, 0, 0) 80%,
-    rgb(10, 10, 10)
-  );
+  background: linear-gradient(rgb(0, 0, 0) 80%, rgb(10, 10, 10));
 }
 
-#frame{  
+#frame {
   border-radius: 20px;
   filter: drop-shadow(-8px -8px 8px rgba(36, 36, 36, 0.5));
-  background: radial-gradient(
-    circle,
-    rgb(19, 19, 19) 10%,
-    rgb(8, 8, 8) 90%
-  );
+  background: radial-gradient(circle, rgb(19, 19, 19) 10%, rgb(8, 8, 8) 90%);
 }
 
 #splash {
@@ -208,11 +237,7 @@ input[type="button"]:disabled {
   padding: 0px;
   margin: 0px;
 
-  background: radial-gradient(
-    ellipse,
-    rgb(20, 20, 20) 0%,
-    rgba(0, 0, 0, 1) 75%
-  );
+  background: radial-gradient(ellipse, rgb(20, 20, 20) 0%, rgba(0, 0, 0, 1) 75%);
   margin: auto;
 
   display: flex;

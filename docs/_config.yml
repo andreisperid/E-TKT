@@ -1,0 +1,54 @@
+title: E-TKT
+description: Anachronic label maker
+
+remote_theme: just-the-docs/just-the-docs@v0.4.0.rc2
+
+logo: "/assets/logo.png"
+
+# Footer content
+# appears at the bottom of every page's main content
+
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
+
+footer_content: "Copyright &copy; 2022 Andrei Speridião - <a href=\"https://andrei.cc\">andrei.cc</a> - Distributed by these <a href=\"https://andreisperid.github.io/E-TKT/license.html\">licenses.</a>"
+
+# Footer last edited timestamp
+# last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
+# last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
+
+color_scheme: etkt-dark
+
+# Enable or disable heading anchors
+heading_anchors: true
+
+# Aux links for the upper right navigation
+aux_links:
+  "GitHub":
+    - "//github.com/andreisperid/E-TKT"
+  "OSHWA":
+    - "//certification.oshwa.org/br000010.html"
+  "andrei.cc":
+    - "//andrei.cc"
+
+# Makes Aux links open in a new tab. Default is false
+aux_links_new_tab: true
+
+# Sort order for navigation links
+# nav_sort: case_insensitive # default, equivalent to nil
+nav_sort: case_sensitive # Capital letters sorted before lowercase
+
+# # External navigation links
+nav_external_links:
+  - title: 🙂 donate
+    url: https://www.paypal.com/donate/?business=U5QYSBT2TLZL8&no_recurring=0&currency_code=USD
+
+
+# Footer "Edit this page on GitHub" link text
+gh_edit_link: true # show or hide edit this page link
+gh_edit_link_text: "Edit this page on GitHub."
+gh_edit_repository: "https://github.com/andreisperid/E-TKT/" # the github URL for your repo
+gh_edit_branch: "main" # the branch that your docs is served from
+gh_edit_source: "docs" # the source that your files originate from
+gh_edit_view_mode: "edit" # "tree" or "edit" if you want the user to jump into the editor immediately
