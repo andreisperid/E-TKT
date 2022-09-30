@@ -53,7 +53,7 @@ parent: 🛠️ do it yourself!
 
 | TYPE | SPEC — PACKAGE | REF | QTY |
 | :--- | :--- | :---: | :---: |
-| PCB | 4 layer, FR4, black — 99.57 mm x 76.2 mm | | 1 |
+| PCB | 4 layer, FR4, black solder mask — 99.57 mm x 76.2 mm | | 1 |
 | stencil | top layer only (F.Cu) — 200mm x 150mm | | 1 |
 | MCU | ESP32 — WROOM-32D (SMD) | [ESP32-WROOM-32D-N4](https://www.findchips.com/search/ESP32-WROOM-32D-N4) | 1 |
 | serial | USB Interface, Full Serial UART — SSOP-20 3.9x8.7mm (SMD) | [FT231XS-R](https://www.findchips.com/search/FT231XS-R) | 1 |
