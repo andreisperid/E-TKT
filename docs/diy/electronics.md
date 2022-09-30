@@ -31,7 +31,8 @@ parent: 🛠️ do it yourself!
 
 ## Schematics
 ![image](https://user-images.githubusercontent.com/15098003/193071371-ac9c6aa6-0b87-4183-b6b2-9ccb1d030f1d.png)
-*[link to the schematics](https://github.com/andreisperid/E-TKT/tree/main/_electronic/)*
+<p align="right"><a href="https://github.com/andreisperid/E-TKT/tree/main/_electronic/" target="_blank"><i>🔎 see larger</i></p>
+
 
 ----
 
