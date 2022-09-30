@@ -10,5 +10,9 @@ has_children: true
 
 # 🧩 **assembly**
 
-![exploded_001](https://user-images.githubusercontent.com/15098003/193162441-de10b587-e087-431a-aa9b-d942057395de.png)
-[see larger](https://user-images.githubusercontent.com/15098003/193162441-de10b587-e087-431a-aa9b-d942057395de.png)
+![exploded_001-01](https://user-images.githubusercontent.com/15098003/193283104-1593d64c-becb-477a-a0ad-74b2916b5a0d.png)
+[🔎 see larger](https://user-images.githubusercontent.com/15098003/193283104-1593d64c-becb-477a-a0ad-74b2916b5a0d.png)
+
+
+
+
