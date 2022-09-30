@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 🛠️ do it yourself!
-nav_order: 6
+nav_order: 7
 description: "E-TKT"
 has_children: true
 ---
