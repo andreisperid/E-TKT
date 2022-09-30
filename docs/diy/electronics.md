@@ -17,7 +17,7 @@ parent: 🛠️ do it yourself!
 
 ----
 
-## Layers
+## Stackup
 <p align="center">  
 <img width="25%" src="https://user-images.githubusercontent.com/15098003/193071414-60c6b8d1-a408-4636-970f-516105952620.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071446-c8ad1838-c0e3-43a6-938a-168fd1d36d60.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071449-e0617bdb-d3d9-4312-b82b-2f735cb272e8.png"><img width="25%" src="https://user-images.githubusercontent.com/15098003/193071444-545b5f12-a920-4734-ae05-dccdc0a62cc8.png">
 </p>
@@ -40,8 +40,10 @@ parent: 🛠️ do it yourself!
   
 
 ----
+## Subsystems
 
-### Power rails
+
+### Power
   - ***12V*** needs to be provided by an external power supply with at least 3A (real) to deal with servo peaks current while pressing the label. It supplies both the stepper drivers directly.
   - ***6V*** out of the bucket converter and is provided for both the servo and hall sensor. The peak voltage tested on oscilloscope was +1V surge when the servo stalls. *
   - ***3.3V*** is provided by the AZ1117 linear regulator, which receives power directly from the 6V rail.
@@ -49,11 +51,11 @@ parent: 🛠️ do it yourself!
 <h6><i>* Using a bucket converter for the 6V rail is preferred due to the high step from 12V, but a cheaper alternative using a L7806 (1.5A) is oferred at the PCB back side. For that, you should not mount the bucket converter components (C_POW_IN_1, C_POW_IN_2, C_POW_IN_3, U_POW1, C_POW_BST_1, L1, C_POW_6V_FF1, R_POW_FBT1, R_POW_FFB1, C_POW_OUT_1, C_POW_OUT_2, C_POW_OUT_3, C_POW_OUT_4, C_POW_OUT_5). But IMPORTANT, this exact setup wasn't tested on this exact PCB (only in the preliminar prototype), so do it at your own risk.</i></h6>
 
 
-### ESP32-D WROOM
-- Version ESP32-WROOM-32D-N4, with integrated antenna.
+### Processing & wireless communication
+- Using an ESP32-WROOM-32D-N4, with an integrated antenna.
 
 ### Serial communication
-- An FT231XS-R for flashing the firmware through an USB-C 2.0 port.
+- An FT231XS-R is used for flashing the firmware through an USB-C 2.0 port.
 
 ### Logic Level MOSFETs (BSS138)
 - As the ESP32 uses 3.3v logic, we need this conversion for parts that are running on 6V (servo and hall sensor).
@@ -65,7 +67,7 @@ parent: 🛠️ do it yourself!
 - A NEMA stepper driven by a A4988 breakout and a KY 003 hall sensor for homing.
 
 ### Wifi reset
-- A tactile button that when pressed while booting, clears the saved wifi credentials.
+- When this tactile button is pressed while booting, the saved wifi credentials are cleared.
 
 ### Feeder
 - 12v reduced stepper motor (28BYJ-48) driven by a ULN2003 darlington array.
