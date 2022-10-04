@@ -87,7 +87,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 #define ledChar 17
 
 // buzzer
-#define buzzerPin 26
+#define buzzerPin 27 // 26 for new PCB
 
 // DEBUG --------------------------------------------------------------------------
 // comment lines individually to isolate functions
@@ -197,8 +197,9 @@ void lightFinished()
 void lightChar(float state)
 {
 	// lights up when the character is pressed against the tape
+	int s = state * 128;
 
-	analogWrite(ledChar, state * 128);
+	analogWrite(ledChar, s);
 }
 
 // --------------------------------------------------------------------------------
@@ -450,7 +451,8 @@ void displayProgress(float total, float actual, String label)
 	u8g2.drawBox(0, 21, (actual)*6, 21);
 
 	float progress = actual / total;
-	String progressString = String(progress * 95, 0);
+	// String progressString = String(progress * 95, 0);
+	String progressString = String(progress * 100, 0);
 	webProgress = progressString;
 	progressString.concat("%");
 	const char *p = progressString.c_str();
@@ -1258,6 +1260,10 @@ void initialize()
 	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/favicon.ico", "image"); });
 
+	// route to icon image
+	server.on("/icon.png", HTTP_GET, [](AsyncWebServerRequest *request)
+			  { request->send(SPIFFS, "/icon.png", "image"); });
+
 	// route to splash icon
 	server.on("/splash.png", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/splash.png", "image"); });
@@ -1269,6 +1275,7 @@ void initialize()
 	// route to settings image
 	server.on("/iso.png", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/iso.png", "image"); });
+			  
 
 	// start server
 	server.begin();
@@ -1376,6 +1383,10 @@ void setup()
 
 	loadSettings();
 
+	// set  display
+	displayInitialize();
+	displayClear();
+
 	// set pins
 	pinMode(sensorPin, INPUT_PULLUP);
 	pinMode(wifiResetPin, INPUT);
@@ -1398,6 +1409,7 @@ void setup()
 	stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
 	stepperChar.setPinsInverted(true, false, true);
 	stepperChar.setEnablePin(enableCharStepper);
+	setHome(); // initial home for reference
 	stepperChar.disableOutputs();
 
 	// set  servo
@@ -1405,11 +1417,9 @@ void setup()
 	myServo.write(restAngle);
 	delay(100);
 
-	setHome(); // initial home for reference
 
-	// set  display
-	displayInitialize();
-	displayClear();
+
+	// splash
 	displaySplash();
 	
 	// start wifi > comment both to avoid entering the main loop

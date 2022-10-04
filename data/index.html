@@ -9,9 +9,10 @@
     <link rel="manifest" href="/manifest.json" />
     <link rel="image" href="./splash.png" />
     <link rel="preload" href="./fontwhite.ttf" as="font" crossorigin />
+    <link rel="icon" href="./icon.png" />
 
     <meta name="viewport" content="width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=0" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#0b111a00" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   </head>
@@ -34,7 +35,15 @@
       <div id="background"></div>
 
       <div
-        style="display: box; width: 300px; margin-right: auto; margin-left: auto; margin-top: 50px; padding: 20px"
+        style="
+          display: box;
+          width: 350px;
+          height: 460px;
+          margin-right: auto;
+          margin-left: auto;
+          margin-top: 20px;
+          padding: 20px;
+        "
         id="frame"
       >
         <form action="none" method="post" autocomplete="off" novalidate onsubmit="return false">
@@ -42,7 +51,7 @@
             <h1 style="text-align: center; transform: rotate(-1deg)">E-TKT</h1>
             <h2 style="text-align: center; margin-top: 5px">label maker</h2>
             <div id="single-column" style="margin-top: 45px; position: relative">
-              <div style="position: absolute; top: 0; left: 0">
+              <div style="position: absolute; top: 0; left: 20px; right: 20px">
                 <input
                   type="text"
                   id="text-input"
@@ -62,17 +71,27 @@
                 id="size-helper"
                 style="
                   pointer-events: none;
-                  border-color: rgba(255, 166, 0, 0.3) rgba(0, 102, 255, 0.6);
+
+                  border-color: rgba(255, 166, 0, 0.4) rgba(0, 102, 255, 0.7);
                   border-style: solid dashed solid dashed;
-                  border-width: 2px 2px 2px 2px;
+
+                  border-width: 2px;
+                  mix-blend-mode: normal;
+
                   margin: auto;
+                  margin-top: -2px;
                   background: #00000044;
                   z-index: 50;
                   font-size: 25px;
-                  color: #ff000000;
+                  height: 25px;
                 "
               >
-                `WRITE HERE`
+                <div
+                  id="progress-bar"
+                  style="visibility: visible; background: white; height: 100%; width: 0%; mix-blend-mode: difference"
+                ></div>
+
+                <div id="size-helper-content" style="font-size: 25px; color: rgba(255, 0, 0, 0)">`WRITE HERE`</div>
               </div>
             </div>
 
@@ -80,41 +99,46 @@
               <div id="hint">A-Z 0-9 space . -</div>
             </div>
 
-            <div id="single-column" style="margin: 5px 0 15px 0; height: 36px">
-              <div>
-                <input type="button" id="emoji-button" value="♡" tabindex="-1" onclick="insertIntoField('♡')" />
-              </div>
-              <div>
-                <input type="button" id="emoji-button" value="☆" tabindex="-1" onclick="insertIntoField('☆')" />
-              </div>
-              <div>
-                <input type="button" id="emoji-button" value="♪" tabindex="-1" onclick="insertIntoField('♪')" />
-              </div>
-              <div>
-                <input
-                  style="font-size: 24px"
-                  type="button"
-                  id="emoji-button"
-                  value="$"
-                  tabindex="-1"
-                  onclick="insertIntoField('$')"
-                />
-              </div>
-              <div>
-                <input
-                  style="font-size: 24px"
-                  type="button"
-                  id="emoji-button"
-                  value="@"
-                  tabindex="-1"
-                  onclick="insertIntoField('@')"
-                />
+            <div id="single-column" style="margin: 5px 0 15px 0; height: 40px">
+              <div
+                id="emoji-buttons"
+                style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; margin: auto"
+              >
+                <div>
+                  <input type="button" id="emoji-button" value="♡" tabindex="-1" onclick="insertIntoField('♡')" />
+                </div>
+                <div>
+                  <input type="button" id="emoji-button" value="☆" tabindex="-1" onclick="insertIntoField('☆')" />
+                </div>
+                <div>
+                  <input type="button" id="emoji-button" value="♪" tabindex="-1" onclick="insertIntoField('♪')" />
+                </div>
+                <div>
+                  <input
+                    style="font-size: 24px"
+                    type="button"
+                    id="emoji-button"
+                    value="$"
+                    tabindex="-1"
+                    onclick="insertIntoField('$')"
+                  />
+                </div>
+                <div>
+                  <input
+                    style="font-size: 24px"
+                    type="button"
+                    id="emoji-button"
+                    value="@"
+                    tabindex="-1"
+                    onclick="insertIntoField('@')"
+                  />
+                </div>
               </div>
             </div>
 
-            <div id="single-column" style="margin-top: 0px; padding-top: 0px; height: 36px">
+            <div id="single-column" style="margin-top: 0px; padding-top: 0px; height: 40px">
               <div style="width: 55px">
-                <input type="button" id="clear-button" onclick="clearField()" value=" x " disabled tabindex="-1" />
+                <input type="button" id="clear-button" onclick="clearField()" value=" c " disabled tabindex="-1" />
               </div>
 
               <div style="width: 50%">
@@ -128,25 +152,24 @@
               <div
                 id="length-label"
                 style="
-                  line-height: 33px;
-                  height: 33px;
+                  line-height: 37px;
+                  height: 37px;
                   border-width: 1.5px 0 1.5px 0;
                   border-style: solid;
                   border-color: orange;
+                  color: orange;
                   margin: 0;
                   width: 55px;
                   text-align: center;
+                  opacity: 0.2;
                 "
               >
-                <div>??mm</div>
+                <div style="color: orange">??mm</div>
               </div>
             </div>
 
-            <div id="single-column" style="margin-top: 15px; padding: 0 3px 0 3px">
-              <div id="progress-bar" style="background: white; height: 2px; width: 0%"></div>
-            </div>
-            <div id="single-column" style="margin-top: 0px; padding-top: 0">
-              <div style="width: 100%; height: 60px">
+            <div id="single-column" style="margin-top: 10px; padding-top: 0">
+              <div style="width: 100%; height: 40px">
                 <input
                   type="button"
                   onclick="labelCommand()"
@@ -161,7 +184,7 @@
 
             <!-- extras section -->
 
-            <div id="single-column" style="margin-top: 0px; padding-bottom: 0px; padding-top: 15px; height: 36px">
+            <div id="single-column" style="margin-top: 0px; padding-bottom: 0px; padding-top: 15px; height: 40px">
               <div>
                 <input
                   type="button"
@@ -169,14 +192,28 @@
                   onclick="toggleSettings()"
                   value=" SETUP "
                   tabindex="-1"
-                  style="padding: 4px"
+                  style="padding: 4px; width: 100px"
                 />
               </div>
               <div>
-                <input type="button" id="cut-button" onclick="cutCommand()" value=" CUT " tabindex="-1" />
+                <input
+                  type="button"
+                  id="cut-button"
+                  style="width: 100px"
+                  onclick="cutCommand()"
+                  value=" CUT "
+                  tabindex="-1"
+                />
               </div>
               <div>
-                <input type="button" id="feed-button" onclick="feedCommand()" value=" FEED " tabindex="-1" />
+                <input
+                  type="button"
+                  id="feed-button"
+                  style="width: 100px"
+                  onclick="feedCommand()"
+                  value=" FEED "
+                  tabindex="-1"
+                />
               </div>
             </div>
           </div>
@@ -189,12 +226,11 @@
               flex-direction: column;
               justify-content: space-between;
               position: absolute;
-              top: 0px;
-              bottom: 0px;
-              left: 0px;
-              right: 0px;
-              margin: auto;
-              padding: 20px;
+              top: 40px;
+              width: 350px;
+              height: 460px;
+              margin-right: auto;
+              margin-left: auto;
               z-index: 999;
             "
             id="settings-frame"
@@ -202,6 +238,7 @@
             <div
               id="single-column"
               style="
+                filter: drop-shadow(0px 0px 40px rgba(174, 219, 255, 64));
                 display: flex;
                 flex-direction: column;
                 margin: auto;
@@ -224,7 +261,7 @@
                 <h1 style="color: white; font-size: 36px; margin: 0px">SETUP</h1>
               </div>
               <div>
-                <input type="button" id="reel-button" onclick="reelCommand()" value=" NEW REEL " tabindex="-1" />
+                <input type="button" id="reel-button" onclick="reelCommand()" value=" +REEL " tabindex="-1" />
               </div>
             </div>
             <div
@@ -247,23 +284,27 @@
                 align-content: flex-end;
                 justify-content: space-around;
                 margin: auto;
-                margin-top: 10px;
+                margin-top: 20px;
                 padding-bottom: 0px;
               "
             >
+              <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center">
+                <div style="margin-right: 10px; margin-top: 7px; font-size: 25px" class="align">align</div>
+                <div style="margin-right: 10px; margin-bottom: 9px; font-size: 25px" class="force">force</div>
+              </div>
+
               <div>
                 <div
                   style="display: flex; flex-direction: row; justify-content: center; align-items: center"
                   id="align-div"
                 >
-                  <div style="margin-right: 10px; font-size: 18px" class="align">wheel align</div>
                   <div>
                     <input
                       type="button"
                       id="remove-align-button"
                       class="align"
                       onclick="changeField('remove', 'align-field')"
-                      value="-"
+                      value="<"
                       tabindex="-1"
                       style="width: 40px; margin: 0 5px"
                     />
@@ -286,7 +327,7 @@
                       id="add-align-button"
                       class="align"
                       onclick="changeField('add', 'align-field')"
-                      value="+"
+                      value=">"
                       tabindex="-1"
                       style="width: 40px; margin: 0 5px"
                     />
@@ -303,7 +344,6 @@
                   "
                   id="force-div"
                 >
-                  <div style="margin-right: 10px; font-size: 18px" class="force">press force</div>
                   <div>
                     <input
                       type="button"
@@ -356,7 +396,7 @@
                   onclick="testCommand(true)"
                   value="test"
                   tabindex="-1"
-                  style="width: 75px; height: 100%; position: relative; bottom: 0px"
+                  style="width: 75px; height: 100%; position: relative; bottom: 0px; border-radius: 21px"
                 >
                   <br /><br />test
                 </button>
@@ -390,10 +430,10 @@
               visibility: hidden;
               display: flex;
               flex-direction: column;
-              justify-content: center;
+              /* justify-content: center; */
               align-items: center;
               position: absolute;
-              top: 0px;
+              top: 250px;
               bottom: 0px;
               left: 0px;
               right: 0px;

@@ -29,7 +29,7 @@ h1 {
   margin: 0px;
   color: rgb(194, 194, 194);
   opacity: 1;
-  filter: drop-shadow(-2px -2px 2px rgba(255, 255, 255, 0.35));
+  filter: drop-shadow(-2px -2px 2px rgba(181, 214, 255, 0.35));
 }
 h2 {
   font-size: 23px;
@@ -56,9 +56,9 @@ a:hover {
 input {
   color: white;
   background: none;
-  border-color: #77777766;
+  border-color: #131a3466;
   border-width: 2px;
-  border-radius: 3px;
+  border-radius: 20px;
   padding: 3px 0 4px 0;
   margin: 0px;
   width: 100%;
@@ -66,7 +66,7 @@ input {
 button {
   color: white;
   background: none;
-  border-color: #77777766;
+  border-color: #131a3466;
   border-width: 2px;
   border-radius: 3px;
   padding: 3px 0 4px 0;
@@ -74,7 +74,8 @@ button {
   width: 100%;
 }
 #text-input {
-  outline: 10px inset #44444444;
+  height: 25px;
+  outline: 20px inset #0d101b66;
   border-radius: 1px;
   border: none;
   margin: 0px;
@@ -83,23 +84,31 @@ button {
   width: 100%;
   text-align: center;
   font-size: 25px;
-  filter: drop-shadow(0px 0px 40px #fff);
+  filter: drop-shadow(0px 0px 40px rgba(174, 219, 255, 255));
   caret-color: "white";
 }
 #text-input:focus {
-  background: #11111166;
+  background: #3037487a;
+}
+#text-input:disabled {
+  pointer-events: none;
+}
+
+#progress-bar {
+  filter: drop-shadow(0px 0px 25px rgb(174, 219, 255));
 }
 
 #mode-dropdown {
   outline: none;
   border-color: rgb(0, 102, 255);
-  border-width: 0 1.5px 0 1.5px;
+  border-width: 0 2px 0 2px;
   border-style: dashed;
   font-size: 21px;
-  background: black;
-  height: 36px;
+  background: rgb(7, 15, 22);
+  height: 40px;
   width: 100%;
   text-align: center;
+  border-radius: 5px;
 }
 
 #single-column {
@@ -112,7 +121,7 @@ button {
 }
 
 input[type="button"] {
-  height: 36px;
+  height: 40px;
 }
 
 input[type="button"]:disabled {
@@ -121,79 +130,203 @@ input[type="button"]:disabled {
 
 button:disabled {
   color: #333333;
+  pointer-events: none;
 }
 
 #emoji-button {
+  filter: drop-shadow(-3px -3px 3.5px rgba(255, 255, 255, 0.25));
+  background-color: rgb(11, 17, 26);
   color: rgb(255, 255, 255, 0.75);
-  border-color: rgb(255, 255, 255, 0.15);
   font-size: 18px;
-  width: 36px;
-  height: 36px;
-  border-width: 1.5px;
+  width: 40px;
+  height: 40px;
+  border-width: 0px;
+  border-width: 0.5px 0 0 0.5px;
+  border-color: rgba(255, 255, 255, 0.32);
+}
+#emoji-button:disabled {
+  color: rgb(255, 255, 255, 0.25);
+  pointer-events: none;
+}
+#emoji-button:active {
+  filter: drop-shadow(3px 3px 3.5px rgba(255, 255, 255, 0.1));
+  color: rgb(255, 255, 255, 1);
+  background-color: rgb(18, 25, 37);
+  border-width: 0px;
+  border-width: 0 0.5px 0.5px 0;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 #clear-button {
+  filter: drop-shadow(-4px -4px 4.5px rgba(255, 255, 255, 0.15));
+  background-color: rgb(11, 17, 26);
   color: rgb(255, 0, 0);
   border-color: rgba(255, 0, 0, 0.55);
+  border-style: solid;
 }
 #clear-button:disabled {
   color: rgba(255, 0, 0, 0.25);
   border-color: rgba(255, 0, 0, 0.15);
+  pointer-events: none;
+}
+#clear-button:active {
+  filter: drop-shadow(4px 4px 4.5px rgba(255, 68, 68, 0.5));
+  background-color: rgb(18, 25, 37);
+  border-color: rgba(255, 0, 0, 1);
+  padding: 0 0 2px 0;
 }
 
 #reel-button {
-  color: rgba(0, 151, 81, 1);
-  border-color: rgba(0, 151, 81, 0.25);
+  filter: drop-shadow(-4px -4px 4.5px rgba(255, 255, 255, 0.15));
+  background-color: rgb(11, 17, 26);
+  color: rgb(0, 189, 35);
+  border-color: rgba(0, 189, 35, 0.4);
+  border-style: solid;
 }
 #reel-button:disabled {
   color: rgba(0, 151, 81, 0.25);
   border-color: rgba(0, 151, 81, 0.25);
+  pointer-events: none;
+}
+#reel-button:active {
+  filter: drop-shadow(4px 4px 4.5px rgba(134, 255, 156, 0.4));
+  background-color: rgb(18, 25, 37);
+  border-color: rgb(0, 255, 47);
+  padding: 0 0 2px 0;
 }
 
 #feed-button {
+  filter: drop-shadow(-4px -4px 4.5px rgba(255, 255, 255, 0.15));
+  background-color: rgb(11, 17, 26);
   color: rgba(255, 166, 0, 1);
   border-color: rgba(255, 166, 0, 0.25);
+  border-style: solid;
 }
 #feed-button:disabled {
   color: rgba(255, 166, 0, 0.25);
   border-color: rgba(255, 166, 0, 0.25);
+  pointer-events: none;
+}
+#feed-button:active {
+  filter: drop-shadow(4px 4px 4.5px rgba(255, 183, 49, 0.4));
+  background-color: rgb(18, 25, 37);
+  border-color: rgba(255, 166, 0, 1);
+  padding: 0 0 2px 0;
 }
 
 #cut-button {
-  border-style: dashed;
+  filter: drop-shadow(-4px -4px 4.5px rgba(255, 255, 255, 0.15));
+  background-color: rgb(11, 17, 26);
   color: rgba(0, 102, 255, 1);
   border-color: rgba(0, 102, 255, 0.25);
+  border-style: dashed;
 }
 #cut-button:disabled {
   color: rgba(0, 102, 255, 0.25);
   border-color: rgba(0, 102, 255, 0.25);
+  pointer-events: none;
+}
+#cut-button:active {
+  filter: drop-shadow(4px 4px 4px rgba(45, 129, 255, 0.4));
+  background-color: rgb(18, 25, 37);
+  border-color: rgba(0, 102, 255, 1);
+  padding: 0 0 2px 0;
 }
 
 #submit-button {
+  filter: drop-shadow(-4px -4px 4.5px rgba(255, 255, 255, 0.15));
+  background-color: rgb(11, 17, 26);
   color: rgb(255, 255, 255);
   border-color: rgba(255, 255, 255, 0.5);
+  border-style: solid;
 }
 #submit-button:disabled {
   color: rgb(255, 255, 255);
   border-color: rgba(128, 128, 128, 0.25);
+  pointer-events: none;
+}
+#submit-button:active {
+  filter: drop-shadow(3px 3px 6px rgba(255, 255, 255, 0.6));
+  background-color: rgb(18, 25, 37);
+  color: rgb(255, 255, 255, 1);
+  border-color: rgba(255, 255, 255, 1);
+  padding: 0 0 2px 0;
 }
 
-#setup-button {
+#test-align-button {
+  filter: drop-shadow(-2px -2px 2.5px rgba(255, 255, 255, 0.25));
+  background-color: rgb(11, 17, 26);
   color: rgb(255, 255, 255, 0.5);
-  border-color: rgba(255, 255, 255, 0.25);
+  border-width: 0px;
+  border-width: 0.5px 0 0 0.5px;
+  border-color: rgba(255, 255, 255, 0.2);
 }
-#setup-button:disabled {
+#test-align-button:disabled {
   color: rgb(255, 255, 255, 0.25);
-  border-color: rgba(128, 128, 128, 0.25);
+  pointer-events: none;
+}
+#test-align-button:active {
+  filter: drop-shadow(2px 2px 2.5px rgba(255, 255, 255, 0.5));
+  color: rgb(255, 255, 255, 1);
+  background-color: rgb(18, 25, 37);
+  border-width: 0px;
+  border-width: 0 0.5px 0.5px 0;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+#setup-button,
+#test-full-button,
+#cancel-button,
+#save-button {
+  filter: drop-shadow(-4px -4px 4.5px rgba(255, 255, 255, 0.25));
+  background-color: rgb(11, 17, 26);
+  color: rgb(255, 255, 255, 0.5);
+  border-width: 0px;
+  border-width: 0.5px 0 0 0.5px;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+#setup-button:disabled,
+#test-full-button:disabled,
+#cancel-button:disabled,
+#save-button:disabled {
+  color: rgb(255, 255, 255, 0.25);
+  pointer-events: none;
+}
+#setup-button:active,
+#test-full-button:active,
+#cancel-button:active,
+#save-button:active {
+  filter: drop-shadow(4px 4px 4.5px rgba(255, 255, 255, 0.1));
+  color: rgb(255, 255, 255, 1);
+  background-color: rgb(18, 25, 37);
+  border-width: 0px;
+  border-width: 0 0.5px 0.5px 0;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .align {
   color: rgb(220, 100, 255);
-  border-color: rgba(220, 100, 255, 0.25);
+  border-color: rgba(220, 100, 255, 0.5);
 }
 .align:disabled {
   color: rgba(220, 100, 255, 0.25);
-  border-color: rgba(220, 100, 255, 0.25);
+  border-color: rgba(220, 100, 255, 0.5);
+  pointer-events: none;
+}
+
+#remove-align-button,
+#add-align-button {
+  filter: drop-shadow(-4px -4px 4.5px rgba(255, 255, 255, 0.25));
+  background-color: rgb(11, 17, 26);
+  border-style: solid;
+  /* border-width: 1px; */
+}
+#remove-align-button:active,
+#add-align-button:active {
+  filter: drop-shadow(4px 4px 4.5px rgba(255, 157, 248, 0.4));
+  background-color: rgb(18, 25, 37);
+  border-color: rgba(220, 100, 255, 1);
+  padding: 0 0 2px 0;
 }
 
 .force {
@@ -203,6 +336,22 @@ button:disabled {
 .force:disabled {
   color: rgba(80, 255, 255, 0.25);
   border-color: rgba(80, 255, 255, 0.25);
+  pointer-events: none;
+}
+
+#remove-force-button,
+#add-force-button {
+  filter: drop-shadow(-4px -4px 4.5px rgba(255, 255, 255, 0.25));
+  background-color: rgb(11, 17, 26);
+  border-style: solid;
+  /* border-width: 1px; */
+}
+#remove-force-button:active,
+#add-force-button:active {
+  filter: drop-shadow(4px 4px 4.5px rgba(147, 235, 255, 0.4));
+  background-color: rgb(16, 22, 33);
+  border-color: rgba(80, 255, 255, 1);
+  padding: 0 0 2px 0;
 }
 
 #background {
@@ -216,13 +365,13 @@ button:disabled {
   z-index: -1;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(rgb(0, 0, 0) 80%, rgb(10, 10, 10));
+  background: rgb(11, 17, 26);
 }
 
 #frame {
-  border-radius: 20px;
-  filter: drop-shadow(-8px -8px 8px rgba(36, 36, 36, 0.5));
-  background: radial-gradient(circle, rgb(19, 19, 19) 10%, rgb(8, 8, 8) 90%);
+  border-radius: 40px;
+  /* filter: drop-shadow(-4px -4px 3px rgb(35, 42, 56)); */
+  background: rgb(11, 17, 26);
 }
 
 #splash {
@@ -237,7 +386,8 @@ button:disabled {
   padding: 0px;
   margin: 0px;
 
-  background: radial-gradient(ellipse, rgb(20, 20, 20) 0%, rgba(0, 0, 0, 1) 75%);
+  /* background: radial-gradient(ellipse, rgb(16, 23, 36) 0%, rgb(3, 5, 8) 75%); */
+  background: rgb(11, 17, 26);
   margin: auto;
 
   display: flex;

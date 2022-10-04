@@ -48,8 +48,10 @@ function calculateLength() {
 
   if (treatedLabel.length === 0) {
     label.innerHTML = "??mm";
+    label.style.opacity = 0.2;
   } else {
     label.innerHTML = (treatedLabel.length < 7 ? 7 : treatedLabel.length) * 4 + "mm";
+    label.style.opacity = 1;
   }
 }
 
@@ -61,12 +63,26 @@ function labelCommand() {
   if (useRegex(fieldValue)) {
     // console.log('printing: "' + treatedLabel.toLowerCase() + '"');
     document.getElementById("text-input").blur();
+
+    document.getElementById("size-helper").style.borderColor = "rgba(128, 128, 128, 128)";
+    document.getElementById("size-helper").style.borderStyle = "solid";
+    document.getElementById("size-helper").style.backgroundColor = "rgba(32, 32, 32, 255)";
+    document.getElementById("size-helper").style.mixBlendMode = "difference";
+    // document.getElementById("progress-bar").style.visibility = "visible";
+
+    let emojiDivs = document.getElementById("emoji-buttons").children;
+    Array.from(emojiDivs).forEach((element) => {
+      element.children[0].disabled = true;
+    });
+
     document.getElementById("text-input").disabled = true;
     document.getElementById("clear-button").disabled = true;
     document.getElementById("submit-button").disabled = true;
     document.getElementById("reel-button").disabled = true;
     document.getElementById("feed-button").disabled = true;
     document.getElementById("cut-button").disabled = true;
+    document.getElementById("setup-button").disabled = true;
+
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "/&?" + "tag=" + treatedLabel.toLowerCase(), true);
     xhr.send();
@@ -109,13 +125,14 @@ function drawHelper() {
   document.getElementById("reel-button").disabled = !(fieldValue === "");
   document.getElementById("feed-button").disabled = !(fieldValue === "");
   document.getElementById("cut-button").disabled = !(fieldValue === "");
+  document.getElementById("setup-button").disabled = !(fieldValue === "");
 
   if (fieldValue != "" && !clear) {
     if (multiplier + field.value.length + multiplier < 7) {
       multiplier = Math.ceil((7 - field.value.length) / 2);
       // console.log("minimum length " + multiplier);
     }
-    document.getElementById("size-helper").innerHTML =
+    document.getElementById("size-helper-content").innerHTML =
       space.repeat(multiplier) + "x".repeat(field.value.length) + space.repeat(multiplier);
 
     treatedLabel = "_".repeat(multiplier) + field.value + "_".repeat(multiplier);
@@ -130,7 +147,7 @@ function drawHelper() {
   } else {
     clear = false;
     treatedLabel = "";
-    document.getElementById("size-helper").innerHTML =
+    document.getElementById("size-helper-content").innerHTML =
       space.repeat(multiplier) + (mode != "full" ? "WRITE HERE" : "") + space.repeat(multiplier);
   }
 }
@@ -429,7 +446,6 @@ setInterval(function () {
 }, 100); // lower rate?
 
 function getData() {
-
   // gets progress data from the device and disable buttons while busy
 
   const textField = document.getElementById("text-input");
@@ -473,6 +489,20 @@ function getData() {
           document.getElementById("feed-button").disabled = false;
           document.getElementById("cut-button").disabled = false;
           document.getElementById("setup-button").disabled = false;
+
+          let emojiDivs = document.getElementById("emoji-buttons").children;
+          Array.from(emojiDivs).forEach((element) => {
+            element.children[0].disabled = false;
+          });
+
+          document.getElementById("size-helper").style.borderLeftColor = "rgba(0, 102, 255, 0.7)";
+          document.getElementById("size-helper").style.borderRightColor = "rgba(0, 102, 255, 0.7)";
+          document.getElementById("size-helper").style.borderTopColor = "rgba(255, 166, 0, 0.4) ";
+          document.getElementById("size-helper").style.borderBottomColor = "rgba(255, 166, 0, 0.4)";          
+          document.getElementById("size-helper").style.borderStyle = "solid dashed solid dashed";
+
+          document.getElementById("size-helper").style.backgroundColor = "rgba(0, 0, 0, 0)";
+          document.getElementById("size-helper").style.mixBlendMode = "normal";
 
           // settings
           document.getElementById("add-align-button").disabled = false;
