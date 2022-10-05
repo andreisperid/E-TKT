@@ -22,11 +22,11 @@ description: "E-TKT"
 - Buttons for special characters: ♡  ☆  ♪  $ @
 - Reeling function: for when a new tape reel must be installed;
 - Manual commands: feed & cut;
-
 <br>
 
 ## 🔌 device
 
+- Label cutting;
 - Minimum label size to allow for picking it up;
 - OLED screen + LED feedback:
 - Instructions for configuring the wifi;
