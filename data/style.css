@@ -110,6 +110,10 @@ button {
   text-align: center;
   border-radius: 5px;
 }
+#mode-dropdown:disabled {
+  color: rgba(231, 218, 201, 0.25);
+  border-color: rgba(0, 102, 255, 0.5);
+}
 
 #single-column {
   display: flex;
@@ -145,7 +149,7 @@ button:disabled {
   border-color: rgba(255, 255, 255, 0.32);
 }
 #emoji-button:disabled {
-  color: rgba(231, 218, 201, 100);
+  color: rgba(231, 218, 201, 0.25);
   pointer-events: none;
 }
 #emoji-button:active {
@@ -241,7 +245,7 @@ button:disabled {
   border-style: solid;
 }
 #submit-button:disabled {
-  color: rgba(231, 218, 201, .25);
+  /* color: rgba(231, 218, 201, .25); */
   border-color: rgba(231, 218, 201, 0.25);
   pointer-events: none;
 }
@@ -249,7 +253,7 @@ button:disabled {
   filter: drop-shadow(3px 3px 6px rgba(255, 255, 255, 0.6));
   background-color: rgb(18, 25, 37);
   color: white;
-  border-color: rgba(255, 255, 255, 1);
+  border-color: white;
   padding: 0 0 2px 0;
 }
 
@@ -365,7 +369,8 @@ button:disabled {
   z-index: -1;
   width: 100%;
   height: 100vh;
-  background: rgb(11, 17, 26);
+  /* background: rgb(11, 17, 26); */
+  background: linear-gradient(rgb(11, 17, 26) 500px, rgb(3, 5, 8) 100%);
 }
 
 #frame {
@@ -386,8 +391,8 @@ button:disabled {
   padding: 0px;
   margin: 0px;
 
-  /* background: radial-gradient(ellipse, rgb(16, 23, 36) 0%, rgb(3, 5, 8) 75%); */
-  background: rgb(11, 17, 26);
+  background: linear-gradient(rgb(11, 17, 26) 500px, rgb(3, 5, 8) 100%);
+  /* background: rgb(11, 17, 26); */
   margin: auto;
 
   display: flex;
@@ -395,8 +400,8 @@ button:disabled {
   justify-content: center;
   align-items: center;
 
-  -webkit-animation: fade 2s;
-  animation: fade 2s;
+  -webkit-animation: fade 2.5s;
+  animation: fade 2.5s;
   opacity: 0;
   z-index: -1;
 }
@@ -410,8 +415,8 @@ button:disabled {
   justify-content: flex-end;
   align-content: flex-start;
 
-  -webkit-animation: fade 1.5s;
-  animation: fade 1.5s;
+  -webkit-animation: fade 2s;
+  animation: fade 2s;
 
   opacity: 0;
   z-index: -1;
@@ -423,8 +428,8 @@ button:disabled {
   background-position: left;
 
   height: 150px;
-  -webkit-animation: move 1.5s;
-  animation: move 1.5s;
+  -webkit-animation: move 2s;
+  animation: move 2s;
 }
 @keyframes move {
   0% {
@@ -449,6 +454,18 @@ button:disabled {
   }
   100% {
     z-index: -1;
+    opacity: 0;
+  }
+}
+
+@keyframes fade-modal {
+  0% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
     opacity: 0;
   }
 }

@@ -70,11 +70,11 @@ function labelCommand() {
     document.getElementById("size-helper").style.mixBlendMode = "difference";
     document.getElementById("progress-bar").style.outline = "solid 2px white";
 
+    document.getElementById("mode-dropdown").disabled = true;
     let emojiDivs = document.getElementById("emoji-buttons").children;
     Array.from(emojiDivs).forEach((element) => {
       element.children[0].disabled = true;
     });
-
     document.getElementById("text-input").disabled = true;
     document.getElementById("clear-button").disabled = true;
     document.getElementById("submit-button").disabled = true;
@@ -320,14 +320,22 @@ function reelCommand() {
 
   if (
     confirm(
-      "Confirm loading a new reel?\n\nPlease make sure the tape is touching the cog. \n\n Important: unsaved align and force settings will be lost."
+      "Confirm loading a new reel?\n\nPlease make sure the tape is touching the cog.\n\nImportant: unsaved align and force settings will be lost."
     )
   ) {
     toggleSettings(false);
+    document.getElementById("mode-dropdown").disabled = true;
+    let emojiDivs = document.getElementById("emoji-buttons").children;
+    Array.from(emojiDivs).forEach((element) => {
+      element.children[0].disabled = true;
+    });
+    document.getElementById("text-input").disabled = true;
+    document.getElementById("clear-button").disabled = true;
     document.getElementById("reel-button").disabled = true;
-    document.getElementById("setup-button").disabled = true;
     document.getElementById("feed-button").disabled = true;
     document.getElementById("cut-button").disabled = true;
+    document.getElementById("setup-button").disabled = true;
+  
     document.getElementById("submit-button").disabled = true;
     document.getElementById("submit-button").value = "  reeling... ";
     var xhr = new XMLHttpRequest();
@@ -341,9 +349,18 @@ function reelCommand() {
 function feedCommand() {
   // sends feed command to the device
 
+  document.getElementById("mode-dropdown").disabled = true;
+  let emojiDivs = document.getElementById("emoji-buttons").children;
+  Array.from(emojiDivs).forEach((element) => {
+    element.children[0].disabled = true;
+  });
+  document.getElementById("text-input").disabled = true;
+  document.getElementById("clear-button").disabled = true;
   document.getElementById("reel-button").disabled = true;
   document.getElementById("feed-button").disabled = true;
   document.getElementById("cut-button").disabled = true;
+  document.getElementById("setup-button").disabled = true;
+
   document.getElementById("submit-button").disabled = true;
   document.getElementById("submit-button").value = " feeding... ";
   var xhr = new XMLHttpRequest();
@@ -356,9 +373,18 @@ function feedCommand() {
 function cutCommand() {
   // sends cut command to the device
 
+  document.getElementById("mode-dropdown").disabled = true;
+  let emojiDivs = document.getElementById("emoji-buttons").children;
+  Array.from(emojiDivs).forEach((element) => {
+    element.children[0].disabled = true;
+  });
+  document.getElementById("text-input").disabled = true;
+  document.getElementById("clear-button").disabled = true;
   document.getElementById("reel-button").disabled = true;
   document.getElementById("feed-button").disabled = true;
   document.getElementById("cut-button").disabled = true;
+  document.getElementById("setup-button").disabled = true;
+
   document.getElementById("submit-button").disabled = true;
   document.getElementById("submit-button").value = " cutting... ";
 
@@ -460,9 +486,14 @@ function getData() {
       if (this.readyState == 4 && this.status == 200) {
         // console.log("response: " + this.responseText);
 
+        let percentage = parseInt(this.responseText)
+        if (percentage > 0){
+          percentage -= 1 // avoid 100% progress while still finishing
+        }
+
         switch (command) {
           case "tag":
-            document.getElementById("submit-button").value = " Printing " + this.responseText + "% ";
+            document.getElementById("submit-button").value = " printing " + percentage + "% ";
             break;
           case "reel":
             document.getElementById("submit-button").value = " reeling... ";
@@ -490,6 +521,8 @@ function getData() {
           document.getElementById("cut-button").disabled = false;
           document.getElementById("setup-button").disabled = false;
 
+          document.getElementById("mode-dropdown").disabled = false;
+
           let emojiDivs = document.getElementById("emoji-buttons").children;
           Array.from(emojiDivs).forEach((element) => {
             element.children[0].disabled = false;
@@ -498,7 +531,7 @@ function getData() {
           document.getElementById("size-helper").style.borderLeftColor = "rgba(0, 102, 255, 0.7)";
           document.getElementById("size-helper").style.borderRightColor = "rgba(0, 102, 255, 0.7)";
           document.getElementById("size-helper").style.borderTopColor = "rgba(255, 166, 0, 0.4) ";
-          document.getElementById("size-helper").style.borderBottomColor = "rgba(255, 166, 0, 0.4)";          
+          document.getElementById("size-helper").style.borderBottomColor = "rgba(255, 166, 0, 0.4)";
           document.getElementById("size-helper").style.borderStyle = "solid dashed solid dashed";
 
           document.getElementById("size-helper").style.backgroundColor = "rgba(0, 0, 0, 0)";

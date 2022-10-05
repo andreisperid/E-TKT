@@ -12,7 +12,7 @@
     <link rel="icon" href="./icon.png" />
 
     <meta name="viewport" content="width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=0" />
-    <meta name="theme-color" content="#0b111a00" />
+    <meta name="theme-color" content="#0b111a" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   </head>
@@ -34,23 +34,35 @@
     >
       <div id="background"></div>
 
-      <div
-        style="
-          display: box;
-          width: 350px;
-          height: 460px;
-          margin-right: auto;
-          margin-left: auto;
-          margin-top: 20px;
-          padding: 20px;
-        "
-        id="frame"
-      >
+      <div style="display: box; width: 350px; margin-right: auto; margin-left: auto" id="frame">
         <form action="none" method="post" autocomplete="off" novalidate onsubmit="return false">
-          <div id="main-frame">
-            <h1 style="text-align: center; transform: rotate(-1deg)">E-TKT</h1>
-            <h2 style="text-align: center; margin-top: 5px">label maker</h2>
-            <div id="single-column" style="margin-top: 36px; position: relative">
+          <!-------------------->
+          <!---- main frame ---->
+          <!-------------------->
+          <div
+            id="main-frame"
+            style="
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              position: absolute;
+              top: 20px;
+              width: 350px;
+              height: 485px;
+              margin-right: auto;
+              margin-left: auto;
+              /* background-color: green; */
+            "
+          >
+            <div>
+              <div style="transform: rotate(-2deg)">
+                <h1 style="text-align: center">E-TKT</h1>
+              </div>
+              <div style="margin-top: 2px">
+                <h2 style="text-align: center">label maker</h2>
+              </div>
+            </div>
+            <div id="single-column" style="margin-top: 40px; position: relative">
               <div style="position: absolute; top: 0; left: 22px; right: 22px">
                 <input
                   type="text"
@@ -88,7 +100,7 @@
               >
                 <div
                   id="progress-bar"
-                  style="visibility: visible; background: white; height: 100%; width: 0%; mix-blend-mode: difference;"
+                  style="visibility: visible; background: white; height: 100%; width: 0%; mix-blend-mode: difference"
                 ></div>
 
                 <div id="size-helper-content" style="font-size: 25px; color: rgba(255, 0, 0, 0)">`WRITE HERE`</div>
@@ -184,7 +196,7 @@
 
             <!-- extras section -->
 
-            <div id="single-column" style="margin-top: 0px; padding-bottom: 0px; padding-top: 15px; height: 40px">
+            <div id="single-column" style="margin: 0px; padding: 0px; padding-top: 15px">
               <div>
                 <input
                   type="button"
@@ -218,7 +230,9 @@
             </div>
           </div>
 
+          <!-------------------->
           <!-- settings modal -->
+          <!-------------------->
           <div
             style="
               visibility: hidden;
@@ -226,12 +240,13 @@
               flex-direction: column;
               justify-content: space-between;
               position: absolute;
-              top: 40px;
+              top: 30px;
               width: 350px;
-              height: 460px;
+              height: 475px;
               margin-right: auto;
               margin-left: auto;
               z-index: 999;
+              /* background-color: red; */
             "
             id="settings-frame"
           >
@@ -258,7 +273,7 @@
               style="display: flex; margin: auto; justify-content: space-between; padding: 0px; margin-top: 15px"
             >
               <div>
-                <h1 style="font-size: 36px; margin: 0px">SETUP</h1>
+                <h1 style="font-size: 36px; margin: 0px; transform: rotate(-2deg)">SETUP</h1>
               </div>
               <div>
                 <input type="button" id="reel-button" onclick="reelCommand()" value=" +REEL " tabindex="-1" />
@@ -449,7 +464,7 @@
         </form>
       </div>
 
-      <div style="margin-top: 10px">
+      <div style="position: absolute; top: 525px; left: 0; right: 0">
         <h3 style="opacity: 0.5">
           <a href="http://andrei.cc" target="blank">andrei speridião - 2022</a>
         </h3>

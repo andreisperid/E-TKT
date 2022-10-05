@@ -98,6 +98,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 #define do_feed
 #define do_sound
 // #define do_wifi_debug
+// #define do_display_debug
 // #define do_serial
 
 // DATA ---------------------------------------------------------------------------
@@ -451,9 +452,17 @@ void displayProgress(float total, float actual, String label)
 	u8g2.drawBox(0, 21, (actual)*6, 21);
 
 	float progress = actual / total;
+	progress = progress * 100;
+
 	// String progressString = String(progress * 95, 0);
-	String progressString = String(progress * 100, 0);
-	webProgress = progressString;
+	webProgress = String(progress, 0);
+
+	if (progress > 0)
+	{
+		progress -= 1; // avoid 100% progress while still finishing
+	}
+	String progressString = String(progress, 0);
+
 	progressString.concat("%");
 	const char *p = progressString.c_str();
 	u8g2.setDrawColor(1);
@@ -1466,5 +1475,7 @@ void loop()
 {
 	// the loop should be empty
 
-	// debugDisplay();
+#ifdef do_display_debug
+	debugDisplay();
+#endif
 }
