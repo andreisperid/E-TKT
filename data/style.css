@@ -6,7 +6,7 @@
 * {
   font-family: "Impact Label Reversed", sans-serif;
   font-size: 22px;
-  color: white;
+  color: #e7dac9;
   text-decoration: none;
   -webkit-user-select: none; /* Chrome all / Safari all */
   -moz-user-select: none; /* Firefox all */
@@ -21,15 +21,15 @@ body {
 h1,
 h2,
 h3 {
-  color: #ffffff;
+  color: #e7dac9;
   font-weight: 100;
 }
 h1 {
   font-size: 55px;
   margin: 0px;
-  color: rgb(194, 194, 194);
+  color: #e7dac9;
   opacity: 1;
-  filter: drop-shadow(-2px -2px 2px rgba(181, 214, 255, 0.35));
+  filter: drop-shadow(-2px -2px 2px rgba(181, 214, 255, 0.4));
 }
 h2 {
   font-size: 23px;
@@ -42,19 +42,19 @@ h3 {
 }
 a {
   font-size: 18px;
-  color: #aaa;
+  color: rgba(231, 218, 201, 0.75);
   opacity: 0.6;
-  filter: drop-shadow(0px 0px 20px #fff);
+  filter: drop-shadow(0px 0px 15px #fff);
 }
 a:hover {
   opacity: 1;
 }
 #hint {
   font-size: 20px;
-  color: #777777;
+  color: #e7dac960;
 }
 input {
-  color: white;
+  color: #e7dac9;
   background: none;
   border-color: #131a3466;
   border-width: 2px;
@@ -64,7 +64,7 @@ input {
   width: 100%;
 }
 button {
-  color: white;
+  color: #e7dac9;
   background: none;
   border-color: #131a3466;
   border-width: 2px;
@@ -74,13 +74,13 @@ button {
   width: 100%;
 }
 #text-input {
-  height: 25px;
+  height: 29px;
   outline: 20px inset #0d101b66;
   border-radius: 1px;
   border: none;
   margin: 0px;
   padding: 0px;
-  color: white;
+  color: rgb(231, 218, 201);
   width: 100%;
   text-align: center;
   font-size: 25px;
@@ -136,7 +136,7 @@ button:disabled {
 #emoji-button {
   filter: drop-shadow(-3px -3px 3.5px rgba(255, 255, 255, 0.25));
   background-color: rgb(11, 17, 26);
-  color: rgb(255, 255, 255, 0.75);
+  color: rgba(231, 218, 201, 0.75);
   font-size: 18px;
   width: 40px;
   height: 40px;
@@ -145,12 +145,12 @@ button:disabled {
   border-color: rgba(255, 255, 255, 0.32);
 }
 #emoji-button:disabled {
-  color: rgb(255, 255, 255, 0.25);
+  color: rgba(231, 218, 201, 100);
   pointer-events: none;
 }
 #emoji-button:active {
   filter: drop-shadow(3px 3px 3.5px rgba(255, 255, 255, 0.1));
-  color: rgb(255, 255, 255, 1);
+  color: rgba(231, 218, 201, 1);
   background-color: rgb(18, 25, 37);
   border-width: 0px;
   border-width: 0 0.5px 0.5px 0;
@@ -236,19 +236,19 @@ button:disabled {
 #submit-button {
   filter: drop-shadow(-4px -4px 4.5px rgba(255, 255, 255, 0.15));
   background-color: rgb(11, 17, 26);
-  color: rgb(255, 255, 255);
-  border-color: rgba(255, 255, 255, 0.5);
+  color: rgba(231, 218, 201, 0.75);
+  border-color: rgba(231, 218, 201, 0.75);
   border-style: solid;
 }
 #submit-button:disabled {
-  color: rgb(255, 255, 255);
-  border-color: rgba(128, 128, 128, 0.25);
+  color: rgba(231, 218, 201, .25);
+  border-color: rgba(231, 218, 201, 0.25);
   pointer-events: none;
 }
 #submit-button:active {
   filter: drop-shadow(3px 3px 6px rgba(255, 255, 255, 0.6));
   background-color: rgb(18, 25, 37);
-  color: rgb(255, 255, 255, 1);
+  color: white;
   border-color: rgba(255, 255, 255, 1);
   padding: 0 0 2px 0;
 }
@@ -256,18 +256,18 @@ button:disabled {
 #test-align-button {
   filter: drop-shadow(-2px -2px 2.5px rgba(255, 255, 255, 0.25));
   background-color: rgb(11, 17, 26);
-  color: rgb(255, 255, 255, 0.5);
+  color: rgba(231, 218, 201, 0.75);
   border-width: 0px;
   border-width: 0.5px 0 0 0.5px;
   border-color: rgba(255, 255, 255, 0.2);
 }
 #test-align-button:disabled {
-  color: rgb(255, 255, 255, 0.25);
+  color: rgba(231, 218, 201, 0.25);
   pointer-events: none;
 }
 #test-align-button:active {
   filter: drop-shadow(2px 2px 2.5px rgba(255, 255, 255, 0.5));
-  color: rgb(255, 255, 255, 1);
+  color: rgba(231, 218, 201, 1);
   background-color: rgb(18, 25, 37);
   border-width: 0px;
   border-width: 0 0.5px 0.5px 0;
@@ -280,7 +280,7 @@ button:disabled {
 #save-button {
   filter: drop-shadow(-4px -4px 4.5px rgba(255, 255, 255, 0.25));
   background-color: rgb(11, 17, 26);
-  color: rgb(255, 255, 255, 0.5);
+  color: rgba(231, 218, 201, 0.75);
   border-width: 0px;
   border-width: 0.5px 0 0 0.5px;
   border-color: rgba(255, 255, 255, 0.2);
@@ -289,7 +289,7 @@ button:disabled {
 #test-full-button:disabled,
 #cancel-button:disabled,
 #save-button:disabled {
-  color: rgb(255, 255, 255, 0.25);
+  color: rgba(231, 218, 201, 0.25);
   pointer-events: none;
 }
 #setup-button:active,
@@ -297,7 +297,7 @@ button:disabled {
 #cancel-button:active,
 #save-button:active {
   filter: drop-shadow(4px 4px 4.5px rgba(255, 255, 255, 0.1));
-  color: rgb(255, 255, 255, 1);
+  color: rgba(231, 218, 201, 1);
   background-color: rgb(18, 25, 37);
   border-width: 0px;
   border-width: 0 0.5px 0.5px 0;

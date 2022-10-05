@@ -64,11 +64,11 @@ function labelCommand() {
     // console.log('printing: "' + treatedLabel.toLowerCase() + '"');
     document.getElementById("text-input").blur();
 
-    document.getElementById("size-helper").style.borderColor = "rgba(128, 128, 128, 128)";
+    document.getElementById("size-helper").style.borderColor = "rgba(128, 128, 128, 0)";
     document.getElementById("size-helper").style.borderStyle = "solid";
-    document.getElementById("size-helper").style.backgroundColor = "rgba(32, 32, 32, 255)";
+    document.getElementById("size-helper").style.backgroundColor = "rgba(32, 32, 32, 1)";
     document.getElementById("size-helper").style.mixBlendMode = "difference";
-    // document.getElementById("progress-bar").style.visibility = "visible";
+    document.getElementById("progress-bar").style.outline = "solid 2px white";
 
     let emojiDivs = document.getElementById("emoji-buttons").children;
     Array.from(emojiDivs).forEach((element) => {
@@ -171,10 +171,10 @@ function validateField() {
     document.getElementById("submit-button").style.color = "red";
   } else {
     valid = true;
-    document.getElementById("hint").style.color = "#777777";
-    document.getElementById("text-input").style.color = "#ffffff";
+    document.getElementById("hint").style.color = "#e7dac960";
+    document.getElementById("text-input").style.color = "#e7dac9ff";
     document.getElementById("submit-button").value = fieldValue != "" ? " Print label! " : " ... ";
-    document.getElementById("submit-button").style.color = "white";
+    document.getElementById("submit-button").style.color = "#e7dac9ff";
   }
 }
 
@@ -503,6 +503,8 @@ function getData() {
 
           document.getElementById("size-helper").style.backgroundColor = "rgba(0, 0, 0, 0)";
           document.getElementById("size-helper").style.mixBlendMode = "normal";
+
+          document.getElementById("progress-bar").style.outline = "none";
 
           // settings
           document.getElementById("add-align-button").disabled = false;
