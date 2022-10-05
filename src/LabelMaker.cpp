@@ -583,6 +583,44 @@ void displayReboot()
 	delay(2000);
 }
 
+void debugDisplay()
+{
+	// displaySplash();
+	// delay(2000);
+
+	// displayReset();
+	// delay(2000);
+
+	// displayConfig();
+	// delay(2000);
+
+	// displayIP = "192.168.69.69";
+	// displaySSID = "Network";
+	// displayQRCode();
+	// delay(2000);
+
+	// displayProgress(7, 5, " E-TKT ");
+	// delay(5000);
+
+	// displayFinished();
+	// delay(2000);
+
+	// displayCut();
+	// delay(2000);
+
+	// displayFeed();
+	// delay(2000);
+
+	// displayReel();
+	// delay(2000);
+
+	// displaySettings(5, 2);
+	// delay(2000);
+
+	// displayReboot();
+	// delay(2000);
+}
+
 // --------------------------------------------------------------------------------
 // MECHANICS ----------------------------------------------------------------------
 
@@ -1275,7 +1313,6 @@ void initialize()
 	// route to settings image
 	server.on("/iso.png", HTTP_GET, [](AsyncWebServerRequest *request)
 			  { request->send(SPIFFS, "/iso.png", "image"); });
-			  
 
 	// start server
 	server.begin();
@@ -1359,7 +1396,7 @@ void wifiManager()
 	// if you get here you have connected to the WiFi
 	displayIP = WiFi.localIP().toString();
 	displaySSID = WiFi.SSID();
-	
+
 #ifdef do_wifi_debug
 	Serial.print("connected at ");
 	Serial.print(displayIP);
@@ -1417,47 +1454,17 @@ void setup()
 	myServo.write(restAngle);
 	delay(100);
 
-
-
 	// splash
 	displaySplash();
-	
+
 	// start wifi > comment both to avoid entering the main loop
 	wifiManager();
 	delay(2000); // time for the task to start
-
 }
 
 void loop()
 {
 	// the loop should be empty
 
-	// display tests
-
-	// displaySplash();
-	// delay(2000);
-	// displayReset();
-	// delay(2000);
-	// displayConfig();
-	// delay(2000);
-	// displayIP = "192.168.255.255";
-	// displaySSID = "Wifi Network";
-	// displayQRCode();
-	// delay(2000);
-	// displayProgress(7, 5, " TESTE ");
-	// delay(5000);
-
-	// displayFinished();
-	// delay(2000);
-	// displayCut();
-	// delay(2000);
-	// displayFeed();
-	// delay(2000);
-	// displayReel();
-	// delay(2000);
-
-	// displaySettings(1, 2);
-	// delay(2000);
-	// displayReboot();
-	// delay(2000);
+	// debugDisplay();
 }
