@@ -9,8 +9,8 @@ description: "E-TKT"
 
 ## 🌟 *highlights*
 - No need for internet, app installation, data cables or drivers;
-- Use from any device that is connected to a local network and has a web browser: desktop, tablet, smartphone;
-- Compatible with ubiquitous and cheap 9mm generic tape (DYMO-compatible);
+- Command it from any device that is connected to a local network and has a web browser: desktop, tablet, smartphone;
+- Compatible with ubiquitous, DRM-less and cheap 9mm generic tape (DYMO-compatible);
 
 <img src="https://user-images.githubusercontent.com/15098003/194381898-ce36482a-8fbb-4b75-ae36-58ca9c9a64b1.gif" height="600">
 
