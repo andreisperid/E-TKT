@@ -1,12 +1,12 @@
 ---
 layout: default
-title: ☑️ bill of materials
+title: 📝 bill of materials
 nav_order: 4
 description: "E-TKT"
 parent: 🛠️ do it yourself!
 ---
 
-# ☑️ **bill of materials**
+# 📝 **bill of materials**
 
 💬 *The estimated cost is around $?? (USD) without shipping and taxes, as of October 2022.*
 
