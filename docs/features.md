@@ -27,6 +27,7 @@ description: "E-TKT"
 ## 🔌 device
 
 - Label cutting;
+- Auto center content;
 - Minimum label size to allow for picking it up;
 - OLED screen + LED feedback:
 - Instructions for configuring the wifi;
