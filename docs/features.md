@@ -13,7 +13,7 @@ description: "E-TKT"
 - Compatible with ubiquitous and cheap 9mm generic tape (DYMO-compatible);
 
 ## 📱 web app
-<img src="https://user-images.githubusercontent.com/15098003/171068984-5492a5b2-0eec-4714-9bf8-0055f606ac5b.gif" height="600">
+<img src="https://user-images.githubusercontent.com/15098003/194381898-ce36482a-8fbb-4b75-ae36-58ca9c9a64b1.gif" height="600">
 
 - Instant preview: what you see is what you’ll get;
 - Real time check for character validity;
