@@ -12,8 +12,9 @@ description: "E-TKT"
 - Use from any device that is connected to a local network and has a web browser: desktop, tablet, smartphone;
 - Compatible with ubiquitous and cheap 9mm generic tape (DYMO-compatible);
 
-## 📱 web app (local)
 <img src="https://user-images.githubusercontent.com/15098003/194381898-ce36482a-8fbb-4b75-ae36-58ca9c9a64b1.gif" height="600">
+
+## 📱 web app (local)
 
 - Instant preview: what you see is what you’ll get;
 - Real time check for character validity;
