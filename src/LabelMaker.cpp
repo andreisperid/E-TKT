@@ -149,11 +149,7 @@ int etktNotes[8] = {
 
 // selected musical scale for playing tunes
 int charNoteSet[charQuantity + 1] = {
-	NOTE_A4, NOTE_AS4, NOTE_B4, NOTE_C5, NOTE_CS5, NOTE_D5, NOTE_DS5, NOTE_E5, NOTE_F5, NOTE_FS5,
-	NOTE_G5, NOTE_GS5, NOTE_A5, NOTE_AS5, NOTE_B5, NOTE_C6, NOTE_CS6, NOTE_D6, NOTE_DS6, NOTE_E6,
-	NOTE_F6, NOTE_FS6, NOTE_G6, NOTE_GS6, NOTE_A6, NOTE_AS6, NOTE_B6, NOTE_C7, NOTE_CS7, NOTE_D7,
-	NOTE_DS7, NOTE_E7, NOTE_F7, NOTE_FS7, NOTE_G7, NOTE_GS7, NOTE_A7, NOTE_AS7, NOTE_B7, NOTE_C8,
-	NOTE_CS8, NOTE_D8, NOTE_DS8, 0};
+	G4, G6, A4, D4, E4, F4, G5, A5, B5, C5, D5, 0, E5, F5, C6, D6, E6, F6, A6, B6, C4, C7, D7, E7, F7, G7, B4, A7, B7, C8, D8, C3, D3, E3, F3, G3, A3, B3, E2, F2, G2, A2, B2, 0};
 
 // --------------------------------------------------------------------------------
 // COMMUNICATION ------------------------------------------------------------------
@@ -230,6 +226,27 @@ void labelMusic(String label)
 			}
 		}
 		delay(50);
+	}
+}
+
+void eggMusic(String notes, String durations)
+{
+	// ♪ By pressing down a special key ♪
+	// ♪ It plays a little melody ♪
+
+	int length = notes.length();
+
+	for (int i = 0; i < length; i++)
+	{
+		for (int j = 0; j < charQuantity; j++)
+		{
+			if (notes[i] == charSet[j])
+			{
+				char charDuration = durations[i];
+				float duration = 2000 / atoi(&charDuration);
+				tone(buzzerPin, charNoteSet[j], duration);
+			}
+		}
 	}
 }
 
@@ -803,8 +820,7 @@ void writeLabel(String label)
 {
 	// manages entirely a particular label printing process, from start to end (task kill)
 
-	// enables servo and char stepper
-	stepperChar.enableOutputs();
+	// enables servo
 	myServo.write(restAngle);
 	delay(500);
 
@@ -817,7 +833,6 @@ void writeLabel(String label)
 
 	int labelLength = label.length();
 
-	setHome();
 	lightChar(0.2f);
 
 	// the webapp uses underscores instead of spaces, here they are changed back to spaces
@@ -833,10 +848,21 @@ void writeLabel(String label)
 	displayProgress(labelLength, 0, label);
 
 #ifdef do_sound
-	labelMusic(label);
+	if (label == " TASCHENRECHNER " || label == " POCKET CALCULATOR " || label == " DENTAKU " || label == " CALCULADORA " || label == " MINI CALCULATEUR ")
+	{
+		eggMusic("*4599845887*459984588764599845887*4599845887", "88843888484888438884848884388848488843888484"); // ♪ I'm the operator with my pocket calculator ♪
+	}
+	else
+	{
+		labelMusic(label);
+	}
 #else
 	delay(200);
 #endif
+
+	// enable and home char stepper
+	stepperChar.enableOutputs();
+	setHome();
 
 #ifdef do_feed
 	feedLabel();
