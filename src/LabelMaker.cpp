@@ -152,6 +152,20 @@ int charNoteSet[charQuantity + 1] = {
 	G4, G6, A4, D4, E4, F4, G5, A5, B5, C5, D5, 0, E5, F5, C6, D6, E6, F6, A6, B6, C4, C7, D7, E7, F7, G7, B4, A7, B7, C8, D8, C3, D3, E3, F3, G3, A3, B3, E2, F2, G2, A2, B2, 0};
 
 // --------------------------------------------------------------------------------
+// ASSEMBLY -----------------------------------------------------------------------
+// adjust both values below for a rough starting point
+
+// depending on the hall sensor positioning, the variable below makes sure the initial calibration is within tolerance
+// use a value between -1.0 and 1.0 to make it roughly align during assembly
+float assemblyCalibrationAlign = 0.5;
+
+// depending on servo characteristics and P_press assembling process, the pressing angle might not be so precise and the value below compensates it
+// use a value between 0 and 20 to make sure the press is barely touching the daisy wheel on test align
+int assemblyCalibrationForce = 15;
+
+// after that, proceed to fine tune on the E-TKT's app when the machine is fully assembled
+
+// --------------------------------------------------------------------------------
 // COMMUNICATION ------------------------------------------------------------------
 
 // create AsyncWebServer object on port 80
@@ -683,7 +697,7 @@ void setHome(int align = alignFactor)
 	stepperChar.setCurrentPosition(0);
 	sensorState = analogRead(sensorPin);
 
-	stepperChar.runToNewPosition(-stepsPerChar + (stepsPerChar * a));
+	stepperChar.runToNewPosition(-stepsPerChar + (stepsPerChar * a) + (assemblyCalibrationAlign * stepsPerChar));
 	stepperChar.run();
 	stepperChar.setCurrentPosition(0);
 	currentCharPosition = charHome;
@@ -725,14 +739,14 @@ void pressLabel(bool strong = false, int force = forceFactor, bool slow = false)
 
 	int delayFactor = 0;
 
+	peakAngle = targetAngle + 9 - assemblyCalibrationForce - force;
+
 	if (strong)
 	{
-		peakAngle = targetAngle + 9 - force;
-		delayFactor = 2;
+		delayFactor = 4;
 	}
 	else
 	{
-		peakAngle = targetAngle + 9 - force;
 		delayFactor = slow ? 100 : 0;
 	}
 	lightChar(1.0f); // lights up the char led
