@@ -34,19 +34,19 @@
 
 //                  // orig >> adapt
 
-#define B0  31      //
-#define C1  33      //
-#define CS1 35      
-#define D1  37      //
-#define DS1 39      
-#define E1  41      //
-#define F1  44      //
-#define FS1 46      
-#define G1  49      //
-#define GS1 52      
-#define A1  55      //
-#define AS1 58      
-#define B1  62      //
+// #define B0  31      //
+// #define C1  33      //
+// #define CS1 35      
+// #define D1  37      //
+// #define DS1 39      
+// #define E1  41      //
+// #define F1  44      //
+// #define FS1 46      
+// #define G1  49      //
+// #define GS1 52      
+// #define A1  55      //
+// #define AS1 58      
+// #define B1  62      //
 #define C2  65      //
 #define CS2 69      
 #define D2  73      //          *
