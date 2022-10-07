@@ -17,7 +17,7 @@ E-TKT by [Andrei Speridião](https://github.com/andreisperid/), 2022
 ----
 
 ### Software
-[MIT](https://github.com/andreisperid/E-TKT/blob/main/LICENSE)
+[MIT License](https://github.com/andreisperid/E-TKT/blob/main/LICENSE)
 
 ### Hardware
 TBD
