@@ -19,7 +19,7 @@ E-TKT by [Andrei Speridião](https://github.com/andreisperid/), 2022
 TBD
 
 ### Documentation
-TBD
+[Creative Commons Attribution-ShareAlike 4.0 International Public License](https://github.com/andreisperid/E-TKT/blob/main/docs/LICENSE)
 
 
 
