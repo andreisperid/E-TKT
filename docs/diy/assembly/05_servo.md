@@ -16,3 +16,6 @@ nav_order: 5
 22. ***<< IMPORTANT >> turn on the machine and wait for 30 seconds to make sure the servo is in its rest position***;
 23. with the machine still on, gently align the X_press to the servo axis and make sure the side is aligned to the servo vertical wall;
 24. place a M3x?? screw with a washer and tighten it;
+
+
+depending on the servo, add washers to align properly, or modify the P_press
