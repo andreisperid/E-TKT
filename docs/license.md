@@ -20,7 +20,7 @@ E-TKT by [Andrei Speridião](https://github.com/andreisperid/), 2022
 [MIT License](https://github.com/andreisperid/E-TKT/blob/main/LICENSE)
 
 ### Hardware
-TBD
+[MIT License](https://github.com/andreisperid/E-TKT/blob/main/LICENSE)
 
 ### Documentation
 [Creative Commons Attribution-ShareAlike 4.0 International Public License](https://github.com/andreisperid/E-TKT/blob/main/docs/LICENSE)
