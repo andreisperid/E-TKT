@@ -64,3 +64,22 @@ gh_edit_repository: "https://github.com/andreisperid/E-TKT/" # the github URL fo
 gh_edit_branch: "main" # the branch that your docs is served from
 gh_edit_source: "docs" # the source that your files originate from
 gh_edit_view_mode: "edit" # "tree" or "edit" if you want the user to jump into the editor immediately
+
+
+
+
+
+kramdown:
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  startings: []
+  blanklines: false
+  profile: false
+  # ignore:
+  #   envs: all
