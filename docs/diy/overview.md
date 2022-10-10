@@ -30,7 +30,7 @@ Very simple process, but please don't forget to *add the data files* together wi
 After making sure the system is working properly, you can proceed to *cable management and physically mounting* the parts together.
 
 ### 7. calibrate
-The final step makes sure the carousel letters are aligned to the tape and works along with the right pressing force. There is a handy *calibration mode built-in the web app* ;)
+The final step makes sure the daisy wheel letters are aligned to the tape and works along with the right pressing force. There is a handy *calibration mode built-in the web app* ;)
 
 <br>
 
