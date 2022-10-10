@@ -9,7 +9,7 @@ remote_theme: just-the-docs/just-the-docs@v0.4.0.rc2
 mermaid:
   # Version of mermaid library
   # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
-  version: "9.1.7"
+  version: "9.2.0-rc2"
   # Put any additional configuration, such as setting the theme, in _includes/mermaid_config.js
 
 
