@@ -9,10 +9,12 @@ has_children: true
 # 🧬 **iterations**
 
 ```mermaid
+
 graph TD;
     opa-->B;
     opa-->C;
     B-->D;
     eita-->D;
     eita-->B;
+    
 ```
