@@ -9,6 +9,14 @@ has_children: true
 # 🧬 **iterations**
 
 ```mermaid
-flowchart LR
-    A-- text -->B
+flowchart LR;
+    A-- text -->B;
+    
+    
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+    
 ```
