@@ -8,11 +8,11 @@ has_children: true
 
 # 🧬 **iterations**
 
-````mermaid
+```mermaid
 graph TD;
-    A-->B;
-    A-->C;
+    opa-->B;
+    opa-->C;
     B-->D;
-    C-->D;
-    C-->B;
-````
+    eita-->D;
+    eita-->B;
+```
