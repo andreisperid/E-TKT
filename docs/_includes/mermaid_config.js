@@ -1,3 +1,3 @@
 {
-  theme: "forest"
+  darkMode:	"true" 
 }
