@@ -1,4 +1,3 @@
 {
-  theme: "base"
-  darkMode: "true"
+  theme: "dark";
 }
