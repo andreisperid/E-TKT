@@ -60,5 +60,5 @@ gh_edit_view_mode: "edit" # "tree" or "edit" if you want the user to jump into t
 mermaid:
   # Version of mermaid library
   # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
-  version: "9.1.6"
+  version: "9.1.7"
   # Put any additional configuration, such as setting the theme, in _includes/mermaid_config.js
