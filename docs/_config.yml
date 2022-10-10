@@ -31,7 +31,6 @@ footer_content: "E-TKT - Copyright &copy; 2022 Andrei Speridião - <a href=\"htt
 # last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
 
 
-
 # Enable or disable heading anchors
 heading_anchors: true
 
@@ -65,9 +64,7 @@ gh_edit_branch: "main" # the branch that your docs is served from
 gh_edit_source: "docs" # the source that your files originate from
 gh_edit_view_mode: "edit" # "tree" or "edit" if you want the user to jump into the editor immediately
 
-
-
-
+##
 
 kramdown:
   syntax_highlighter_opts:
