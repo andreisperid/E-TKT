@@ -7,3 +7,12 @@ has_children: true
 ---
 
 # 🧬 **iterations**
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+    C-->B;
+```
