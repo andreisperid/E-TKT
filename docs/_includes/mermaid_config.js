@@ -1,4 +1,4 @@
 {
   'theme': 'base'
-  'darkMode':	"true" 
+  'darkMode': 'true'
 }
