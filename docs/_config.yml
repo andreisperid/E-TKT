@@ -1,7 +1,7 @@
 title: E-TKT
 description: Anachronic label maker
 
-# remote_theme: just-the-docs/just-the-docs@v0.4.0.rc3
+remote_theme: just-the-docs/just-the-docs@v0.4.0.rc3
 
 # To disable support for mermaid diagrams (https://mermaid-js.github.io/mermaid/),
 # comment out the `mermaid` and `version` keys below
