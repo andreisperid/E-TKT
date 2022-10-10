@@ -19,8 +19,10 @@ The *web app* provides text validation, special characters, a preview of the exa
 
 The label production itself uses the same mechanical principles as the original machine did, but is now automated. A stepper motor feeds the tape while another selects the appropriate character on the daisy wheel according to a home position acquired by a hall sensor. Then a servo motor imprints each character by pressing it's daisy wheel tooth against the tape. That happens successively until the end of the desired label content, when there is a special character position to cut it off. A light blinks to ask for the label to be picked.
 
+```mermaid
 graph TD;
     A-->B;
     A-->C;
     B-->D;
     C-->D;
+```
