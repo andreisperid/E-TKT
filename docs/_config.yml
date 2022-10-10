@@ -1,7 +1,7 @@
 title: E-TKT
 description: Anachronic label maker
 
-# remote_theme: just-the-docs/just-the-docs@v0.4.0.rc2
+remote_theme: just-the-docs/just-the-docs@v0.4.0.rc2
 
 logo: "/assets/logo.png"
 
@@ -62,4 +62,3 @@ mermaid:
   # Pick an available version from https://cdn.jsdelivr.net/npm/mermaid/
   version: "9.1.6"
   # Put any additional configuration, such as setting the theme, in _includes/mermaid_config.js
-  # See also docs/ui-components/code
