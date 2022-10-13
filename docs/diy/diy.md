@@ -8,4 +8,4 @@ has_children: true
 
 # 🛠️ **do it yourself!**
 
-![exploded_001-03](https://user-images.githubusercontent.com/15098003/193351528-acbd63ce-22a0-4c05-8db4-85cecec3df9d.png)
+![exploded_002_-03](https://user-images.githubusercontent.com/15098003/195711763-0c5e9158-b84f-4817-acad-1d733b31112b.png)

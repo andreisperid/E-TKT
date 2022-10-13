@@ -13,4 +13,4 @@ parent: 🛠️ do it yourself!
 3. Flash the code into the ESP32 using an USB-C cable;
 4. Upload the files ("data" folder) to the ESP32 using SPIFFS.
 
-If you want to know more, please check the [firmware code](https://github.com/andreisperid/E-TKT/blob/main/src/LabelMaker.cpp) and the [app scripts](https://github.com/andreisperid/E-TKT/blob/main/data/script.js).
+👀 if you want to know more, please check the [firmware code](https://github.com/andreisperid/E-TKT/blob/main/src/LabelMaker.cpp) and the [app scripts](https://github.com/andreisperid/E-TKT/blob/main/data/script.js).
