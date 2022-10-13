@@ -29,6 +29,7 @@ The label production itself uses the same mechanical principles as the original 
 
 ## Functional block diagram
 
+<br>
 <img width="100%" src="https://user-images.githubusercontent.com/15098003/195631487-45085257-776d-4da8-94e5-62735814b732.png">
 <p align="right">
   <a href ="https://user-images.githubusercontent.com/15098003/195631487-45085257-776d-4da8-94e5-62735814b732.png" target="_blank">
