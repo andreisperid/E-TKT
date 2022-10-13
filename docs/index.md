@@ -11,7 +11,7 @@ permalink: /
     E-TKT: anachronic label maker
 </h1>
 <h6 align="center">Andrei Speridião - 2022 - <a href="https://andrei.cc">andrei.cc</a></h6>
-<br>E-TKT is a DIY label maker that mixes both old fashioned and contemporary technology to create something as simple and ubiquitous as... Embossed labels!
+<br>E-TKT is an open source DIY label maker that mixes both old fashioned and contemporary technology to create something as simple and ubiquitous as... Embossed labels!
 
 <br>
 <iframe  width="100%" height="420" src="https://www.youtube.com/embed/F0E5adLQ-AY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
