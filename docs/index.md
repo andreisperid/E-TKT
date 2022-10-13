@@ -14,7 +14,7 @@ permalink: /
 <h6 align="center">Andrei Speridião - 2022 - <a href="https://andrei.cc">andrei.cc</a></h6>
 <br>
 <p align= "center" >
-    <img src="https://user-images.githubusercontent.com/15098003/195655502-1b714388-3294-45c6-be22-be38c60f5d9a.png" width="50px" style="opacity: 0.5;">
+    <img src="https://user-images.githubusercontent.com/15098003/195655502-1b714388-3294-45c6-be22-be38c60f5d9a.png" width="50px" style="opacity: 0.75;">
 </p>
 
 
