@@ -34,7 +34,7 @@ description: "E-TKT"
 - Minimum label size to be pickable from the device;
 - OLED screen + LED feedback:
 - Instructions for configuring the wifi;
-- QR code/URL for easily accessing the web app;
+- QR code & URL for easily accessing the web app;
 - Real time embossing progress;
 - Sound signature: each label owns a subtle melody 🐰🥚
 
