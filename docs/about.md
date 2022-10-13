@@ -37,7 +37,7 @@ I've later realized that it was what I’ve been attracted to. According to [Wik
 The point is: even though the process is digitalized, *the resulting label is totally old school* and there is no easy way of telling if it wasn't made in the traditional way.
 
 
-## By merging the simple, straightforward and widely available 9mm embossing tapes in a reliable mechanism with modern connectivity, it is possible to rescue a ***would-be future that didn't happen.***
+## By combining simple and widely available 9mm embossing tapes in a reliable mechanism with modern connectivity, E-TKT rescues a ***would-be future that didn't happen***, and at the same time reduces the dependence on environmentally impacting DRM-enabled disposable cartridges.
 
 
 <br>
