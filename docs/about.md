@@ -51,12 +51,12 @@ I wanted to create an open source project for a long time and this is why I put 
 
 # 🤓 **the exploratory side**... <ins>*anachronism*<ins>
 
-I've later realized that it was what I’ve been attracted to. According to [Wikipedia](https://en.wikipedia.org/wiki/Anachronism):
+During the process I've realized that this odd mix between new and old was the biggest underlying curiosity. According to [Wikipedia](https://en.wikipedia.org/wiki/Anachronism):
 > “An ***anachronism*** (from the Greek ἀνά ana, 'against' and χρόνος khronos, 'time') is a chronological inconsistency in some arrangements, especially a juxtaposition of people, events, objects, language terms and customs from different time periods”.
 
 The point is: even though the process is digitalized, *the resulting label is totally old school* and there is no easy way of telling if it wasn't made in the traditional way.
 
-## By combining simple and widely available 9mm embossing tapes in a reliable mechanism with modern connectivity, E-TKT rescues a ***would-be future that didn't happen***, and at the same time reduces the dependence on environmentally impacting DRM-enabled disposable cartridges.
+## By combining simple and widely available embossing tapes in a reliable mechanism with modern connectivity, E-TKT rescues a ***would-be future that did not happen (yet)***, and at the same time reduces the dependence on environmentally impacting DRM-enabled disposable cartridges.
 
 <br>
 
