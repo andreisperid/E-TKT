@@ -39,7 +39,7 @@ The context below was brought by several people I've been interacting during the
 3. **REACH:** this is a cheap mass-produced device, meaning that lots of [people around the world](https://www.reddit.com/r/coolgithubprojects/comments/vfa2nt/comment/id8e9f5/?utm_source=reddit&utm_medium=web2x&context=3) might have one at [home](https://www.reddit.com/r/arduino/comments/vf6rjo/comment/icv9q29/?utm_source=reddit&utm_medium=web2x&context=3) or [work](https://www.reddit.com/r/functionalprint/comments/vf8hrq/comment/icuddop/?utm_source=reddit&utm_medium=web2x&context=3);
 4. **ENVIRONMENT:** these devices might be already broken: how many kilos of wasted plastic (plus the shipping impact)?
 6. **ISSUES:** of course, these folks will be upset and in the end have their needs unaddressed;
-8. **ACCESSIBILITY:** [braille labels](https://www.maxiaids.com/reizen-rl-350-braille-labeler) are only a step of distance for a possible future [spin off](https://www.reddit.com/r/functionalprint/comments/vf8hrq/comment/icvtlxn/?utm_source=reddit&utm_medium=web2x&context=3).
+8. **ACCESSIBILITY:** [braille labels](https://www.maxiaids.com/reizen-rl-350-braille-labeler) are only a [step of distance](https://www.reddit.com/r/arduino/comments/vf6rjo/comment/icv2cnr/?utm_source=reddit&utm_medium=web2x&context=3) for a possible future [spin off](https://www.reddit.com/r/functionalprint/comments/vf8hrq/comment/icvtlxn/?utm_source=reddit&utm_medium=web2x&context=3).
 
 These factors made me think of E-TKT as more than a solution only for myself, but to everyone.
 
