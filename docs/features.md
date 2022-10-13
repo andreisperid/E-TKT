@@ -16,10 +16,10 @@ description: "E-TKT"
 
 ## 📱 web app (local)
 
-- Instant preview: what you see is what you get;
+- Instant preview simulation: what you see is what you get;
 - Dynamic check for character validity;
-- Label physical dimensions estimate;
-- Automatic text center;
+- Estimate of the resulting label dimensions;
+- Automatic text centering;
 - Margin modes: tight, margin (1 space on each side) or full (maximum input length);
 - Buttons for special characters: ♡  ☆  ♪  $ @
 - "+ REEL" function to install a new tape reel;
