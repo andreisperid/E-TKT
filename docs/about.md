@@ -41,7 +41,9 @@ The context below was brought by several people I've been interacting during the
 6. **ISSUES:** of course, these folks will be upset and in the end have their needs unaddressed;
 8. **ACCESSIBILITY:** [braille labels](https://www.maxiaids.com/reizen-rl-350-braille-labeler) are only a step of distance for a possible future [spin off](https://www.reddit.com/r/functionalprint/comments/vf8hrq/comment/icvtlxn/?utm_source=reddit&utm_medium=web2x&context=3).
 
-These three factors made me think of E-TKT as more than a solution for myself, but to everyone. I wanted to create an open source project for a long time and this is why I put a lot of effort into testing all parts extensively and of course crafting this detailed documentation.
+These factors made me think of E-TKT as more than a solution only for myself, but to everyone.
+
+I wanted to create an open source project for a long time and this is why I put a lot of effort into testing all parts extensively and of course crafting this detailed documentation.
 
 
 # 🤓 the exploratory side ***...anachronism*** 
