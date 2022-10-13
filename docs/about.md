@@ -20,11 +20,13 @@ It's curious how both meanings are a consequence of each other: we *name things 
 
 The initial spark for this project came from an ordinary manual [labeling device](https://www.aliexpress.com/item/3256801648218535.html) that I bought to organize my workshop. I was ***VERY UPSET*** when I noticed that it was basically rubbish, getting broken and unusable after just a few operations. Just to imagine something made in another part of the world, travelling to me and breaking this way is unbelieavable.
 
-This little plastic hook (circled in red) grabs a gated cog (the white plastic part below) to feed the tape forward. I tried to fix and reinforce it, but the failure was unavoidable because there seems to be a critical flaw in the project: it is too weak for the lateral force imposed.
+Instead of embossing, it was really embarrassing labels 😅
+
+This little plastic hook (circled in red) grabs a ratchet mechanism (the white plastic part below) to feed the tape forward. I tried to fix and reinforce it, but the failure was unavoidable because there seems to be a critical flaw in the project: it is too weak for the lateral force imposed.
 
 ![low_DSC8695 copy annotated](https://user-images.githubusercontent.com/15098003/171303466-703fb695-e1d0-488c-8f9b-58dd55291529.jpg)
 
-I knew I could easily buy a brand new modern electronic thermal label printer ([such as this Brother model](https://www.brother-usa.com/products/pth110bp)), but something about the vintage embossed finish fascinated me. Also, these new models use expensive DRM [proprietary cartridges](https://www.brother-usa.com/products/tze335) that create a lot of trash after use, not to mention that some other recent models are [DRM protected](https://hackaday.com/2022/03/30/freedmo-gets-rid-of-dymo-label-printer-drm/).
+At that moment, I could easily buy a brand-new electronic thermal label printer ([such as this Brother model](https://www.brother-usa.com/products/pth110bp)), but something about the vintage embossed finish fascinated me. Also, these new models use expensive DRM [proprietary cartridges](https://www.brother-usa.com/products/tze335) that create a lot of trash after use, not to mention that some other recent models are [DRM protected](https://hackaday.com/2022/03/30/freedmo-gets-rid-of-dymo-label-printer-drm/).
 
 
 After all, even though the pressing mechanism was poorly made, the daisy wheel was pretty sturdy and sharp-printing. So I thought: can I build over its principles to create a functional device? If so, then why not make it *physical-digital?*
