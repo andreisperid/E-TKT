@@ -21,9 +21,9 @@ The label production itself uses the same mechanical principles as the original 
 
 <br>
 
-<img width="100%" src="https://user-images.githubusercontent.com/15098003/195626540-8d118593-76f9-48f4-ad97-d8a87a013965.png">
+<img width="100%" src="https://user-images.githubusercontent.com/15098003/195631487-45085257-776d-4da8-94e5-62735814b732.png">
 <p align="right">
-  <a href ="https://user-images.githubusercontent.com/15098003/195626540-8d118593-76f9-48f4-ad97-d8a87a013965.png" target="_blank">
+  <a href ="https://user-images.githubusercontent.com/15098003/195631487-45085257-776d-4da8-94e5-62735814b732.png" target="_blank">
     <i>🔎 see larger</i>
   </a>
 </p>  
