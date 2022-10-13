@@ -15,7 +15,7 @@ permalink: /
 <br>
 
 
-<div align= "center" style="width: 100%; vertical-align: middle; display: flex; flex-direction: row; align-items: center; opacity: 0.75;" >
+<div style="width: 100%; display: flex; flex-direction: row; align-items: center; opacity: 0.75;" >
     <div><img src="https://user-images.githubusercontent.com/15098003/195655502-1b714388-3294-45c6-be22-be38c60f5d9a.png" width="50px" ></div>
     <div><a href="https://certification.oshwa.org/br000010.html" target="_blank"><img width="75px" src="https://user-images.githubusercontent.com/15098003/191094349-1365897e-3fb5-4a83-951e-a10630c27bd5.png"></a><div>
 </div>
