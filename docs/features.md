@@ -32,10 +32,11 @@ description: "E-TKT"
 
 - Full label embossing & cutting;
 - Minimum label size to be pickable from the device;
-- OLED screen + LED feedback:
-- Instructions for configuring the wifi;
+- OLED screen + LED feedback;
 - QR code & URL for easily accessing the web app;
 - Real time embossing progress;
+- Instructions for configuring the wifi;
+- Button for clearing the wifi configuration;
 - Sound signature: each label owns a subtle melody 🐰🥚
 
 <br>
