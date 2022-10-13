@@ -20,7 +20,7 @@ description: "E-TKT"
 - Dynamic check for character validity;
 - Label physical size estimation;
 - Automatic text center;
-- Margin modes: tight, small (1 space on each side) or full (maximum input length);
+- Margin modes: tight, margin (1 space on each side) or full (maximum input length);
 - Buttons for special characters: ♡  ☆  ♪  $ @
 - Add new reel function for when a new tape reel must be installed;
 - Manual commands: feed & cut;
