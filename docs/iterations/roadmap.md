@@ -20,4 +20,4 @@ parent: 🧬 iterations
 - adjustable kerning
 - adaptive kerning
 - random kerning
-- interchangeable letter's carousel
+- custom daisy wheels
