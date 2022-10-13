@@ -29,6 +29,9 @@ I knew I could easily buy a brand new modern electronic thermal label printer ([
 
 After all, even though the pressing mechanism was poorly made, the daisy wheel was pretty sturdy and sharp-printing. So I thought: can I build over its principles to create a functional device? If so, then why not make it *physical-digital?*
 
+...why bother mixing an archaic printing method with current automation and connectivity features? Because *why not?* It was a technological blind spot ready to be explored!
+
+
 
 # 🤯 **wider context & purpose**
 
@@ -47,7 +50,6 @@ I wanted to create an open source project for a long time and this is why I put 
 
 
 # 🤓 **the exploratory side**... <ins>*anachronism*<ins>
-...why bother mixing an archaic printing method with current automation and connectivity features? Because *why not?* It was a technological blind spot to be explored!
 
 I've later realized that it was what I’ve been attracted to. According to [Wikipedia](https://en.wikipedia.org/wiki/Anachronism):
 > “An ***anachronism*** (from the Greek ἀνά ana, 'against' and χρόνος khronos, 'time') is a chronological inconsistency in some arrangements, especially a juxtaposition of people, events, objects, language terms and customs from different time periods”.
