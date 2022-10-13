@@ -18,7 +18,7 @@ description: "E-TKT"
 
 - Instant preview: what you see is what you get;
 - Dynamic check for character validity;
-- Label physical size estimation;
+- Label physical dimensions estimate;
 - Automatic text center;
 - Margin modes: tight, margin (1 space on each side) or full (maximum input length);
 - Buttons for special characters: ♡  ☆  ♪  $ @
