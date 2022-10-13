@@ -24,7 +24,7 @@ This little plastic hook (circled in red) grabs a gated cog (the white plastic p
 
 ![low_DSC8695 copy annotated](https://user-images.githubusercontent.com/15098003/171303466-703fb695-e1d0-488c-8f9b-58dd55291529.jpg)
 
-I knew I could easily buy a brand new modern electronic thermal label printer ([such as this Brother model](https://www.brother-usa.com/products/pth110bp)), but something about the vintage embossed finish fascinated me. Also, these new models use expensive DRM [proprietary cartridges](https://www.brother-usa.com/products/tze335) that create a lot of trash after use, not to mention the recent models that are [DRM protected](https://hackaday.com/2022/03/30/freedmo-gets-rid-of-dymo-label-printer-drm/).
+I knew I could easily buy a brand new modern electronic thermal label printer ([such as this Brother model](https://www.brother-usa.com/products/pth110bp)), but something about the vintage embossed finish fascinated me. Also, these new models use expensive DRM [proprietary cartridges](https://www.brother-usa.com/products/tze335) that create a lot of trash after use, not to mention that some other recent models are [DRM protected](https://hackaday.com/2022/03/30/freedmo-gets-rid-of-dymo-label-printer-drm/).
 
 
 After all, even though the pressing mechanism was poorly made, the daisy wheel was pretty sturdy and sharp-printing. So I thought: can I build over its principles to create a functional device? If so, then why not make it *physical-digital?*
@@ -32,13 +32,14 @@ After all, even though the pressing mechanism was poorly made, the daisy wheel w
 
 # 🤯 wider context & purpose
 
-The context below was brought by several people I've been interacting:
+The context below was brought by several people I've been interacting during the development process:
 1. **CULTURE:** embossed labels are deeply ingrained in culture, as well pointed by [Dan Maloney](https://deadhomersociety.wordpress.com/2015/10/22/quote-of-the-day-2406/) [(*HACKADAY*)](https://hackaday.com/2022/06/15/diy-automated-printer-kerchunks-out-classic-embossed-labels/) and a [spacestationkru](https://best-tv-shows.fandom.com/wiki/Labels_(Dexter%27s_Laboratory)) [(*reddit*)](https://www.reddit.com/r/3Dprinting/comments/vf8acb/comment/icvk1fe/?utm_source=reddit&utm_medium=web2x&context=3) and [agent_kater](https://backtothefuture.fandom.com/wiki/Flux_capacitor) [(*reddit*)](https://www.reddit.com/r/3Dprinting/comments/vf8acb/comment/icwgo76/?utm_source=reddit&utm_medium=web2x&context=3);
-2. **NEED:** there are situations where a paper, flat and/or thermally printed label doesn't fit the needs, let alone the need for relief
-3. **REACH:** this is a cheap mass-produced device, meaning that lots of people around the world might have one at home or work;
+2. **NEED:** there are situations where a paper, flat and/or thermally printed label doesn't fit the needs, let alone the need for the embossed relief;
+7. **ERGONOMICS**: when there is no other way than using embossed labels, making them manually is a [straining process](https://www.reddit.com/r/functionalprint/comments/vf8hrq/comment/icvjqvg/?utm_source=reddit&utm_medium=web2x&context=3) that might give the operator [repetitive strain injury](https://en.wikipedia.org/wiki/Repetitive_strain_injury);
+3. **REACH:** this is a cheap mass-produced device, meaning that lots of [people around the world](https://www.reddit.com/r/coolgithubprojects/comments/vfa2nt/comment/id8e9f5/?utm_source=reddit&utm_medium=web2x&context=3) might have one at home or [work](https://www.reddit.com/r/functionalprint/comments/vf8hrq/comment/icuddop/?utm_source=reddit&utm_medium=web2x&context=3);
 4. **ENVIRONMENT:** these devices might be already broken: how many kilos of wasted plastic (plus the shipping impact)?
-5. **ISSUES:** of course, these folks will be upset and in the end have their needs unaddressed.
-6. **ACCESSIBILITY:** [braille labels](https://www.maxiaids.com/reizen-rl-350-braille-labeler) are only a step of distance for a possible future spin off.
+6. **ISSUES:** of course, these folks will be upset and in the end have their needs unaddressed;
+8. **ACCESSIBILITY:** [braille labels](https://www.maxiaids.com/reizen-rl-350-braille-labeler) are only a step of distance for a possible future [spin off](https://www.reddit.com/r/functionalprint/comments/vf8hrq/comment/icvtlxn/?utm_source=reddit&utm_medium=web2x&context=3).
 
 These three factors made me think of E-TKT as more than a solution for myself, but to everyone. I wanted to create an open source project for a long time and this is why I put a lot of effort into testing all parts extensively and of course crafting this detailed documentation.
 
