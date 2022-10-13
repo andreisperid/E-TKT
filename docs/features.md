@@ -16,23 +16,26 @@ description: "E-TKT"
 
 ## 📱 web app (local)
 
-- Instant preview: what you see is what you’ll get;
-- Real time check for character validity;
-- Label length estimation;
-- Margin modes: tight, small (1 space each side) or full (max input length);
+- Instant preview: what you see is what you get;
+- Dynamic check for character validity;
+- Label physical size estimation;
+- Automatic text center;
+- Margin modes: tight, small (1 space on each side) or full (maximum input length);
 - Buttons for special characters: ♡  ☆  ♪  $ @
-- Reeling function: for when a new tape reel must be installed;
+- Add new reel function for when a new tape reel must be installed;
 - Manual commands: feed & cut;
+- Calibration setup for fine tuning the character alignment and pressing force.
+
 <br>
 
 ## 🔌 device
 
-- Label cutting;
-- Auto center content;
-- Minimum label size to allow for picking it up;
+- Full label embossing & cutting;
+- Minimum label size to be pickable from the device;
 - OLED screen + LED feedback:
 - Instructions for configuring the wifi;
 - QR code/URL for easily accessing the web app;
-- Real time progress;
+- Real time embossing progress;
+- Sound signature: each label owns a subtle melody 🐰🥚
 
 <br>
