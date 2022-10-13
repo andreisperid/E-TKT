@@ -16,7 +16,7 @@ permalink: /
 
 
 <div align="center" style="opacity: 0.75">
-<a href="https://certification.oshwa.org/br000010.html" target="_blank"><img width="150px" src="https://user-images.githubusercontent.com/15098003/195676689-90f9a3bb-1ea9-408a-a618-434ab7b26c85.png"></a>
+<a href="https://certification.oshwa.org/br000010.html" target="_blank"><img width="175px" src="https://user-images.githubusercontent.com/15098003/195676689-90f9a3bb-1ea9-408a-a618-434ab7b26c85.png"></a>
 </div>
 
 
