@@ -33,12 +33,12 @@ After all, even though the pressing mechanism was poorly made, the daisy wheel w
 # 🤯 wider context & purpose
 
 The context below was brought by several people I've been interacting:
-1. embossed labels are deeply ingrained in culture, as well pointed by [Dan Maloney](https://deadhomersociety.wordpress.com/2015/10/22/quote-of-the-day-2406/) [(*HACKADAY*)](https://hackaday.com/2022/06/15/diy-automated-printer-kerchunks-out-classic-embossed-labels/) and a [spacestationkru](https://best-tv-shows.fandom.com/wiki/Labels_(Dexter%27s_Laboratory)) [(*reddit*)](https://www.reddit.com/r/3Dprinting/comments/vf8acb/comment/icvk1fe/?utm_source=reddit&utm_medium=web2x&context=3) and [agent_kater](https://backtothefuture.fandom.com/wiki/Flux_capacitor) [(*reddit*)](https://www.reddit.com/r/3Dprinting/comments/vf8acb/comment/icwgo76/?utm_source=reddit&utm_medium=web2x&context=3);
-2. there are situations where a paper, flat and/or thermally printed label doesn't fit the needs, let alone the need for relief
-3. this is a cheap mass-produced device, meaning that lots of people around the world might have one at home or work;
-4. these devices might be already broken: how many kilos of wasted plastic (plus the shipping impact)?
-5. of course, these folks will be upset and in the end have their needs unaddressed.
-6. braille labels are something only a step of distance for a possible future spin off.
+1. **CULTURE:** embossed labels are deeply ingrained in culture, as well pointed by [Dan Maloney](https://deadhomersociety.wordpress.com/2015/10/22/quote-of-the-day-2406/) [(*HACKADAY*)](https://hackaday.com/2022/06/15/diy-automated-printer-kerchunks-out-classic-embossed-labels/) and a [spacestationkru](https://best-tv-shows.fandom.com/wiki/Labels_(Dexter%27s_Laboratory)) [(*reddit*)](https://www.reddit.com/r/3Dprinting/comments/vf8acb/comment/icvk1fe/?utm_source=reddit&utm_medium=web2x&context=3) and [agent_kater](https://backtothefuture.fandom.com/wiki/Flux_capacitor) [(*reddit*)](https://www.reddit.com/r/3Dprinting/comments/vf8acb/comment/icwgo76/?utm_source=reddit&utm_medium=web2x&context=3);
+2. **NEED:** there are situations where a paper, flat and/or thermally printed label doesn't fit the needs, let alone the need for relief
+3. **REACH:** this is a cheap mass-produced device, meaning that lots of people around the world might have one at home or work;
+4. **ENVIRONMENT:** these devices might be already broken: how many kilos of wasted plastic (plus the shipping impact)?
+5. **ISSUES:** of course, these folks will be upset and in the end have their needs unaddressed.
+6. **ACCESSIBILITY:** [braille labels](https://www.maxiaids.com/reizen-rl-350-braille-labeler) are only a step of distance for a possible future spin off.
 
 These three factors made me think of E-TKT as more than a solution for myself, but to everyone. I wanted to create an open source project for a long time and this is why I put a lot of effort into testing all parts extensively and of course crafting this detailed documentation.
 
