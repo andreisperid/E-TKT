@@ -22,7 +22,7 @@ description: "E-TKT"
 - Automatic text center;
 - Margin modes: tight, margin (1 space on each side) or full (maximum input length);
 - Buttons for special characters: ♡  ☆  ♪  $ @
-- "+ reel" function to install a new tape reel;
+- + REEL function to install a new tape reel;
 - Manual commands: feed & cut;
 - Calibration setup for fine tuning the character alignment and pressing force.
 
