@@ -87,7 +87,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 #define ledChar 17
 
 // buzzer
-#define buzzerPin 27 // 26 for new PCB
+#define buzzerPin 26
 
 // DEBUG --------------------------------------------------------------------------
 // comment lines individually to isolate functions
