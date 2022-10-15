@@ -40,7 +40,7 @@ parent: 🛠️ do it yourself!
 | :--- | :--- | :---: | :---: |
 | hall sensor (breakout) | Keyes KY 003 | [link](http://aliexpress.com/item/2251832475321023.html) | 1 | 
 | stepper driver (breakout) | A4988 | [link](http://aliexpress.com/item/3256801435362018.html) | 1 |
-| stepper motor | NEMA 17HS4023 | [link](http://aliexpress.com/item/2251832620474591.html) | 1 |
+| stepper motor | NEMA 17HS4023 + cable | [link](http://aliexpress.com/item/2251832620474591.html) | 1 |
 | stepper motor | 28BYJ-48 12V | [link](https://www.aliexpress.com/item/1005003708064424.html) | 1 | 
 | servo | Towerpro MG-996R | [link](http://aliexpress.com/item/2251832857187114.html) | 1 | 
 | neodymium magnet | 2mm ⌀ x 3mm length | [link](http://aliexpress.com/item/3256803632497346.html) | 1 |
@@ -108,10 +108,7 @@ parent: 🛠️ do it yourself!
 | :--- | :--- | :---: | :---: |
 | cable | USB A to C data cable | [link]() | 1 |
 | wiring | flat, flexible | [link](http://aliexpress.com/item/2251832639497810.html) | 1 |
-| header | male header - 0.1" pitch | [link](http://aliexpress.com/item/2251832538163556.html) | 2 |
-| header | female header - 0.1" pitch | [link](http://aliexpress.com/item/2251832538163556.html) | 2 |
-| connector | female - 1x08 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 1 |
-| connector | female - 1x03 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 4 |
+| connector | female - 1x02 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 2 |
 | connector | female - 1x04 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 2 |
 
 ----
