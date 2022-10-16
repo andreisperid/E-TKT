@@ -21,7 +21,8 @@ parent: 🛠️ do it yourself!
 | screw, cyl. allen | M3x20mm | [link](http://aliexpress.com/item/2261799963738734.html) | 23 |
 | screw, cyl. allen | M3x16mm | [link](http://aliexpress.com/item/2261799963738734.html) | 2 |
 | screw, cyl. allen | M3x10mm | [link](http://aliexpress.com/item/2261799963738734.html) | 4 |
-| screw, cyl. allen | M3x6mm | [link](http://aliexpress.com/item/2261799963738734.html) | 11 | 
+| screw, cyl. allen | M3x8mm | [link](http://aliexpress.com/item/2261799963738734.html) | 2 | 
+| screw, cyl. allen | M3x6mm | [link](http://aliexpress.com/item/2261799963738734.html) | 9 | 
 | screw, cyl. allen | M4x10mm | [link](http://aliexpress.com/item/2261799963738734.html) | 1 | 
 | nut, hex | M3 | [link](http://aliexpress.com/item/1005001966426139.html) | 10 | 
 | washer | M3 | [link](http://aliexpress.com/item/3256801295230574.html) | 9 | 
