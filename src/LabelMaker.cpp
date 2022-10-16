@@ -1189,7 +1189,7 @@ void processor(void *parameters)
 
 			displayInitialize();
 			displayTest(newAlign, newForce);
-			analogWrite(ledFinish, 32);
+			analogWrite(ledFinish, 0);
 
 			bool testFull = false;
 			if (parameter == "testfull")
@@ -1242,7 +1242,7 @@ void processor(void *parameters)
 
 			displayInitialize();
 			displaySettings(newAlign, newForce);
-			analogWrite(ledFinish, 32);
+			analogWrite(ledFinish, 0);
 
 			saveSettings(newAlign, newForce);
 
@@ -1467,6 +1467,10 @@ void setup()
 	Serial.println("setup");
 #endif
 
+	// turns of the leds
+	analogWrite(ledChar, 0);
+	analogWrite(ledFinish, 0);
+	
 	loadSettings();
 
 	// set  display
@@ -1480,9 +1484,6 @@ void setup()
 	pinMode(ledFinish, OUTPUT);
 	pinMode(enableCharStepper, OUTPUT);
 
-	// turns of the leds
-	analogWrite(ledChar, 0);
-	analogWrite(ledFinish, 0);
 
 	// set feed stepper
 	stepperFeed.setMaxSpeed(1000000);
