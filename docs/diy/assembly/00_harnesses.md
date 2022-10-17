@@ -8,6 +8,8 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 1
 ---
 
+💬 *whenever you need, check out the [exploded view](https://andreisperid.github.io/E-TKT/diy/assembly/assembly.html) for orientation;*
+
 # **0. harnesses**
 
 ![_DSC0484](https://user-images.githubusercontent.com/15098003/196167866-c9dad3e1-6fc4-4c4f-b2bf-710a4462bdb5.jpg)
