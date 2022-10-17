@@ -54,7 +54,7 @@ nav_order: 8
 2. then the display connector;
 3. carefully close the K_top_screenholder while observing the PCB, servo and B_walland their respective fittings;
 
-# top + servo
+## top + servo
 
 ![_DSC0611](https://user-images.githubusercontent.com/15098003/196253537-268324eb-d305-4a30-a314-9f4895d1ae6e.jpg)
 ![_DSC0612](https://user-images.githubusercontent.com/15098003/196253539-6d75beeb-c2e1-4969-8ae3-b310ef27742a.jpg)
@@ -65,7 +65,7 @@ nav_order: 8
 3. while you firmly grip the J_top against the A_bottom, press the servo inward and tighten the screw;
 
 
-# top + pillars
+## top + pillars
 
 ![_DSC0614](https://user-images.githubusercontent.com/15098003/196253544-61f3c40a-ffd7-4968-8c2b-6def4dfd1a06.jpg)
 ![_DSC0615](https://user-images.githubusercontent.com/15098003/196253546-2df40245-a25b-4911-be06-5963e3ea61ed.jpg)
@@ -75,7 +75,7 @@ nav_order: 8
 
 
 
-# result
+## result
 
 ![_DSC0616](https://user-images.githubusercontent.com/15098003/196253547-2f19ff23-daf6-4931-b704-1d42a26357a6.jpg)
 
