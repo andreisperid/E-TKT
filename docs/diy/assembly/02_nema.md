@@ -59,6 +59,6 @@ We need to know the right magnet polarity to trigger the hall sensor, otherwise 
 3. again, do not fasten the screws, we will have then tightened later.
 
 
-## resulting NEMA assembly
+## result
 
 ![_DSC0520](https://user-images.githubusercontent.com/15098003/196174964-2be42ca0-ebd9-47d4-b338-3df034615c7c.jpg)
