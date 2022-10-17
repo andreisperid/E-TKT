@@ -23,7 +23,7 @@ PS: the wheel cover serves for removing the daisy wheel without needing to disas
 ![_DSC0634](https://user-images.githubusercontent.com/15098003/196263500-3cde12ea-d3ac-4631-a36d-465e85e29a77.jpg)
 
 1. slide the M_top_wheel_cover into the J_top;
-2. use 2x m3x10 screws to lightly touch the bearing;
+2. use 2x m3x10 screws to lightly touch the bearing, but we will finish tightening them on the final step;
 
 
 ## D_pillar
@@ -45,7 +45,8 @@ PS: the wheel cover serves for removing the daisy wheel without needing to disas
 2. rotate the daisy wheel assembly until you find a chamfer on the bottom of the I_nema_wheel_hub;
 3. place a scredriver to leverage the I_nema_wheel_hub against the H_nema_cover;
 4. while keeping it up, tighten very whell both screws of the I_nema_wheel_hub;
-5. test to see if the daisy wheel is properly fixed, without clearance.
+5. also, tighten both screws on the M_top_wheel_cover;
+6. test to see if the daisy wheel is properly fixed, without clearance.
 
 
 ## 🎈 congratulations, now we are ready to calibrate
