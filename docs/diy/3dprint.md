@@ -11,8 +11,7 @@ parent: 🛠️ do it yourself!
 
 ----
 
-![_DSC9996](https://user-images.githubusercontent.com/15098003/196299305-b3be53ee-1f25-47ae-aec2-c015270dda9e.jpg)
-
+![_DSC9996](https://user-images.githubusercontent.com/15098003/196301345-7a4f6768-4f64-40c6-9f63-5ebba04e5f37.jpg)
 
 ----
 
