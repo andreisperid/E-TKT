@@ -19,7 +19,7 @@ The servo, together with the hall sensor, is one of the most critical sub system
 ![_DSC0539](https://user-images.githubusercontent.com/15098003/196191067-f6430e82-d6fd-4fb3-900d-c49b4bce222f.jpg)
 
 
-## servo + PCB
+## servo: connection
 
 ![_DSC0540](https://user-images.githubusercontent.com/15098003/196191071-e32b1b19-2a8f-4e25-aeb5-bb78d8042977.jpg)
 
@@ -42,7 +42,7 @@ It is unpredictable in which angle a given unit is delivered to you. Because of 
 3. plug the 12DC power source into the PCB;
 4. wait for the "E-TKT" splash animation and the servo will be homed to its resting position.
 
-## P_press
+## press
 
 ![_DSC0547](https://user-images.githubusercontent.com/15098003/196191076-92adb8f3-eaf8-4014-92e5-d235145523cd.jpg)
 ![_DSC0548](https://user-images.githubusercontent.com/15098003/196191077-79708c40-8876-425b-9ef4-410c147d03ce.jpg)
@@ -51,7 +51,7 @@ It is unpredictable in which angle a given unit is delivered to you. Because of 
 2. this is intended to ease the movement between the P_press while keeping it perpendicular to the servo axis;
 
 
-## P_press: alignment
+## press: alignment
 
 Now that the servo is homed, we can put the P_press by using its own visual cue.
 
@@ -67,7 +67,7 @@ Now that the servo is homed, we can put the P_press by using its own visual cue.
 7. there must be absolutely no lateral play (force it a bit to test) between the servo and the P_press, otherwise it will miss the daisy wheel's tooth when forced. 
 
 
-## + chassis
+## chassis
 
 ![_DSC0551](https://user-images.githubusercontent.com/15098003/196191086-55f37bf0-3e01-438f-8cf4-81cc9240379b.jpg)
 ![_DSC0556](https://user-images.githubusercontent.com/15098003/196191090-a3575acb-5dcf-4c34-aa14-71673e516052.jpg)
@@ -81,7 +81,6 @@ Now that the servo is homed, we can put the P_press by using its own visual cue.
 5. keep a gap between the washers and the A_bottom;
 6. align the servo to both screws and "click" it through;
 7. tighten both screws while making sure the servo is as inward and pressed against to the A_bottom as possible;
-
 
 
 ## result & check
