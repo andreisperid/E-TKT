@@ -1,7 +1,7 @@
 ---
 layout: default
 title: ➿ label reel
-nav_order: 9
+nav_order: 8
 description: "E-TKT"
 parent: 🛠️ do it yourself!
 ---
