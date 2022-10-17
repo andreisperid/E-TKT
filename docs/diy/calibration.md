@@ -70,6 +70,7 @@ You will see a xray of the machine, and now we will proceed to the first part of
 - increase it one at a time and hit the big test button;
 - take the opportunity to see if the alignment is correct, and if not adjust it too;
 
+---
 
 ### 🕐 when you are happy with the result, click save and wait for the machine to reboot.
 <br>
