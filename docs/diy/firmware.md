@@ -8,6 +8,10 @@ parent: 🛠️ do it yourself!
 
 # 💻 **firmware**
 
+----
+![_DSC0743](https://user-images.githubusercontent.com/15098003/196303763-939a3349-6e17-4484-b9b3-b4690aa199b1.jpg)
+----
+
 1. Clone the [repository](https://github.com/andreisperid/E-TKT);
 2. Make sure you have the [framework and all the libraries](https://andreisperid.github.io/E-TKT/credits/libraries.html) installed on your computer (I use [Visual Studio Code](https://code.visualstudio.com/) with [PlatformIO](https://platformio.org/) and recommend it!);
 3. Flash the code into the PCB using an USB-C cable \*;
