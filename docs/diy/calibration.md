@@ -22,7 +22,7 @@ Check the letter "J" position in the top window: if the letter is visually cente
 <img src="https://user-images.githubusercontent.com/15098003/196271237-0aad831a-ca98-495b-8739-150a3f19cbf9.jpg" width="50%"><img src="https://user-images.githubusercontent.com/15098003/196271232-4fec3785-aaef-469e-9138-371bef4d8894.jpg" width="50%">
 
 
-***<details><summary> In case the letter "J" does not meet the above criteria </summary>***  
+***<details><summary> ⚠️ In case the letter "J" does not meet the above criteria </summary>***  
   
 ![_DSC0676_arrow](https://user-images.githubusercontent.com/15098003/196274788-680d20cc-d54b-45de-8b5a-a0055486766a.jpg)
 
