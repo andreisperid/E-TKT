@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 3. wall and track
+title: 3. PCB
 description: "E-TKT"
 
 parent: 🧩 assembly
@@ -8,21 +8,21 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 3
 ---
 
-# **3. pcb**
+# **3. PCB**
 
 The PCB gather electronic breakouts but also serves a structural role. 
 
 ![_DSC0521](https://user-images.githubusercontent.com/15098003/196185055-6aed9912-7867-4cb3-ad2a-606238e2e0b2.jpg)
 
 
-# stepper driver
+# PCB + stepper driver
 
 ![_DSC0523](https://user-images.githubusercontent.com/15098003/196185063-d4743c1a-6601-4dee-b9cb-1c615c004d64.jpg)
 
 1. place the A4988 driver on the board, observing the VMOT and GND markings to make sure it is properly oriented;
 
 
-# hall sensor
+# PCB + hall sensor
 
 ![_DSC0524](https://user-images.githubusercontent.com/15098003/196185066-e851fced-6f3d-49ee-a590-d0e9f9021fb2.jpg)
 
@@ -30,7 +30,7 @@ The PCB gather electronic breakouts but also serves a structural role.
 2. it isn't going to hold steadily into the connector and that's expected;
 
 
-# pcb + hall + F_pillar
+# + F_pillar
 
 The F_pillar will make sure the hall breakout stays firm in position, while at the same time aggregating the PCB to the overall structure.
 
