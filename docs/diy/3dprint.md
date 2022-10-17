@@ -11,9 +11,14 @@ parent: 🛠️ do it yourself!
 
 ----
 
+![_DSC9996](https://user-images.githubusercontent.com/15098003/196299305-b3be53ee-1f25-47ae-aec2-c015270dda9e.jpg)
+
+
+----
+
+
 ### 16 parts in total, using approximately 220g of filament (I've used PETG).
 
-![_DSC9997](https://user-images.githubusercontent.com/15098003/196298742-6d85e73e-dd56-448f-a0a8-05b23ec15f89.jpg)
 
 ----
 
