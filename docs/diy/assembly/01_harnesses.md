@@ -8,7 +8,7 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 1
 ---
 
-# **1. harnesses**
+# **0. harnesses**
 
 ![_DSC0484](https://user-images.githubusercontent.com/15098003/196167866-c9dad3e1-6fc4-4c4f-b2bf-710a4462bdb5.jpg)
 
