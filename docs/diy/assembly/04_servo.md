@@ -8,6 +8,8 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 5
 ---
 
+💬 *whenever you need, check out the [exploded view](https://andreisperid.github.io/E-TKT/diy/assembly/assembly.html) for orientation;*
+
 # **4. servo**
 
 The servo, together with the hall sensor, is one of the most critical sub systems of the device.
