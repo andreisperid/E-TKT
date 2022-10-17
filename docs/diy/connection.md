@@ -12,7 +12,7 @@ The device must be connected to a 2.4GHz Wireless Local Area Network.
 
 ## 1. in the device
 
-![image](https://user-images.githubusercontent.com/15098003/196287088-516e709b-66ee-4409-88b3-a3fbd1eaf8fa.png)
+![image](https://user-images.githubusercontent.com/15098003/196288878-c1d163cf-1c81-4d74-9b00-c7b1c382f926.png)
 
 - turn it on;
 - check if it is asking for be connected (if not, you might want to reset wi-fi — see the bottom of the page);
