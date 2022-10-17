@@ -8,7 +8,7 @@ parent: 🛠️ do it yourself!
 
 # 🗺️ **overview & tips**
 
-![_DSC0414](https://user-images.githubusercontent.com/15098003/196304235-ec6878e4-4783-47bc-8f77-8db2b66b69cc.jpg)
+![_DSC0414](https://user-images.githubusercontent.com/15098003/196304985-a2bc14ca-9ad9-4c69-9240-d5bb8c515a52.jpg)
 
 To make your own E-TKT you will need to:
 ### 1. 3D print
