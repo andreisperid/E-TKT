@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 5. feed track
+title: 5. feed
 description: "E-TKT"
 
 parent: 🧩 assembly
@@ -10,7 +10,7 @@ nav_order: 6
 
 💬 *whenever you need, check out the [exploded view](https://andreisperid.github.io/E-TKT/diy/assembly/assembly.html) for orientation;*
 
-# **5. feed track**
+# **5. feed**
 
 The 28BYJ is a reduced stepper motor and it's responsible for feeding the tape forward through the guiding track.
 
