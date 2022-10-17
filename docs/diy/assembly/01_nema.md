@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 2. NEMA
+title: 1. NEMA
 description: "E-TKT"
 
 parent: 🧩 assembly
