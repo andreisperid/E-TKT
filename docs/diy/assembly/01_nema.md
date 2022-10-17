@@ -8,7 +8,7 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 2
 ---
 
-# **2. NEMA**
+# **1. NEMA**
 
 ![_DSC0500](https://user-images.githubusercontent.com/15098003/196174941-3c4be757-cb8c-40b8-80c9-3585ac24ea61.jpg)
 
