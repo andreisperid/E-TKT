@@ -8,6 +8,8 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 7
 ---
 
+💬 *whenever you need, check out the [exploded view](https://andreisperid.github.io/E-TKT/diy/assembly/assembly.html) for orientation;*
+
 # **6. daisy wheel**
 
 The leading character of the device, the daisy wheel is responsible for embossing the letters into the tape.
