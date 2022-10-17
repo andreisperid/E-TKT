@@ -1,12 +1,12 @@
 ---
 layout: default
-title: ➿ label reel
+title: ➰ label reel
 nav_order: 8
 description: "E-TKT"
 parent: 🛠️ do it yourself!
 ---
 
-# ➿ **label reel**
+# ➰ **label reel**
 
 The E-TKT uses generic 9mm DYMO-compatible label reel. They are cheap and come in different colors.
 
