@@ -11,11 +11,13 @@ parent: 🛠️ do it yourself!
 💬 *you can find the KiCad v6 source files, PDF schematics and gerbers in the [electronic](https://github.com/andreisperid/E-TKT/tree/main/_electronic/) folder.*
 
 ----
-![_DSC0091](https://user-images.githubusercontent.com/15098003/196300129-7feca78c-2359-42fd-ab6e-444c5a236fea.jpg)
+
+![_DSC0364](https://user-images.githubusercontent.com/15098003/196300472-0a6d9673-1229-49ee-814d-58a3f39551d4.jpg)
+
 ----
 
 ## Board
-<img width="50%" src="https://user-images.githubusercontent.com/15098003/193073510-e8ca0f93-9d0d-4541-8dd6-37c3eacae061.png"><img width="50%" src="https://user-images.githubusercontent.com/15098003/193073505-1d91c3db-753d-4110-8e7a-523b866b203b.png">
+<img width="50%" src="https://user-images.githubusercontent.com/15098003/196300905-4247ead6-7743-4f2a-bca7-bb8238c75d28.png"><img width="50%" src="https://user-images.githubusercontent.com/15098003/196300906-cbcebdab-12e4-495c-bd3a-9b33c1dceccf.png">
 
 ----
 
