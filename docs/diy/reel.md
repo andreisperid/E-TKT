@@ -25,9 +25,7 @@ The E-TKT uses generic 9mm DYMO-compatible label reel. They are cheap and come i
 
 ### 4. in the app, go to "SETUP" and the press "+ REEL", then reassure the step 3, confirm and wait
 
-![app_setup](https://user-images.githubusercontent.com/15098003/196284059-7a92dbf8-ee4a-46af-bb03-b13ca54971f4.png)
-![app_reel](https://user-images.githubusercontent.com/15098003/196284589-e2325ea7-1b4a-430c-b9c8-4d5745488ea7.png)
-
+<img src="https://user-images.githubusercontent.com/15098003/196284059-7a92dbf8-ee4a-46af-bb03-b13ca54971f4.png" width="50%"><img src="https://user-images.githubusercontent.com/15098003/196284589-e2325ea7-1b4a-430c-b9c8-4d5745488ea7.png" width="50%">
 
 ----
 
