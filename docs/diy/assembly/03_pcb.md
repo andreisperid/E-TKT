@@ -50,7 +50,8 @@ The F_pillar will make sure the hall breakout stays firm in position, while at t
 
 1. connect the NEMA harness to the stepper motor;
 2. then, connect it to the PCB;
-3. very carefully, place the assembly into a surface. 
+3. mount the G_pillar in the opposite side of the PCB;
+4. very carefully, place the assembly into a surface. 
 
 ## result
 
