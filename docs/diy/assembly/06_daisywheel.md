@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 7. daisy wheel
+title: 6. daisy wheel
 description: "E-TKT"
 
 parent: 🧩 assembly
@@ -8,7 +8,7 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 7
 ---
 
-# **7. daisy wheel**
+# **6. daisy wheel**
 
 The leading character of the device, the daisy wheel is responsible for embossing the letters into the tape.
 
