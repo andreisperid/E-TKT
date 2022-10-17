@@ -51,4 +51,4 @@ In this first step, we will prepare several parts that will be used through all 
 1. cut the terminals of the two DIP LEDs;
 2. solder each LED to a 2 vias flat cable
 3. I recommend to use individual thermo retractable sleeves for each terminal to avoid short circuits
-4. ***do not crimp the connector yet, we will need to pass the cables before that.***
+4. ***do not crimp the connectors yet, we will need to pass the cables before that.***
