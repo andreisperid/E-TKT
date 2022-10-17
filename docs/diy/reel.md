@@ -20,10 +20,10 @@ The E-TKT uses generic 9mm DYMO-compatible label reel. They are cheap and come i
 ### 2. place the tape on it
 ![_DSC0693](https://user-images.githubusercontent.com/15098003/196272459-b45b0007-b8a0-4052-b4e4-fe75423afc4c.jpg)
 
-### 3. make sure the tape is touching the cog and the bearing
+### 3. make sure the tape is touching the cog and the metal bearings
 ![_DSC0694](https://user-images.githubusercontent.com/15098003/196272462-82975dcc-011a-4393-a01f-a3d33e115fdb.jpg)
 
-### 4. in the app, go to "SETUP" and the press "+ REEL"
+### 4. in the app, go to "SETUP" and the press "+ REEL", then reassure the step 3 and confirm
 
 <img src="https://user-images.githubusercontent.com/15098003/196279872-b6f401ca-5ff9-41bf-853e-ac6cf6efcbfc.png" width="50%"><img src="https://user-images.githubusercontent.com/15098003/196279878-43450431-d4ab-4c54-bf0a-31f968f13b34.png" width="50%">
 
