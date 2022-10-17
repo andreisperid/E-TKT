@@ -12,7 +12,7 @@ nav_order: 10
 
 # **9. finish**
 
-These are the few last steps before proceeding to calibration.
+These are the few last steps.
 
 PS: the wheel cover serves for removing the daisy wheel without needing to disassemble anything else.
 
@@ -49,7 +49,7 @@ PS: the wheel cover serves for removing the daisy wheel without needing to disas
 6. test to see if the daisy wheel is properly fixed, without clearance.
 
 
-## 🎈 congratulations, now we are ready to calibrate
+## 🎈 congratulations, now we are ready to proceed to connecting it, adding a reel adn calibrating!
 
 ![_DSC0647](https://user-images.githubusercontent.com/15098003/196263511-a5ae48a3-b7b8-4eb5-9d8e-a94aaec0700b.jpg)
 
