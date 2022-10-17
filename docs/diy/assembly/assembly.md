@@ -10,10 +10,10 @@ has_children: true
 
 # 🧩 **assembly**
 
-![exploded_001-01](https://user-images.githubusercontent.com/15098003/195709027-90aa87ea-e680-4b99-bf7a-1b729e355c24.png)
+![exploded_001-01](https://user-images.githubusercontent.com/15098003/196292732-2089eaad-7a61-4db6-8097-c3a6049bdc21.png)
 
 <p align="right">
-  <a href="https://user-images.githubusercontent.com/15098003/195709027-90aa87ea-e680-4b99-bf7a-1b729e355c24.png" target="_blank">
+  <a href="https://user-images.githubusercontent.com/15098003/196292732-2089eaad-7a61-4db6-8097-c3a6049bdc21.png" target="_blank">
     <i>🔎 see larger</i>
   </a>
 </p>
