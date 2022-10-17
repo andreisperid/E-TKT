@@ -9,7 +9,9 @@ parent: 🛠️ do it yourself!
 # 💻 **firmware**
 
 ----
+
 ![_DSC0743](https://user-images.githubusercontent.com/15098003/196303763-939a3349-6e17-4484-b9b3-b4690aa199b1.jpg)
+
 ----
 
 1. Clone the [repository](https://github.com/andreisperid/E-TKT);
