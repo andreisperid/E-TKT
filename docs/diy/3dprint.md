@@ -21,7 +21,7 @@ parent: 🛠️ do it yourself!
  <iframe title="E-TKT: 3D printing" width="100%" height="600px" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/af2f40abf97d477f9c3f3be6128178a7/embed?autostart=1"> </iframe> 
 </div>
 
-### 📐 All the .stl provided are in the correct orientation for optimal printing:
+### 📐 All the [.stl provided](https://github.com/andreisperid/E-TKT/tree/main/_3dprint/stl) are in the correct orientation for optimal printing:
 
 - A_bottom \*
 - B_wall \*
@@ -49,4 +49,5 @@ parent: 🛠️ do it yourself!
 - Wall line count: 3 + 1 (alternating extra wall with Cura)
 - Top/bottom layers: 5
 
+PS: [here](https://github.com/andreisperid/E-TKT/tree/main/_3dprint/source) you can find the source 3D file.
 
