@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 4. servo
+title: 4. press
 description: "E-TKT"
 
 parent: 🧩 assembly
@@ -10,7 +10,7 @@ nav_order: 5
 
 💬 *whenever you need, check out the [exploded view](https://andreisperid.github.io/E-TKT/diy/assembly/assembly.html) for orientation;*
 
-# **4. servo**
+# **4. press**
 
 The servo, together with the hall sensor, is one of the most critical sub systems of the device.
 
