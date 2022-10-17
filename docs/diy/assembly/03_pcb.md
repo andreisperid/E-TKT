@@ -10,7 +10,7 @@ nav_order: 3
 
 # **3. PCB**
 
-The PCB gather electronic breakouts but also serves a structural role. 
+The PCB gathers electronic breakouts but also serves a structural role. That means it is adjacent to several mechanical parts.
 
 ![_DSC0521](https://user-images.githubusercontent.com/15098003/196185055-6aed9912-7867-4cb3-ad2a-606238e2e0b2.jpg)
 
