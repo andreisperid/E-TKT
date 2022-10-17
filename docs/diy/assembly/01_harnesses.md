@@ -14,7 +14,7 @@ nav_order: 1
 
 In this first step, we will prepare several parts that will be used through all the assembly, interacting with multiple subgroups.
 
-## hall sensor
+## hall sensor breakout
 
 ![_DSC0490](https://user-images.githubusercontent.com/15098003/196168016-5dbd1229-9154-4916-a2e2-4ef6edc4835c.jpg)
 
@@ -23,7 +23,7 @@ In this first step, we will prepare several parts that will be used through all 
 3. fold hall terminals by 90° at approximately 7mm from the board, making sure the sensor is perpendicular to the breakout;
 
 
-## OLED display
+## OLED display + harness
 
 ![_DSC0486](https://user-images.githubusercontent.com/15098003/196167931-365aa63a-cd00-4597-9fc7-0f9ee8d28bfd.jpg)
 
@@ -35,7 +35,7 @@ In this first step, we will prepare several parts that will be used through all 
 5. place a 4x plastic case *(nevermind the 5x connector case, I didn't have 4x available)*;
 
 
-# NEMA 
+## NEMA harness
 
 ![_DSC0488](https://user-images.githubusercontent.com/15098003/196168345-3b4173bf-d00f-4c8d-a072-563242f6d99c.jpg)
 
@@ -45,7 +45,7 @@ In this first step, we will prepare several parts that will be used through all 
 4. place a 4x plastic case *(nevermind the 5x connector case, I didn't have 4x available)*;
 
 
-## LEDs
+## LEDs + harnesses
 
 ![_DSC0491](https://user-images.githubusercontent.com/15098003/196168461-33125586-b510-42de-9042-6b23a2de6909.jpg)
 1. cut the terminals of the two DIP LEDs;
