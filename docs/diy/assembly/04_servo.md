@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 5. servo
+title: 4. servo
 description: "E-TKT"
 
 parent: 🧩 assembly
@@ -8,7 +8,7 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 5
 ---
 
-# **5. servo**
+# **4. servo**
 
 The servo, together with the hall sensor, is one of the most critical sub systems of the device.
 
