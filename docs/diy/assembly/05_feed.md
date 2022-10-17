@@ -26,7 +26,7 @@ The 28BYJ is a reduced stepper motor and it's responsible for feeding the tape f
 3. tighten both screws;
 
 
-## + B_wall 
+## + wall 
 
 ![_DSC0564](https://user-images.githubusercontent.com/15098003/196208003-2ef43058-cb04-48d0-9384-3da5a3211635.jpg)
 ![_DSC0565](https://user-images.githubusercontent.com/15098003/196208005-a7c0433d-88eb-41ee-869e-a477e5113006.jpg)
@@ -51,7 +51,7 @@ The 28BYJ is a reduced stepper motor and it's responsible for feeding the tape f
 4. fix both parts together by using 2x m3x20 from underneath.
 
 
-## + C_wall_track and D_pillar
+## + wall_track and D_pillar
 
 ![_DSC0572](https://user-images.githubusercontent.com/15098003/196208019-a4f3dbde-1fb2-489f-b0cb-05ce6073a9a9.jpg)
 ![_DSC0573](https://user-images.githubusercontent.com/15098003/196208025-69bdb4da-38db-4df3-ad54-64fadb7aead1.jpg)
