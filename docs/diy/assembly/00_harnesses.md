@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 1. harnesses
+title: 0. harnesses
 description: "E-TKT"
 
 parent: 🧩 assembly
