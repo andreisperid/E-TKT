@@ -30,7 +30,7 @@ The PCB gather electronic breakouts but also serves a structural role.
 2. it isn't going to hold steadily into the connector and that's expected;
 
 
-# pcb + hall + F pillar
+# pcb + hall + F_pillar
 
 The F_pillar will make sure the hall breakout stays firm in position, while at the same time aggregating the PCB to the overall structure.
 
@@ -43,7 +43,7 @@ The F_pillar will make sure the hall breakout stays firm in position, while at t
 3. insert 2x m3x10 with 2x washers and fasten them;
 
 
-# NEMA
+# + NEMA + G_pillar
 
 ![_DSC0529](https://user-images.githubusercontent.com/15098003/196185078-da34ba9f-25fb-432a-bd08-ab944df2b724.jpg)
 ![_DSC0530](https://user-images.githubusercontent.com/15098003/196185079-d90e178b-6254-4bdf-a4ab-82528acc1d2d.jpg)
