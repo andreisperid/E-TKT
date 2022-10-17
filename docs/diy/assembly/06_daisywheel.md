@@ -25,7 +25,7 @@ The leading character of the device, the daisy wheel is responsible for embossin
 6. "click" the daisy wheel into the I_nema_wheel_hub;
 
 
-## N_wheel_coupling_bottom
+## wheel coupling bottom
 
 ![_DSC0582](https://user-images.githubusercontent.com/15098003/196213395-3fcf106f-9e2e-40d8-a077-831efd3ffc3d.jpg)
 ![_DSC0581](https://user-images.githubusercontent.com/15098003/196213391-16003883-aed8-479b-8ec8-ab3215a480fb.jpg)
@@ -34,7 +34,7 @@ The leading character of the device, the daisy wheel is responsible for embossin
 2. then, place the N_wheel_coupling_bottom in the hole while respecting the alignment mark;
 
 
-## O_wheel_coupling_top
+## wheel coupling top
 
 ![_DSC0583](https://user-images.githubusercontent.com/15098003/196213398-1813d16f-8e8d-427c-9f65-5d235e09ebee.jpg)
 ![_DSC0584](https://user-images.githubusercontent.com/15098003/196213400-0050c8c7-30e1-4246-a2fb-9396e12b37c9.jpg)
