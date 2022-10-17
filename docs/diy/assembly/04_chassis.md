@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 4. chassis
+title: 3. chassis
 description: "E-TKT"
 
 parent: 🧩 assembly
@@ -8,7 +8,7 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 4
 ---
 
-# **4. chassis**
+# **3. chassis**
 
 This is the foundation of the device. From now on, things will be mounted over it.
 
