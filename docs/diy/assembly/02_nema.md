@@ -27,7 +27,7 @@ In this first step, we will prepare the NEMA stepper sub-assembly, responsible f
 We need to know the right polarity to trigger the hall sensor, otherwise the device will not be able to home itself.
 
 1. for that, temporarily mount the hall sensor breakout into the PCB and turn it on;
-2. avoiding any short circuits, pass the magnet extremities to the sensor, **carefully**;
+2. avoiding any short circuits, pass the magnet extremities to the sensor, **careful, as it might be attracted to the terminals**;
 3. when the right side is found, mark it with a pen;
 4. turn the PCB off and then disassemble the hall sensor breakout;
 
