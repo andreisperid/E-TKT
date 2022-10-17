@@ -12,10 +12,6 @@ parent: 🛠️ do it yourself!
 
 ----
 
-![_DSC0022](https://user-images.githubusercontent.com/15098003/196299882-e6be0c72-cb70-415f-8317-e65a323a461f.jpg)
-
-----
-
 ## A. structure & mechanic 
 
 | TYPE | SPEC | REF | QTY |
