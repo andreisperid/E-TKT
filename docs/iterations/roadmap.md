@@ -8,13 +8,19 @@ parent: 🧬 iterations
 
 # 🚀 **roadmap**
 
+----
+
 ## [🐛 bugfix](https://github.com/andreisperid/E-TKT/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
+
+----
 
 ## features
 ### 📌 planned
 - ~~manufactured PCB~~
 - ~~documentation~~
 - ~~letter calibration~~
+
+----
 
 ### 🎈 nice to have
 - adjustable kerning
