@@ -8,6 +8,8 @@ parent: 🛠️ do it yourself!
 
 # 📶 **connection**
 
+----
+
 The device must be connected to a 2.4GHz Wireless Local Area Network.
 
 ## 1. in the device
