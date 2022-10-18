@@ -8,6 +8,8 @@ parent: 🏅 credits
 
 # 🙂 **thanks**
 
+----
+
 ### Especially to
 - **[Ana Marini](https://anamarini.com/):** for the initial idea of having embossed labels, which started all the process (and the motivation all along);
 - **José Speridião Junior:** for several insights that improved the printing mechanics, leading to better labels;
