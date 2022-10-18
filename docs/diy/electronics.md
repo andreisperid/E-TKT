@@ -10,7 +10,7 @@ parent: 🛠️ do it yourself!
 
 ----
 
-💬 *you can find the KiCad v6 source files, PDF schematics and gerbers in the [electronic](https://github.com/andreisperid/E-TKT/tree/main/_electronic/) folder.*
+💬 *you can find the KiCad v6 source files, PCB 3D export, PDF schematics and gerbers in the [electronic](https://github.com/andreisperid/E-TKT/tree/main/_electronic/) folder.*
 
 ----
 
