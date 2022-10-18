@@ -41,9 +41,8 @@ After all, even though the pressing mechanism was poorly made, the daisy wheel w
 
 ## 🤯 **reasoning**
 
-### **context & purpose**
+### *context & purpose*
 
-The context below was brought by several people I've been interacting during the development process:
 1. **CULTURE:** embossed labels are deeply ingrained in culture, as well pointed by [Dan Maloney](https://deadhomersociety.wordpress.com/2015/10/22/quote-of-the-day-2406/) [(*HACKADAY*)](https://hackaday.com/2022/06/15/diy-automated-printer-kerchunks-out-classic-embossed-labels/) and a [spacestationkru](https://best-tv-shows.fandom.com/wiki/Labels_(Dexter%27s_Laboratory)) [(*reddit*)](https://www.reddit.com/r/3Dprinting/comments/vf8acb/comment/icvk1fe/?utm_source=reddit&utm_medium=web2x&context=3) and [agent_kater](https://backtothefuture.fandom.com/wiki/Flux_capacitor) [(*reddit*)](https://www.reddit.com/r/3Dprinting/comments/vf8acb/comment/icwgo76/?utm_source=reddit&utm_medium=web2x&context=3);
 2. **NICHE NEEDS:** there are situations where a paper, flat and/or thermally printed label doesn't fit the needs, let alone the need for the embossed relief;
 7. **ERGONOMICS**: when there is no other way than using embossed labels, making them manually is a [straining process](https://www.reddit.com/r/functionalprint/comments/vf8hrq/comment/icvjqvg/?utm_source=reddit&utm_medium=web2x&context=3) that might give the operator [repetitive strain injury](https://en.wikipedia.org/wiki/Repetitive_strain_injury);
