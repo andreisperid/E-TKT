@@ -126,4 +126,4 @@ This value takes into account all the breaking points for a single E-TKT device 
 | TYPE | SPEC | REF | QTY |
 | :--- | :--- | :---: | :---: |
 | power | 12v 3A (real) | | 1 |
-| label tape | 9mm DYMO-compatible | [link](http://aliexpress.com/item/1005001525284316.html) | 🦝 |
+| label tape | 9mm DYMO-compatible | [link](https://www.aliexpress.com/item/1005002288190756.html) | 🦝 |
