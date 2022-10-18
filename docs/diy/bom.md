@@ -8,7 +8,7 @@ parent: 🛠️ do it yourself!
 
 # 📝 **bill of materials**
 
-💬 *The estimated cost is around $?? (USD) without shipping and taxes, as of October 2022.*
+💬 *The estimated cost is around $100 (USD) without shipping and taxes, as of October 2022.*
 
 ----
 
@@ -110,7 +110,7 @@ parent: 🛠️ do it yourself!
 
 | TYPE | SPEC | REF | QTY |
 | :--- | :--- | :---: | :---: |
-| cable | USB A to C data cable | [link]() | 1 |
+| cable | USB A to C data cable (firmware flash only) | | 1 |
 | wiring | flat, flexible | [link](http://aliexpress.com/item/2251832639497810.html) | 1 |
 | connector | female - 1x02 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 2 |
 | connector | female - 1x04 P2.54mm dupont | [link](http://aliexpress.com/item/3256802073547679.html) | 2 |
@@ -121,5 +121,5 @@ parent: 🛠️ do it yourself!
 
 | TYPE | SPEC | REF | QTY |
 | :--- | :--- | :---: | :---: |
-| power | 12v 3A (real) | [link]() | 1 |
+| power | 12v 3A (real) | | 1 |
 | label tape | 9mm DYMO-compatible | [link](http://aliexpress.com/item/1005001525284316.html) | 🦝 |
