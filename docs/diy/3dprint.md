@@ -7,6 +7,9 @@ parent: 🛠️ do it yourself!
 ---
 
 # 🧵 **3D printing**
+
+----
+
 💬 *you can find both the STL and source files in the [3d_print](https://github.com/andreisperid/E-TKT/tree/main/_3dprint) folder.*
 
 ----
