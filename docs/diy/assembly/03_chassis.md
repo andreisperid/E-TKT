@@ -8,9 +8,13 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 4
 ---
 
+# **3. chassis**
+
+----
+
 💬 *whenever you need, check out the [exploded view](https://andreisperid.github.io/E-TKT/diy/assembly/assembly.html) for orientation;*
 
-# **3. chassis**
+----
 
 This is the foundation of the device. From now on, things will be mounted over it.
 
