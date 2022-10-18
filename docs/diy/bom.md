@@ -77,11 +77,10 @@ parent: 🛠️ do it yourself!
 | connector | USB-C 2.0 — GCT USB4105-GF-A | [GCT USB4105-GF-A](https://www.findchips.com/search/USB4105-GF-A) | 1 |
 | connector | Barrel Jack 2mm/6.3mm, 5A 20V — DCJ200 | [DCJ200-10-A-K1-K](https://www.findchips.com/search/DCJ200-10-A-K1-K) | 1 |
 | connector | Conn_01x02_Male — Header 1x02 P2.54mm Vertical | [M20-9990245](https://www.findchips.com/search/M20-9990245) | 2 |
-| connector | Conn_01x03_Male — Header 1x03 P2.54mm Vertical | [M20-9990346](https://www.findchips.com/search/M20-9990346) | 1 |
+| connector | Conn_01x03_Male — Header 1x03 P2.54mm Vertical | [M20-9990346](https://www.findchips.com/search/M20-9990346) | 2 |
 | connector | Conn_01x04_Male — Header 1x04 P2.54mm Vertical | [M20-9770446](https://www.findchips.com/search/M20-9770446) | 1 |
 | connector |Conn_01x05_Male — Header 1x05 P2.54mm Vertical | [M20-9990546](https://www.findchips.com/search/M20-9990546) | 1 |
 | connector | Conn_01x04_Male — Header 1x04 P2.54mm Horizontal | [M20-9750446](https://www.findchips.com/search/M20-9750446) | 1 |
-| connector | Conn_01x03_Female — Socket 1x03 P2.54mm Vertical | [M20-7820346](https://www.findchips.com/search/M20-7820346) | 1 |
 | connector | Conn_02x08_Female — Socket 2x08 P2.54mm Vertical (A4988) | [M20-7820842](https://www.findchips.com/search/M20-7820842) | 2 |
 | capacitor | Electrolytical 100uF 25V — 6.3x7.7 (SMD) | [EMVE250ADA101MF80G](https://www.findchips.com/search/EMVE250ADA101MF80G) | 1 |
 | capacitor | Ceramic 22uF 25V X7R — 1210 (SMD) | [C3225X7R1E226M250AB](https://www.findchips.com/search/C3225X7R1E226M250AB) | 8 |
