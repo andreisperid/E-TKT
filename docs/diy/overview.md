@@ -10,7 +10,7 @@ parent: 🛠️ do it yourself!
 
 ----
 
-![_DSC0414](https://user-images.githubusercontent.com/15098003/196304985-a2bc14ca-9ad9-4c69-9240-d5bb8c515a52.jpg)
+![_DSC0414](https://user-images.githubusercontent.com/15098003/196466575-590d7391-8b85-40ff-90a4-20be451bfa4c.jpg)
 
 ----
 
