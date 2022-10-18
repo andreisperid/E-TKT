@@ -7,6 +7,8 @@ description: "E-TKT"
 
 # ⚙️ **how does it work?**
 
+----
+
 <img src="https://user-images.githubusercontent.com/15098003/196457261-b6343e3f-528d-4cbe-a548-1b4f4463e4a1.png">
 
 An *ESP32* commands the label production and also serves an on demand web application (local) to any device connected in a local network.
