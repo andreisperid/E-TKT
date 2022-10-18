@@ -8,9 +8,13 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 9
 ---
 
+# **8. feeder**
+
+----
+
 💬 *whenever you need, check out the [exploded view](https://andreisperid.github.io/E-TKT/diy/assembly/assembly.html) for orientation;*
 
-# **8. feeder**
+----
 
 The feeder is a springed mechanism that helps the cog gain traction against the tape by gently denting the adhesive liner.
 
