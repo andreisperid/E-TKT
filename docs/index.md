@@ -7,13 +7,14 @@ permalink: /
 ---
 ![teaser_4](https://user-images.githubusercontent.com/15098003/171178685-e226b7ec-bc1c-44df-a134-f5b71171801a.gif)
 
+    
+![exploded_003](https://user-images.githubusercontent.com/15098003/196431396-4138f870-f61e-4865-b66e-4e3e04586896.png)
+
+
 <div align="center">
 <h1>E-TKT: anachronic label maker</h1>
 <!--     <img src="https://user-images.githubusercontent.com/15098003/195709100-840ccb76-b995-456c-aa3a-58bf1be48051.png" width="75%"> -->
 </div>    
-    
-![exploded_003](https://user-images.githubusercontent.com/15098003/196431396-4138f870-f61e-4865-b66e-4e3e04586896.png)
-
     
     
 <!-- <div align="center">
