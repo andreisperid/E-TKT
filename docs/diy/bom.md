@@ -8,17 +8,17 @@ parent: 🛠️ do it yourself!
 
 # 📝 **bill of materials**
 
-## 💬 cost per unit
-
-The estimated cost for the components (without attrition) is around **$100 (USD) without shipping and taxes**, as of October 2022.
-
-This value takes into account all the breaking points for a single E-TKT device and includes the manufacturing of 5 PCBs (4 layers) plus a stencil for the front layer.
-
 ----
 
 ![_DSC0022](https://user-images.githubusercontent.com/15098003/196436665-9944830a-e542-4ce0-8121-35b3681ad0ac.jpg)
 
 ----
+
+## 💬 cost per unit
+
+The estimated cost for the components (without attrition) is around **$100 (USD) without shipping and taxes**, as of October 2022.
+
+This value takes into account all the breaking points for a single E-TKT device and includes the manufacturing of 5 PCBs (4 layers) plus a stencil for the front layer.
 
 ## A. structure & mechanic 
 
