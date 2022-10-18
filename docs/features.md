@@ -33,6 +33,7 @@ description: "E-TKT"
 ## 🔌 device
 
 - Full label embossing & cutting;
+- Speed: 10 characters per minute;
 - Minimum label size to be pickable from the device;
 - OLED screen + LED feedback;
 - QR code & URL for easily accessing the web app;
