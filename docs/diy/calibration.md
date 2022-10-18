@@ -8,6 +8,8 @@ parent: 🛠️ do it yourself!
 
 # ⏱️ **calibration**
 
+----
+
 This final part of the process will make sure the letter alignment is finely adjusted, and together with the correct imprinting pressure.
 
 Only when fully assembled and revised, follow the instructions to [connect the machine](https://andreisperid.github.io/E-TKT/diy/connection.html) and add a [new reel](https://andreisperid.github.io/E-TKT/diy/reel.html);
