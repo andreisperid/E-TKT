@@ -2539,7 +2539,7 @@
       (reference "J_GND_ALT6V1") (unit 1) (value "TestPoint") (footprint "TestPoint:TestPoint_Pad_D1.5mm")
     )
     (path "/7bf025fc-a57d-4f41-9c31-fcca97a0dd34/25fb1bc1-92f6-404a-b780-b416e13fa0fd"
-      (reference "J_HALL1") (unit 1) (value "Conn_01x03_Female") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical")
+      (reference "J_HALL1") (unit 1) (value "Conn_01x03_Female") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical")
     )
     (path "/7bf025fc-a57d-4f41-9c31-fcca97a0dd34/b8a1dc47-9235-4743-9a8f-d6b36a313cf1"
       (reference "J_LEDE1") (unit 1) (value "Conn_01x02_Male") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")

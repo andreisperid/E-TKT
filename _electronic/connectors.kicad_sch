@@ -507,7 +507,7 @@
     (property "Value" "Conn_01x03_Female" (id 1) (at 110.49 115.5699 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
-    (property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical" (id 2) (at 111.76 114.3 0)
+    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" (id 2) (at 111.76 114.3 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://br.mouser.com/datasheet/2/181/M20-782-1220556.pdf" (id 3) (at 111.76 114.3 0)
