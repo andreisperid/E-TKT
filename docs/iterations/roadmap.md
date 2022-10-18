@@ -20,8 +20,6 @@ parent: 🧬 iterations
 - ~~documentation~~
 - ~~letter calibration~~
 
-----
-
 ### 🎈 nice to have
 - adjustable kerning
 - adaptive kerning
