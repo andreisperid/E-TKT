@@ -39,7 +39,9 @@ After all, even though the pressing mechanism was poorly made, the daisy wheel w
 
 
 
-## 🤯 **wider context & purpose**
+## 🤯 **reasoning**
+
+### **context & purpose**
 
 The context below was brought by several people I've been interacting during the development process:
 1. **CULTURE:** embossed labels are deeply ingrained in culture, as well pointed by [Dan Maloney](https://deadhomersociety.wordpress.com/2015/10/22/quote-of-the-day-2406/) [(*HACKADAY*)](https://hackaday.com/2022/06/15/diy-automated-printer-kerchunks-out-classic-embossed-labels/) and a [spacestationkru](https://best-tv-shows.fandom.com/wiki/Labels_(Dexter%27s_Laboratory)) [(*reddit*)](https://www.reddit.com/r/3Dprinting/comments/vf8acb/comment/icvk1fe/?utm_source=reddit&utm_medium=web2x&context=3) and [agent_kater](https://backtothefuture.fandom.com/wiki/Flux_capacitor) [(*reddit*)](https://www.reddit.com/r/3Dprinting/comments/vf8acb/comment/icwgo76/?utm_source=reddit&utm_medium=web2x&context=3);
@@ -55,7 +57,8 @@ These factors made me think of E-TKT as more than a solution only for myself, bu
 I wanted to create an open source project for a long time and this is why I put a lot of effort into testing all parts extensively and of course crafting this detailed documentation.
 
 
-## 🤓 **the exploratory side**... <ins>***anachronism***<ins>
+## 🤓 **exploration**
+###  ...<ins>***anachronism***<ins>
 
 During the process I've realized that this odd mix between new and old was the biggest underlying curiosity. According to [Wikipedia](https://en.wikipedia.org/wiki/Anachronism):
 > “An ***anachronism*** (from the Greek ἀνά ana, 'against' and χρόνος khronos, 'time') is a chronological inconsistency in some arrangements, especially a juxtaposition of people, events, objects, language terms and customs from different time periods”.
