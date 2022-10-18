@@ -12,7 +12,7 @@ parent: 🛠️ do it yourself!
 
 The estimated cost for the components (without attrition) is around **$100 (USD) without shipping and taxes**, as of October 2022.
 
-This value takes into account all the breaking points for a single E-TKT device and includes the manufacturing of 5 PCBs plus a stencil for the front layer.
+This value takes into account all the breaking points for a single E-TKT device and includes the manufacturing of 5 PCBs (4 layers) plus a stencil for the front layer.
 
 ----
 
@@ -62,7 +62,7 @@ This value takes into account all the breaking points for a single E-TKT device 
 
 | TYPE | SPEC — PACKAGE | REF | QTY |
 | :--- | :--- | :---: | :---: |
-| PCB | 4 layer, FR4, black solder mask — 99.57 mm x 76.2 mm | | 1 |
+| PCB | 4 layers, FR4, black solder mask — 99.57 mm x 76.2 mm | | 1 |
 | stencil | top layer only (F.Cu) — 200mm x 150mm | | 1 |
 | MCU | ESP32 — WROOM-32D (SMD) | [ESP32-WROOM-32D-N4](https://www.findchips.com/search/ESP32-WROOM-32D-N4) | 1 |
 | serial | USB Interface, Full Serial UART — SSOP-20 3.9x8.7mm (SMD) | [FT231XS-R](https://www.findchips.com/search/FT231XS-R) | 1 |
