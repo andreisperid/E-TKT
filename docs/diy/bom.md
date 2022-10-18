@@ -20,6 +20,8 @@ The estimated cost for the components (without attrition) is around **$100 (USD)
 
 This value takes into account all the breaking points for a single E-TKT device and includes the manufacturing of 5 PCBs (4 layers) plus a stencil for the front layer.
 
+----
+
 ## A. structure & mechanic 
 
 | TYPE | SPEC | REF | QTY |
