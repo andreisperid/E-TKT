@@ -14,7 +14,7 @@ The E-TKT uses generic 9mm DYMO-compatible label reel. They are cheap and come i
 
 ## to add a new reel
 
-### 1. find the slit on the back of the machine
+### 1. find the slit on the back of the machine, between the J_top and the C_wall_track
 ![_DSC0691](https://user-images.githubusercontent.com/15098003/196272457-49baf94d-b491-4d32-961f-a51a5a3d0c4f.jpg)
 
 ### 2. place the tape on it
