@@ -7,8 +7,7 @@ permalink: /
 ---
 ![teaser_4](https://user-images.githubusercontent.com/15098003/171178685-e226b7ec-bc1c-44df-a134-f5b71171801a.gif)
 
-    
-![exploded_003](https://user-images.githubusercontent.com/15098003/196431396-4138f870-f61e-4865-b66e-4e3e04586896.png)
+<img src="https://user-images.githubusercontent.com/15098003/196433068-a0544041-550e-4acb-8bc9-1a3e610fcd27.png" style="opacity: 0.5" width="100%">
 
 
 <div align="center">
