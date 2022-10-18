@@ -8,6 +8,8 @@ parent: 🛠️ do it yourself!
 
 # ➰ **label reel**
 
+----
+
 The E-TKT uses generic 9mm DYMO-compatible label reel. They are cheap and come in different colors.
 
 ![_DSC0690](https://user-images.githubusercontent.com/15098003/196272453-34eda44a-7b39-4f8a-b2a1-b5b868ae7e0e.jpg)
