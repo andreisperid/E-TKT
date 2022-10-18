@@ -10,6 +10,10 @@ parent: 🛠️ do it yourself!
 
 ----
 
+💬 *if you want to know more about the code, please check the [firmware](https://github.com/andreisperid/E-TKT/blob/main/src/LabelMaker.cpp) and the [app scripts](https://github.com/andreisperid/E-TKT/blob/main/data/script.js)*.
+
+----
+
 ![_DSC0743](https://user-images.githubusercontent.com/15098003/196303763-939a3349-6e17-4484-b9b3-b4690aa199b1.jpg)
 
 ----
@@ -21,4 +25,4 @@ parent: 🛠️ do it yourself!
 
 *\* don't forget to hold the \*FN button to enter DFU mode*
 
-👀 if you want to know more about the code, please check the [firmware](https://github.com/andreisperid/E-TKT/blob/main/src/LabelMaker.cpp) and the [app scripts](https://github.com/andreisperid/E-TKT/blob/main/data/script.js).
+
