@@ -62,7 +62,7 @@ I wanted to create an open source project for a long time and this is why I put 
 
 
 ## 🤓 **exploration**
-###  ...<ins>***anachronism***<ins>
+###  ...***anachronism***
 
 During the process I've realized that this odd mix between new and old was the biggest underlying curiosity. According to [Wikipedia](https://en.wikipedia.org/wiki/Anachronism):
 > “An ***anachronism*** (from the Greek ἀνά ana, 'against' and χρόνος khronos, 'time') is a chronological inconsistency in some arrangements, especially a juxtaposition of people, events, objects, language terms and customs from different time periods”.
