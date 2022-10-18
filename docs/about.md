@@ -7,6 +7,11 @@ description: "E-TKT"
 
 # 🤓 **about**
 
+
+----
+
+## By combining simple and widely available embossing tapes in a reliable mechanism with modern connectivity, E-TKT rescues a ***would-be future that did not happen (yet)***, and at the same time reduces the dependence on environmentally impacting DRM-enabled disposable cartridges.
+
 ----
 
 ## 🧐 **what?**
@@ -63,8 +68,6 @@ During the process I've realized that this odd mix between new and old was the b
 > “An ***anachronism*** (from the Greek ἀνά ana, 'against' and χρόνος khronos, 'time') is a chronological inconsistency in some arrangements, especially a juxtaposition of people, events, objects, language terms and customs from different time periods”.
 
 The point is: even though the process is digitalized, *the resulting label is totally old school* and there is no easy way of telling if it wasn't made in the traditional way.
-
-## By combining simple and widely available embossing tapes in a reliable mechanism with modern connectivity, E-TKT rescues a ***would-be future that did not happen (yet)***, and at the same time reduces the dependence on environmentally impacting DRM-enabled disposable cartridges.
-
+  
 <br>
 
