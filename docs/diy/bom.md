@@ -32,7 +32,7 @@ parent: 🛠️ do it yourself!
 | washer | M3 | [link](http://aliexpress.com/item/3256801295230574.html) | 9 | 
 | washer | M6 | [link](http://aliexpress.com/item/3256801295230574.html) | 1 | 
 | silicone pad feet | 8x2mm | [link](http://aliexpress.com/item/2251832637568894.html) | 4 | 
-| daisy wheel | MOTEX / CIDY |  [link](https://www.aliexpress.com/item/1005004489017299.html) | 1 | 
+| daisy wheel | MOTEX — uppercase, 43 chars. |  [link](https://www.aliexpress.com/item/1005004489017299.html) | 1 | 
 | bearing | 608ZZ | [link](http://aliexpress.com/item/1005001813219171.html) | 1 | 
 | bearing | 623ZZ | [link](http://aliexpress.com/item/1005001813219171.html) | 2 | 
 | extruder gear | MK8 40 teeth / 5mm axis | [link](http://aliexpress.com/item/2255800252771556.html) | 1 |
