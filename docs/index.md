@@ -9,12 +9,16 @@ permalink: /
 
 <div align="center">
 <h1>E-TKT: anachronic label maker</h1>
-    <img src="https://user-images.githubusercontent.com/15098003/195709100-840ccb76-b995-456c-aa3a-58bf1be48051.png" width="75%">
+<!--     <img src="https://user-images.githubusercontent.com/15098003/195709100-840ccb76-b995-456c-aa3a-58bf1be48051.png" width="75%"> -->
 </div>    
     
-<div align="center">
+![exploded_003](https://user-images.githubusercontent.com/15098003/196431396-4138f870-f61e-4865-b66e-4e3e04586896.png)
+
+    
+    
+<!-- <div align="center">
     <a href="https://certification.oshwa.org/br000010.html" target="_blank"><img width="175px" style="opacity: 0.75" src="https://user-images.githubusercontent.com/15098003/195676689-90f9a3bb-1ea9-408a-a618-434ab7b26c85.png"></a>
-</div>
+</div> -->
 
 
 <h6 align="center">Andrei Speridião - 2022 - <a href="https://andrei.cc">andrei.cc</a></h6>
