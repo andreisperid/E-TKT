@@ -8,9 +8,13 @@ grand_parent: 🛠️ do it yourself!
 nav_order: 10
 ---
 
+# **9. finish**
+
+----
+
 💬 *whenever you need, check out the [exploded view](https://andreisperid.github.io/E-TKT/diy/assembly/assembly.html) for orientation;*
 
-# **9. finish**
+----
 
 These are the few last steps.
 
