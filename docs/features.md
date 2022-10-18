@@ -7,6 +7,8 @@ description: "E-TKT"
 
 # 💡 **features**
 
+----
+
 ## 🌟 *highlights*
 - No need for internet, app installation, data cables or drivers;
 - Command it from any device that is connected to a local network and has a web browser: desktop, tablet, smartphone;
