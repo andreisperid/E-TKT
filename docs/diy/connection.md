@@ -39,6 +39,6 @@ The device must be connected to a 2.4GHz Wireless Local Area Network.
 ![image](https://user-images.githubusercontent.com/15098003/196287056-4af73b3e-97f8-49bd-8c57-238fa931bda6.png)
 
 - press and hold the physical "WI-FI" button on the device;
-- either turn the device off, or press reset;
-- wait for the splash screen and then for the confirmation;
+- either turn the device off and on again, or press reset;
+- wait for the splash screen and then for the confirmation that the wi-fi has been cleared;
 - release the "WI-FI" button.
