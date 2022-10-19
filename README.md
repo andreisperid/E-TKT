@@ -11,7 +11,11 @@
 
 <br>
 
-<h2 align="center">E-TKT is an open source label maker that fuses together both old and contemporary technology to create something as ubiquitous as... EMBOSSED LABELS!</h2>
+<h3 align="center">E-TKT is an open source label maker that fuses together both old and contemporary technology to create something as ubiquitous as... EMBOSSED LABELS!</h2>
+
+<br>
+
+![_DSC0933](https://user-images.githubusercontent.com/15098003/196803028-69a44a98-04b3-4a64-b55b-feddd9654e46.jpg)
 
 <br>
 
@@ -35,12 +39,11 @@ It's now much more detailed, so I've moved it to a [dedicated page](https://andr
 
 ### What you fill find there:
 
-- [Home](https://andreisperid.github.io/E-TKT/)
-- [🎯 news](https://andreisperid.github.io/E-TKT/news.html)
+- [🎯 news](https://andreisperid.github.io/E-TKT/news.html): what's going on;
 - [🤓 about](https://andreisperid.github.io/E-TKT/about.html): how it started, and why?
 - [⚙️ how does it work?](https://andreisperid.github.io/E-TKT/how.html): a more in depth explanation;
-- [💡 features](https://andreisperid.github.io/E-TKT/features.html): device and app details.
-- [📷 gallery](https://andreisperid.github.io/E-TKT/gallery.html): misc. photos of the device and labeled things.
+- [💡 features](https://andreisperid.github.io/E-TKT/features.html): device and app details;
+- [📷 gallery](https://andreisperid.github.io/E-TKT/gallery.html): misc. photos of the device and labeled things;
 - [🛠️ do it yourself](https://andreisperid.github.io/E-TKT/diy/diy.html): a **super** detailed guide for you to buy the parts and make your own E-TKT;
 - [🧬 iterations](https://andreisperid.github.io/E-TKT/iterations/iterations.html): a log of development so far;
 - [⚖️ license](https://andreisperid.github.io/E-TKT/license.html): for firmware, hardware and documentation itself;
@@ -56,3 +59,7 @@ It's now much more detailed, so I've moved it to a [dedicated page](https://andr
 <br>
 
 ### *...for other projects: [andrei.cc](https://andrei.cc)*
+
+<br>
+
+![_DSC0816](https://user-images.githubusercontent.com/15098003/196803410-4224c3c8-c57b-4dd6-9995-3067e11d042b.jpg)
