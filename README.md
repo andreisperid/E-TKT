@@ -15,6 +15,11 @@
 
 <br>
 
+By combining simple and widely available embossing tapes in a reliable mechanism with modern connectivity, E-TKT rescues a would-be future that did not happen (yet), and at the same time reduces the dependence on environmentally impacting DRM-enabled disposable cartridges.
+
+<br>
+<br>
+
 ![_DSC0933](https://user-images.githubusercontent.com/15098003/196803028-69a44a98-04b3-4a64-b55b-feddd9654e46.jpg)
 
 <br>
