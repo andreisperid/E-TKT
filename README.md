@@ -15,7 +15,7 @@
 
 <br>
 
-By combining simple and widely available embossing tapes in a reliable mechanism with modern connectivity, E-TKT rescues a would-be future that did not happen, and at the same time reduces the dependence on more environmentally impacting and expensive proprietary cartridges.
+By combining simple and widely available embossing tapes in a reliable mechanism with modern connectivity, E-TKT rescues a *would-be future* that did not happen, and at the same time *gets rid of the dependence on proprietary cartridges*, which are environmentally impacting & expensive.
 
 <br>
 <br>
