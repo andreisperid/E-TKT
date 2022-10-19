@@ -11,7 +11,7 @@
 
 <br>
 
-<h3 align="center">E-TKT is an open source label maker that fuses together both old and contemporary technology to create something as ubiquitous as... EMBOSSED LABELS!</h2>
+<h3 align="center"><i>An open source label maker that fuses together both old and contemporary technology to create something as ubiquitous as... EMBOSSED LABELS!</i></h2>
 
 <br>
 
@@ -23,7 +23,7 @@
 
 <br><br>
 
-# How does it work?
+# how does it work?
 
 <img src="https://user-images.githubusercontent.com/15098003/196457261-b6343e3f-528d-4cbe-a548-1b4f4463e4a1.png">
 
@@ -33,7 +33,7 @@ An *ESP32* commands the label production and also serves an on demand web applic
 
 <br>
 
-# Documentation 
+# documentation 
 
 It's now much more detailed, so I've moved it to a [dedicated page](https://andreisperid.github.io/E-TKT/).
 
@@ -54,7 +54,7 @@ It's now much more detailed, so I've moved it to a [dedicated page](https://andr
 
 ### If you ever build one, [I would love to know](mailto:hi@andrei.cc) ;)
 
-### And if you would like, [donations](https://www.paypal.com/donate/?business=U5QYSBT2TLZL8&no_recurring=0&currency_code=USD) are more than welcome 😍
+### And if you'd like, [donations](https://www.paypal.com/donate/?business=U5QYSBT2TLZL8&no_recurring=0&currency_code=USD) are more than welcome 😍
 
 <br>
 
