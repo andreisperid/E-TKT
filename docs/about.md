@@ -10,7 +10,7 @@ description: "E-TKT"
 
 ----
 
-## By combining simple and widely available embossing tapes in a reliable mechanism with modern connectivity, E-TKT rescues a ***would-be future that did not happen (yet)***, and at the same time reduces the dependence on environmentally impacting DRM-enabled disposable cartridges.
+## By combining simple and widely available embossing tapes in a reliable mechanism with modern connectivity, E-TKT rescues a ***would-be future that did not happen***, and at the same time reduces the dependence on environmentally impacting DRM-enabled disposable cartridges.
 
 ----
 
