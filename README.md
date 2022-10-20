@@ -2,7 +2,14 @@
 
 <br>
 
-<a href="https://certification.oshwa.org/br000010.html" target="_blank"><img src="https://user-images.githubusercontent.com/15098003/196455579-2dbc92c2-23d1-4517-a5df-1538a6b06573.png" style="opacity: 0.75" width="100%"></a>
+<a href="https://certification.oshwa.org/br000010.html" target="_blank">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/15098003/196943625-ccef0886-9a68-493c-814a-6e63b238b2bd.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/15098003/196943559-973e30a0-acfd-4a96-a7b8-da4f9bf773d8.png">
+    <img src="https://user-images.githubusercontent.com/15098003/196943559-973e30a0-acfd-4a96-a7b8-da4f9bf773d8.png">
+  </picture>
+</a>
+
 
 <br>
 
@@ -30,7 +37,13 @@ By combining simple and widely available embossing tapes in a reliable mechanism
 
 # how does it work?
 
-<img src="https://user-images.githubusercontent.com/15098003/196457261-b6343e3f-528d-4cbe-a548-1b4f4463e4a1.png">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/15098003/196457261-b6343e3f-528d-4cbe-a548-1b4f4463e4a1.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/15098003/196944525-07fa4a7a-90d6-4713-a8c5-80f049ca9f87.png">
+  <img src="https://user-images.githubusercontent.com/15098003/196943559-973e30a0-acfd-4a96-a7b8-da4f9bf773d8.png">
+</picture>
+
 
 An *ESP32* commands the label production and also serves an on demand web application (local) to any device connected in a local network.
 
