@@ -40,7 +40,7 @@ By combining simple and widely available embossing tapes in a reliable mechanism
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/15098003/196457261-b6343e3f-528d-4cbe-a548-1b4f4463e4a1.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/15098003/196944525-07fa4a7a-90d6-4713-a8c5-80f049ca9f87.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/15098003/196947337-6aefe414-159e-483b-9dc4-a49cfc82c548.png">
   <img src="https://user-images.githubusercontent.com/15098003/196943559-973e30a0-acfd-4a96-a7b8-da4f9bf773d8.png">
 </picture>
 
