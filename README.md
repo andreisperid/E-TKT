@@ -31,7 +31,7 @@ By combining simple and widely available embossing tapes in a reliable mechanism
 
 <br>
 
-[![🎥 see it working 🎥](https://user-images.githubusercontent.com/15098003/171185500-8a63297c-487c-4900-b6d2-5c67298541d4.png)](https://www.youtube.com/watch?v=F0E5adLQ-AY "🎥 see it working 🎥")
+[![🎥 see it working 🎥](https://user-images.githubusercontent.com/15098003/197377972-e29a0186-2e81-4be0-ac28-e65c5324231d.png)](https://www.youtube.com/watch?v=IKzSupjkA0s "🎥 see it working 🎥")
 
 <br><br>
 
