@@ -31,8 +31,12 @@ By combining simple and widely available embossing tapes in a reliable mechanism
 
 <br>
 
-[![🎥 see it working 🎥](https://user-images.githubusercontent.com/15098003/197377972-e29a0186-2e81-4be0-ac28-e65c5324231d.png)](https://www.youtube.com/watch?v=IKzSupjkA0s "🎥 see it working 🎥")
 
+<div align="center">
+<a href="https://www.youtube.com/watch?v=IKzSupjkA0s" target="_blank"><img width="75%" src="https://user-images.githubusercontent.com/15098003/197377972-e29a0186-2e81-4be0-ac28-e65c5324231d.png"></a>
+</div>
+  
+  
 <br><br>
 
 # how does it work?
