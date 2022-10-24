@@ -32,8 +32,9 @@ By combining simple and widely available embossing tapes in a reliable mechanism
 <br>
 
 
-<a href="https://www.youtube.com/watch?v=IKzSupjkA0s" target="_blank"><img src="https://user-images.githubusercontent.com/15098003/197377972-e29a0186-2e81-4be0-ac28-e65c5324231d.png"></a>
-  
+<a href="https://www.youtube.com/watch?v=IKzSupjkA0s" target="_blank"><img src="https://user-images.githubusercontent.com/15098003/197562960-47200a14-0c52-4b09-92b6-733d636fb18b.png"></a>
+
+
   
 <br><br>
 
