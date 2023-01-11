@@ -47,6 +47,36 @@
 #include "etktLogo.cpp" // etkt logo in binary format
 #include "pitches.cpp"	// list of notes and their frequencies
 
+// OPTIONAL CONFIGURATION ---------------------------------------------------------
+// Depending on the hardware you've used to build your E-TKT, you might need to change some of these constants
+// to get the hardware into a working state
+
+// If your feed motor moves in the wrong direction by default, use this to reverse it.  It should be obvious 
+// if this is happening sicne the tape gets fed in the wrong direction.
+#define REVERSE_FEED_STEPPER_DIRECTION true
+
+// If your hall sensor has inverted logic (eg active LOW and neutral HIGH) then use this to invert the logic 
+// checking it.  If you're affected by this then you'll see the character carousel move forward slightly and 
+// then stop when the E-TKT starts up instead of moving to the "J" position.  
+#define INVERT_HALL_SENSOR_LOGIC true
+
+// Speed and acceleration of the stepper motor that rotates the character carousel, measured in steps/s and steps/s^2.  
+// Use lower values if you find that the printer sometimes prints the wrong letter.  Any value above zero is ok but
+// lower values will slow down printing, if you're having trouble start by halving them and move up from there.  The
+// speed you can reliably achieve depends on the quality of the motor, how much current you've set it up to use, and
+// how fast the ESP-32 can talk with it. 1600 steps is a full revolution of the carousel. 
+#define CHARACTER_STEPPER_MAX_SPEED 320000
+#define CHARACTER_STEPPER_MAX_ACCELERATION 16000
+
+
+// Speed and acceleration of the stepper motor that feeds the label tape, measured in steps/s and steps/s^2.  
+// Use lower values if you find that the printer doesn't consistently feed the correct length of tape between letters.
+// For calibrating these values the same advice about the character stepper motor above applies. 4076 steps is one full
+// revolution of the motor.
+#define FEED_STEPPER_MAX_SPEED 1000000
+#define FEED_STEPPER_MAX_ACCELERATION 1000
+
+
 // HARDWARE -----------------------------------------------------------------------
 
 #define MICROSTEP_Feed 8
@@ -680,20 +710,29 @@ void setHome(int align = alignFactor)
 
 	sensorState = analogRead(sensorPin);
 
-	if (sensorState < threshold)
+	// Check to see if the hall sensor on the stepper is already trigerred
+	// and if so, move it a little bit to get the sensor into an un-trigerred 
+	// position.  
+	if ((sensorState < threshold) ^ INVERT_HALL_SENSOR_LOGIC)
 	{
 		stepperChar.runToNewPosition(-stepsPerChar * 4);
 		stepperChar.run();
 	}
 	sensorState = analogRead(sensorPin);
+	// TODO: Change the above to only move as long as the hall sensor is 
+	// triggerred, which could save a little time while printing.  
 
+	// Move the carousel until the hall sensor triggers, and then treat wherever 
+	// that is as the new home position.
 	stepperChar.move(-stepsPerRevolutionChar * 1.5f);
-	while (sensorState > threshold)
+	while ((sensorState > threshold) ^ INVERT_HALL_SENSOR_LOGIC)
 	{
 		sensorState = analogRead(sensorPin);
 		stepperChar.run();
 		delayMicroseconds(100); // TODO: less intrusive way to avoid triggering watchdog?
 	}
+	// TODO: Add a failure path for if the stepper moved a full rotation without trigerring 
+	// the sensor, inidcating that something is wrong with the hardware.
 	stepperChar.setCurrentPosition(0);
 	sensorState = analogRead(sensorPin);
 
@@ -720,7 +759,8 @@ void feedLabel(int repeat = 1)
 
 	for (int i = 0; i < repeat; i++)
 	{
-		stepperFeed.runToNewPosition((stepperFeed.currentPosition() - stepsPerRevolutionFeed / 8) * 1);
+		const int direction = REVERSE_FEED_STEPPER_DIRECTION ? 1 : -1;
+		stepperFeed.runToNewPosition(stepperFeed.currentPosition() + (stepsPerRevolutionFeed / 8) * direction);
 		delay(10);
 	}
 
@@ -1484,15 +1524,14 @@ void setup()
 	pinMode(ledFinish, OUTPUT);
 	pinMode(enableCharStepper, OUTPUT);
 
-
 	// set feed stepper
-	stepperFeed.setMaxSpeed(1000000);
-	stepperFeed.setAcceleration(1000); // 6000?
+	stepperFeed.setMaxSpeed(FEED_STEPPER_MAX_SPEED);
+	stepperFeed.setAcceleration(FEED_STEPPER_MAX_ACCELERATION);
 
 	// set char stepper
 	digitalWrite(enableCharStepper, HIGH);
-	stepperChar.setMaxSpeed(20000 * MICROSTEP_Char);
-	stepperChar.setAcceleration(1000 * MICROSTEP_Char);
+	stepperChar.setMaxSpeed(CHARACTER_STEPPER_MAX_SPEED);
+	stepperChar.setAcceleration(CHARACTER_STEPPER_MAX_ACCELERATION);
 	stepsPerChar = (float)stepsPerRevolutionChar / charQuantity;
 	stepperChar.setPinsInverted(true, false, true);
 	stepperChar.setEnablePin(enableCharStepper);
