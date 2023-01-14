@@ -42,6 +42,8 @@
 #include <U8g2lib.h>
 #include <ESP32Tone.h>
 #include <Preferences.h>
+#include "ArduinoJson.h"
+#include "AsyncJson.h"
 
 // extension files
 #include "etktLogo.cpp" // etkt logo in binary format
@@ -129,7 +131,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 #define do_sound
 // #define do_wifi_debug
 // #define do_display_debug
-// #define do_serial
+#define do_serial
 
 // DATA ---------------------------------------------------------------------------
 
@@ -202,7 +204,7 @@ int assemblyCalibrationForce = 15;
 AsyncWebServer server(80);
 DNSServer dns;
 
-String webProgress = " 0";
+float webProgress = 0;
 
 // qr code for accessing the webapp
 const int QRcode_Version = 3; //  set the version (range 1->40)
@@ -231,8 +233,7 @@ void lightFinished()
 		state = !state;
 		delay(25);
 	}
-
-	webProgress = " 0";
+	webProgress = 100;
 }
 
 void lightChar(float state)
@@ -516,7 +517,7 @@ void displayProgress(float total, float actual, String label)
 	progress = progress * 100;
 
 	// String progressString = String(progress * 95, 0);
-	webProgress = String(progress, 0);
+	webProgress = progress;
 
 	if (progress > 0)
 	{
@@ -539,7 +540,7 @@ void displayFinished()
 	displayClear(1);
 	u8g2.setDrawColor(0);
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
-	webProgress = "finished";
+	webProgress = 100;
 	u8g2.drawStr(42, 37, "FINISHED!");
 
 	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
@@ -1140,9 +1141,7 @@ void processor(void *parameters)
 			myServo.write(restAngle);
 
 			busy = false;
-			webProgress = "finished";
-			delay(500);
-			webProgress = " 0";
+			webProgress = 100;
 			analogWrite(ledFinish, 0);
 			lightChar(0.0f);
 			displayQRCode();
@@ -1172,9 +1171,7 @@ void processor(void *parameters)
 			value = "";
 			stepperChar.disableOutputs();
 			busy = false;
-			webProgress = "finished";
-			delay(500);
-			webProgress = " 0";
+			webProgress = 100;
 			analogWrite(ledFinish, 0);
 			lightChar(0.0f);
 			displayQRCode();
@@ -1203,9 +1200,7 @@ void processor(void *parameters)
 			value = "";
 			stepperChar.disableOutputs();
 			busy = false;
-			webProgress = "finished";
-			delay(500);
-			webProgress = " 0";
+			webProgress = 100;
 			lightChar(0.0f);
 			displayQRCode();
 			vTaskDelete(processorTaskHandle); // delete task
@@ -1259,9 +1254,7 @@ void processor(void *parameters)
 			newForce = 0;
 			value = "";
 
-			webProgress = "finished";
-			delay(500);
-			webProgress = " 0";
+			webProgress = 100;
 
 			analogWrite(ledFinish, 0);
 			lightChar(0.0f);
@@ -1292,9 +1285,7 @@ void processor(void *parameters)
 
 			displayReboot();
 
-			webProgress = "finished";
-			delay(500);
-			webProgress = " 0";
+			webProgress = 100;
 
 			analogWrite(ledFinish, 0);
 			lightChar(0.0f);
@@ -1313,6 +1304,60 @@ void notFound(AsyncWebServerRequest *request)
 	request->send(404, "text/plain", "Not found");
 }
 
+void getStatus(AsyncWebServerRequest *request)
+{
+	AsyncJsonResponse * response = new AsyncJsonResponse();
+	const JsonObject& root = response->getRoot();
+
+	// TODO: There is a potential (but rare) race condition here if the
+	// status is updated while being changed.  Consider blocking while 
+	// state changes happen. 
+	root["progress"] = webProgress;
+	root["busy"] = busy;
+	root["command"] = parameter;
+	root["align"] = alignFactor;
+	root["force"] = forceFactor;
+
+	// TODO: The webserver should also indicate what the text of the current,
+	// label is, however this will require substantial additional refactoring
+	// of how the current tag is communicated.
+	response->setLength();
+	request->send(response);
+}
+
+void handleTaskRequest(AsyncWebServerRequest *request, JsonVariant &json) {
+	Serial.println("Got task request");
+	const auto request_data = json.as<JsonObject>();
+	auto response_data = new AsyncJsonResponse();
+	const auto response_root = response_data->getRoot();
+	if (!request_data.containsKey("value")) {
+		response_root["error"] = "Please provide a value";
+		response_data->setCode(400);
+	} else if (!request_data.containsKey("parameter")) {
+		response_root["error"] = "Please provide a parameter";
+		response_data->setCode(400);
+	} else if (busy) {
+		response_root["error"] = "Printer is already busy";
+		response_data->setCode(400);
+	} else {
+		parameter = request_data["parameter"].as<String>();
+		value = request_data["value"].as<String>();
+		Serial.println("Creating task");
+		xTaskCreatePinnedToCore(
+			processor,			  // the processor() function that processes the inputs
+			"processorTask",      // name of the task 
+			10000,                // number of words to be allocated to use on task  
+			NULL,				  // parameter to be input on the task (can be NULL) 
+			1,					  // priority for the task (0 to N) 
+			&processorTaskHandle, // reference to the task (can be NULL) 
+			0);                   // core 0
+		response_root["result"] = "success";
+	}
+	Serial.println("Request finished");
+	response_data->setLength();
+	request->send(response_data);
+}
+
 void initialize()
 {
 	// Initialize SPIFFS
@@ -1324,88 +1369,21 @@ void initialize()
 		return;
 	}
 
-	// route for web app
-	server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/index.html", String(), false); });
+	// Handles all requests the control the device (print label, feed, cut, test, etc)
+	// TODO: Break this method into several api calls, one for each task (eg api/feed,, ap/cut, etc)
+	// That way each handler can validate only the arugments it needs.
+	server.addHandler(new AsyncCallbackJsonWebHandler("/api/task", handleTaskRequest));
 
-	server.on("/&", HTTP_GET, [](AsyncWebServerRequest *request)
-			  {
-				  int paramsNr = request->params();
+	// Check printing status
+	server.on("/api/status", HTTP_GET, getStatus);
 
-				  for (int i = 0; i < paramsNr; i++)
-				  {
-					  AsyncWebParameter *p = request->getParam(i);
-					  parameter = p->name();
-					  value = p->value();
+	// Serve static assets from the SPIFFS root directory.
+	server.serveStatic("/", SPIFFS, "/").setDefaultFile("index.html");
 
-					  // if not currently busy, creates a task for a single label print on core 0, that will be killed upon completion
-					  // the wifi and web app keeps running on core 1
-					  if (!busy)
-					  {
-						  xTaskCreatePinnedToCore(
-							  processor,			// the processor() function that processes the inputs
-							  "processorTask",		// name of the task 
-							  10000,				// number of words to be allocated to use on task  
-							  NULL,					// parameter to be input on the task (can be NULL) 
-							  1,					// priority for the task (0 to N) 
-							  &processorTaskHandle, // reference to the task (can be NULL) 
-							  0);					// core 0
-					  }
-// 					  else
-// 					  {
-// #ifdef do_serial
-// 						Serial.println("<< DENYING, BUSY >>");
-// #endif
-// 					  }
-				  }
-				  request->send(SPIFFS, "/index.html", String(), false); });
-
-	// check printing status
-	server.on("/status", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(200, "text/plane", webProgress); });
-
-	// provide stored settings
-	server.on("/settings", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(200, "text/plane", combinedSettings);  Serial.print("giving combinedSettings: ");  Serial.print(combinedSettings); });
-
-	// ----------------------------------------------------------------------------
-	// asset serving --------------------------------------------------------------
-
-	// route to load style.css file
-	server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/style.css", "text/css"); });
-
-	// route to load script.js file
-	server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/script.js", "text/javascript"); });
-
-	// route to load fonts
-	server.on("/fontwhite.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/fontwhite.ttf", "font"); });
-
-	// route to favicon
-	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/favicon.ico", "image"); });
-
-	// route to icon image
-	server.on("/icon.png", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/icon.png", "image"); });
-
-	// route to splash icon
-	server.on("/splash.png", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/splash.png", "image"); });
-
-	// route to manifest file
-	server.on("/manifest.json", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/manifest.json", "image"); });
-
-	// route to settings image
-	server.on("/iso.png", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/iso.png", "image"); });
-
-	// start server
+	// Start server
 	server.begin();
 }
+
 
 void configModeCallback(AsyncWiFiManager *myWiFiManager)
 {
