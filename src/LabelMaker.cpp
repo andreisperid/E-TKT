@@ -131,7 +131,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 #define do_sound
 // #define do_wifi_debug
 // #define do_display_debug
-#define do_serial
+// #define do_serial
 
 // DATA ---------------------------------------------------------------------------
 
