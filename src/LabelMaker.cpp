@@ -44,9 +44,27 @@
 #include <Preferences.h>
 
 // extension files
-#include "etktLogo.cpp"	 // etkt logo in binary format
-#include "pitches.cpp"	 // list of notes and their frequencies
+#include "etktLogo.cpp" // etkt logo in binary format
+#include "pitches.cpp"	// list of notes and their frequencies
+
+// BASIC CONFIGURATION ------------------------------------------------------------
+
 #include "optConfig.cpp" // opt-in external file for configuring motor direction and hall sensor logic
+
+// Speed and acceleration of the stepper motor that rotates the character carousel, measured in steps/s and steps/s^2.
+// Use lower values if you find that the printer sometimes prints the wrong letter.  Any value above zero is ok but
+// lower values will slow down printing, if you're having trouble start by halving them and move up from there.  The
+// speed you can reliably achieve depends on the quality of the motor, how much current you've set it up to use, and
+// how fast the ESP-32 can talk with it. 1600 steps is a full revolution of the carousel.
+#define CHARACTER_STEPPER_MAX_SPEED 320000
+#define CHARACTER_STEPPER_MAX_ACCELERATION 16000
+
+// Speed and acceleration of the stepper motor that feeds the label tape, measured in steps/s and steps/s^2.
+// Use lower values if you find that the printer doesn't consistently feed the correct length of tape between letters.
+// For calibrating these values the same advice about the character stepper motor above applies. 4076 steps is one full
+// revolution of the motor.
+#define FEED_STEPPER_MAX_SPEED 1000000
+#define FEED_STEPPER_MAX_ACCELERATION 1000
 
 // HARDWARE -----------------------------------------------------------------------
 
@@ -70,21 +88,6 @@ AccelStepper stepperFeed(MICROSTEP_Feed, 15, 2, 16, 4);
 AccelStepper stepperChar(1, 32, 33);
 #define enableCharStepper 25
 float stepsPerChar;
-
-// Speed and acceleration of the stepper motor that rotates the character carousel, measured in steps/s and steps/s^2.
-// Use lower values if you find that the printer sometimes prints the wrong letter.  Any value above zero is ok but
-// lower values will slow down printing, if you're having trouble start by halving them and move up from there.  The
-// speed you can reliably achieve depends on the quality of the motor, how much current you've set it up to use, and
-// how fast the ESP-32 can talk with it. 1600 steps is a full revolution of the carousel.
-#define CHARACTER_STEPPER_MAX_SPEED 320000
-#define CHARACTER_STEPPER_MAX_ACCELERATION 16000
-
-// Speed and acceleration of the stepper motor that feeds the label tape, measured in steps/s and steps/s^2.
-// Use lower values if you find that the printer doesn't consistently feed the correct length of tape between letters.
-// For calibrating these values the same advice about the character stepper motor above applies. 4076 steps is one full
-// revolution of the motor.
-#define FEED_STEPPER_MAX_SPEED 1000000
-#define FEED_STEPPER_MAX_ACCELERATION 1000
 
 // servo
 Servo myServo;
