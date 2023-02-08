@@ -222,7 +222,7 @@ void lightFinished()
 		state = !state;
 		delay(25);
 	}
-	webProgress = 100;
+	webProgress = 0;
 }
 
 void lightChar(float state)
@@ -1310,12 +1310,12 @@ void notFound(AsyncWebServerRequest *request)
 
 void getStatus(AsyncWebServerRequest *request)
 {
-	AsyncJsonResponse * response = new AsyncJsonResponse();
-	const JsonObject& root = response->getRoot();
+	AsyncJsonResponse *response = new AsyncJsonResponse();
+	const JsonObject &root = response->getRoot();
 
 	// TODO: There is a potential (but rare) race condition here if the
-	// status is updated while being changed.  Consider blocking while 
-	// state changes happen. 
+	// status is updated while being changed.  Consider blocking while
+	// state changes happen.
 	root["progress"] = webProgress;
 	root["busy"] = busy;
 	root["command"] = parameter;
@@ -1329,32 +1329,40 @@ void getStatus(AsyncWebServerRequest *request)
 	request->send(response);
 }
 
-void handleTaskRequest(AsyncWebServerRequest *request, JsonVariant &json) {
+void handleTaskRequest(AsyncWebServerRequest *request, JsonVariant &json)
+{
 	Serial.println("Got task request");
 	const auto request_data = json.as<JsonObject>();
 	auto response_data = new AsyncJsonResponse();
 	const auto response_root = response_data->getRoot();
-	if (!request_data.containsKey("value")) {
+	if (!request_data.containsKey("value"))
+	{
 		response_root["error"] = "Please provide a value";
 		response_data->setCode(400);
-	} else if (!request_data.containsKey("parameter")) {
+	}
+	else if (!request_data.containsKey("parameter"))
+	{
 		response_root["error"] = "Please provide a parameter";
 		response_data->setCode(400);
-	} else if (busy) {
+	}
+	else if (busy)
+	{
 		response_root["error"] = "Printer is already busy";
 		response_data->setCode(400);
-	} else {
+	}
+	else
+	{
 		parameter = request_data["parameter"].as<String>();
 		value = request_data["value"].as<String>();
 		Serial.println("Creating task");
 		xTaskCreatePinnedToCore(
 			processor,			  // the processor() function that processes the inputs
-			"processorTask",      // name of the task 
-			10000,                // number of words to be allocated to use on task  
-			NULL,				  // parameter to be input on the task (can be NULL) 
-			1,					  // priority for the task (0 to N) 
-			&processorTaskHandle, // reference to the task (can be NULL) 
-			0);                   // core 0
+			"processorTask",	  // name of the task
+			10000,				  // number of words to be allocated to use on task
+			NULL,				  // parameter to be input on the task (can be NULL)
+			1,					  // priority for the task (0 to N)
+			&processorTaskHandle, // reference to the task (can be NULL)
+			0);					  // core 0
 		response_root["result"] = "success";
 	}
 	Serial.println("Request finished");
@@ -1387,7 +1395,6 @@ void initialize()
 	// Start server
 	server.begin();
 }
-
 
 void configModeCallback(AsyncWiFiManager *myWiFiManager)
 {
