@@ -44,38 +44,9 @@
 #include <Preferences.h>
 
 // extension files
-#include "etktLogo.cpp" // etkt logo in binary format
-#include "pitches.cpp"	// list of notes and their frequencies
-
-// OPTIONAL CONFIGURATION ---------------------------------------------------------
-// Depending on the hardware you've used to build your E-TKT, you might need to change some of these constants
-// to get the hardware into a working state
-
-// If your feed motor moves in the wrong direction by default, use this to reverse it.  It should be obvious 
-// if this is happening sicne the tape gets fed in the wrong direction.
-#define REVERSE_FEED_STEPPER_DIRECTION true
-
-// If your hall sensor has inverted logic (eg active LOW and neutral HIGH) then use this to invert the logic 
-// checking it.  If you're affected by this then you'll see the character carousel move forward slightly and 
-// then stop when the E-TKT starts up instead of moving to the "J" position.  
-#define INVERT_HALL_SENSOR_LOGIC true
-
-// Speed and acceleration of the stepper motor that rotates the character carousel, measured in steps/s and steps/s^2.  
-// Use lower values if you find that the printer sometimes prints the wrong letter.  Any value above zero is ok but
-// lower values will slow down printing, if you're having trouble start by halving them and move up from there.  The
-// speed you can reliably achieve depends on the quality of the motor, how much current you've set it up to use, and
-// how fast the ESP-32 can talk with it. 1600 steps is a full revolution of the carousel. 
-#define CHARACTER_STEPPER_MAX_SPEED 320000
-#define CHARACTER_STEPPER_MAX_ACCELERATION 16000
-
-
-// Speed and acceleration of the stepper motor that feeds the label tape, measured in steps/s and steps/s^2.  
-// Use lower values if you find that the printer doesn't consistently feed the correct length of tape between letters.
-// For calibrating these values the same advice about the character stepper motor above applies. 4076 steps is one full
-// revolution of the motor.
-#define FEED_STEPPER_MAX_SPEED 1000000
-#define FEED_STEPPER_MAX_ACCELERATION 1000
-
+#include "etktLogo.cpp"	 // etkt logo in binary format
+#include "pitches.cpp"	 // list of notes and their frequencies
+#include "optConfig.cpp" // opt-in external file for configuring motor direction and hall sensor logic
 
 // HARDWARE -----------------------------------------------------------------------
 
@@ -99,6 +70,21 @@ AccelStepper stepperFeed(MICROSTEP_Feed, 15, 2, 16, 4);
 AccelStepper stepperChar(1, 32, 33);
 #define enableCharStepper 25
 float stepsPerChar;
+
+// Speed and acceleration of the stepper motor that rotates the character carousel, measured in steps/s and steps/s^2.
+// Use lower values if you find that the printer sometimes prints the wrong letter.  Any value above zero is ok but
+// lower values will slow down printing, if you're having trouble start by halving them and move up from there.  The
+// speed you can reliably achieve depends on the quality of the motor, how much current you've set it up to use, and
+// how fast the ESP-32 can talk with it. 1600 steps is a full revolution of the carousel.
+#define CHARACTER_STEPPER_MAX_SPEED 320000
+#define CHARACTER_STEPPER_MAX_ACCELERATION 16000
+
+// Speed and acceleration of the stepper motor that feeds the label tape, measured in steps/s and steps/s^2.
+// Use lower values if you find that the printer doesn't consistently feed the correct length of tape between letters.
+// For calibrating these values the same advice about the character stepper motor above applies. 4076 steps is one full
+// revolution of the motor.
+#define FEED_STEPPER_MAX_SPEED 1000000
+#define FEED_STEPPER_MAX_ACCELERATION 1000
 
 // servo
 Servo myServo;
@@ -711,27 +697,37 @@ void setHome(int align = alignFactor)
 	sensorState = analogRead(sensorPin);
 
 	// Check to see if the hall sensor on the stepper is already trigerred
-	// and if so, move it a little bit to get the sensor into an un-trigerred 
-	// position.  
+	// and if so, move it a little bit to get the sensor into an un-trigerred
+	// position.
+
+#ifdef INVERT_HALL_SENSOR_LOGIC
 	if ((sensorState < threshold) ^ INVERT_HALL_SENSOR_LOGIC)
+#else
+	if ((sensorState < threshold))
+#endif
 	{
 		stepperChar.runToNewPosition(-stepsPerChar * 4);
 		stepperChar.run();
 	}
 	sensorState = analogRead(sensorPin);
-	// TODO: Change the above to only move as long as the hall sensor is 
-	// triggerred, which could save a little time while printing.  
+	// TODO: Change the above to only move as long as the hall sensor is
+	// triggerred, which could save a little time while printing.
 
-	// Move the carousel until the hall sensor triggers, and then treat wherever 
+	// Move the carousel until the hall sensor triggers, and then treat wherever
 	// that is as the new home position.
 	stepperChar.move(-stepsPerRevolutionChar * 1.5f);
+
+#ifdef INVERT_HALL_SENSOR_LOGIC
 	while ((sensorState > threshold) ^ INVERT_HALL_SENSOR_LOGIC)
+#else
+	while (sensorState > threshold)
+#endif
 	{
 		sensorState = analogRead(sensorPin);
 		stepperChar.run();
 		delayMicroseconds(100); // TODO: less intrusive way to avoid triggering watchdog?
 	}
-	// TODO: Add a failure path for if the stepper moved a full rotation without trigerring 
+	// TODO: Add a failure path for if the stepper moved a full rotation without trigerring
 	// the sensor, inidcating that something is wrong with the hardware.
 	stepperChar.setCurrentPosition(0);
 	sensorState = analogRead(sensorPin);
@@ -759,7 +755,12 @@ void feedLabel(int repeat = 1)
 
 	for (int i = 0; i < repeat; i++)
 	{
-		const int direction = REVERSE_FEED_STEPPER_DIRECTION ? 1 : -1;
+
+#ifdef REVERSE_FEED_STEPPER_DIRECTION
+		const int direction = 1;
+#else
+		const int direction = -1;
+#endif
 		stepperFeed.runToNewPosition(stepperFeed.currentPosition() + (stepsPerRevolutionFeed / 8) * direction);
 		delay(10);
 	}
@@ -1510,7 +1511,7 @@ void setup()
 	// turns of the leds
 	analogWrite(ledChar, 0);
 	analogWrite(ledFinish, 0);
-	
+
 	loadSettings();
 
 	// set  display
