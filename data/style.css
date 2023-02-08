@@ -399,6 +399,40 @@ button:disabled {
   background: linear-gradient(rgb(11, 17, 26) 500px, rgb(3, 5, 8) 100%);
 }
 
+#size-helper {
+  border-style: solid dashed;
+  border-color: rgba(255, 166, 0, 0.4) rgba(0, 102, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0);
+  mix-blend-mode: normal;
+  pointer-events: none;
+  border-width: 2px;
+  margin: auto;
+  background: #00000044;
+  z-index: 50;
+  font-size: 25px;
+  height: 25px;
+}
+
+[data-printing="true"] #size-helper {
+  border-color: rgba(128, 128, 128, 0);
+  border-style: solid;
+  background-color: rgba(32, 32, 32, 1);
+  mix-blend-mode: difference;
+}
+
+[data-printing="true"] #progress-bar {
+  visibility: visible; 
+  background: white; 
+  height: 100%; 
+  width: 0%; 
+  mix-blend-mode: difference
+}
+
+#progress-bar {
+  visibility: hidden; 
+  outline: none;
+}
+
 #frame {
   border-radius: 40px;
   /* filter: drop-shadow(-4px -4px 3px rgb(35, 42, 56)); */
