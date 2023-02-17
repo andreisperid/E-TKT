@@ -42,40 +42,31 @@
 #include <U8g2lib.h>
 #include <ESP32Tone.h>
 #include <Preferences.h>
+#include "ArduinoJson.h"
+#include "AsyncJson.h"
 
 // extension files
 #include "etktLogo.cpp" // etkt logo in binary format
 #include "pitches.cpp"	// list of notes and their frequencies
 
-// OPTIONAL CONFIGURATION ---------------------------------------------------------
-// Depending on the hardware you've used to build your E-TKT, you might need to change some of these constants
-// to get the hardware into a working state
+// BASIC CONFIGURATION ------------------------------------------------------------
 
-// If your feed motor moves in the wrong direction by default, use this to reverse it.  It should be obvious 
-// if this is happening sicne the tape gets fed in the wrong direction.
-#define REVERSE_FEED_STEPPER_DIRECTION true
+#include "optConfig.cpp" // opt-in external file for configuring motor direction and hall sensor logic
 
-// If your hall sensor has inverted logic (eg active LOW and neutral HIGH) then use this to invert the logic 
-// checking it.  If you're affected by this then you'll see the character carousel move forward slightly and 
-// then stop when the E-TKT starts up instead of moving to the "J" position.  
-#define INVERT_HALL_SENSOR_LOGIC true
-
-// Speed and acceleration of the stepper motor that rotates the character carousel, measured in steps/s and steps/s^2.  
+// Speed and acceleration of the stepper motor that rotates the character carousel, measured in steps/s and steps/s^2.
 // Use lower values if you find that the printer sometimes prints the wrong letter.  Any value above zero is ok but
 // lower values will slow down printing, if you're having trouble start by halving them and move up from there.  The
 // speed you can reliably achieve depends on the quality of the motor, how much current you've set it up to use, and
-// how fast the ESP-32 can talk with it. 1600 steps is a full revolution of the carousel. 
+// how fast the ESP-32 can talk with it. 1600 steps is a full revolution of the carousel.
 #define CHARACTER_STEPPER_MAX_SPEED 320000
 #define CHARACTER_STEPPER_MAX_ACCELERATION 16000
 
-
-// Speed and acceleration of the stepper motor that feeds the label tape, measured in steps/s and steps/s^2.  
+// Speed and acceleration of the stepper motor that feeds the label tape, measured in steps/s and steps/s^2.
 // Use lower values if you find that the printer doesn't consistently feed the correct length of tape between letters.
 // For calibrating these values the same advice about the character stepper motor above applies. 4076 steps is one full
 // revolution of the motor.
 #define FEED_STEPPER_MAX_SPEED 1000000
 #define FEED_STEPPER_MAX_ACCELERATION 1000
-
 
 // HARDWARE -----------------------------------------------------------------------
 
@@ -202,7 +193,7 @@ int assemblyCalibrationForce = 15;
 AsyncWebServer server(80);
 DNSServer dns;
 
-String webProgress = " 0";
+float webProgress = 0;
 
 // qr code for accessing the webapp
 const int QRcode_Version = 3; //  set the version (range 1->40)
@@ -231,8 +222,7 @@ void lightFinished()
 		state = !state;
 		delay(25);
 	}
-
-	webProgress = " 0";
+	webProgress = 0;
 }
 
 void lightChar(float state)
@@ -516,7 +506,7 @@ void displayProgress(float total, float actual, String label)
 	progress = progress * 100;
 
 	// String progressString = String(progress * 95, 0);
-	webProgress = String(progress, 0);
+	webProgress = progress;
 
 	if (progress > 0)
 	{
@@ -539,7 +529,7 @@ void displayFinished()
 	displayClear(1);
 	u8g2.setDrawColor(0);
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
-	webProgress = "finished";
+	webProgress = 100;
 	u8g2.drawStr(42, 37, "FINISHED!");
 
 	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
@@ -711,27 +701,37 @@ void setHome(int align = alignFactor)
 	sensorState = analogRead(sensorPin);
 
 	// Check to see if the hall sensor on the stepper is already trigerred
-	// and if so, move it a little bit to get the sensor into an un-trigerred 
-	// position.  
+	// and if so, move it a little bit to get the sensor into an un-trigerred
+	// position.
+
+#ifdef INVERT_HALL_SENSOR_LOGIC
 	if ((sensorState < threshold) ^ INVERT_HALL_SENSOR_LOGIC)
+#else
+	if ((sensorState < threshold))
+#endif
 	{
 		stepperChar.runToNewPosition(-stepsPerChar * 4);
 		stepperChar.run();
 	}
 	sensorState = analogRead(sensorPin);
-	// TODO: Change the above to only move as long as the hall sensor is 
-	// triggerred, which could save a little time while printing.  
+	// TODO: Change the above to only move as long as the hall sensor is
+	// triggerred, which could save a little time while printing.
 
-	// Move the carousel until the hall sensor triggers, and then treat wherever 
+	// Move the carousel until the hall sensor triggers, and then treat wherever
 	// that is as the new home position.
 	stepperChar.move(-stepsPerRevolutionChar * 1.5f);
+
+#ifdef INVERT_HALL_SENSOR_LOGIC
 	while ((sensorState > threshold) ^ INVERT_HALL_SENSOR_LOGIC)
+#else
+	while (sensorState > threshold)
+#endif
 	{
 		sensorState = analogRead(sensorPin);
 		stepperChar.run();
 		delayMicroseconds(100); // TODO: less intrusive way to avoid triggering watchdog?
 	}
-	// TODO: Add a failure path for if the stepper moved a full rotation without trigerring 
+	// TODO: Add a failure path for if the stepper moved a full rotation without trigerring
 	// the sensor, inidcating that something is wrong with the hardware.
 	stepperChar.setCurrentPosition(0);
 	sensorState = analogRead(sensorPin);
@@ -759,7 +759,12 @@ void feedLabel(int repeat = 1)
 
 	for (int i = 0; i < repeat; i++)
 	{
-		const int direction = REVERSE_FEED_STEPPER_DIRECTION ? 1 : -1;
+
+#ifdef REVERSE_FEED_STEPPER_DIRECTION
+		const int direction = 1;
+#else
+		const int direction = -1;
+#endif
 		stepperFeed.runToNewPosition(stepperFeed.currentPosition() + (stepsPerRevolutionFeed / 8) * direction);
 		delay(10);
 	}
@@ -1140,9 +1145,7 @@ void processor(void *parameters)
 			myServo.write(restAngle);
 
 			busy = false;
-			webProgress = "finished";
-			delay(500);
-			webProgress = " 0";
+			webProgress = 100;
 			analogWrite(ledFinish, 0);
 			lightChar(0.0f);
 			displayQRCode();
@@ -1172,9 +1175,7 @@ void processor(void *parameters)
 			value = "";
 			stepperChar.disableOutputs();
 			busy = false;
-			webProgress = "finished";
-			delay(500);
-			webProgress = " 0";
+			webProgress = 100;
 			analogWrite(ledFinish, 0);
 			lightChar(0.0f);
 			displayQRCode();
@@ -1203,9 +1204,7 @@ void processor(void *parameters)
 			value = "";
 			stepperChar.disableOutputs();
 			busy = false;
-			webProgress = "finished";
-			delay(500);
-			webProgress = " 0";
+			webProgress = 100;
 			lightChar(0.0f);
 			displayQRCode();
 			vTaskDelete(processorTaskHandle); // delete task
@@ -1259,9 +1258,7 @@ void processor(void *parameters)
 			newForce = 0;
 			value = "";
 
-			webProgress = "finished";
-			delay(500);
-			webProgress = " 0";
+			webProgress = 100;
 
 			analogWrite(ledFinish, 0);
 			lightChar(0.0f);
@@ -1292,9 +1289,7 @@ void processor(void *parameters)
 
 			displayReboot();
 
-			webProgress = "finished";
-			delay(500);
-			webProgress = " 0";
+			webProgress = 100;
 
 			analogWrite(ledFinish, 0);
 			lightChar(0.0f);
@@ -1313,6 +1308,68 @@ void notFound(AsyncWebServerRequest *request)
 	request->send(404, "text/plain", "Not found");
 }
 
+void getStatus(AsyncWebServerRequest *request)
+{
+	AsyncJsonResponse *response = new AsyncJsonResponse();
+	const JsonObject &root = response->getRoot();
+
+	// TODO: There is a potential (but rare) race condition here if the
+	// status is updated while being changed.  Consider blocking while
+	// state changes happen.
+	root["progress"] = webProgress;
+	root["busy"] = busy;
+	root["command"] = parameter;
+	root["align"] = alignFactor;
+	root["force"] = forceFactor;
+
+	// TODO: The webserver should also indicate what the text of the current,
+	// label is, however this will require substantial additional refactoring
+	// of how the current tag is communicated.
+	response->setLength();
+	request->send(response);
+}
+
+void handleTaskRequest(AsyncWebServerRequest *request, JsonVariant &json)
+{
+	Serial.println("Got task request");
+	const auto request_data = json.as<JsonObject>();
+	auto response_data = new AsyncJsonResponse();
+	const auto response_root = response_data->getRoot();
+	if (!request_data.containsKey("value"))
+	{
+		response_root["error"] = "Please provide a value";
+		response_data->setCode(400);
+	}
+	else if (!request_data.containsKey("parameter"))
+	{
+		response_root["error"] = "Please provide a parameter";
+		response_data->setCode(400);
+	}
+	else if (busy)
+	{
+		response_root["error"] = "Printer is already busy";
+		response_data->setCode(400);
+	}
+	else
+	{
+		parameter = request_data["parameter"].as<String>();
+		value = request_data["value"].as<String>();
+		Serial.println("Creating task");
+		xTaskCreatePinnedToCore(
+			processor,			  // the processor() function that processes the inputs
+			"processorTask",	  // name of the task
+			10000,				  // number of words to be allocated to use on task
+			NULL,				  // parameter to be input on the task (can be NULL)
+			1,					  // priority for the task (0 to N)
+			&processorTaskHandle, // reference to the task (can be NULL)
+			0);					  // core 0
+		response_root["result"] = "success";
+	}
+	Serial.println("Request finished");
+	response_data->setLength();
+	request->send(response_data);
+}
+
 void initialize()
 {
 	// Initialize SPIFFS
@@ -1324,86 +1381,18 @@ void initialize()
 		return;
 	}
 
-	// route for web app
-	server.on("/", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/index.html", String(), false); });
+	// Handles all requests the control the device (print label, feed, cut, test, etc)
+	// TODO: Break this method into several api calls, one for each task (eg api/feed,, ap/cut, etc)
+	// That way each handler can validate only the arugments it needs.
+	server.addHandler(new AsyncCallbackJsonWebHandler("/api/task", handleTaskRequest));
 
-	server.on("/&", HTTP_GET, [](AsyncWebServerRequest *request)
-			  {
-				  int paramsNr = request->params();
+	// Check printing status
+	server.on("/api/status", HTTP_GET, getStatus);
 
-				  for (int i = 0; i < paramsNr; i++)
-				  {
-					  AsyncWebParameter *p = request->getParam(i);
-					  parameter = p->name();
-					  value = p->value();
+	// Serve static assets from the SPIFFS root directory.
+	server.serveStatic("/", SPIFFS, "/").setDefaultFile("index.html");
 
-					  // if not currently busy, creates a task for a single label print on core 0, that will be killed upon completion
-					  // the wifi and web app keeps running on core 1
-					  if (!busy)
-					  {
-						  xTaskCreatePinnedToCore(
-							  processor,			// the processor() function that processes the inputs
-							  "processorTask",		// name of the task 
-							  10000,				// number of words to be allocated to use on task  
-							  NULL,					// parameter to be input on the task (can be NULL) 
-							  1,					// priority for the task (0 to N) 
-							  &processorTaskHandle, // reference to the task (can be NULL) 
-							  0);					// core 0
-					  }
-// 					  else
-// 					  {
-// #ifdef do_serial
-// 						Serial.println("<< DENYING, BUSY >>");
-// #endif
-// 					  }
-				  }
-				  request->send(SPIFFS, "/index.html", String(), false); });
-
-	// check printing status
-	server.on("/status", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(200, "text/plane", webProgress); });
-
-	// provide stored settings
-	server.on("/settings", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(200, "text/plane", combinedSettings);  Serial.print("giving combinedSettings: ");  Serial.print(combinedSettings); });
-
-	// ----------------------------------------------------------------------------
-	// asset serving --------------------------------------------------------------
-
-	// route to load style.css file
-	server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/style.css", "text/css"); });
-
-	// route to load script.js file
-	server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/script.js", "text/javascript"); });
-
-	// route to load fonts
-	server.on("/fontwhite.ttf", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/fontwhite.ttf", "font"); });
-
-	// route to favicon
-	server.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/favicon.ico", "image"); });
-
-	// route to icon image
-	server.on("/icon.png", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/icon.png", "image"); });
-
-	// route to splash icon
-	server.on("/splash.png", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/splash.png", "image"); });
-
-	// route to manifest file
-	server.on("/manifest.json", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/manifest.json", "image"); });
-
-	// route to settings image
-	server.on("/iso.png", HTTP_GET, [](AsyncWebServerRequest *request)
-			  { request->send(SPIFFS, "/iso.png", "image"); });
-
-	// start server
+	// Start server
 	server.begin();
 }
 
@@ -1510,7 +1499,7 @@ void setup()
 	// turns of the leds
 	analogWrite(ledChar, 0);
 	analogWrite(ledFinish, 0);
-	
+
 	loadSettings();
 
 	// set  display

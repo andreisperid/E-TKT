@@ -35,34 +35,28 @@ let force;
 let alignTemp;
 let forceTemp;
 
-window.load = startupRoutine();
+window.onload = startupRoutine;
 
-function startupRoutine() {
+async function startupRoutine() {
   document.getElementById("text-input").focus();
-  retrieveSettings();
+  await retrieveSettings();
+  await getStatus();
 }
 
-function retrieveSettings() {
+async function retrieveSettings() {
+  // TODO: consolidate this method with getStatus(), since they both now use the same API method.
+
   // retrieve settings from the device
+  let request = await fetchWithTimeout("api/status", {timeout: 5000});
+  let response = await request.json();
 
-  // console.log("trying to retrieve settings...");
+  align = response.align;
+  force = response.force;
+  alignTemp = align;
+  forceTemp = force;
 
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      // console.log("settings read: '" + this.responseText + "'");
-
-      align = this.responseText[0];
-      force = this.responseText[1];
-      alignTemp = align;
-      forceTemp = force;
-
-      document.getElementById("align-field").value = align;
-      document.getElementById("force-field").value = force;
-    }
-  };
-  xhttp.open("GET", "settings", true);
-  xhttp.send();
+  document.getElementById("align-field").value = align;
+  document.getElementById("force-field").value = force;
 }
 
 function calculateLength() {
@@ -81,39 +75,19 @@ function calculateLength() {
   }
 }
 
-function labelCommand() {
+async function labelCommand() {
   // sends the label to the device
 
   let fieldValue = document.getElementById("text-input").value;
-
   if (useRegex(fieldValue)) {
     // console.log('printing: "' + treatedLabel.toLowerCase() + '"');
     document.getElementById("text-input").blur();
-
-    document.getElementById("size-helper").style.borderColor = "rgba(128, 128, 128, 0)";
-    document.getElementById("size-helper").style.borderStyle = "solid";
-    document.getElementById("size-helper").style.backgroundColor = "rgba(32, 32, 32, 1)";
-    document.getElementById("size-helper").style.mixBlendMode = "difference";
-    document.getElementById("progress-bar").style.outline = "solid 2px white";
-
-    document.getElementById("mode-dropdown").disabled = true;
-    let emojiDivs = document.getElementById("emoji-buttons").children;
-    Array.from(emojiDivs).forEach((element) => {
-      element.children[0].disabled = true;
-    });
-    document.getElementById("text-input").disabled = true;
-    document.getElementById("clear-button").disabled = true;
-    document.getElementById("submit-button").disabled = true;
-    document.getElementById("reel-button").disabled = true;
-    document.getElementById("feed-button").disabled = true;
-    document.getElementById("cut-button").disabled = true;
-    document.getElementById("setup-button").disabled = true;
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/&?" + "tag=" + treatedLabel.toLowerCase(), true);
-    xhr.send();
-    command = "tag";
-    busy = true;
+    setUiBusy(true);
+    let response = await postJson("api/task", {parameter: "tag", value: treatedLabel.toLowerCase()});
+    if (!response.ok) {
+      console.error("Unable to feed");
+      console.error((await response.json())["error"])
+    }
   }
 }
 
@@ -341,120 +315,67 @@ function toggleSettings(safe = true) {
   }
 }
 
-function reelCommand() {
+async function reelCommand() {
   // sends reel command to the device
-
-  if (
-    confirm(
-      "Confirm loading a new reel?\n\nPlease make sure the tape is touching the cog.\n\nImportant: unsaved align and force settings will be lost."
-    )
-  ) {
+  let prompt = confirm(
+    "Confirm loading a new reel?\n\nPlease make sure the tape is touching the cog.\n\nImportant: unsaved align and force settings will be lost."
+  );
+  if (prompt) {
     toggleSettings(false);
-    document.getElementById("mode-dropdown").disabled = true;
-    let emojiDivs = document.getElementById("emoji-buttons").children;
-    Array.from(emojiDivs).forEach((element) => {
-      element.children[0].disabled = true;
-    });
-    document.getElementById("text-input").disabled = true;
-    document.getElementById("clear-button").disabled = true;
-    document.getElementById("reel-button").disabled = true;
-    document.getElementById("feed-button").disabled = true;
-    document.getElementById("cut-button").disabled = true;
-    document.getElementById("setup-button").disabled = true;
-
-    document.getElementById("submit-button").disabled = true;
-    document.getElementById("submit-button").value = "  reeling... ";
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/&?" + "reel", true);
-    xhr.send();
-    command = "reel";
-    busy = true;
+    setUiBusy(true);
+    document.getElementById("submit-button").value = " reeling... ";
+    let response = await postJson("api/task", {parameter: "reel", value: ""});
+    if (!response.ok) {
+      console.error("Unable to reel");
+      console.error((await response.json())["error"])
+    }
   }
 }
 
-function feedCommand() {
+async function feedCommand() {
   // sends feed command to the device
-
-  document.getElementById("mode-dropdown").disabled = true;
-  let emojiDivs = document.getElementById("emoji-buttons").children;
-  Array.from(emojiDivs).forEach((element) => {
-    element.children[0].disabled = true;
-  });
-  document.getElementById("text-input").disabled = true;
-  document.getElementById("clear-button").disabled = true;
-  document.getElementById("reel-button").disabled = true;
-  document.getElementById("feed-button").disabled = true;
-  document.getElementById("cut-button").disabled = true;
-  document.getElementById("setup-button").disabled = true;
-
-  document.getElementById("submit-button").disabled = true;
+  setUiBusy(true);
   document.getElementById("submit-button").value = " feeding... ";
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/&?" + "feed", true);
-  xhr.send();
-  command = "feed";
-  busy = true;
+  let response = await postJson("api/task", {parameter: "feed", value: ""});
+  if (!response.ok) {
+    console.error("Unable to feed");
+    console.error((await response.json())["error"])
+  }
 }
 
-function cutCommand() {
+async function cutCommand() {
   // sends cut command to the device
-
-  document.getElementById("mode-dropdown").disabled = true;
-  let emojiDivs = document.getElementById("emoji-buttons").children;
-  Array.from(emojiDivs).forEach((element) => {
-    element.children[0].disabled = true;
-  });
-  document.getElementById("text-input").disabled = true;
-  document.getElementById("clear-button").disabled = true;
-  document.getElementById("reel-button").disabled = true;
-  document.getElementById("feed-button").disabled = true;
-  document.getElementById("cut-button").disabled = true;
-  document.getElementById("setup-button").disabled = true;
-
-  document.getElementById("submit-button").disabled = true;
+  setUiBusy(true);
   document.getElementById("submit-button").value = " cutting... ";
-
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/&?" + "cut", true);
-  xhr.send();
-  command = "cut";
-  busy = true;
+  let response = await postJson("api/task", {parameter: "cut", value: ""});
+  if (!response.ok) {
+    console.error("Unable to cut");
+    console.error((await response.json())["error"])
+  }
 }
 
-function testCommand(testFull) {
+async function testCommand(testFull) {
   // sends test command to the device
-
-  document.getElementById("add-align-button").disabled = true;
-  document.getElementById("remove-align-button").disabled = true;
-  document.getElementById("add-force-button").disabled = true;
-  document.getElementById("remove-force-button").disabled = true;
-
-  document.getElementById("test-full-button").disabled = true;
-  document.getElementById("test-align-button").disabled = true;
-
-  document.getElementById("reel-button").disabled = true;
-  document.getElementById("align-field").disabled = true;
-  document.getElementById("force-field").disabled = true;
-  document.getElementById("cancel-button").disabled = true;
-  document.getElementById("save-button").disabled = true;
   align = document.getElementById("align-field").value;
   force = document.getElementById("force-field").value;
-
+  let data;
   if (testFull) {
-    // console.log("test full / align: " + align + ", force: " + force);
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/&?" + "testfull=" + align + "," + force, true);
-    xhr.send();
-    command = "testfull";
+    data = {
+      parameter: 'testfull',
+      value: align + "," + force
+    };
   } else {
-    // console.log("test align : " + align);
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/&?" + "testalign=" + align + "," + 1, true);
-    xhr.send();
-    command = "testalign";
+    data = {
+      parameter: 'testalign',
+      value: align + "," + 1
+    };
   }
-
-  busy = true;
+  setUiBusy(true);
+  let response = await postJson("api/task", data);
+  if (!response.ok) {
+    console.error("Unable to perform test");
+    console.error((await response.json())["error"])
+  }
 }
 
 function settingsCommand() {
@@ -493,93 +414,103 @@ function settingsCommand() {
   }
 }
 
-setInterval(function () {
-  getData();
-}, 100); // lower rate?
+// Helper method to amke fetch requests with a configurable timeout.
+// See: https://dmitripavlutin.com/timeout-fetch-request/
+async function fetchWithTimeout(resource, options = {}) {
+  const { timeout = 8000 } = options;
+  
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  const response = await fetch(resource, {
+    ...options,
+    signal: controller.signal  
+  });
+  clearTimeout(id);
+  return response;
+}
 
-function getData() {
-  // gets progress data from the device and disable buttons while busy
 
-  const textField = document.getElementById("text-input");
-  // console.log("getting data");
-  // console.log(textField.value == "");
+// Helper method to post a json request, supports timeouts.
+async function postJson(url, data, options = {}) {
+  options.headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  };
+  options.body = JSON.stringify(data);
+  options.method = 'POST';
+  return await fetchWithTimeout(url, options);
+}
 
-  if (busy) {
-    // console.log("busy")
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        // console.log("response: " + this.responseText);
+async function getStatus() {
+  try {
+    let request = await fetchWithTimeout("api/status", {timeout: 5000});
+    handleData(await request.json());
+  } catch (error) {
+    // TODO: Add some UI treatment for when there are communication errors, eg 
+    // a "Reconnecting..." toast message or something.
+    console.error("Problem ")
+    console.error(error);
+  } finally {
+    setTimeout(getStatus, 1000);
+  }
+}
 
-        let percentage = parseInt(this.responseText);
-        if (percentage > 0) {
-          percentage -= 1; // avoid 100% progress while still finishing
-        }
 
-        switch (command) {
-          case "tag":
-            document.getElementById("submit-button").value = " printing " + percentage + "% ";
-            break;
-          case "reel":
-            document.getElementById("submit-button").value = " reeling... ";
-            break;
-          case "feed":
-            document.getElementById("submit-button").value = " feeding... ";
-            break;
-          case "cut":
-            document.getElementById("submit-button").value = " cutting... ";
-            break;
-        }
+wasBusy = false;
 
-        document.getElementById("progress-bar").style.width =
-          (this.responseText === "" ? " 0" : this.responseText) + "%";
+// Enables or disables UI elements to prevent intercations while the printer is printing,
+// reeling, cutting, etc. 
+function setUiBusy(busy) {
+  if (busy && !wasBusy) {
+    // Disable UI elements
+    wasBusy = true;
+    Array.from(document.querySelectorAll("input")).forEach((element) => {
+      element.disabled = true;
+    });
+    document.getElementById("mode-dropdown").disabled = true;
+  } else if (!busy && wasBusy) {
+    // Enable UI elements
+    wasBusy = false;
+    let body = document.getElementsByTagName("body")[0];
+    body.dataset.printing = "false";
+    const textField = document.getElementById("text-input");
+    Array.from(document.querySelectorAll("input")).forEach((element) => {
+      element.disabled = false;
+    });
+    document.getElementById("mode-dropdown").disabled = false;
+    document.getElementById("submit-button").disabled = textField.value == "";
+    document.getElementById("clear-button").disabled = textField.value == "";
+    validateField();
+  }
+}
 
-        if (this.responseText === "finished") {
-          // main
-          document.getElementById("progress-bar").style.width = 0;
-          document.getElementById("submit-button").value = " Print label! ";
-          document.getElementById("text-input").disabled = false;
-          document.getElementById("clear-button").disabled = textField.value == "";
-          document.getElementById("submit-button").disabled = textField.value == "";
-          document.getElementById("reel-button").disabled = false;
-          document.getElementById("feed-button").disabled = false;
-          document.getElementById("cut-button").disabled = false;
-          document.getElementById("setup-button").disabled = false;
+function handleData(data_json) {
+  setUiBusy(data_json.busy);
 
-          document.getElementById("mode-dropdown").disabled = false;
+  if (!data_json.busy) {
+    return;
+  }
+  let percentage = parseInt(data_json.progress);
+  if (percentage > 0) {
+    percentage -= 1; // avoid 100% progress while still finishing
+  }
 
-          let emojiDivs = document.getElementById("emoji-buttons").children;
-          Array.from(emojiDivs).forEach((element) => {
-            element.children[0].disabled = false;
-          });
-
-          document.getElementById("size-helper").style.borderLeftColor = "rgba(0, 102, 255, 0.7)";
-          document.getElementById("size-helper").style.borderRightColor = "rgba(0, 102, 255, 0.7)";
-          document.getElementById("size-helper").style.borderTopColor = "rgba(255, 166, 0, 0.4) ";
-          document.getElementById("size-helper").style.borderBottomColor = "rgba(255, 166, 0, 0.4)";
-          document.getElementById("size-helper").style.borderStyle = "solid dashed solid dashed";
-
-          document.getElementById("size-helper").style.backgroundColor = "rgba(0, 0, 0, 0)";
-          document.getElementById("size-helper").style.mixBlendMode = "normal";
-
-          document.getElementById("progress-bar").style.outline = "none";
-
-          // settings
-          document.getElementById("add-align-button").disabled = false;
-          document.getElementById("remove-align-button").disabled = false;
-          document.getElementById("add-force-button").disabled = false;
-          document.getElementById("remove-force-button").disabled = false;
-          document.getElementById("test-align-button").disabled = false;
-          document.getElementById("test-full-button").disabled = false;
-          document.getElementById("cancel-button").disabled = false;
-          document.getElementById("save-button").disabled = false;
-
-          busy = false;
-        }
-      }
-    };
-    xhttp.open("GET", "status", true);
-    xhttp.send();
+  switch (data_json.command) {
+    case "tag":
+      document.getElementById("submit-button").value = " printing " + percentage + "% ";
+      let body = document.getElementsByTagName("body")[0];
+      body.dataset.printing = "true";
+      document.getElementById("progress-bar").style.width = percentage.toString() + "%";
+      break;
+    case "reel":
+      document.getElementById("submit-button").value = " reeling... ";
+      break;
+    case "feed":
+      document.getElementById("submit-button").value = " feeding... ";
+      break;
+    case "cut":
+      document.getElementById("submit-button").value = " cutting... ";
+      break;
   }
 }
