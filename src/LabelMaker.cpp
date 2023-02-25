@@ -740,6 +740,7 @@ void setHome(int align = alignFactor)
 	stepperChar.run();
 	stepperChar.setCurrentPosition(0);
 	currentCharPosition = charHome;
+	prevChar = charSet[charHome];
 
 	delay(100);
 }
