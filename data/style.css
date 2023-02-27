@@ -39,6 +39,12 @@
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* Likely future */
 }
+input {
+  -webkit-user-select: text; /* Chrome all / Safari all */
+  -moz-user-select: text; /* Firefox all */
+  -ms-user-select: text; /* IE 10+ */
+  user-select: text; /* Likely future */
+}
 body {
   background-color: rgb(32, 32, 32);
   margin: 0px;
