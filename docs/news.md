@@ -9,6 +9,13 @@ description: "E-TKT"
 
 ----
 
+### March, 2023
+- 🤟 Huge thanks to [Stephen Beechen](https://github.com/sabeechen), who since January has been strongly contributing to the project with great insights and improvements! ([+info](https://github.com/andreisperid/E-TKT/pulls?q=is%3Apr+is%3Aclosed+author%3Asabeechen))
+
+### October, 2022
+- Stable PCB, BOM and firmware;
+- Documentation with in-depth, step-by-step instructions;
+
 ### September, 2022
 - ⚠️ A manufactured PCB is being developed and the files are already committed, ***but they are still a work in progress. Aka: not stable and with issues.*** I'm working on that at this moment. Meanwhile, please refer to the [legacy documentation](https://github.com/andreisperid/E-TKT) for reference;
 
