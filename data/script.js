@@ -135,15 +135,8 @@ function drawHelper() {
     document.getElementById("size-helper-content").innerHTML =
       space.repeat(multiplier) + "x".repeat(field.value.length) + space.repeat(multiplier);
 
-    treatedLabel = "_".repeat(multiplier) + field.value + "_".repeat(multiplier);
+    treatedLabel = " ".repeat(multiplier) + field.value + " ".repeat(multiplier);
     // console.log('"' + treatedLabel + '"');
-
-    // conversion table to prevent multichar error
-    treatedLabel = treatedLabel.replace(/♡/g, "<");
-    treatedLabel = treatedLabel.replace(/☆/g, ">");
-    treatedLabel = treatedLabel.replace(/♪/g, "~");
-    treatedLabel = treatedLabel.replace(/€/g, "|");
-    // console.log(treatedLabel);
   } else {
     clear = false;
     treatedLabel = "";

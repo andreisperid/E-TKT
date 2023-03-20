@@ -42,6 +42,8 @@
 #include <U8g2lib.h>
 #include <ESP32Tone.h>
 #include <Preferences.h>
+#include <map>
+#include <tuple>
 #include "ArduinoJson.h"
 #include "AsyncJson.h"
 
@@ -127,21 +129,22 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 // char
 #define charQuantity 43 // the amount of teeth/characters in the carousel
 
-// conversion table to prevent multichar error
-// complex chars gets transformed into simple ones (not present in the carousel) to ease transmission and parsing
-// ♡ ... <
-// ☆ ... >
-// ♪ ... ~
-// € ... |
-
-// list of characters in the caroulsel
+// A map from each supported character to its index in the carousel.
+// Characters are stored as a string instead of a native char type to support
+// multi-byte code-points like "☆". Some characters share the same position,
+// such as "I" and "1".
 // important: keep in mind the home is always on 21st character (J)
-char charSet[charQuantity] = {
-	'$', '-', '.', '2', '3', '4', '5', '6', '7', '8',
-	'9', '*', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-	'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-	'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '<', '>',
-	'~', '|', '@'};
+const std::map<String, int> charSet = {
+	{"$", 0}, {"-", 1}, {".", 2}, {"0", 26}, {"1", 20}, {"2", 3}, {"3", 4}, {"4", 5}, {"5", 6}, {"6", 7}, {"7", 8}, {"8", 9}, {"9", 10}, {"*", 11}, {"A", 12}, {"B", 13}, {"C", 14}, {"D", 15}, {"E", 16}, {"F", 17}, {"G", 18}, {"H", 19}, {"I", 20}, {"J", 21}, {"K", 22}, {"L", 23}, {"M", 24}, {"N", 25}, {"O", 26}, {"P", 27}, {"Q", 28}, {"R", 29}, {"S", 30}, {"T", 31}, {"U", 32}, {"V", 33}, {"W", 34}, {"X", 35}, {"Y", 36}, {"Z", 37}, {"♡", 38}, {"☆", 39}, {"♪", 40}, {"€", 41}, {"@", 42}};
+
+// For each non-ascii "glyph" character, maps it to a tuple of (font, symbol code,
+// width, x offset, y offset).  These values are used to align the redered glyph
+// with the rest of the label text which is from a font with different spacing.
+const std::map<String, std::tuple<const uint8_t *, int, int, int, int>> glyphs = {
+	{"♡", std::make_tuple(u8g2_font_6x12_t_symbols, 0x2664, 5, -1, -1)},
+	{"☆", std::make_tuple(u8g2_font_6x12_t_symbols, 0x2605, 5, -1, -1)},
+	{"♪", std::make_tuple(u8g2_font_siji_t_6x10, 0xE271, 5, -3, 0)},
+	{"€", std::make_tuple(u8g2_font_6x12_t_symbols, 0x20AC, 6, -1, -1)}};
 
 String labelString;
 char prevChar = 'J';
@@ -203,6 +206,61 @@ String displaySSID = "";
 String displayIP = "";
 
 // --------------------------------------------------------------------------------
+// UTF-8 String handling
+
+// Returns the number of bytes making up the UTF-8 character starting at char index
+// "position" of str.  For an explanation of the magic constants, please see:
+// https://en.wikipedia.org/wiki/UTF-8#Encoding
+int utf8CharLength(String str, int position)
+{
+	int start = str[position];
+	if (start >> 3 == 30)
+	{
+		return 4;
+	}
+	else if (start >> 4 == 14)
+	{
+		return 3;
+	}
+	else if (start >> 5 == 6)
+	{
+		return 2;
+	}
+	else
+	{
+		return 1;
+	}
+}
+
+// Returns the length of a UTF-8 encoded string, treating each UTF-8 code-point
+// as a single character.
+int utf8Length(String str)
+{
+	int position = 0;
+	int length = 0;
+	while (position < str.length())
+	{
+		position += utf8CharLength(str, position);
+		length++;
+	}
+	return length;
+}
+
+// Returns the UTF-8 characters at the given position of the given string,
+// treating multi-character code points as inidividual characters.
+String utf8CharAt(String str, int position)
+{
+	int current = 0;
+	while (current < str.length() && position > 0)
+	{
+		current += utf8CharLength(str, current);
+		position--;
+	}
+	int charLength = utf8CharLength(str, current);
+	return str.substring(current, current + charLength);
+}
+
+// --------------------------------------------------------------------------------
 // LEDS ---------------------------------------------------------------------------
 
 void lightFinished()
@@ -245,20 +303,22 @@ void labelMusic(String label)
 {
 	// plays a music according to the label letters
 
-	int length = label.length();
+	int length = utf8Length(label);
 
 	for (int i = 0; i < length; i++)
 	{
-		for (int j = 0; j < charQuantity; j++)
+		auto character = utf8CharAt(label, i);
+		if (charSet.count(character) == 0)
 		{
-			if (label[i] == charSet[j])
-			{
-#ifdef do_serial
-				Serial.println(charNoteSet[j]);
-#endif
-				tone(buzzerPin, charNoteSet[j], 100);
-			}
+			// The character isn't on the wheel, so just ignore it.
+			continue;
 		}
+		auto index = charSet.at(character);
+#ifdef do_serial
+		Serial.println(charNoteSet[index]);
+#endif
+		tone(buzzerPin, charNoteSet[index], 100);
+
 		delay(50);
 	}
 }
@@ -268,19 +328,20 @@ void eggMusic(String notes, String durations)
 	// ♪ By pressing down a special key ♪
 	// ♪ It plays a little melody ♪
 
-	int length = notes.length();
+	int length = utf8Length(notes);
 
 	for (int i = 0; i < length; i++)
 	{
-		for (int j = 0; j < charQuantity; j++)
+		auto character = utf8CharAt(notes, i);
+		if (charSet.count(character) == 0)
 		{
-			if (notes[i] == charSet[j])
-			{
-				char charDuration = durations[i];
-				float duration = 2000 / atoi(&charDuration);
-				tone(buzzerPin, charNoteSet[j], duration);
-			}
+			// Ignore characters not on the wheel.
+			continue;
 		}
+		auto index = charSet.at(character);
+		char charDuration = durations[i];
+		float duration = 2000 / atoi(&charDuration);
+		tone(buzzerPin, charNoteSet[index], duration);
 	}
 }
 
@@ -482,42 +543,139 @@ void displayQRCode()
 	delay(1000);
 }
 
-void displayProgress(float total, float actual, String label)
+/**
+ * Renders the printing progress screen, where "progress" is the number of
+ * characters already printed.
+ */
+void displayProgress(float progress, String label)
 {
-	// screen with the label being printed and its progress
-
 	displayClear();
 
+	// Show "⚙️ PRINTING" header.
 	u8g2.setDrawColor(1);
-
 	u8g2.setFont(u8g2_font_nine_by_five_nbp_t_all);
 	u8g2.drawStr(15, 12, "PRINTING");
 	u8g2.setFont(u8g2_font_open_iconic_all_1x_t);
 	u8g2.drawGlyph(3, 12, 0x0081);
 
-	u8g2.setFont(u8g2_font_6x13_te);
-	const char *c = label.c_str();
-	u8g2.drawStr(0, 36, c);
+	auto labelLength = utf8Length(label);
+	int progress_width = 0;
+	int total_width = 0;
 
-	u8g2.setDrawColor(2);
-	u8g2.drawBox(0, 21, (actual)*6, 21);
-
-	float progress = actual / total;
-	progress = progress * 100;
-
-	// String progressString = String(progress * 95, 0);
-	webProgress = progress;
-
-	if (progress > 0)
+	// Do a pass thorugh the label characters to see how much horizontal
+	// space is needed to render all the characters and how wide the completed
+	// progress bar will be.
+	for (int i = 0; i < labelLength; i++)
 	{
-		progress -= 1; // avoid 100% progress while still finishing
+		auto character = utf8CharAt(label, i);
+		int width = 7;
+		if (glyphs.count(character) != 0)
+		{
+			// Its a glyph, so use its custom width.
+			width = std::get<2>(glyphs.at(character));
+		}
+		total_width += width;
+		if (i < progress)
+		{
+			progress_width += width;
+		}
 	}
-	String progressString = String(progress, 0);
 
-	progressString.concat("%");
-	const char *p = progressString.c_str();
+	// Calculate the render offset, which keeps the currently printing location
+	// visible if the label doesn't fit all on screen.
+	int render_offset = 0;
+	if (total_width > Lcd_X)
+	{
+		// If the "progress" location is off screen, offset the rendered label
+		// so the progress indicator is centered.
+		if (progress_width > Lcd_X / 2)
+		{
+			render_offset = progress_width - Lcd_X / 2;
+		}
+
+		// If centering the progress location woudl cause the right side of the
+		// label to render before the right edge of the screen then realign so
+		// it does, simulating a scrolling box's bounds.
+		if (total_width - render_offset < Lcd_X)
+		{
+			render_offset = total_width - Lcd_X;
+		}
+	}
+
+	// Iterate through the label again, this time drawing it on screen.  For
+	// simplicity's sake always draw the entire label (even if its of screen)
+	// and just let the screen buffer clip the edges.
+	int x_position = 0;
+	const int y_position = 36;
+	for (int i = 0; i < labelLength; i++)
+	{
+		auto character = utf8CharAt(label, i);
+		int width = 7;
+		if (glyphs.count(character) == 0)
+		{
+			// print the character as a normal string.
+			u8g2.setFont(u8g2_font_6x13_te);
+			u8g2.drawStr(x_position - render_offset, y_position, character.c_str());
+		}
+		else
+		{
+			// Print the character as a glyph with its custom offsets.
+			auto glyph_data = glyphs.at(character);
+			// the glyph is a tuple of:
+			// <0> font reference
+			// <1> glyph index
+			// <2> width
+			// <3> x offset
+			u8g2.setFont(std::get<0>(glyph_data));
+			auto char_x = x_position + std::get<3>(glyph_data) - render_offset;
+			auto char_y = y_position + std::get<4>(glyph_data);
+			u8g2.drawGlyph(char_x, char_y, std::get<1>(glyph_data));
+			width = std::get<2>(glyph_data);
+		}
+		x_position += width;
+	}
+
+	if (progress_width > 0)
+	{
+		// Render an inverted-color rectangle over the completed characters.
+		u8g2.setDrawColor(2);
+		u8g2.drawBox(0 - render_offset, 21, progress_width - 1, 21);
+	}
+
+	// Draw a box around the text, which looks like the edges of a label.
 	u8g2.setDrawColor(1);
-	u8g2.drawStr(6, 60, p);
+	u8g2.drawFrame(0 - render_offset, 21, total_width, 22);
+
+	// If needed, draw ellipses on the right side of the screen to indicate the
+	// label continues.
+	if (total_width - render_offset > Lcd_X)
+	{
+		u8g2.setDrawColor(0);
+
+		// Clear 14 pixels of space on the right side of the screen.
+		u8g2.drawBox(Lcd_X - 14, 21, 14, 22);
+
+		// Draw a triplet of 2x2 pixel dots, "...", in the middle of the
+		// text line.
+		u8g2.setDrawColor(1);
+		for (int i = 1; i <= 3; i++)
+		{
+			u8g2.drawBox(Lcd_X - (i * 4) + 2, 31, 2, 2);
+		}
+	}
+
+	// Update the progress reported to the web app.
+	webProgress = 100 * progress / labelLength;
+	if (webProgress > 0)
+	{
+		webProgress -= 1; // avoid 100% progress while still finishing
+	}
+
+	// Print "XX%" at the bottom of the screen.
+	String progressString = String(webProgress, 0);
+	progressString.concat("%");
+	u8g2.setDrawColor(1);
+	u8g2.drawStr(6, 60, progressString.c_str());
 
 	u8g2.sendBuffer();
 }
@@ -659,7 +817,7 @@ void debugDisplay()
 	// displayQRCode();
 	// delay(2000);
 
-	// displayProgress(7, 5, " E-TKT ");
+	// displayProgress(5, " E-TKT ");
 	// delay(5000);
 
 	// displayFinished();
@@ -740,7 +898,7 @@ void setHome(int align = alignFactor)
 	stepperChar.run();
 	stepperChar.setCurrentPosition(0);
 	currentCharPosition = charHome;
-	prevChar = charSet[charHome];
+	prevChar = charHome;
 
 	delay(100);
 }
@@ -822,7 +980,7 @@ void pressLabel(bool strong = false, int force = forceFactor, bool slow = false)
 	lightChar(0.2f); // dims the char led
 }
 
-void goToCharacter(char c, int override = alignFactor)
+void goToCharacter(String c, int override = alignFactor)
 {
 	// reaches out for a specific character
 
@@ -833,24 +991,12 @@ void goToCharacter(char c, int override = alignFactor)
 	// calls home everytime to avoid accumulating errors
 	setHome(override);
 
-	// optimizes O and 0, I and 1
-	if (c == '0')
-	{
-		c = 'O';
-	}
-	else if (c == '1')
-	{
-		c = 'I';
-	}
-
 	// matches the character to the list and gets delta steps from home
-	for (int i = 0; i < charQuantity; i++)
+	if (charSet.count(c) != 0)
 	{
-		if (c == charSet[i])
-		{
-			deltaPosition = i - currentCharPosition;
-			currentCharPosition = i;
-		}
+		auto index = charSet.at(c);
+		deltaPosition = index - currentCharPosition;
+		currentCharPosition = index;
 	}
 
 	if (deltaPosition < 0)
@@ -868,7 +1014,7 @@ void cutLabel()
 {
 	// moves to a specific char (*) then presses label three times (more vigorously)
 
-	goToCharacter('*');
+	goToCharacter("*");
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -891,21 +1037,12 @@ void writeLabel(String label)
 
 	// all possible characters: $-.23456789*abcdefghijklmnopqrstuvwxyz♡☆♪€@
 
-	int labelLength = label.length();
+	int labelLength = utf8Length(label);
 
 	lightChar(0.2f);
 
-	// the webapp uses underscores instead of spaces, here they are changed back to spaces
-	for (int i = 0; i < labelLength; i++)
-	{
-		if (label[i] == '_')
-		{
-			label[i] = ' ';
-		}
-	}
-
 	displayInitialize();
-	displayProgress(labelLength, 0, label);
+	displayProgress(0, label);
 
 #ifdef do_sound
 	if (label == " TASCHENRECHNER " || label == " POCKET CALCULATOR " || label == " DENTAKU " || label == " CALCULADORA " || label == " MINI CALCULATEUR ")
@@ -930,20 +1067,20 @@ void writeLabel(String label)
 	delay(500);
 #endif
 
-	//
 	for (int i = 0; i < labelLength; i++)
 	{
-		if (label[i] != ' ' && label[i] != '_' && label[i] != prevChar) // skip char seeking on repeated characters or on spaces
+		auto character = utf8CharAt(label, i);
+		if (character != " " && character != prevChar) // skip char seeking on repeated characters or on spaces
 		{
 #ifdef do_char
-			goToCharacter(label[i]);
+			goToCharacter(character);
 #else
 			delay(500);
 #endif
-			prevChar = label[i];
+			prevChar = character;
 		}
 
-		if (label[i] != ' ' && label[i] != '_') // skip pressing on label spaces
+		if (character != " ") // skip pressing on label spaces
 		{
 
 #ifdef do_press
@@ -960,7 +1097,7 @@ void writeLabel(String label)
 #endif
 		delay(500);
 
-		displayProgress(labelLength, i + 1, label);
+		displayProgress(i + 1, label);
 	}
 
 	if (labelLength < 6 && labelLength != 1) // minimum label length to make sure the user can grab it
@@ -1049,29 +1186,29 @@ void testSettings(int tempAlign, int tempForce, bool full = true)
 	{
 		// feedLabel(4);
 		feedLabel(2);
-		goToCharacter('E', tempAlign);
+		goToCharacter("E", tempAlign);
 		pressLabel(false, tempForce, false);
 		feedLabel();
-		goToCharacter('-', tempAlign);
+		goToCharacter("-", tempAlign);
 		pressLabel(false, tempForce, false);
 		feedLabel();
-		goToCharacter('T', tempAlign);
+		goToCharacter("T", tempAlign);
 		pressLabel(false, tempForce, false);
 		feedLabel();
-		goToCharacter('K', tempAlign);
+		goToCharacter("K", tempAlign);
 		pressLabel(false, tempForce, false);
 		feedLabel();
-		goToCharacter('T', tempAlign);
+		goToCharacter("T", tempAlign);
 		pressLabel(false, tempForce, false);
 		feedLabel(2);
-		goToCharacter('*', tempAlign);
+		goToCharacter("*", tempAlign);
 		pressLabel(true, tempForce, false);
 		pressLabel(true, tempForce, false);
 		pressLabel(true, tempForce, false);
 	}
 	else
 	{
-		goToCharacter('M', tempAlign);
+		goToCharacter("M", tempAlign);
 		pressLabel(false, 1, true);
 	}
 
