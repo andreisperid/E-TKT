@@ -147,7 +147,7 @@ const std::map<String, std::tuple<const uint8_t *, int, int, int, int>> glyphs =
 	{"€", std::make_tuple(u8g2_font_6x12_t_symbols, 0x20AC, 6, -1, -1)}};
 
 String labelString;
-char prevChar = 'J';
+String prevChar = "J";
 const int charHome = 21;
 bool waitingLabel = false;
 
