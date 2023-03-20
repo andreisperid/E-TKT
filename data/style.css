@@ -39,12 +39,6 @@
   -ms-user-select: none; /* IE 10+ */
   user-select: none; /* Likely future */
 }
-input {
-  -webkit-user-select: text; /* Chrome all / Safari all */
-  -moz-user-select: text; /* Firefox all */
-  -ms-user-select: text; /* IE 10+ */
-  user-select: text; /* Likely future */
-}
 body {
   background-color: rgb(32, 32, 32);
   margin: 0px;
@@ -118,6 +112,10 @@ button {
   font-size: 25px;
   filter: drop-shadow(0px 0px 40px rgba(174, 219, 255, 255));
   caret-color: "white";
+  -webkit-user-select: text; /* Chrome all / Safari all */
+  -moz-user-select: text; /* Firefox all */
+  -ms-user-select: text; /* IE 10+ */
+  user-select: text; /* Likely future */
 }
 #text-input:focus {
   background: #3037487a;
@@ -427,15 +425,15 @@ button:disabled {
 }
 
 [data-printing="true"] #progress-bar {
-  visibility: visible; 
-  background: white; 
-  height: 100%; 
-  width: 0%; 
-  mix-blend-mode: difference
+  visibility: visible;
+  background: white;
+  height: 100%;
+  width: 0%;
+  mix-blend-mode: difference;
 }
 
 #progress-bar {
-  visibility: hidden; 
+  visibility: hidden;
   outline: none;
 }
 
