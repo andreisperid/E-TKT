@@ -371,7 +371,7 @@ async function testCommand(testFull) {
   }
 }
 
-function settingsCommand() {
+async function settingsCommand() {
   // sends settings save command to the device, and triggers self restart in 15 seconds
 
   align = document.getElementById("align-field").value;
@@ -380,13 +380,14 @@ function settingsCommand() {
   // console.log("settings / align (" + align + ") force (" + force + ")");
 
   if (confirm("Confirm saving align [" + align + "] and force [" + force + "] settings?")) {
-    // console.log("settings sent");
-    var xhr = new XMLHttpRequest();
-    // xhr.open("GET", "/&?" + "settings", true);
-    xhr.open("GET", "/&?" + "save=" + align + "," + force, true);
-    xhr.send();
-    command = "test";
-    busy = true;
+    setUiBusy(true);
+    document.getElementById("submit-button").value = " saving... ";
+    let response = await postJson("api/task", {parameter: "save", value: align + "," + force});
+    if (!response.ok) {
+      console.error("Unable to save settings");
+      console.error((await response.json())["error"]);
+      return;
+    }
 
     document.getElementById("settings-frame").style.visibility = "hidden";
     document.getElementById("refresh-frame").style.visibility = "visible";
