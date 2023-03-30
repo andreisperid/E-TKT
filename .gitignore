@@ -10,3 +10,4 @@ include/
 _electronic/e-tkt-backups/
 _electronic/fp-info-cache
 src/optConfig.cpp
+src/simulator/__pycache__/
