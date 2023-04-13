@@ -35,8 +35,8 @@ This value takes into account all the breaking points for a single E-TKT device 
 | socket head screw | ISO 4762 - M3 x 6 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 9 | 
 | socket head screw | ISO 4762 - M4 x 10 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 1 | 
 | hex nut | DIN EN ISO 4032 - M3 - A2-70 | [link](http://aliexpress.com/item/1005001966426139.html) | 10 | 
-| oversized washer | DIN EN ISO 7093-1 - 3 - 200 HV - A2 | [link](http://aliexpress.com/item/3256801295230574.html) | 9 | 
-| oversized washer | DIN EN ISO 7093-1 - 6 - 200 HV - A2 | [link](http://aliexpress.com/item/3256801295230574.html) | 1 | 
+| oversized washer | DIN EN ISO 7090 - 3 - 200 HV - A2 | [link](https://aliexpress.com/item/1005003991819416.html) | 9 | 
+| oversized washer | DIN EN ISO 7090 - 6 - 200 HV - A2 | [link](https://aliexpress.com/item/1005003991819416.html) | 1 | 
 | silicone pad feet | 8x2mm | [link](http://aliexpress.com/item/2251832637568894.html) | 4 | 
 | daisy wheel | MOTEX — uppercase, 43 chars. |  [link](https://www.aliexpress.com/item/1005004489017299.html) | 1 | 
 | deep groove ball bearing | 608-2Z | [link](https://www.aliexpress.com/w/wholesale-608%2525252d2z-bearing.html) | 1 | 
