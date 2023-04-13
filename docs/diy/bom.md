@@ -27,20 +27,20 @@ This value takes into account all the breaking points for a single E-TKT device 
 | TYPE | SPEC | REF | QTY |
 | :--- | :--- | :---: | :---: |
 | 3D print | filament — PETG | [link](http://prusa3d.com/product/prusament-petg-jet-black-1kg/) | ~220g |
-| screw, cyl. allen | M3x40mm | [link](http://aliexpress.com/item/2261799963738734.html) | 1 |
-| screw, cyl. allen | M3x20mm | [link](http://aliexpress.com/item/2261799963738734.html) | 23 |
-| screw, cyl. allen | M3x16mm | [link](http://aliexpress.com/item/2261799963738734.html) | 2 |
-| screw, cyl. allen | M3x10mm | [link](http://aliexpress.com/item/2261799963738734.html) | 4 |
-| screw, cyl. allen | M3x8mm | [link](http://aliexpress.com/item/2261799963738734.html) | 2 | 
-| screw, cyl. allen | M3x6mm | [link](http://aliexpress.com/item/2261799963738734.html) | 9 | 
-| screw, cyl. allen | M4x10mm | [link](http://aliexpress.com/item/2261799963738734.html) | 1 | 
-| nut, hex | M3 | [link](http://aliexpress.com/item/1005001966426139.html) | 10 | 
-| washer | M3 | [link](http://aliexpress.com/item/3256801295230574.html) | 9 | 
-| washer | M6 | [link](http://aliexpress.com/item/3256801295230574.html) | 1 | 
+| socket head screw | ISO 4762 - M3 x 40 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 1 |
+| socket head screw | ISO 4762 - M3 x 20 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 23 |
+| socket head screw | ISO 4762 - M3 x 16 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 2 |
+| socket head screw | ISO 4762 - M3 x 10 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 4 |
+| socket head screw | ISO 4762 - M3 x 8 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 2 | 
+| socket head screw | ISO 4762 - M3 x 6 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 9 | 
+| socket head screw | ISO 4762 - M4 x 10 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 1 | 
+| hex nut | DIN EN ISO 4032 - M3 - A2-70 | [link](http://aliexpress.com/item/1005001966426139.html) | 10 | 
+| washer | DIN EN ISO 7090 - 3 - 200 HV - A2 | [link](https://aliexpress.com/item/1005003991819416.html) | 9 | 
+| washer | DIN EN ISO 7090 - 6 - 200 HV - A2 | [link](https://aliexpress.com/item/1005003991819416.html) | 1 | 
 | silicone pad feet | 8x2mm | [link](http://aliexpress.com/item/2251832637568894.html) | 4 | 
 | daisy wheel | MOTEX — uppercase, 43 chars. |  [link](https://www.aliexpress.com/item/1005004489017299.html) | 1 | 
-| bearing | 608ZZ | [link](http://aliexpress.com/item/1005001813219171.html) | 1 | 
-| bearing | 623ZZ | [link](http://aliexpress.com/item/1005001813219171.html) | 2 | 
+| deep groove ball bearing | 608-2Z | [link](https://www.aliexpress.com/w/wholesale-608%2525252d2z-bearing.html) | 1 | 
+| deep groove ball bearing | 623-2Z | [link](https://www.aliexpress.com/w/wholesale-623%2525252d2z-bearing.html) | 2 | 
 | extruder gear | MK8 40 teeth / 5mm axis | [link](http://aliexpress.com/item/2255800252771556.html) | 1 |
 
 ----
