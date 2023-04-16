@@ -56,7 +56,7 @@ This value takes into account all the breaking points for a single E-TKT device 
 | servo | Towerpro MG-996R | [link](http://aliexpress.com/w/wholesale-Towerpro-MG%2525252d996R.html) | 1 | 
 | neodymium magnet | ⌀2mm x 3mm length | [link](https://aliexpress.com/item/1005003022293200.html) | 1 |
 | LED | Clear white —	DIP 2x5x7mm | [link](https://www.aliexpress.com/item/1005003347290499.html) | 1 |
-| OLED display | SSH1106, 128x64, monochrome white — 4 pin I²C | [link](https://www.aliexpress.com/item/1005003484018034.html) | 1 |
+| OLED display | SSD1306, 128x64, monochrome white — 4 pin I²C | [link](https://www.aliexpress.com/item/1005003484018034.html) | 1 |
 
 ----
 
