@@ -37,7 +37,7 @@ This value takes into account all the breaking points for a single E-TKT device 
 | hex nut | DIN EN ISO 4032 - M3 - A2-70 | [link](http://aliexpress.com/item/1005001966426139.html) | 10 | 
 | washer | DIN EN ISO 7090 - 3 - 200 HV - A2 | [link](https://aliexpress.com/item/1005003991819416.html) | 9 | 
 | washer | DIN EN ISO 7090 - 6 - 200 HV - A2 | [link](https://aliexpress.com/item/1005003991819416.html) | 1 | 
-| silicone pad feet | 8x2mm | [link](http://aliexpress.com/item/2251832637568894.html) | 4 | 
+| silicone pad feet | ⌀8x2mm | [link](http://aliexpress.com/item/2251832637568894.html) | 4 | 
 | daisy wheel | MOTEX — uppercase, 43 chars. |  [link](https://www.aliexpress.com/item/1005004489017299.html) | 1 | 
 | deep groove ball bearing | 608-2Z | [link](https://www.aliexpress.com/w/wholesale-608%2525252d2z-bearing.html) | 1 | 
 | deep groove ball bearing | 623-2Z | [link](https://www.aliexpress.com/w/wholesale-623%2525252d2z-bearing.html) | 2 | 
@@ -53,10 +53,10 @@ This value takes into account all the breaking points for a single E-TKT device 
 | stepper driver (breakout) | A4988 | [link](http://aliexpress.com/item/3256801435362018.html) | 1 |
 | stepper motor | NEMA 17HS4023 + cable | [link](http://aliexpress.com/item/2251832620474591.html) | 1 |
 | stepper motor | 28BYJ-48 12V | [link](https://www.aliexpress.com/item/1005003708064424.html) | 1 | 
-| servo | Towerpro MG-996R | [link](http://aliexpress.com/item/2251832857187114.html) | 1 | 
-| neodymium magnet | 2mm ⌀ x 3mm length | [link](http://aliexpress.com/item/3256803632497346.html) | 1 |
+| servo | Towerpro MG-996R | [link](http://aliexpress.com/w/wholesale-Towerpro-MG%2525252d996R.html) | 1 | 
+| neodymium magnet | ⌀2mm x 3mm length | [link](https://aliexpress.com/item/1005003022293200.html) | 1 |
 | LED | Clear white —	DIP 2x5x7mm | [link](https://www.aliexpress.com/item/1005003347290499.html) | 1 |
-| OLED display | 128x64, monochrome white — 4 pin I²C | [link](https://www.aliexpress.com/item/1005003484018034.html) | 1 |
+| OLED display | SSD1306, 128x64, monochrome white — 4 pin I²C | [link](https://www.aliexpress.com/item/1005003484018034.html) | 1 |
 
 ----
 
@@ -127,5 +127,5 @@ This value takes into account all the breaking points for a single E-TKT device 
 
 | TYPE | SPEC | REF | QTY |
 | :--- | :--- | :---: | :---: |
-| power | 12v 3A (real) | | 1 |
+| power | 12V 3A (real) 5,5mm x 2,1mm barrel jack, center positive | [link](https://aliexpress.com/item/1005002620565526.html) | 1 |
 | label tape | 9mm DYMO-compatible | [link](https://www.aliexpress.com/item/1005002288190756.html) | 🦝 |

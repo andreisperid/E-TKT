@@ -33,6 +33,21 @@ parent: 🛠️ do it yourself!
 
 ----
 
+## Specs
+- ***Size:*** 99.6 x 76.2mm(3.92 x 3.00 inches)
+- ***Layer count:*** 4
+- ***Material:*** FR-4
+- ***FR4-TG:*** TG 150-160
+- ***Thickness:*** 1.6mm
+- ***Min. Track/Spacing:*** 6/6mil
+- ***Min. Hole Size:*** 0.3mm↑
+- ***Solder Mask:*** Black
+- ***Silkscreen:*** White
+- ***Surface Finish:*** HASL
+- ***Thickness:*** 1.6mm
+
+----
+
 ## Subsystems
 
 ### Power
