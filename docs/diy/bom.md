@@ -28,8 +28,8 @@ This value takes into account all the breaking points for a single E-TKT device 
 | :--- | :--- | :---: | :---: |
 | 3D print | filament — PETG | [link](http://prusa3d.com/product/prusament-petg-jet-black-1kg/) | ~220g |
 | socket head screw | ISO 4762 - M3 x 40 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 1 |
-| socket head screw | ISO 4762 - M3 x 20 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 23 |
-| socket head screw | ISO 4762 - M3 x 16 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 2 |
+| socket head screw | ISO 4762 - M3 x 20 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 18 |
+| socket head screw | ISO 4762 - M3 x 16 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 7 |
 | socket head screw | ISO 4762 - M3 x 10 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 4 |
 | socket head screw | ISO 4762 - M3 x 8 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 2 | 
 | socket head screw | ISO 4762 - M3 x 6 - A2-70 | [link](http://aliexpress.com/item/2261799963738734.html) | 9 | 
