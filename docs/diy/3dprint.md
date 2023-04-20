@@ -56,5 +56,5 @@ parent: 🛠️ do it yourself!
 - Wall line count: 3 + 1 (alternating extra wall with Cura)
 - Top/bottom layers: 5
 
-PS: [here](https://github.com/andreisperid/E-TKT/tree/main/_3dprint/source) you can find the source 3D file.
+PS: [here](https://github.com/andreisperid/E-TKT/tree/main/_3dprint/source) you can find the source 3D files (STEP).
 

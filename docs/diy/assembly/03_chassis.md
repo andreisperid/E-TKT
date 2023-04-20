@@ -34,7 +34,7 @@ This is the foundation of the device. From now on, things will be mounted over i
 ![_DSC0535](https://user-images.githubusercontent.com/15098003/196189610-3c69b50a-3eba-4d27-b47c-c80c869102b6.jpg)
 ![_DSC0536](https://user-images.githubusercontent.com/15098003/196189611-bf71f3fe-ee92-4b9e-aab3-4dbf89a4aed5.jpg)
 
-1. proceeed to use 2x m3x20 screws to hold the pillars, also from the bottom;
+1. proceeed to use 2x m3x16 screws to hold the pillars, also from the bottom;
 
 ## + lateral screws
 ![_DSC0537](https://user-images.githubusercontent.com/15098003/196189613-2fad8167-283b-4a59-a466-7019a5cd67af.jpg)

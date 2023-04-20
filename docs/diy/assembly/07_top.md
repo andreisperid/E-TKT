@@ -75,7 +75,7 @@ nav_order: 8
 ![_DSC0615](https://user-images.githubusercontent.com/15098003/196253546-2df40245-a25b-4911-be06-5963e3ea61ed.jpg)
 
 1. place 4x m3x20screws to attach the J_top vertically to the pillars and wall;
-2. finish by using 2x m3x20 screws on the side.
+2. finish by using 2x m3x16 screws on the side.
 
 
 
