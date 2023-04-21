@@ -47,7 +47,7 @@ async function retrieveSettings() {
   // TODO: consolidate this method with getStatus(), since they both now use the same API method.
 
   // retrieve settings from the device
-  let request = await fetchWithTimeout("api/status", {timeout: 5000});
+  let request = await fetchWithTimeout("api/status", { timeout: 5000 });
   let response = await request.json();
 
   align = response.align;
@@ -83,12 +83,19 @@ async function labelCommand() {
     // console.log('printing: "' + treatedLabel.toLowerCase() + '"');
     document.getElementById("text-input").blur();
     setUiBusy(true);
-    let response = await postJson("api/task", {parameter: "tag", value: treatedLabel.toLowerCase()});
+    let response = await postJson("api/task", { parameter: "tag", value: treatedLabel.toLowerCase() });
     if (!response.ok) {
       console.error("Unable to feed");
-      console.error((await response.json())["error"])
+      console.error((await response.json())["error"]);
     }
   }
+}
+
+function resizeForm(length) {
+  // resizes the form to fit the label
+
+  document.getElementById("text-input").size = length != 0 ? length : 11;
+  // console.log(document.getElementById("text-input").size);
 }
 
 function drawHelper() {
@@ -96,28 +103,31 @@ function drawHelper() {
 
   let field = document.getElementById("text-input");
   let fieldValue = field.value;
+  let displayFieldValue = fieldValue.replace(/\s/g, "&nbsp"); // only for the visual feedback
   let space = "X";
   let multiplier = 0;
   let mode = document.getElementById("mode-dropdown").value;
+  let scroll = document.getElementById("text-form-scroll"); // picks up the parent scroll element
+
   switch (mode) {
     case "margin":
       minSize = 12;
-      field.maxLength = 18;
-      if (field.value.length > 18) {
-        field.value = fieldValue.slice(0, 18);
-      }
+      // field.maxLength = 18;
+      // if (field.value.length > 18) {
+      //   field.value = fieldValue.slice(0, 18);
+      // }
       multiplier = 1;
       break;
     case "tight":
       minSize = 10;
       multiplier = 0;
-      field.maxLength = 20;
+      // field.maxLength = 20;
       break;
-    case "full":
-      minSize = 20;
-      multiplier = Math.floor((20 - field.value.length) / 2);
-      field.maxLength = 20;
-      break;
+    // case "full":
+    //   minSize = 20;
+    //   multiplier = Math.floor((20 - field.value.length) / 2);
+    //   // field.maxLength = 20;
+    //   break;
   }
 
   document.getElementById("clear-button").disabled = fieldValue === "";
@@ -133,7 +143,7 @@ function drawHelper() {
       // console.log("minimum length " + multiplier);
     }
     document.getElementById("size-helper-content").innerHTML =
-      space.repeat(multiplier) + "x".repeat(field.value.length) + space.repeat(multiplier);
+      space.repeat(multiplier) + displayFieldValue + space.repeat(multiplier);
 
     treatedLabel = " ".repeat(multiplier) + field.value + " ".repeat(multiplier);
     // console.log('"' + treatedLabel + '"');
@@ -143,6 +153,8 @@ function drawHelper() {
     document.getElementById("size-helper-content").innerHTML =
       space.repeat(multiplier) + (mode != "full" ? "WRITE HERE" : "") + space.repeat(multiplier);
   }
+
+  scroll.scrollLeft = scroll.scrollWidth; // makes sure the scroll is keeping up with margin instead of only text input
 }
 
 function validateField() {
@@ -153,6 +165,7 @@ function validateField() {
 
   let valid;
 
+  resizeForm(document.getElementById("text-input").value.length);
   drawHelper();
 
   if (!useRegex(fieldValue) && fieldValue != "") {
@@ -204,6 +217,7 @@ function clearField() {
   document.getElementById("submit-button").value = " ... ";
 
   textField.value = "";
+  textField.size = 11;
   treatedLabel = "";
 
   drawHelper();
@@ -317,10 +331,10 @@ async function reelCommand() {
     toggleSettings(false);
     setUiBusy(true);
     document.getElementById("submit-button").value = " reeling... ";
-    let response = await postJson("api/task", {parameter: "reel", value: ""});
+    let response = await postJson("api/task", { parameter: "reel", value: "" });
     if (!response.ok) {
       console.error("Unable to reel");
-      console.error((await response.json())["error"])
+      console.error((await response.json())["error"]);
     }
   }
 }
@@ -329,10 +343,10 @@ async function feedCommand() {
   // sends feed command to the device
   setUiBusy(true);
   document.getElementById("submit-button").value = " feeding... ";
-  let response = await postJson("api/task", {parameter: "feed", value: ""});
+  let response = await postJson("api/task", { parameter: "feed", value: "" });
   if (!response.ok) {
     console.error("Unable to feed");
-    console.error((await response.json())["error"])
+    console.error((await response.json())["error"]);
   }
 }
 
@@ -340,10 +354,10 @@ async function cutCommand() {
   // sends cut command to the device
   setUiBusy(true);
   document.getElementById("submit-button").value = " cutting... ";
-  let response = await postJson("api/task", {parameter: "cut", value: ""});
+  let response = await postJson("api/task", { parameter: "cut", value: "" });
   if (!response.ok) {
     console.error("Unable to cut");
-    console.error((await response.json())["error"])
+    console.error((await response.json())["error"]);
   }
 }
 
@@ -354,20 +368,20 @@ async function testCommand(testFull) {
   let data;
   if (testFull) {
     data = {
-      parameter: 'testfull',
-      value: align + "," + force
+      parameter: "testfull",
+      value: align + "," + force,
     };
   } else {
     data = {
-      parameter: 'testalign',
-      value: align + "," + 1
+      parameter: "testalign",
+      value: align + "," + 1,
     };
   }
   setUiBusy(true);
   let response = await postJson("api/task", data);
   if (!response.ok) {
     console.error("Unable to perform test");
-    console.error((await response.json())["error"])
+    console.error((await response.json())["error"]);
   }
 }
 
@@ -382,7 +396,7 @@ async function settingsCommand() {
   if (confirm("Confirm saving align [" + align + "] and force [" + force + "] settings?")) {
     setUiBusy(true);
     document.getElementById("submit-button").value = " saving... ";
-    let response = await postJson("api/task", {parameter: "save", value: align + "," + force});
+    let response = await postJson("api/task", { parameter: "save", value: align + "," + force });
     if (!response.ok) {
       console.error("Unable to save settings");
       console.error((await response.json())["error"]);
@@ -412,49 +426,46 @@ async function settingsCommand() {
 // See: https://dmitripavlutin.com/timeout-fetch-request/
 async function fetchWithTimeout(resource, options = {}) {
   const { timeout = 8000 } = options;
-  
+
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
   const response = await fetch(resource, {
     ...options,
-    signal: controller.signal  
+    signal: controller.signal,
   });
   clearTimeout(id);
   return response;
 }
 
-
 // Helper method to post a json request, supports timeouts.
 async function postJson(url, data, options = {}) {
   options.headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    "Content-Type": "application/json",
+    Accept: "application/json",
   };
   options.body = JSON.stringify(data);
-  options.method = 'POST';
+  options.method = "POST";
   return await fetchWithTimeout(url, options);
 }
 
-
 async function getStatus() {
   try {
-    let request = await fetchWithTimeout("api/status", {timeout: 5000});
+    let request = await fetchWithTimeout("api/status", { timeout: 5000 });
     handleData(await request.json());
   } catch (error) {
-    // TODO: Add some UI treatment for when there are communication errors, eg 
+    // TODO: Add some UI treatment for when there are communication errors, eg
     // a "Reconnecting..." toast message or something.
-    console.error("Problem ")
+    console.error("Problem ");
     console.error(error);
   } finally {
     setTimeout(getStatus, 1000);
   }
 }
 
-
 wasBusy = false;
 
 // Enables or disables UI elements to prevent intercations while the printer is printing,
-// reeling, cutting, etc. 
+// reeling, cutting, etc.
 function setUiBusy(busy) {
   if (busy && !wasBusy) {
     // Disable UI elements
@@ -490,12 +501,15 @@ function handleData(data_json) {
     percentage -= 1; // avoid 100% progress while still finishing
   }
 
+  let scroll = document.getElementById("text-form-scroll"); // picks up the parent scroll element
+
   switch (data_json.command) {
     case "tag":
       document.getElementById("submit-button").value = " printing " + percentage + "% ";
       let body = document.getElementsByTagName("body")[0];
       body.dataset.printing = "true";
       document.getElementById("progress-bar").style.width = percentage.toString() + "%";
+      scroll.scrollLeft = ((scroll.scrollWidth / 2) * percentage) / 100;
       break;
     case "reel":
       document.getElementById("submit-button").value = " reeling... ";
