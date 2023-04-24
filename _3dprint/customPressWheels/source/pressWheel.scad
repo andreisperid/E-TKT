@@ -162,7 +162,7 @@ module botDsc(){
       cube([8.3,2,botDscThck+0.7]);
   //chars
   color("ivory") for (i=[0:len(chars)-1])
-    rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,3.4]) rotate([charTilt,0,90]) 
+    rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,2.8]) rotate([charTilt,0,90]) 
       linear_extrude(embHght) text(chars[i],size=txtSize, halign="center");
 }
 
