@@ -21,15 +21,15 @@ $fn=50;
 //charset
 chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ-.1234567890X";
 //general spacing between all parts
-spcng=0.1; //spacing between parts
+spcng=0.2; //spacing between parts
 
 /* [Emboss] */
 //height above baseline
 txtSize=2.5; 
 //spacing positive and negative
-embSpcng=0.05; 
+embSpcng=0.15; 
 //embossing height
-embHght=0.5; 
+embHght=1.0; 
 
 /* [Top Disc] */
 //outer Dia of top disc (negative)
