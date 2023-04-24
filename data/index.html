@@ -90,8 +90,13 @@
             </div>
 
             <div id="single-column" style="margin-top: 40px; position: relative">
+              <div id="tips">
+                <div id="tip-left" class="tip-child">...</div>
+                <div id="tip-right" class="tip-child">...</div>
+              </div>
+
               <div id="text-form-border">
-                <div id="text-form-scroll">
+                <div id="text-form-scroll" onscroll="updateScrollHelper()">
                   <div id="text-form-content">
                     <div id="size-helper">
                       <div id="progress-bar"></div>

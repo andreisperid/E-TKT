@@ -157,6 +157,35 @@ function drawHelper() {
   scroll.scrollLeft = scroll.scrollWidth; // makes sure the scroll is keeping up with margin instead of only text input
 }
 
+function updateScrollHelper() {
+  // shows "..." helper if text is overflowed to that side
+
+  let scroll = document.getElementById("text-form-scroll");
+  let leftHelper = document.getElementById("tip-left");
+  let rightHelper = document.getElementById("tip-right");
+
+  // console.log(Math.round(scroll.scrollLeft + scroll.offsetWidth), scroll.scrollWidth);
+
+  if (scroll.scrollWidth > scroll.offsetWidth) {
+    if (
+      Math.round(scroll.scrollLeft + scroll.offsetWidth) >=
+      scroll.scrollWidth - 1 // "1" is margin of error
+    ) {
+      rightHelper.style.visibility = "hidden";
+    } else {
+      rightHelper.style.visibility = "visible";
+    }
+    if (scroll.scrollLeft == 0) {
+      leftHelper.style.visibility = "hidden";
+    } else {
+      leftHelper.style.visibility = "visible";
+    }
+  } else {
+    rightHelper.style.visibility = "hidden";
+    leftHelper.style.visibility = "hidden";
+  }
+}
+
 function validateField() {
   // instantly validates label field by blocking buttons and giving visual feedback
 

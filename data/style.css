@@ -146,6 +146,21 @@ button {
   background: #d6d6d620;
 }
 
+#tips {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 114%;
+  margin: 9px 0 0 -7%;
+  pointer-events: none;
+}
+
+.tip-child {
+  filter: drop-shadow(-1px -1px 1px rgb(255, 255, 255));
+  font-size: 9px;
+  visibility: hidden;
+}
+
 #text-form-border {
   width: 100%;
   /* background-color: rgba(255, 255, 255, 0.05); */
