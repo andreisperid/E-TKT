@@ -26,8 +26,10 @@ spcng=0.2; //spacing between parts
 /* [Emboss] */
 //textheight above baseline
 txtSize=2.5; 
-//spacing positive and negative
-embSpcng=0.15; 
+//X-Y spacing between positive and negative
+embXYSpcng=0.15; 
+//Z spacing between positive and negative
+embZSpcng=0.15; 
 //embossing height
 embHght=0.5; 
 
@@ -73,6 +75,7 @@ showSection= false;
 wheelRot=0;
 //tilt the wheels to have the tip of tongue lay flat
 wheelTilt= false;
+showCharInTopDsc=false;
 
 /* [Hidden] */
 charTilt=8.9;
@@ -105,6 +108,18 @@ if (showBotDsc)
         translate([0,-(botDscDia/2+fudge)/2,(botCntrHght+topDscThck)/2]) 
           cube([botDscDia+fudge,botDscDia/2+fudge,botCntrHght+topDscThck+fudge],true);
     }
+//tuning: show the chars as if they where pressed into the top disc    
+if (showCharInTopDsc)
+  rotate([0,sectYTilt,0]) difference(){
+    color("ivory") for (i=[0:len(chars)-1])
+      rotate(tngAng*i+tngAng+sectZRot) translate([bsLneDia/2,0,botCntrHght]) 
+        rotate([0,0,90]) linear_extrude(embHght,convexity=3) 
+          text(chars[i],size=txtSize, halign="center");
+    if (showSection) color("darkred")
+      translate([0,-(topDscDia/2+fudge)/2,botCntrHght+topDscThck/2]) 
+        cube([topDscDia+fudge,topDscDia/2+fudge,topDscThck+fudge],true);
+  }
+
 //debug tongue cross section
 *polygon(dscPoly);
 
@@ -132,8 +147,8 @@ module topDsc(){
       //chars
       for (i=[0:len(chars)-1])
         rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,-fudge]) 
-          rotate([0,0,90]) linear_extrude(embHght+fudge) 
-            offset(embSpcng) text(chars[i],size=txtSize, halign="center");
+          rotate([0,0,90]) linear_extrude(embHght+embZSpcng+fudge) 
+            offset(embXYSpcng) text(chars[i],size=txtSize, halign="center");
     }
 }
 
