@@ -226,7 +226,97 @@ module botDsc(){
           text(chars[i],size=txtSize, halign="center");
 }
 
-
+*sixteenSegment();
+module sixteenSegment(size=2.5, draw=["a1"]){
+  //can give in draw a list of segments to draw, if nothing is given all segments are drawn
+  /*
+        a1  a2
+       ---i--- 
+      |\h | j/|
+     f| \ | / |b
+      |  \|/  |
+     g1--- ---g2
+      |  /|\  |
+     e| / | \ |c
+      |/k | m\|
+       ---l---
+       d1   d2
+  */
+  // https://en.wikipedia.org/wiki/Sixteen-segment_display
+  stroke=size/15;
+  gap=0.03;
+  gap45=gap/(1/2*sqrt(2));
+  ovWdth=size/2;
+  ovHght=size*0.95; //size correction
+  
+  //text for size and positioning reference
+  *text("8",halign="center",size=2.5);
+  
+  segments=[["a1",1],["a2",2],["b",3],["c",4],["d1",5],["d2",6],["e",7],["f",8],["g1",9],["g2",10],["h",11], ["i",12],["j",13], ["k",14], ["l",15],["m",16]];
+  segType= ["h", "h", "v","v","h", "h", "v","v","h", "h", "dd","v","du","du","v","dd"]; //h,v,dd,du (diagonal down, up)
+  segPos=[
+          [-ovWdth/4,ovHght],//a1
+          [ovWdth/4,ovHght],//a2
+          [ovWdth/2,ovHght*3/4], //b
+          [ovWdth/2,ovHght/4], //c
+          [-ovWdth/4,0],//d1
+          [ovWdth/4,0],//d2
+          [-ovWdth/2,ovHght/4], //e
+          [-ovWdth/2,ovHght*3/4], //f
+          [-ovWdth/4,ovHght/2],//g1
+          [ovWdth/4,ovHght/2],//g2  
+          [-ovWdth/4,ovHght*3/4],//h
+          [0,ovHght*3/4],//i  
+          [ovWdth/4,ovHght*3/4],//j
+          [-ovWdth/4,ovHght/4],//k
+          [0,ovHght/4],//l
+          [ovWdth/4,ovHght/4],//m
+          ];
+  
+  segID=search(draw,segments);
+  echo(segID);
+  //draw all segments
+  selection= (len(segID)==0) ? [0:len(segments)] :  segID;
+  for (i=selection){
+    if (segType[i]=="h")
+      translate(segPos[i]) horizontal();
+    if (segType[i]=="v")
+      translate(segPos[i]) vertical();
+    if (segType[i]=="du")
+      translate(segPos[i]) diagonal(true);
+    if (segType[i]=="dd")
+      translate(segPos[i]) diagonal(false);
+  }
+  /*
+  else if (segType[segID]=="h")
+    translate(segPos[i]) horizontal();
+  else if (segType[segID]=="v")
+    translate(segPos[i]) vertical();
+  else if (segType[segID]=="du")
+    translate(segPos[i]) diagonal(true);
+  else if (segType[segID]=="dd")
+    translate(segPos[i]) diagonal(false);
+  */
+  module vertical(){
+    hull() for (iy=[-1,1])
+      translate([0,iy*(ovHght/2-stroke-gap45)/2]) cylinder(d=stroke, $fn=4);
+  }
+  module horizontal(){
+    hull() for (ix=[-1,1])
+      translate([ix*(ovWdth/2-stroke-gap45)/2,0]) cylinder(d=stroke, $fn=4);
+  }
+  
+  module diagonal(isUp=true){
+    poly=[
+          [-(ovWdth-stroke)/2+gap,(ovHght-stroke)/2-gap],
+          [-stroke/2-gap,stroke*2+gap],
+          [-stroke/2-gap,stroke/2+gap],
+          [-(ovWdth-stroke)/2+gap,ovHght/2-stroke*2-gap]
+    ];
+    im = isUp ? [1,0,0] : [0,0,0] ;
+    mirror(im) translate([ovWdth/4,-ovHght/4]) polygon(poly);
+  }
+}
 
 
 
