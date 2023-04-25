@@ -44,8 +44,8 @@ async function startupRoutine() {
 }
 
 function checkScrollbarWidth() {
-  const outer = document.createElement('div');
-  outer.style.overflow = 'scroll';
+  const outer = document.createElement("div");
+  outer.style.overflow = "scroll";
   document.body.appendChild(outer);
 
   const scrollbarWidth = outer.offsetWidth - outer.clientWidth;
@@ -56,12 +56,12 @@ function checkScrollbarWidth() {
 
 /**
  * Attempts to detect if overlay scrollbars are in use, and adds a css class we can
- * change layout behavior on. 
+ * change layout behavior on.
  */
 function checkOverlayScrollbars() {
   const scrollbarWidth = checkScrollbarWidth();
   if (scrollbarWidth === 0) {
-    document.body.classList.add('overlay-scroll-enabled');
+    document.body.classList.add("overlay-scroll-enabled");
   }
 }
 
@@ -83,8 +83,8 @@ async function retrieveSettings() {
 
 function measureText(element, text) {
   // Create a temporary canvas element
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
 
   // Apply the styles (height and font) from the element to the context
   const style = getComputedStyle(element);
@@ -136,15 +136,15 @@ function buildTreatedLabel() {
       multiplier = 0;
       break;
     default:
-      multiplier = 1
+      multiplier = 1;
       break;
   }
 
-  const printLength = fieldValue.length + (multiplier * 2);
+  const printLength = fieldValue.length + multiplier * 2;
   if (printLength < 7) {
     multiplier = Math.ceil((7 - printLength) / 2);
   }
-  return " ".repeat(multiplier) + fieldValue + " ".repeat(multiplier)
+  return " ".repeat(multiplier) + fieldValue + " ".repeat(multiplier);
 }
 
 function getScrollbarHeight(element) {
@@ -182,30 +182,32 @@ function drawHelper() {
     } else if (labelInput.selectionStart && labelInput.selectionStart < 20) {
       scroll.scrollLeft = 0;
     }
-    // Avoid leaving the scroll position past the end of the "needed" scrollable area.  
+    // Avoid leaving the scroll position past the end of the "needed" scrollable area.
     // Dunno why browsers let you do this.
     if (scroll.scrollLeft + neededWidth > scroll.scrollWidth) {
       scroll.scrollLeft = neededWidth - scroll.clientWidth;
     }
     border.classList.add("scrolling");
-
   } else {
     border.classList.remove("scrolling");
     scroll.scrollLeft = 0;
   }
 
   onTextInputSelectionchange();
-} 
+}
 
 function onTextInputSelectionchange() {
   const labelInput = document.getElementById("text-input");
   const scroll = document.getElementById("text-form-scroll");
 
-  // If the selection is at the beginning or end of the text, then move the scroll area to 
+  // If the selection is at the beginning or end of the text, then move the scroll area to
   // the beginning or end to include the label margins.
   if (labelInput.selectionStart == labelInput.selectionEnd && labelInput.selectionEnd == 0) {
     scroll.scrollLeft = 0;
-  } else if (labelInput.selectionStart == labelInput.selectionEnd && labelInput.selectionEnd == labelInput.value.length) {
+  } else if (
+    labelInput.selectionStart == labelInput.selectionEnd &&
+    labelInput.selectionEnd == labelInput.value.length
+  ) {
     scroll.scrollLeft = scroll.scrollWidth - scroll.clientWidth;
   }
 }
@@ -255,6 +257,21 @@ function updateScrollHelper() {
   }
 }
 
+function jumpToScrollEnds(target) {
+  // jumps to the scroll target where 0 is the start and 1 the end
+
+  let labelInput = document.getElementById("text-input");
+  labelInput.focus();
+  labelInput.setSelectionRange(target * labelInput.value.length, target * labelInput.value.length );
+
+  // let scroll = document.getElementById("text-form-scroll");
+  // scroll.scrollTo({ left: target * scroll.scrollWidth, behavior: "smooth" });
+}
+
+function lerp(start, end, amt) {
+  return (1 - amt) * start + amt * end;
+}
+
 function validateField() {
   // instantly validates label field by blocking buttons and giving visual feedback
   let labelInput = document.getElementById("text-input");
@@ -281,7 +298,7 @@ function labelTextChanged() {
 }
 
 function labelTextKeyDown(e) {
-  if (e.key === 'Enter' && isValidLabelText()) {
+  if (e.key === "Enter" && isValidLabelText()) {
     document.getElementById("submit-button").click();
   }
   onTextInputSelectionchange();

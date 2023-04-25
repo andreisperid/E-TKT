@@ -276,15 +276,20 @@ button {
   position: absolute;
   display: flex;
   justify-content: space-between;
-  width: 114%;
-  margin: 9px 0 0 -7%;
+  width: 116.5%;
+  margin: 1px 0 0 -8%;
   pointer-events: none;
 }
 
 .tip-child {
-  filter: drop-shadow(-1px -1px 1px rgb(255, 255, 255));
+  /* filter: drop-shadow(-1px -1px 1px rgb(255, 255, 255)); */
+  background-image: linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,0.05),rgba(255,255,255,0.05),rgba(255,255,255,0));
+  /* border-radius: 5px; */
+  padding: 11px 8px 14px 8px;
   font-size: 9px;
   visibility: hidden;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 #text-form-border {
