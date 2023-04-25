@@ -15,6 +15,13 @@
   
 */
 
+/*
+  About symbols and fonts
+  for portability you should use the fonts embedded with openSCAD (LiberationSans,..Mono,..Serif, see Help->Fontlist)
+  you can use some Unicode Characters as well by either copying them from a website or using the codes like \u263A (Smiley hex)
+  e.g. https://www.vertex42.com/ExcelTips/unicode-symbols.html
+  Attention! most of them will not work
+*/
 
 /* [Parameters] */
 $fn=50;
