@@ -29,11 +29,14 @@ let align;
 let force;
 let alignTemp;
 let forceTemp;
+let scrollbarHeight = 0;
 
 window.onload = startupRoutine;
 
 async function startupRoutine() {
   checkOverlayScrollbars();
+  let body = document.getElementsByTagName("body")[0];
+  body.dataset.printing = "false";
   drawHelper();
   document.getElementById("text-input").focus();
   await retrieveSettings();
@@ -157,6 +160,7 @@ function drawHelper() {
   const labelInput = document.getElementById("text-input");
   const labelText = labelInput.value;
   const scroll = document.getElementById("text-form-scroll"); // picks up the parent scroll element
+  const border = document.getElementById("text-form-border");
 
   document.getElementById("clear-button").disabled = labelText === "";
   document.getElementById("submit-button").disabled = labelText === "";
@@ -165,7 +169,6 @@ function drawHelper() {
   document.getElementById("cut-button").disabled = !(labelText === "");
   document.getElementById("setup-button").disabled = !(labelText === "");
 
- 
   labelInput.style.width = measureText(labelInput, buildTreatedLabel()) + 4 + "px";
   labelInput.style.minWidth = measureText(labelInput, " ".repeat(7)) + 4 + "px";
 
@@ -184,9 +187,10 @@ function drawHelper() {
     if (scroll.scrollLeft + neededWidth > scroll.scrollWidth) {
       scroll.scrollLeft = neededWidth - scroll.clientWidth;
     }
-    scroll.classList.add("scrolling");
+    border.classList.add("scrolling");
+
   } else {
-    scroll.classList.remove("scrolling");
+    border.classList.remove("scrolling");
     scroll.scrollLeft = 0;
   }
 

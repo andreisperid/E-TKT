@@ -140,12 +140,12 @@ button {
   justify-content: center;
 }
 
-#text-form-scroll.scrolling {
+.scrolling #text-form-scroll {
   overflow-x: scroll;
 }
 
 /* Hide the scrollbar and prevent manual scrolling while printing */
-[data-printing="true"] #text-form-scroll.scrolling {
+[data-printing="true"] .scrolling #text-form-scroll {
   overflow-x: hidden;
 }
 
@@ -161,11 +161,20 @@ button {
   left: 0;
 }
 
+#text-form-border.scrolling {
+  margin-bottom: 0px;
+}
+
+[data-printing="true"] #text-form-border.scrolling {
+  margin-bottom: 12.5px;
+}
+
+
 /*
  * Firefox specific rules to style the scrollbar.
  */
 @supports (-moz-appearance:none) {
-  #text-form-scroll.scrolling { 
+  .scrolling #text-form-scroll { 
     scrollbar-color: #808080 transparent;
   }
 }
@@ -177,7 +186,19 @@ button {
   z-index: 10;
 }
 
-[data-printing="true"] .overlay-scroll-enabled .scrolling .overlay-gutter {
+.overlay-scroll-enabled #text-form-border{
+  margin-bottom: 14px;
+}
+
+.overlay-scroll-enabled #text-form-border.scrolling {
+  margin-bottom: 0px;
+}
+
+[data-printing="true"].overlay-scroll-enabled #text-form-border.scrolling {
+  margin-bottom: 14px;
+}
+
+[data-printing="true"].overlay-scroll-enabled .scrolling .overlay-gutter {
   height: 0px;
 }
 /*
@@ -185,15 +206,35 @@ button {
   * so style the elements appropriately.
   */
 @media screen and (max-width: 760px) {
+    .overlay-scroll-enabled #text-form-border{
+      margin-bottom: 8px;
+    }
+    
+    .overlay-scroll-enabled #text-form-border.scrolling {
+      margin-bottom: 0px;
+    }
+    
+    [data-printing="true"].overlay-scroll-enabled #text-form-border.scrolling {
+      margin-bottom: 8px;
+    }
+    
+    [data-printing="true"].overlay-scroll-enabled .scrolling .overlay-gutter {
+      height: 0px;
+    }
+
     .overlay-scroll-enabled .scrolling .overlay-gutter {
       height: 8px;
+    }
+
+    .overlay-scroll-enabled #text-form-border {
+      margin-bottom: 8px;
     }
     
     #text-form-scroll { 
       scrollbar-color: transparent #252A32;
     }
 
-    [data-printing="true"] .overlay-scroll-enabled .scrolling .overlay-gutter {
+    [data-printing="true"].overlay-scroll-enabled .scrolling .overlay-gutter {
       height: 0px;
     }
 }
@@ -205,6 +246,14 @@ button {
 @supports (-webkit-touch-callout: none) {
   .overlay-gutter {
     display: none !important;
+  }
+
+  #text-form-border {
+    margin-bottom: 0px !important;
+  }
+
+  .overlay-scroll-enabled #text-form-border {
+    margin-bottom: 0px;
   }
 }
 
@@ -245,6 +294,7 @@ button {
   border-width: 0 1px 1px 0;
   border-radius: 2px;
   box-shadow: 0px 5px 10px rgba(255, 255, 255, 0.25);
+  margin-bottom: 12.5px;
 }
 
 #progress-bar-container {
@@ -261,7 +311,7 @@ button {
 
 [data-printing="true"] #text-input {
   box-shadow: none;
-  border-style: none;
+  border: solid transparent 2px;
   background: transparent;
 }
 
