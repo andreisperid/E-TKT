@@ -15,6 +15,13 @@
   
 */
 
+/*
+  About symbols and fonts
+  for portability you should use the fonts embedded with openSCAD (LiberationSans,..Mono,..Serif, see Help->Fontlist)
+  you can use some Unicode Characters as well by either copying them from a website or using the codes like \u263A (Smiley hex)
+  e.g. https://www.vertex42.com/ExcelTips/unicode-symbols.html
+  Attention! most of them will not work
+*/
 
 /* [Parameters] */
 $fn=50;
@@ -24,14 +31,18 @@ chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ-.1234567890X";
 spcng=0.2; //spacing between parts
 
 /* [Emboss] */
-//height above baseline
+//textheight above baseline
 txtSize=2.5; 
-//spacing positive and negative
-embSpcng=0.15; 
+//X-Y spacing between positive and negative
+embXYSpcng=0.15; 
+//Z spacing between positive and negative
+embZSpcng=0.15; 
 //embossing height
-embHght=1.0; 
+embHght=0.5; 
 
 /* [Top Disc] */
+// render a label with the characterset
+rndrTopLabel=true;
 //outer Dia of top disc (negative)
 topDscDia=55.9; 
 //Thickness of top disc
@@ -66,26 +77,63 @@ cntrBore=7.1;
 showTopDsc = true;
 showBotDsc = true;
 
+/* [Tune] */
+//apply a sectionCut 
+showSection= false;
+//select char to cut, 0: anvil
+wheelRot=0;
+//tilt the wheels to have the tip of tongue lay flat
+wheelTilt= false;
+showCharInTopDsc=false;
 
 /* [Hidden] */
-//a polygon to revolute into the disc shape
-charCount=len(chars); 
-dscPoly=[[botCntrDia/2,2.15],[sltCntrDia/2,2.15],[37.6/2,2],[38.6/2,3],[botDscDia/2,2], //bottom face
-         [botDscDia/2,2+botDscThck],[38.6/2-0.5,3+botDscThck],[37.6/2-0.5,2+botDscThck],[sltCntrDia/2,2.15+botDscThck],[botCntrDia/2,2.15+botDscThck]];
-tngAng=360/(charCount+1); //angle of one tongue
 charTilt=8.9;
 fudge=0.1;
 //guide dimensions
 gdWdth=2;
+//a polygon to revolute into the disc shape
+charCount=len(chars); 
+dscPoly=[[botCntrDia/2-fudge,2.15],[sltCntrDia/2,2.15],[37.6/2,2],[38.6/2,3],[botDscDia/2,2], //bottom face
+         [botDscDia/2,2+botDscThck],[38.6/2-0.5,3+botDscThck],[37.6/2-0.5,2+botDscThck],[sltCntrDia/2,2.15+botDscThck],[botCntrDia/2-fudge,2.15+botDscThck]];
+tngAng=360/(charCount+1); //angle of one tongue
+
 lngGuide=botCntrDia+3.3;
 shrtGuide=botCntrDia;
+sectZRot = wheelRot ? wheelRot*tngAng : 0;
+sectYTilt = wheelTilt ? -charTilt : 0;
 
-if (showTopDsc) topDsc();
-if (showBotDsc) botDsc();
+if (showTopDsc){
+  rotate([0,sectYTilt,0]) difference(){
+    rotate(sectZRot) topDsc();
+    if (showSection) color("darkred")
+      translate([0,-(topDscDia/2+fudge)/2,botCntrHght+topDscThck/2]) 
+        cube([topDscDia+fudge,topDscDia/2+fudge,topDscThck+fudge],true);
+    }
+}
+if (showBotDsc) 
+  rotate([0,sectYTilt,0]) difference(){
+    rotate(sectZRot) botDsc();
+    if (showSection) color("darkred")
+        translate([0,-(botDscDia/2+fudge)/2,(botCntrHght+topDscThck)/2]) 
+          cube([botDscDia+fudge,botDscDia/2+fudge,botCntrHght+topDscThck+fudge],true);
+    }
+//tuning: show the chars as if they where pressed into the top disc    
+if (showCharInTopDsc)
+  rotate([0,sectYTilt,0]) difference(){
+    color("ivory") for (i=[0:len(chars)-1])
+      rotate(tngAng*i+tngAng+sectZRot) translate([bsLneDia/2,0,botCntrHght]) 
+        rotate([0,0,90]) linear_extrude(embHght,convexity=3) 
+          text(chars[i],size=txtSize, halign="center");
+    if (showSection) color("darkred")
+      translate([0,-(topDscDia/2+fudge)/2,botCntrHght+topDscThck/2]) 
+        cube([topDscDia+fudge,topDscDia/2+fudge,topDscThck+fudge],true);
+  }
+
 //debug tongue cross section
 *polygon(dscPoly);
 
 module topDsc(){
+  lblThck=0.2;
   //top disc with negatives
   color("darkSlateGrey") translate([0,0,botCntrHght]) 
     difference(){
@@ -104,13 +152,23 @@ module topDsc(){
           hull() for (iy=[0,1])
             translate([0,iy*(lngGuide-gdWdth)/2])
               circle(d=gdWdth+spcng);
-            
         }
+      //groove for labels
+      if (rndrTopLabel)
+        rotate_extrude() translate([bsLneDia/2-txtSize*1.25,topDscThck-lblThck,0]) 
+          square([txtSize*1.5,lblThck+fudge]);
       //chars
       for (i=[0:len(chars)-1])
-        rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,0-0.01]) rotate([0,0,90]) 
-          linear_extrude(embHght+0.01) offset(embSpcng) text(chars[i],size=txtSize, halign="center");
+        rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,-fudge]) 
+          rotate([0,0,90]) linear_extrude(embHght+embZSpcng+fudge) 
+            offset(embXYSpcng) text(chars[i],size=txtSize, halign="center");
     }
+    //labels
+    color("yellow") if (rndrTopLabel)
+      for (i=[0:len(chars)-1])
+        rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,topDscThck+5]) 
+          rotate([0,0,90]) linear_extrude(lblThck) 
+            text(chars[i],size=txtSize, halign="center");
 }
 
 module botDsc(){
@@ -162,8 +220,10 @@ module botDsc(){
       cube([8.3,2,botDscThck+0.7]);
   //chars
   color("ivory") for (i=[0:len(chars)-1])
-    rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,2.8]) rotate([charTilt,0,90]) 
-      linear_extrude(embHght) text(chars[i],size=txtSize, halign="center");
+    rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,3.4-0.2]) // z-Offset to connect chars to tongue tipp securely
+      rotate([charTilt,0,90]) 
+        linear_extrude(embHght+0.14, convexity=3) //compensate for z-Offset of chars
+          text(chars[i],size=txtSize, halign="center");
 }
 
 
