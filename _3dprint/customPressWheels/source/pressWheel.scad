@@ -34,6 +34,8 @@ embZSpcng=0.15;
 embHght=0.5; 
 
 /* [Top Disc] */
+// render a label with the characterset
+rndrTopLabel=true;
 //outer Dia of top disc (negative)
 topDscDia=55.9; 
 //Thickness of top disc
@@ -124,6 +126,7 @@ if (showCharInTopDsc)
 *polygon(dscPoly);
 
 module topDsc(){
+  lblThck=0.2;
   //top disc with negatives
   color("darkSlateGrey") translate([0,0,botCntrHght]) 
     difference(){
@@ -142,14 +145,23 @@ module topDsc(){
           hull() for (iy=[0,1])
             translate([0,iy*(lngGuide-gdWdth)/2])
               circle(d=gdWdth+spcng);
-            
         }
+      //groove for labels
+      if (rndrTopLabel)
+        rotate_extrude() translate([bsLneDia/2-txtSize*1.25,topDscThck-lblThck,0]) 
+          square([txtSize*1.5,lblThck+fudge]);
       //chars
       for (i=[0:len(chars)-1])
         rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,-fudge]) 
           rotate([0,0,90]) linear_extrude(embHght+embZSpcng+fudge) 
             offset(embXYSpcng) text(chars[i],size=txtSize, halign="center");
     }
+    //labels
+    color("yellow") if (rndrTopLabel)
+      for (i=[0:len(chars)-1])
+        rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,topDscThck+5]) 
+          rotate([0,0,90]) linear_extrude(lblThck) 
+            text(chars[i],size=txtSize, halign="center");
 }
 
 module botDsc(){
