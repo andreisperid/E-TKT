@@ -77,8 +77,8 @@ fudge=0.1;
 gdWdth=2;
 //a polygon to revolute into the disc shape
 charCount=len(chars); 
-dscPoly=[[botCntrDia/2,2.15],[sltCntrDia/2,2.15],[37.6/2,2],[38.6/2,3],[botDscDia/2,2], //bottom face
-         [botDscDia/2,2+botDscThck],[38.6/2-0.5,3+botDscThck],[37.6/2-0.5,2+botDscThck],[sltCntrDia/2,2.15+botDscThck],[botCntrDia/2,2.15+botDscThck]];
+dscPoly=[[botCntrDia/2-fudge,2.15],[sltCntrDia/2,2.15],[37.6/2,2],[38.6/2,3],[botDscDia/2,2], //bottom face
+         [botDscDia/2,2+botDscThck],[38.6/2-0.5,3+botDscThck],[37.6/2-0.5,2+botDscThck],[sltCntrDia/2,2.15+botDscThck],[botCntrDia/2-fudge,2.15+botDscThck]];
 tngAng=360/(charCount+1); //angle of one tongue
 
 lngGuide=botCntrDia+3.3;
