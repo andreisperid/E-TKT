@@ -26,7 +26,8 @@
 /* [Parameters] */
 $fn=50;
 //charset
-chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ-.1234567890X";
+charset= "custom"; //["custom","16segment"]
+cstmChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ-.1234567890X";
 //general spacing between all parts
 spcng=0.2; //spacing between parts
 
@@ -91,6 +92,12 @@ charTilt=8.9;
 fudge=0.1;
 //guide dimensions
 gdWdth=2;
+
+
+// -- charsets --
+segmented16=["a1","a2","b","c","d1","d2","e","f","g1","g2","h","i","j","k","l","m"];
+
+chars = cstmChars;
 //a polygon to revolute into the disc shape
 charCount=len(chars); 
 dscPoly=[[botCntrDia/2-fudge,2.15],[sltCntrDia/2,2.15],[37.6/2,2],[38.6/2,3],[botDscDia/2,2], //bottom face
@@ -226,7 +233,6 @@ module botDsc(){
           text(chars[i],size=txtSize, halign="center");
 }
 
-*sixteenSegment();
 module sixteenSegment(size=2.5, draw=["a1"]){
   //can give in draw a list of segments to draw, if nothing is given all segments are drawn
   /*
