@@ -21,15 +21,15 @@ $fn=50;
 //charset
 chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ-.1234567890X";
 //general spacing between all parts
-spcng=0.1; //spacing between parts
+spcng=0.2; //spacing between parts
 
 /* [Emboss] */
 //height above baseline
 txtSize=2.5; 
 //spacing positive and negative
-embSpcng=0.05; 
+embSpcng=0.15; 
 //embossing height
-embHght=0.5; 
+embHght=1.0; 
 
 /* [Top Disc] */
 //outer Dia of top disc (negative)
@@ -162,7 +162,7 @@ module botDsc(){
       cube([8.3,2,botDscThck+0.7]);
   //chars
   color("ivory") for (i=[0:len(chars)-1])
-    rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,3.4]) rotate([charTilt,0,90]) 
+    rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,2.8]) rotate([charTilt,0,90]) 
       linear_extrude(embHght) text(chars[i],size=txtSize, halign="center");
 }
 
