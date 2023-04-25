@@ -26,7 +26,8 @@
 /* [Parameters] */
 $fn=50;
 //charset
-chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ-.1234567890X";
+charset= "custom"; //["custom","16segment"]
+cstmChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ-.1234567890X";
 //general spacing between all parts
 spcng=0.2; //spacing between parts
 
@@ -91,6 +92,14 @@ charTilt=8.9;
 fudge=0.1;
 //guide dimensions
 gdWdth=2;
+
+
+// -- charsets --
+//16 segement LCD inspired charset, each segment alone plus some common combinations, can be combined to capital, lowercase and numbers
+segmented16=[["a1"],["a2"],["b"],["c"],["d1"],["d2"],["e"],["f"],["g1"],["g2"],["h"], ["i"],["j"], ["k"], ["l"],["m"],
+             ["a1","a2"],["d1","d2"],["g1","g2"],["j","k"],["a1","a2","f","e"],["d1","d2","b","c"],["h","m"],["a1","a2","b","c","d1","d2","e","f"]];
+
+chars = (charset=="custom") ? cstmChars : segmented16;
 //a polygon to revolute into the disc shape
 charCount=len(chars); 
 dscPoly=[[botCntrDia/2-fudge,2.15],[sltCntrDia/2,2.15],[37.6/2,2],[38.6/2,3],[botDscDia/2,2], //bottom face
@@ -157,18 +166,27 @@ module topDsc(){
       if (rndrTopLabel)
         rotate_extrude() translate([bsLneDia/2-txtSize*1.25,topDscThck-lblThck,0]) 
           square([txtSize*1.5,lblThck+fudge]);
-      //chars
+          
+      //chars 
       for (i=[0:len(chars)-1])
-        rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,-fudge]) 
-          rotate([0,0,90]) linear_extrude(embHght+embZSpcng+fudge) 
-            offset(embXYSpcng) text(chars[i],size=txtSize, halign="center");
+          rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,-fudge]) 
+            rotate([0,0,90]) linear_extrude(embHght+embZSpcng+fudge) 
+            if(charset=="custom")
+              offset(embXYSpcng) text(chars[i],size=txtSize, halign="center");
+            else if (charset=="16segment")
+              offset (embXYSpcng) sixteenSegment(size=2.5, draw=segmented16[i]); 
+              
     }
     //labels
-    color("yellow") if (rndrTopLabel)
-      for (i=[0:len(chars)-1])
-        rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,topDscThck+5]) 
-          rotate([0,0,90]) linear_extrude(lblThck) 
-            text(chars[i],size=txtSize, halign="center");
+    color("yellow") if (rndrTopLabel){
+        for (i=[0:len(chars)-1])
+          rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,topDscThck+5]) 
+            rotate([0,0,90]) linear_extrude(lblThck) 
+            if(charset=="custom")
+              text(chars[i],size=txtSize, halign="center");
+            else if(charset=="16segment")
+              sixteenSegment(size=2.5, draw=segmented16[i]);
+    }
 }
 
 module botDsc(){
@@ -203,9 +221,9 @@ module botDsc(){
       translate([0,0,-botCntrHght-fudge/2]) cylinder(d=cntrBore,h=topDscThck+botCntrHght+fudge);
     }
   
-  //pressing disc
+  //rotate extrude the cross section and cut slots
   color("ivory") rotate(-tngAng/2) difference(){
-    rotate_extrude($fn=charCount+1) polygon(dscPoly);
+    rotate_extrude($fn=50/*charCount+1*/) polygon(dscPoly);
     //slots
      for (ang=[0:tngAng:360-tngAng]){
       sltLngth=(ang<tngAng*2) ? (botDscDia-sltCntrDia)/2-3 : (botDscDia-sltCntrDia)/2;
@@ -218,15 +236,99 @@ module botDsc(){
   color("ivory") translate([botDscDia/2+1.4,0,3]) 
     rotate([0,charTilt,0]) translate([-8.3,-1,-botDscThck]) 
       cube([8.3,2,botDscThck+0.7]);
+      
   //chars
   color("ivory") for (i=[0:len(chars)-1])
     rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,3.4-0.2]) // z-Offset to connect chars to tongue tipp securely
       rotate([charTilt,0,90]) 
         linear_extrude(embHght+0.14, convexity=3) //compensate for z-Offset of chars
+        if(charset=="custom")  
           text(chars[i],size=txtSize, halign="center");
+        else if(charset=="16segment")
+          sixteenSegment(size=2.5, draw=segmented16[i]);
+        
 }
 
+module sixteenSegment(size=2.5, draw=["a1"]){
+  //can give in draw a list of segments to draw, if nothing is given all segments are drawn
+  /*
+        a1  a2
+       ---i--- 
+      |\h | j/|
+     f| \ | / |b
+      |  \|/  |
+     g1--- ---g2
+      |  /|\  |
+     e| / | \ |c
+      |/k | m\|
+       ---l---
+       d1   d2
+  */
+  // https://en.wikipedia.org/wiki/Sixteen-segment_display
+  stroke=size/10;
+  gap=0.03;
+  gap45=gap/(1/2*sqrt(2));
+  ovWdth=size/2;
+  ovHght=size*0.95; //size correction
+  
+  //text for size and positioning reference
+  *text("8",halign="center",size=2.5);
+  
+  segments=[["a1"],["a2"],["b"],["c"],["d1"],["d2"],["e"],["f"],["g1"],["g2"],["h"], ["i"],["j"], ["k"], ["l"],["m"]];
+  segType= ["h", "h", "v","v","h", "h", "v","v","h", "h", "dd","v","du","du","v","dd"]; //h,v,dd,du (diagonal down, up)
+  segPos=[
+          [-ovWdth/4,ovHght],//a1
+          [ovWdth/4,ovHght],//a2
+          [ovWdth/2,ovHght*3/4], //b
+          [ovWdth/2,ovHght/4], //c
+          [-ovWdth/4,0],//d1
+          [ovWdth/4,0],//d2
+          [-ovWdth/2,ovHght/4], //e
+          [-ovWdth/2,ovHght*3/4], //f
+          [-ovWdth/4,ovHght/2],//g1
+          [ovWdth/4,ovHght/2],//g2  
+          [-ovWdth/4,ovHght*3/4],//h
+          [0,ovHght*3/4],//i  
+          [ovWdth/4,ovHght*3/4],//j
+          [-ovWdth/4,ovHght/4],//k
+          [0,ovHght/4],//l
+          [ovWdth/4,ovHght/4],//m
+          ];
+  
+  segID=search(draw,segments);
+  //draw all segments
+  selection= (len(segID)==0) ? [0:len(segments)] :  segID;
+  for (i=selection){
+    if (segType[i]=="h")
+      translate(segPos[i]) horizontal();
+    if (segType[i]=="v")
+      translate(segPos[i]) vertical();
+    if (segType[i]=="du")
+      translate(segPos[i]) diagonal(true);
+    if (segType[i]=="dd")
+      translate(segPos[i]) diagonal(false);
+  }
 
+  module vertical(){
+    hull() for (iy=[-1,1])
+      translate([0,iy*(ovHght/2-stroke-gap45)/2]) circle(d=stroke, $fn=4);
+  }
+  module horizontal(){
+    hull() for (ix=[-1,1])
+      translate([ix*(ovWdth/2-stroke-gap45)/2,0]) circle(d=stroke, $fn=4);
+  }
+  
+  module diagonal(isUp=true){
+    poly=[
+          [-(ovWdth-stroke)/2+gap,(ovHght-stroke)/2-gap],
+          [-stroke/2-gap,stroke*2+gap],
+          [-stroke/2-gap,stroke/2+gap],
+          [-(ovWdth-stroke)/2+gap,ovHght/2-stroke*2-gap]
+    ];
+    im = isUp ? [1,0,0] : [0,0,0] ;
+    mirror(im) translate([ovWdth/4,-ovHght/4]) polygon(poly);
+  }
+}
 
 
 
