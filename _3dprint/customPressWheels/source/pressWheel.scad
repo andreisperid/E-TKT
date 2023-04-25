@@ -29,7 +29,7 @@ txtSize=2.5;
 //spacing positive and negative
 embSpcng=0.15; 
 //embossing height
-embHght=1.0; 
+embHght=1; 
 
 /* [Top Disc] */
 //outer Dia of top disc (negative)
@@ -65,23 +65,41 @@ cntrBore=7.1;
 /* [show] */
 showTopDsc = true;
 showBotDsc = true;
-
+//apply a sectionCut 
+showSection= false;
+//select char to cut, 0: anvil
+sectionChar=0;
 
 /* [Hidden] */
+charTilt=8.9;
+fudge=0.1;
+//guide dimensions
+gdWdth=2;
 //a polygon to revolute into the disc shape
 charCount=len(chars); 
 dscPoly=[[botCntrDia/2,2.15],[sltCntrDia/2,2.15],[37.6/2,2],[38.6/2,3],[botDscDia/2,2], //bottom face
          [botDscDia/2,2+botDscThck],[38.6/2-0.5,3+botDscThck],[37.6/2-0.5,2+botDscThck],[sltCntrDia/2,2.15+botDscThck],[botCntrDia/2,2.15+botDscThck]];
 tngAng=360/(charCount+1); //angle of one tongue
-charTilt=8.9;
-fudge=0.1;
-//guide dimensions
-gdWdth=2;
+
 lngGuide=botCntrDia+3.3;
 shrtGuide=botCntrDia;
+sectRot = showSection ? sectionChar*tngAng : 0;
 
-if (showTopDsc) topDsc();
-if (showBotDsc) botDsc();
+if (showTopDsc){
+  difference(){
+    rotate(sectRot) topDsc();
+    if (showSection) color("darkred")
+      translate([0,-(topDscDia/2+fudge)/2,botCntrHght+topDscThck/2]) 
+        cube([topDscDia+fudge,topDscDia/2+fudge,topDscThck+fudge],true);
+    }
+}
+if (showBotDsc) 
+  difference(){
+    rotate(sectRot) botDsc();
+    if (showSection) color("darkred")
+        translate([0,-(botDscDia/2+fudge)/2,(botCntrHght+topDscThck)/2]) 
+          cube([botDscDia+fudge,botDscDia/2+fudge,botCntrHght+topDscThck+fudge],true);
+    }
 //debug tongue cross section
 *polygon(dscPoly);
 
@@ -162,8 +180,10 @@ module botDsc(){
       cube([8.3,2,botDscThck+0.7]);
   //chars
   color("ivory") for (i=[0:len(chars)-1])
-    rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,2.8]) rotate([charTilt,0,90]) 
-      linear_extrude(embHght) text(chars[i],size=txtSize, halign="center");
+    rotate(tngAng*i+tngAng) translate([bsLneDia/2,0,3.3]) 
+      rotate([charTilt,0,90]) 
+        linear_extrude(embHght, convexity=3) 
+          text(chars[i],size=txtSize, halign="center");
 }
 
 
