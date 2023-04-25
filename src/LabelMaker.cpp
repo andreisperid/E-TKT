@@ -303,7 +303,7 @@ void labelMusic(String label)
 {
 	// plays a music according to the label letters
 
-	int length = utf8Length(label);
+	int length = min(utf8Length(label), 16);
 
 	for (int i = 0; i < length; i++)
 	{
