@@ -25,29 +25,51 @@
 //
 
 let busy = false;
-let command = "";
-let treatedLabel = "";
-let clear = false;
-let minSize = 7;
-let caretPosition = 0;
 let align;
 let force;
 let alignTemp;
 let forceTemp;
+let scrollbarHeight = 0;
 
 window.onload = startupRoutine;
 
 async function startupRoutine() {
+  checkOverlayScrollbars();
+  let body = document.getElementsByTagName("body")[0];
+  body.dataset.printing = "false";
+  drawHelper();
   document.getElementById("text-input").focus();
   await retrieveSettings();
   await getStatus();
+}
+
+function checkScrollbarWidth() {
+  const outer = document.createElement("div");
+  outer.style.overflow = "scroll";
+  document.body.appendChild(outer);
+
+  const scrollbarWidth = outer.offsetWidth - outer.clientWidth;
+  document.body.removeChild(outer);
+
+  return scrollbarWidth;
+}
+
+/**
+ * Attempts to detect if overlay scrollbars are in use, and adds a css class we can
+ * change layout behavior on.
+ */
+function checkOverlayScrollbars() {
+  const scrollbarWidth = checkScrollbarWidth();
+  if (scrollbarWidth === 0) {
+    document.body.classList.add("overlay-scroll-enabled");
+  }
 }
 
 async function retrieveSettings() {
   // TODO: consolidate this method with getStatus(), since they both now use the same API method.
 
   // retrieve settings from the device
-  let request = await fetchWithTimeout("api/status", {timeout: 5000});
+  let request = await fetchWithTimeout("api/status", { timeout: 5000 });
   let response = await request.json();
 
   align = response.align;
@@ -59,14 +81,29 @@ async function retrieveSettings() {
   document.getElementById("force-field").value = force;
 }
 
+function measureText(element, text) {
+  // Create a temporary canvas element
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  // Apply the styles (height and font) from the element to the context
+  const style = getComputedStyle(element);
+  context.font = `${style.fontSize} ${style.fontFamily}`;
+
+  // Measure the text
+  const metrics = context.measureText(text);
+
+  // Return the width
+  return metrics.width;
+}
+
 function calculateLength() {
   // calculates the label length based on the number of characters (including spaces)
 
   let label = document.getElementById("length-label");
+  let treatedLabel = buildTreatedLabel();
 
-  // console.log(treatedLabel);
-
-  if (treatedLabel.length === 0) {
+  if (!isValidLabelText()) {
     label.innerHTML = "??mm";
     label.style.opacity = 0.2;
   } else {
@@ -77,122 +114,205 @@ function calculateLength() {
 
 async function labelCommand() {
   // sends the label to the device
-
-  let fieldValue = document.getElementById("text-input").value;
-  if (useRegex(fieldValue)) {
-    // console.log('printing: "' + treatedLabel.toLowerCase() + '"');
+  if (isValidLabelText()) {
     document.getElementById("text-input").blur();
     setUiBusy(true);
-    let response = await postJson("api/task", {parameter: "tag", value: treatedLabel.toLowerCase()});
+    let response = await postJson("api/task", { parameter: "tag", value: buildTreatedLabel().toLowerCase() });
     if (!response.ok) {
       console.error("Unable to feed");
-      console.error((await response.json())["error"])
+      console.error((await response.json())["error"]);
     }
+  }
+}
+
+function buildTreatedLabel() {
+  const LabelInput = document.getElementById("text-input");
+  let fieldValue = LabelInput.value;
+  if (fieldValue.length == 0) {
+    fieldValue = "WRITE HERE";
+  }
+  switch (document.getElementById("mode-dropdown").value) {
+    case "tight":
+      multiplier = 0;
+      break;
+    default:
+      multiplier = 1;
+      break;
+  }
+
+  const printLength = fieldValue.length + multiplier * 2;
+  if (printLength < 7) {
+    multiplier = Math.ceil((7 - printLength) / 2);
+  }
+  return " ".repeat(multiplier) + fieldValue + " ".repeat(multiplier);
+}
+
+function getScrollbarHeight(element) {
+  if (element.scrollHeight > element.clientHeight) {
+    return element.offsetHeight - element.clientHeight;
+  } else {
+    return 0;
   }
 }
 
 function drawHelper() {
   // draws visual helper with label length taking options into account
+  const labelInput = document.getElementById("text-input");
+  const labelText = labelInput.value;
+  const scroll = document.getElementById("text-form-scroll"); // picks up the parent scroll element
+  const border = document.getElementById("text-form-border");
 
-  let field = document.getElementById("text-input");
-  let fieldValue = field.value;
-  let space = "X";
-  let multiplier = 0;
-  let mode = document.getElementById("mode-dropdown").value;
-  switch (mode) {
-    case "margin":
-      minSize = 12;
-      field.maxLength = 18;
-      if (field.value.length > 18) {
-        field.value = fieldValue.slice(0, 18);
-      }
-      multiplier = 1;
-      break;
-    case "tight":
-      minSize = 10;
-      multiplier = 0;
-      field.maxLength = 20;
-      break;
-    case "full":
-      minSize = 20;
-      multiplier = Math.floor((20 - field.value.length) / 2);
-      field.maxLength = 20;
-      break;
-  }
+  document.getElementById("clear-button").disabled = labelText === "";
+  document.getElementById("submit-button").disabled = labelText === "";
+  document.getElementById("reel-button").disabled = !(labelText === "");
+  document.getElementById("feed-button").disabled = !(labelText === "");
+  document.getElementById("cut-button").disabled = !(labelText === "");
+  document.getElementById("setup-button").disabled = !(labelText === "");
 
-  document.getElementById("clear-button").disabled = fieldValue === "";
-  document.getElementById("submit-button").disabled = fieldValue === "";
-  document.getElementById("reel-button").disabled = !(fieldValue === "");
-  document.getElementById("feed-button").disabled = !(fieldValue === "");
-  document.getElementById("cut-button").disabled = !(fieldValue === "");
-  document.getElementById("setup-button").disabled = !(fieldValue === "");
+  labelInput.style.width = measureText(labelInput, buildTreatedLabel()) + 4 + "px";
+  labelInput.style.minWidth = measureText(labelInput, " ".repeat(7)) + 4 + "px";
 
-  if (fieldValue != "" && !clear) {
-    if (multiplier + field.value.length + multiplier < 7) {
-      multiplier = Math.ceil((7 - field.value.length) / 2);
-      // console.log("minimum length " + multiplier);
+  const neededWidth = labelInput.clientWidth + 4;
+
+  if (neededWidth > scroll.clientWidth) {
+    // If modifying the text near the beginning or end of the scrollable area, then
+    // move the scroll area to keep the border visible while editing for better context.
+    if (labelInput.selectionEnd && labelInput.selectionEnd >= labelText.length - 20) {
+      scroll.scrollLeft = scroll.scrollWidth - scroll.clientWidth;
+    } else if (labelInput.selectionStart && labelInput.selectionStart < 20) {
+      scroll.scrollLeft = 0;
     }
-    document.getElementById("size-helper-content").innerHTML =
-      space.repeat(multiplier) + "x".repeat(field.value.length) + space.repeat(multiplier);
-
-    treatedLabel = " ".repeat(multiplier) + field.value + " ".repeat(multiplier);
-    // console.log('"' + treatedLabel + '"');
+    // Avoid leaving the scroll position past the end of the "needed" scrollable area.
+    // Dunno why browsers let you do this.
+    if (scroll.scrollLeft + neededWidth > scroll.scrollWidth) {
+      scroll.scrollLeft = neededWidth - scroll.clientWidth;
+    }
+    border.classList.add("scrolling");
   } else {
-    clear = false;
-    treatedLabel = "";
-    document.getElementById("size-helper-content").innerHTML =
-      space.repeat(multiplier) + (mode != "full" ? "WRITE HERE" : "") + space.repeat(multiplier);
+    border.classList.remove("scrolling");
+    scroll.scrollLeft = 0;
   }
+
+  onTextInputSelectionchange();
+}
+
+function onTextInputSelectionchange() {
+  const labelInput = document.getElementById("text-input");
+  const scroll = document.getElementById("text-form-scroll");
+
+  // If the selection is at the beginning or end of the text, then move the scroll area to
+  // the beginning or end to include the label margins.
+  if (labelInput.selectionStart == labelInput.selectionEnd && labelInput.selectionEnd == 0) {
+    scroll.scrollLeft = 0;
+  } else if (
+    labelInput.selectionStart == labelInput.selectionEnd &&
+    labelInput.selectionEnd == labelInput.value.length
+  ) {
+    scroll.scrollLeft = scroll.scrollWidth - scroll.clientWidth;
+  }
+}
+
+function isValidLabelText() {
+  // test for suported characters
+  // $-.23456789*abcdefghijklmnopqrstuvwxyz♡☆♪€@
+
+  //  supported emoji:
+  // 	♡
+  // 	☆
+  // 	♪
+  // 	€
+  // 	@
+  // 	$
+  let labelInput = document.getElementById("text-input");
+  let regex = /^[a-zA-Z0-9 .\-♡☆♪€@$]+$/i;
+  return labelInput.value.length > 0 && regex.test(labelInput.value);
+}
+
+function updateScrollHelper() {
+  // shows "..." helper if text is overflowed to that side
+
+  let scroll = document.getElementById("text-form-scroll");
+  let leftHelper = document.getElementById("tip-left");
+  let rightHelper = document.getElementById("tip-right");
+
+  // console.log(Math.round(scroll.scrollLeft + scroll.offsetWidth), scroll.scrollWidth);
+
+  if (scroll.scrollWidth > scroll.offsetWidth) {
+    if (
+      Math.round(scroll.scrollLeft + scroll.offsetWidth) >=
+      scroll.scrollWidth - 1 // "1" is margin of error
+    ) {
+      rightHelper.classList.remove("visible");
+    } else {
+      rightHelper.classList.add("visible");
+    }
+    if (scroll.scrollLeft == 0) {
+      leftHelper.classList.remove("visible");
+    } else {
+      leftHelper.classList.add("visible");
+    }
+  } else {
+    leftHelper.classList.remove("visible");
+    rightHelper.classList.remove("visible");
+  }
+}
+
+function jumpToScrollEnds(target) {
+  // jumps to the scroll target where 0 is the start and 1 the end
+
+  let labelInput = document.getElementById("text-input");
+  labelInput.focus();
+  labelInput.setSelectionRange(target * labelInput.value.length, target * labelInput.value.length );
+
+  // let scroll = document.getElementById("text-form-scroll");
+  // scroll.scrollTo({ left: target * scroll.scrollWidth, behavior: "smooth" });
+}
+
+function lerp(start, end, amt) {
+  return (1 - amt) * start + amt * end;
 }
 
 function validateField() {
   // instantly validates label field by blocking buttons and giving visual feedback
-
-  let field = document.getElementById("text-input");
-  let fieldValue = field.value;
-
-  let valid;
-
+  let labelInput = document.getElementById("text-input");
   drawHelper();
 
-  if (!useRegex(fieldValue) && fieldValue != "") {
-    valid = false;
+  if (!isValidLabelText() && labelInput.value != "") {
     document.getElementById("hint").style.color = "red";
     document.getElementById("text-input").style.color = "red";
     document.getElementById("submit-button").disabled = true;
     document.getElementById("submit-button").value = " invalid entry ";
     document.getElementById("submit-button").style.color = "red";
   } else {
-    valid = true;
     document.getElementById("hint").style.color = "#e7dac960";
     document.getElementById("text-input").style.color = "#e7dac9ff";
-    document.getElementById("submit-button").value = fieldValue != "" ? " Print label! " : " ... ";
+    document.getElementById("submit-button").value = labelInput.value != "" ? " Print label! " : " ... ";
     document.getElementById("submit-button").style.color = "#e7dac9ff";
   }
 }
 
-function formKeyHandler(e) {
-  // sends the form by using the enter key
-
-  let keynum;
-  if (window.event && e != null) {
-    keynum = e.keyCode;
-  } else if (e.which && e != null) {
-    keynum = e.which;
-  }
-
+function labelTextChanged() {
   validateField();
+  calculateLength();
+  drawHelper();
+}
 
-  if (keynum === 13 && valid) {
+function labelTextKeyDown(e) {
+  if (e.key === "Enter" && isValidLabelText()) {
     document.getElementById("submit-button").click();
   }
+  onTextInputSelectionchange();
+}
+
+function marginDropdownChanged(e) {
+  validateField();
+  calculateLength();
+  drawHelper();
 }
 
 function clearField() {
   // clears the label field and restore default button and form states
-
-  clear = true;
-  const textField = document.getElementById("text-input");
+  const labelInput = document.getElementById("text-input");
 
   document.getElementById("clear-button").disabled = true;
   document.getElementById("submit-button").disabled = true;
@@ -203,13 +323,12 @@ function clearField() {
   document.getElementById("text-input").style.color = "#ffffff";
   document.getElementById("submit-button").value = " ... ";
 
-  textField.value = "";
-  treatedLabel = "";
+  labelInput.value = "";
 
   drawHelper();
   calculateLength();
 
-  textField.focus();
+  labelInput.focus();
 }
 
 function updateTempValues() {
@@ -239,36 +358,31 @@ function changeField(action, fieldName) {
 function insertIntoField(specialChar) {
   // inserts special emoji character in the label form
 
-  const textarea = document.getElementById("text-input");
-  textarea.focus();
+  const labelInput = document.getElementById("text-input");
+  labelInput.focus();
 
   let insertStartPoint;
   let insertEndPoint;
-  let value = textarea.value;
+  let value = labelInput.value;
 
-  if (textarea.selectionStart == textarea.selectionEnd) {
-    insertStartPoint = textarea.selectionStart;
+  if (labelInput.selectionStart == labelInput.selectionEnd) {
+    insertStartPoint = labelInput.selectionStart;
     insertEndPoint = insertStartPoint;
   } else {
-    insertStartPoint = textarea.selectionStart;
-    insertEndPoint = textarea.selectionEnd;
+    insertStartPoint = labelInput.selectionStart;
+    insertEndPoint = labelInput.selectionEnd;
   }
 
   // text before cursor/highlighted text + special character + text after cursor/highlighted text
   value = value.slice(0, insertStartPoint) + specialChar + value.slice(insertEndPoint);
-  textarea.value = value;
+  labelInput.value = value;
 
-  textarea.setSelectionRange(insertStartPoint + 1, insertStartPoint + 1);
-
+  labelInput.setSelectionRange(insertStartPoint + 1, insertStartPoint + 1);
   validateField();
-
-  drawHelper();
-  calculateLength();
-
-  textarea.focus();
+  labelInput.focus();
 }
 
-function useRegex(input) {
+function validateText(input) {
   // test for suported characters
   // $-.23456789*abcdefghijklmnopqrstuvwxyz♡☆♪€@
 
@@ -317,10 +431,10 @@ async function reelCommand() {
     toggleSettings(false);
     setUiBusy(true);
     document.getElementById("submit-button").value = " reeling... ";
-    let response = await postJson("api/task", {parameter: "reel", value: ""});
+    let response = await postJson("api/task", { parameter: "reel", value: "" });
     if (!response.ok) {
       console.error("Unable to reel");
-      console.error((await response.json())["error"])
+      console.error((await response.json())["error"]);
     }
   }
 }
@@ -329,10 +443,10 @@ async function feedCommand() {
   // sends feed command to the device
   setUiBusy(true);
   document.getElementById("submit-button").value = " feeding... ";
-  let response = await postJson("api/task", {parameter: "feed", value: ""});
+  let response = await postJson("api/task", { parameter: "feed", value: "" });
   if (!response.ok) {
     console.error("Unable to feed");
-    console.error((await response.json())["error"])
+    console.error((await response.json())["error"]);
   }
 }
 
@@ -340,10 +454,10 @@ async function cutCommand() {
   // sends cut command to the device
   setUiBusy(true);
   document.getElementById("submit-button").value = " cutting... ";
-  let response = await postJson("api/task", {parameter: "cut", value: ""});
+  let response = await postJson("api/task", { parameter: "cut", value: "" });
   if (!response.ok) {
     console.error("Unable to cut");
-    console.error((await response.json())["error"])
+    console.error((await response.json())["error"]);
   }
 }
 
@@ -354,20 +468,20 @@ async function testCommand(testFull) {
   let data;
   if (testFull) {
     data = {
-      parameter: 'testfull',
-      value: align + "," + force
+      parameter: "testfull",
+      value: align + "," + force,
     };
   } else {
     data = {
-      parameter: 'testalign',
-      value: align + "," + 1
+      parameter: "testalign",
+      value: align + "," + 1,
     };
   }
   setUiBusy(true);
   let response = await postJson("api/task", data);
   if (!response.ok) {
     console.error("Unable to perform test");
-    console.error((await response.json())["error"])
+    console.error((await response.json())["error"]);
   }
 }
 
@@ -382,7 +496,7 @@ async function settingsCommand() {
   if (confirm("Confirm saving align [" + align + "] and force [" + force + "] settings?")) {
     setUiBusy(true);
     document.getElementById("submit-button").value = " saving... ";
-    let response = await postJson("api/task", {parameter: "save", value: align + "," + force});
+    let response = await postJson("api/task", { parameter: "save", value: align + "," + force });
     if (!response.ok) {
       console.error("Unable to save settings");
       console.error((await response.json())["error"]);
@@ -412,49 +526,46 @@ async function settingsCommand() {
 // See: https://dmitripavlutin.com/timeout-fetch-request/
 async function fetchWithTimeout(resource, options = {}) {
   const { timeout = 8000 } = options;
-  
+
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
   const response = await fetch(resource, {
     ...options,
-    signal: controller.signal  
+    signal: controller.signal,
   });
   clearTimeout(id);
   return response;
 }
 
-
 // Helper method to post a json request, supports timeouts.
 async function postJson(url, data, options = {}) {
   options.headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    "Content-Type": "application/json",
+    Accept: "application/json",
   };
   options.body = JSON.stringify(data);
-  options.method = 'POST';
+  options.method = "POST";
   return await fetchWithTimeout(url, options);
 }
 
-
 async function getStatus() {
   try {
-    let request = await fetchWithTimeout("api/status", {timeout: 5000});
+    let request = await fetchWithTimeout("api/status", { timeout: 5000 });
     handleData(await request.json());
   } catch (error) {
-    // TODO: Add some UI treatment for when there are communication errors, eg 
+    // TODO: Add some UI treatment for when there are communication errors, eg
     // a "Reconnecting..." toast message or something.
-    console.error("Problem ")
+    console.error("Problem ");
     console.error(error);
   } finally {
     setTimeout(getStatus, 1000);
   }
 }
 
-
 wasBusy = false;
 
 // Enables or disables UI elements to prevent intercations while the printer is printing,
-// reeling, cutting, etc. 
+// reeling, cutting, etc.
 function setUiBusy(busy) {
   if (busy && !wasBusy) {
     // Disable UI elements
@@ -468,13 +579,13 @@ function setUiBusy(busy) {
     wasBusy = false;
     let body = document.getElementsByTagName("body")[0];
     body.dataset.printing = "false";
-    const textField = document.getElementById("text-input");
+    const labelInput = document.getElementById("text-input");
     Array.from(document.querySelectorAll("input")).forEach((element) => {
       element.disabled = false;
     });
     document.getElementById("mode-dropdown").disabled = false;
-    document.getElementById("submit-button").disabled = textField.value == "";
-    document.getElementById("clear-button").disabled = textField.value == "";
+    document.getElementById("submit-button").disabled = labelInput.value == "";
+    document.getElementById("clear-button").disabled = labelInput.value == "";
     validateField();
   }
 }
@@ -490,12 +601,26 @@ function handleData(data_json) {
     percentage -= 1; // avoid 100% progress while still finishing
   }
 
+  let scroll = document.getElementById("text-form-scroll"); // picks up the parent scroll element
+
   switch (data_json.command) {
     case "tag":
       document.getElementById("submit-button").value = " printing " + percentage + "% ";
       let body = document.getElementsByTagName("body")[0];
       body.dataset.printing = "true";
-      document.getElementById("progress-bar").style.width = percentage.toString() + "%";
+      const label = buildTreatedLabel();
+      const labelInput = document.getElementById("text-input");
+      const printed = label.substring(0, Math.round(label.length * (percentage / 100)));
+      const progressLength = measureText(labelInput, printed);
+      document.getElementById("progress-bar").style.width = progressLength + "px";
+
+      if (progressLength < scroll.clientWidth / 2) {
+        scroll.scrollLeft = 0;
+      } else if (progressLength > scroll.scrollWidth - scroll.clientWidth / 2) {
+        scroll.scrollLeft = scroll.scrollWidth;
+      } else {
+        scroll.scrollLeft = progressLength - scroll.clientWidth / 2;
+      }
       break;
     case "reel":
       document.getElementById("submit-button").value = " reeling... ";

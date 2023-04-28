@@ -88,26 +88,38 @@
                 <h2 style="text-align: center">label maker</h2>
               </div>
             </div>
+
             <div id="single-column" style="margin-top: 40px; position: relative">
-              <div style="position: absolute; top: 0; left: 22px; right: 22px">
-                <input
-                  type="search"
-                  id="text-input"
-                  name="LABEL\"
-                  minlenght="1"
-                  maxlength="20"
-                  placeholder="WRITE HERE"
-                  oninput="return formKeyHandler(event), calculateLength()"
-                  value=""
-                  autocomplete="off"
-                  autocorrect="off"
-                  spellcheck="false"
-                  tabindex="-1"
-                />
+              <div id="tips">
+                <div id="tip-left" class="tip-child" onclick="jumpToScrollEnds(0)">...</div>
+                <div id="tip-right" class="tip-child" onclick="jumpToScrollEnds(1)">...</div>
               </div>
-              <div id="size-helper">
-                <div id="progress-bar"></div>
-                <div id="size-helper-content" style="font-size: 25px; color: rgba(255, 0, 0, 0)">`WRITE HERE`</div>
+
+              <div id="text-form-border">
+                <div id="text-form-scroll" onscroll="updateScrollHelper()">
+                  <div id="progress-bar-container">
+                    <input
+                      enterkeyhint="send"
+                      id="text-input"
+                      name="LABEL\"
+                      maxlength="247"
+                      placeholder="WRITE HERE"
+                      oninput="labelTextChanged()"
+                      onchange="labelTextChanged()"
+                      onkeydown="labelTextKeyDown(event)"
+                      onkeydown="onTextInputSelectionchange()"
+                      onselect="onTextInputSelectionchange()"
+                      onfocus="onTextInputSelectionchange()"
+                      value=""
+                      autocomplete="off"
+                      autocorrect="off"
+                      spellcheck="false"
+                      tabindex="-1"
+                    />
+                    <div id="progress-bar"></div>
+                  </div>
+                  <div class="overlay-gutter"></div>
+                </div>
               </div>
             </div>
 
@@ -153,15 +165,15 @@
             </div>
 
             <div id="single-column" style="margin-top: 0px; padding-top: 0px; height: 40px">
-              <div style="width: 55px">
+              <div style="width: 68px">
                 <input type="button" id="clear-button" onclick="clearField()" value=" c " disabled tabindex="-1" />
               </div>
 
               <div style="width: 50%">
-                <select type="range" id="mode-dropdown" onchange="return formKeyHandler(event), calculateLength()">
-                  <option value="tight">tight</option>
-                  <option value="margin" selected>margin</option>
-                  <option value="full">full</option>
+                <select type="range" id="mode-dropdown" onchange="marginDropdownChanged(event)">
+                  <option value="tight">no margin</option>
+                  <option value="margin" selected>1x margin</option>
+                  <!-- <option value="full">2x margin</option> -->
                 </select>
               </div>
 
@@ -175,7 +187,7 @@
                   border-color: orange;
                   color: orange;
                   margin: 0;
-                  width: 55px;
+                  width: 68px;
                   text-align: center;
                   opacity: 0.2;
                 "
