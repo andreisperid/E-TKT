@@ -111,6 +111,9 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 
 // buzzer
 #define buzzerPin 26
+#define NOTE_DURATION_MAX 100
+#define NOTE_DURATION_MIN 20
+#define NOTE_DURATION_DECREASE 2
 
 // DEBUG --------------------------------------------------------------------------
 // comment lines individually to isolate functions
@@ -303,10 +306,21 @@ void labelMusic(String label)
 {
 	// plays a music according to the label letters
 
-	int length = min(utf8Length(label), 16);
+	int length = utf8Length(label);
 
 	for (int i = 0; i < length; i++)
 	{
+		int duration;
+		// If the label is over 16 characters, decrease the note duration every character starting at character 5.
+		if (length > 16 && i > 4)
+		{
+			duration = max(NOTE_DURATION_MAX - (i - 4) * NOTE_DURATION_DECREASE, NOTE_DURATION_MIN);
+		}
+		else
+		{
+			duration = NOTE_DURATION_MAX;
+		}
+
 		auto character = utf8CharAt(label, i);
 		if (charSet.count(character) == 0)
 		{
@@ -317,9 +331,9 @@ void labelMusic(String label)
 #ifdef do_serial
 		Serial.println(charNoteSet[index]);
 #endif
-		tone(buzzerPin, charNoteSet[index], 100);
+		tone(buzzerPin, charNoteSet[index], duration);
 
-		delay(50);
+		delay(duration / 2);
 	}
 }
 
