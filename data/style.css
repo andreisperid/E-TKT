@@ -292,6 +292,19 @@ button {
   cursor: pointer;
 }
 
+.tip-child.visible {
+  visibility: visible;
+}
+
+.tip-child:hover {
+  font-weight: bold;
+  background-image: linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,0.07),rgba(255,255,255,0.07),rgba(255,255,255,0));
+}
+
+[data-printing="true"] .tip-child.visible {
+  visibility: hidden;
+}
+
 #text-form-border {
   width: 100%;
   outline: 3px solid rgba(255, 255, 255, 0.05);

@@ -242,18 +242,18 @@ function updateScrollHelper() {
       Math.round(scroll.scrollLeft + scroll.offsetWidth) >=
       scroll.scrollWidth - 1 // "1" is margin of error
     ) {
-      rightHelper.style.visibility = "hidden";
+      rightHelper.classList.remove("visible");
     } else {
-      rightHelper.style.visibility = "visible";
+      rightHelper.classList.add("visible");
     }
     if (scroll.scrollLeft == 0) {
-      leftHelper.style.visibility = "hidden";
+      leftHelper.classList.remove("visible");
     } else {
-      leftHelper.style.visibility = "visible";
+      leftHelper.classList.add("visible");
     }
   } else {
-    rightHelper.style.visibility = "hidden";
-    leftHelper.style.visibility = "hidden";
+    leftHelper.classList.remove("visible");
+    rightHelper.classList.remove("visible");
   }
 }
 
