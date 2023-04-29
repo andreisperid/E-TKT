@@ -328,9 +328,29 @@ button {
 }
 
 [data-printing="true"] #text-input {
-  box-shadow: none;
+  display: none;
+}
+
+#printing-label {
+  margin: auto;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  height: 29px;
+  padding: 0px;
+  color: rgb(231, 218, 201);
+  box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.5);
+  text-align: center;
+  font-size: 25px;
   border: solid transparent 2px;
   background: transparent;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  white-space: pre;
+}
+
+[data-printing="true"] #printing-label {
+  display: flex;
 }
 
 #progress-bar {

@@ -1476,9 +1476,11 @@ void getStatus(AsyncWebServerRequest *request)
 	root["align"] = alignFactor;
 	root["force"] = forceFactor;
 
-	// TODO: The webserver should also indicate what the text of the current,
-	// label is, however this will require substantial additional refactoring
-	// of how the current tag is communicated.
+	// Return the current label, if relevant.
+	if (parameter == "tag")
+	{
+		root["current_label"] = value;
+	}
 	response->setLength();
 	request->send(response);
 }

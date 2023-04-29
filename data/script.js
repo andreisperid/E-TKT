@@ -155,6 +155,10 @@ function getScrollbarHeight(element) {
   }
 }
 
+function getLabelWidth(element, label) {
+  return Math.max(measureText(element, label), measureText(element, " ".repeat(7))) + 4;
+}
+
 function drawHelper() {
   // draws visual helper with label length taking options into account
   const labelInput = document.getElementById("text-input");
@@ -169,11 +173,8 @@ function drawHelper() {
   document.getElementById("cut-button").disabled = !(labelText === "");
   document.getElementById("setup-button").disabled = !(labelText === "");
 
-  labelInput.style.width = measureText(labelInput, buildTreatedLabel()) + 4 + "px";
-  labelInput.style.minWidth = measureText(labelInput, " ".repeat(7)) + 4 + "px";
-
+  labelInput.style.width = getLabelWidth(labelInput, buildTreatedLabel()) + "px";
   const neededWidth = labelInput.clientWidth + 4;
-
   if (neededWidth > scroll.clientWidth) {
     // If modifying the text near the beginning or end of the scrollable area, then
     // move the scroll area to keep the border visible while editing for better context.
@@ -608,10 +609,12 @@ function handleData(data_json) {
       document.getElementById("submit-button").value = " printing " + percentage + "% ";
       let body = document.getElementsByTagName("body")[0];
       body.dataset.printing = "true";
-      const label = buildTreatedLabel();
-      const labelInput = document.getElementById("text-input");
+      const label = data_json.current_label || "unknown";
+      const printingLabel = document.getElementById("printing-label");
+      printingLabel.style.width = getLabelWidth(printingLabel, label) + "px";
+      printingLabel.innerHTML = label;
       const printed = label.substring(0, Math.round(label.length * (percentage / 100)));
-      const progressLength = measureText(labelInput, printed);
+      const progressLength = measureText(printingLabel, printed) + 3;
       document.getElementById("progress-bar").style.width = progressLength + "px";
 
       if (progressLength < scroll.clientWidth / 2) {

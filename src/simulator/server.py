@@ -42,13 +42,16 @@ class Server:
         return web.FileResponse(self.relativePath('../../data/index.html'))
 
     async def status(self, request):
-        return web.json_response({
+        resp = {
             'command': self.command,
             'progress': self.progress,
             'busy': self.busy,
             'force': self.force,
             'align': self.align
-        })
+        }
+        if self.command == "tag":
+            resp['current_label'] = self.value
+        return web.json_response(resp)
 
     async def task(self, request: web.Request):
         data = await request.json()
