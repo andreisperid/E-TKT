@@ -46,6 +46,8 @@
 #include <tuple>
 #include "ArduinoJson.h"
 #include "AsyncJson.h"
+#include <AsyncElegantOTA.h>
+#include <ESPmDNS.h>
 
 // extension files
 #include "etktLogo.cpp" // etkt logo in binary format
@@ -118,14 +120,14 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 // DEBUG --------------------------------------------------------------------------
 // comment lines individually to isolate functions
 
-#define do_cut
-#define do_press
-#define do_char
-#define do_feed
+// #define do_cut
+// #define do_press
+// #define do_char
+// #define do_feed
 #define do_sound
 // #define do_wifi_debug
 // #define do_display_debug
-// #define do_serial
+#define do_serial
 
 // DATA ---------------------------------------------------------------------------
 
@@ -1544,8 +1546,14 @@ void initialize()
 	// Serve static assets from the SPIFFS root directory.
 	server.serveStatic("/", SPIFFS, "/").setDefaultFile("index.html");
 
+#ifdef OTA_ENABLED
+	// Endpoint to accept OTA updates to hardware and firmware. 
+	AsyncElegantOTA.begin(&server);
+#endif
+
 	// Start server
 	server.begin();
+
 }
 
 void configModeCallback(AsyncWiFiManager *myWiFiManager)
@@ -1616,12 +1624,19 @@ void wifiManager()
 		delay(1000);
 	}
 
-	// TODO: pending idea to access the device from a dns name, but Android doesn't support that yet
-	// if (!MDNS.begin("e-tkt"))
-	// {
-	// 	// Serial.println("Error starting mDNS");
-	// 	return;
-	// }
+	if (!MDNS.begin("e-tkt"))
+	{
+#ifdef do_serial
+	 	Serial.println("Error starting mDNS");
+#endif
+	} else {
+		// Advertise the webserver over mdns-sd, and add some custom props
+		// to identify it as an e-tkt in case future integrations want to 
+		// find it.
+		MDNS.addService("http", "tcp", 80);
+		MDNS.addServiceTxt("http", "tcp", "e-tkt", "true");
+	}
+	
 
 	// if you get here you have connected to the WiFi
 	displayIP = WiFi.localIP().toString();

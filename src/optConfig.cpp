@@ -15,3 +15,8 @@
 // For instance, invert if using a "3144" hall sensor but don't invert if using a "44E 402" hall sensor.
 
 // #define INVERT_HALL_SENSOR_LOGIC true
+
+// If you're developing for the E-TKT it might be useful to enable OTA updates for the board firmware and filesystem.  
+// Once firmware is uploaded with this option, you can use the env:ota-upload platformio target to upload to the device
+// over wifi. Alternatively, you can visit http://e-tkt.local/update to upload binaries manually.
+// #define OTA_ENABLED
