@@ -120,14 +120,14 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 // DEBUG --------------------------------------------------------------------------
 // comment lines individually to isolate functions
 
-// #define do_cut
-// #define do_press
-// #define do_char
-// #define do_feed
+#define do_cut
+#define do_press
+#define do_char
+#define do_feed
 #define do_sound
 // #define do_wifi_debug
 // #define do_display_debug
-#define do_serial
+// #define do_serial
 
 // DATA ---------------------------------------------------------------------------
 
