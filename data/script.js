@@ -117,7 +117,7 @@ async function labelCommand() {
   if (isValidLabelText()) {
     document.getElementById("text-input").blur();
     setUiBusy(true);
-    let response = await postJson("api/task", { parameter: "tag", value: buildTreatedLabel().toLowerCase() });
+    let response = await postJson("api/tag", { tag: buildTreatedLabel().toLowerCase() });
     if (!response.ok) {
       console.error("Unable to feed");
       console.error((await response.json())["error"]);
@@ -432,7 +432,7 @@ async function reelCommand() {
     toggleSettings(false);
     setUiBusy(true);
     document.getElementById("submit-button").value = " reeling... ";
-    let response = await postJson("api/task", { parameter: "reel", value: "" });
+    let response = await postJson("api/reel", {});
     if (!response.ok) {
       console.error("Unable to reel");
       console.error((await response.json())["error"]);
@@ -444,7 +444,7 @@ async function feedCommand() {
   // sends feed command to the device
   setUiBusy(true);
   document.getElementById("submit-button").value = " feeding... ";
-  let response = await postJson("api/task", { parameter: "feed", value: "" });
+  let response = await postJson("api/feed", {});
   if (!response.ok) {
     console.error("Unable to feed");
     console.error((await response.json())["error"]);
@@ -455,31 +455,37 @@ async function cutCommand() {
   // sends cut command to the device
   setUiBusy(true);
   document.getElementById("submit-button").value = " cutting... ";
-  let response = await postJson("api/task", { parameter: "cut", value: "" });
+  let response = await postJson("api/cut", { });
   if (!response.ok) {
     console.error("Unable to cut");
     console.error((await response.json())["error"]);
   }
 }
 
-async function testCommand(testFull) {
+async function testAlignCommand() {
+  // sends test command to the device
+  align = document.getElementById("align-field").value;
+  let data = {
+    align: align,
+  };
+  setUiBusy(true);
+  let response = await postJson("api/testalign", data);
+  if (!response.ok) {
+    console.error("Unable to perform test");
+    console.error((await response.json())["error"]);
+  }
+}
+
+async function testFullCommand() {
   // sends test command to the device
   align = document.getElementById("align-field").value;
   force = document.getElementById("force-field").value;
-  let data;
-  if (testFull) {
-    data = {
-      parameter: "testfull",
-      value: align + "," + force,
-    };
-  } else {
-    data = {
-      parameter: "testalign",
-      value: align + "," + 1,
-    };
-  }
+  let data = {
+    align: align,
+    force: force,
+  };
   setUiBusy(true);
-  let response = await postJson("api/task", data);
+  let response = await postJson("api/testfull", data);
   if (!response.ok) {
     console.error("Unable to perform test");
     console.error((await response.json())["error"]);
@@ -497,7 +503,7 @@ async function settingsCommand() {
   if (confirm("Confirm saving align [" + align + "] and force [" + force + "] settings?")) {
     setUiBusy(true);
     document.getElementById("submit-button").value = " saving... ";
-    let response = await postJson("api/task", { parameter: "save", value: align + "," + force });
+    let response = await postJson("api/save", { align: align, force: force });
     if (!response.ok) {
       console.error("Unable to save settings");
       console.error((await response.json())["error"]);
