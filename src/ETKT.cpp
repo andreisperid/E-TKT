@@ -153,7 +153,7 @@ void ETKT::startCommand(CommandOptions* command) {
   if (this->command != NULL) {
     this->lock->unlock();
     delete command;
-    throw "Command already in progress";
+    throw PrinterBusyException();
   }
   this->command = command;
   xEventGroupSetBits(this->eventGroup, BIT0);

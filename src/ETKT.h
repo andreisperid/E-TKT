@@ -97,6 +97,15 @@ struct StatusUpdate {
   }
 };
 
+class PrinterBusyException : public std::exception
+{
+public:
+    const char *what() const throw()
+    {
+        return "The printer is already busy executing a command.";
+    }
+};
+
 class ETKT {
  private:
   // Device hardware
