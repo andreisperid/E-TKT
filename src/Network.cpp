@@ -16,6 +16,7 @@
 #include "Logger.h"
 #include "SPIFFS.h"
 #include "esp_wifi.h"
+#include "esp_heap_caps.h"
 
 
 Network *Network::instance = NULL;
@@ -349,6 +350,9 @@ void Network::statusGetHandler(AsyncWebServerRequest *request) {
     root["current_label"] = status->currentLabel;
   }
   delete status;
+  root["mem_heap_free_bytes"] = heap_caps_get_free_size(MALLOC_CAP_8BIT);
+  root["mem_largest_free_block_bytes"] = heap_caps_get_largest_free_block(MALLOC_CAP_8BIT);
+  root["uptime_ms"] = millis();
   response->setLength();
   request->send(response);
 }
