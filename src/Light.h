@@ -6,7 +6,7 @@
 
 
 /**
- * @brief Controls a light connected to an analog pin.
+ * @brief Controls an LED connected to a PWM pin.
  */
 class Light {
  private:

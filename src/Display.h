@@ -18,9 +18,9 @@ const String STARTUP_MELODY = "  E.TKT ";
 const String AUTHOR_SIGNATURE = "andrei.cc";
 
 /**
- * Responsible for rendering various screens on the OLED device, such as
- * printing progress, boot splash animation, QR Code, etc. Its hard coded to use
- * a 128x64 OLED, but could be sub-classed to use different sized screens.
+ * Renders various screens on the OLED device, such asprinting progress, 
+ * boot splash animation, QR Code, etc. Its hard coded to use a 128x64 OLED,
+ * but could be sub-classed to use different sized screens.
  */
 class Display {
  private:

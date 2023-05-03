@@ -12,7 +12,7 @@
 #define DEFAULT_FORCE_FACTOR 1  // 1 to 9
 
 /**
- * @brief A class for storing and retrieving settings from EEPROM using the
+ * @brief Stores and retrieves settings from EEPROM using the
  * preference library.
  */
 class Settings {

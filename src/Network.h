@@ -17,9 +17,9 @@
 #include "esp_wifi.h"
 
 /**
- * @brief Manages connection to the network.
- *
- * Handles:
+ * @brief Manages connection to the network. 
+ * 
+ * @details Handles:
  *  - Setting up WiFi credentials, including creating a soft AP for
  *    configuration
  *  - Serving the web interface and API endpoints

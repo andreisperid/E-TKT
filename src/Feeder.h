@@ -9,8 +9,8 @@
 /**
  * @brief Controls the feeder stepper motor.
  *
- * This motor feeds the label tape in only one direction and never needs to
- * maintain its position.
+ * This motor feeds the label tape in only one direction
+ * and never needs to maintain its position.
  */
 class Feeder {
  private:

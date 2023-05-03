@@ -5,7 +5,7 @@
 #include "Configuration.h"
 
 /**
- * @brief A class for logging messages to the serial port.  Very simple for now.
+ * @brief Logs messages to the serial port.  Very simple for now.
  */
 class Logger {
  public:

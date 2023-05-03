@@ -51,7 +51,7 @@ const std::map<String, FontInfo*> GLYPHS = {
     {"♪", new FontInfo(u8g2_font_siji_t_6x10, 0xE271, 5, -3, 0)},
     {"€", new FontInfo(u8g2_font_6x12_t_symbols, 0x20AC, 6, -1, -1)}};
 /**
- * @brief A class for managing the characters that can be printed on the
+ * @brief Manages the characters that can be printed on the
  * E-TKT.
 */
 class Characters {

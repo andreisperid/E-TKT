@@ -14,7 +14,7 @@
 #define NOTE_DURATION_DECREASE 2
 
 /**
- * @brief A class for controlling the buzzer to play single notes, melodies, and
+ * @brief Controls the buzzer to play single notes, melodies, and
  * songs based on a label.
  */
 class Sound {
