@@ -38,7 +38,7 @@ class Press {
   void press(bool strong, int force, bool slow);
 
   /**
-   * @brief Moves the press to the rest position, away from the carousel
+   * @brief Moves the press to the rest position, away from the daisy wheel
    */
   void rest();
 };

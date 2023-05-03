@@ -24,14 +24,15 @@
 // for more information, please visit https://github.com/andreisperid/E-TKT
 //
 
-// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-// ~~~~~ IMPORTANT: do not forget to upload the files in "data" folder using
-// SPIFFS ~~~~~
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+// vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+//
+// IMPORTANT: do not forget to upload the files in "data" folder using SPIFFS
+//
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 #include <Arduino.h>
 
-#include "Carousel.h"
+#include "DaisyWheel.h"
 #include "Characters.h"
 #include "Configuration.h"
 #include "Display.h"
@@ -55,9 +56,9 @@ Light* ledFinish = new Light(FINISH_LED_PIN);
 Light* ledChar = new Light(CHARACTER_LED_PIN);
 Press* press = new Press(logger, SERVO_PIN, ledChar);
 HallSwitch* hall = new HallSwitch(logger, HALL_PIN);
-Carousel* carousel = new Carousel(logger, hall, characters, settings);
+DaisyWheel* daisywheel = new DaisyWheel(logger, hall, characters, settings);
 Feeder* feeder = new Feeder(logger);
-ETKT* etkt = new ETKT(logger, settings, characters, display, carousel, hall,
+ETKT* etkt = new ETKT(logger, settings, characters, display, daisywheel, hall,
                       feeder, press, sound, ledFinish, ledChar);
 Network* network = new Network(logger, display, etkt, WIFI_RESET_PIN);
 

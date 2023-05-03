@@ -58,7 +58,7 @@ You will see a xray of the machine, and now we will proceed to the first part of
 
 - the align values ranges from 1 to 9, having 5 as a default (middle).
 - now click the "TEST" button to the right side of "align";
-- the machine will slowly and lightly press the carousel letter;
+- the machine will slowly and lightly press the daisy wheel letter;
 - the goal is to have the press to be fully aligned with the character, that should also be right in the middle of the character window;
 - adjust the values and test to make sure it is alright;
 

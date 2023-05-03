@@ -7,7 +7,7 @@
 #include <mutex>
 #include <thread>
 
-#include "Carousel.h"
+#include "DaisyWheel.h"
 #include "Characters.h"
 #include "Configuration.h"
 #include "Display.h"
@@ -105,7 +105,7 @@ class ETKT {
   Light* ledChar;
   Settings* settings;
   Display* display;
-  Carousel* carousel;
+  DaisyWheel* daisywheel;
   HallSwitch* hall;
   Feeder* feeder;
   Press* press;
@@ -142,7 +142,7 @@ class ETKT {
 
  public:
   ETKT(Logger* logger, Settings* settings, Characters* characters,
-       Display* display, Carousel* carousel, HallSwitch* hall, Feeder* feeder,
+       Display* display, DaisyWheel* daisywheel, HallSwitch* hall, Feeder* feeder,
        Press* press, Sound* sound, Light* ledFinish, Light* ledChar);
   ~ETKT();
 

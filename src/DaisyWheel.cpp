@@ -1,4 +1,4 @@
-#include "Carousel.h"
+#include "DaisyWheel.h"
 
 #include <AccelStepper.h>
 
@@ -9,7 +9,7 @@
 #include "Logger.h"
 #include "Settings.h"
 
-Carousel::Carousel(Logger* logger, HallSwitch* hall, Characters* characters,
+DaisyWheel::DaisyWheel(Logger* logger, HallSwitch* hall, Characters* characters,
                    Settings* settings) {
   this->logger = logger;
   this->hall = hall;
@@ -19,9 +19,9 @@ Carousel::Carousel(Logger* logger, HallSwitch* hall, Characters* characters,
                                    PIN_STEPPER_CHAR_DIR);
 }
 
-Carousel::~Carousel() { delete stepper; }
+DaisyWheel::~DaisyWheel() { delete stepper; }
 
-void Carousel::initialize() {
+void DaisyWheel::initialize() {
   this->stepsPerChar = (float)this->stepsPerRevolution /
                        this->characters->getWheelCharacterCount();
   digitalWrite(PIN_STEPPER_CHAR_ENABLE, HIGH);
@@ -33,7 +33,7 @@ void Carousel::initialize() {
   this->deenergize();
 }
 
-void Carousel::home(int align) {
+void DaisyWheel::home(int align) {
   this->stepper->enableOutputs();
   // runs the char stepper clockwise until triggering the hall sensor, then call
   // it home at char 21
@@ -55,7 +55,7 @@ void Carousel::home(int align) {
   // TODO: Change the above to only move as long as the hall sensor is
   // triggerred, which could save a little time while printing.
 
-  // Move the carousel until the hall sensor triggers, and then treat wherever
+  // Move the daisy wheel until the hall sensor triggers, and then treat wherever
   // that is as the new home position.
   this->stepper->move(-this->stepsPerRevolution * 1.5f);
   auto hallState = hall->triggered();
@@ -80,8 +80,8 @@ void Carousel::home(int align) {
   delay(100);
 }
 
-bool Carousel::move(String c, int alignFactor) {
-  if (!ENABLE_CAROUSEL) {
+bool DaisyWheel::move(String c, int alignFactor) {
+  if (!ENABLE_DAISYWHEEL) {
     delay(500);
     return true;
   }
@@ -128,7 +128,7 @@ bool Carousel::move(String c, int alignFactor) {
   return true;
 }
 
-void Carousel::deenergize() {
+void DaisyWheel::deenergize() {
   this->stepper->disableOutputs();
 
   // Disabling the motors loses position information, so we need to reset it.

@@ -10,10 +10,10 @@
 #include "Settings.h"
 
 /**
- * @brief Controls the carousel stepper motor and computes the geometry
+ * @brief Controls the daisy wheel stepper motor and computes the geometry
  * necessary for moving it into the correct position.
  */
-class Carousel {
+class DaisyWheel {
  private:
   Logger* logger;
   HallSwitch* hall;
@@ -25,27 +25,27 @@ class Carousel {
   int currentChar;
 
  public:
-  Carousel(Logger* logger, HallSwitch* hall, Characters* characters,
+  DaisyWheel(Logger* logger, HallSwitch* hall, Characters* characters,
            Settings* settings);
-  ~Carousel();
+  ~DaisyWheel();
 
   /**
-   * @brief Initializes the carousel stepper motor and homes it.
+   * @brief Initializes the daisy wheel stepper motor and homes it.
    */
   void initialize();
 
   /**
-   * @brief Moves the carousel to the home position, which shoudl be letter "J".
+   * @brief Moves the daisy wheel to the home position, which shoudl be letter "J".
    */
   void home(int align);
 
   /**
-   * @brief Moves the carousel to the provided character "c".
+   * @brief Moves the daisy wheel to the provided character "c".
    */
   bool move(String c, int alignFactor);
 
   /**
-   * @brief Deactivates the carousel stepper motor, potentially losing its
+   * @brief Deactivates the daisy wheel stepper motor, potentially losing its
    * position.
    */
   void deenergize();

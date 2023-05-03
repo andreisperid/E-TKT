@@ -7,7 +7,7 @@
 #include <mutex>
 #include <thread>
 
-#include "Carousel.h"
+#include "DaisyWheel.h"
 #include "Characters.h"
 #include "Configuration.h"
 #include "Display.h"
@@ -21,12 +21,12 @@
 
 
 ETKT::ETKT(Logger* logger, Settings* settings, Characters* characters,
-           Display* display, Carousel* carousel, HallSwitch* hall,
+           Display* display, DaisyWheel* daisywheel, HallSwitch* hall,
            Feeder* feeder, Press* press, Sound* sound, Light* ledFinish,
            Light* ledChar) {
   this->settings = settings;
   this->display = display;
-  this->carousel = carousel;
+  this->daisywheel = daisywheel;
   this->hall = hall;
   this->feeder = feeder;
   this->press = press;
@@ -56,7 +56,7 @@ void ETKT::initialize() {
   this->hall->initialize();
   this->press->initialize();
   this->feeder->initialize();
-  this->carousel->initialize();
+  this->daisywheel->initialize();
 }
 
 StatusUpdate* ETKT::createStatus() {
@@ -142,7 +142,7 @@ void ETKT::cut() {
   }
   // moves to a specific char (*) then presses label three times (more
   // vigorously)
-  this->carousel->move("*", this->settings->getAlignFactor());
+  this->daisywheel->move("*", this->settings->getAlignFactor());
   for (int i = 0; i < 3; i++) {
     this->press->press(true, this->settings->getForceFactor(), false);
   }
@@ -215,7 +215,7 @@ void ETKT::loop() {
 
   // Turn everything off
   this->display->renderIdle();
-  this->carousel->deenergize();
+  this->daisywheel->deenergize();
   this->press->rest();
   this->feeder->deenergize();
   this->lock->unlock();
@@ -274,7 +274,7 @@ void ETKT::testCommandInternal() {
   display->renderTest(this->command->align, this->command->force);
   ledFinish->off();
 
-  this->carousel->move("M", this->command->align);
+  this->daisywheel->move("M", this->command->align);
   this->press->press(false, 1, true);
 }
 
@@ -284,11 +284,11 @@ void ETKT::testCommandFullInternal() {
   for (int i = 0; i < label.length(); i++) {
     auto character = label.substring(i, i + 1);
     this->feeder->feed();
-    this->carousel->move(character, this->command->align);
+    this->daisywheel->move(character, this->command->align);
     this->press->press(false, this->command->force, false);
   }
   this->feeder->feed();
-  this->carousel->move("*", this->command->align);
+  this->daisywheel->move("*", this->command->align);
   this->cut();
 }
 
@@ -297,14 +297,14 @@ void ETKT::homeCommandInternal() {
   this->ledChar->on(1.0f);
   this->press->rest();
   delay(500);
-  this->carousel->home(this->settings->getAlignFactor());
+  this->daisywheel->home(this->settings->getAlignFactor());
   delay(1000);
 }
 
 void ETKT::moveCommandInternal() {
   this->press->rest();
   delay(500);
-  this->carousel->move(this->command->label, this->settings->getAlignFactor());
+  this->daisywheel->move(this->command->label, this->settings->getAlignFactor());
 }
 
 void ETKT::tagCommandInternal() {
@@ -335,15 +335,15 @@ void ETKT::tagCommandInternal() {
     this->sound->playLabel(label);
   }
 
-  // home carousel
-  this->carousel->home(this->settings->getAlignFactor());
+  // home daisy wheel
+  this->daisywheel->home(this->settings->getAlignFactor());
 
   this->feeder->feed();
 
   for (int i = 0; i < labelLength; i++) {
     auto character = Utility::utf8CharAt(label, i);
     if (character != " ") {
-      this->carousel->move(character, this->settings->getAlignFactor());
+      this->daisywheel->move(character, this->settings->getAlignFactor());
       this->press->press(false, this->settings->getForceFactor(), false);
     }
 

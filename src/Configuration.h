@@ -12,7 +12,7 @@
 /**
  * If your hall sensor has inverted logic (eg active LOW and neutral HIGH)
  * uncomment this #define to invert the logic checking it. If you're affected by
- * this then you'll see the character carousel move forward slightly and then
+ * this then you'll see the character daisy wheel move forward slightly and then
  * stop when the E-TKT starts up instead of moving to the "J" position.
  *
  * For instance, invert if using a "3144" hall sensor but don't invert if using
@@ -40,13 +40,13 @@
 
 /**
  * Speed and acceleration of the stepper motor that rotates the character
- * carousel, measured in steps/s and steps/s^2. Use lower values if you find
+ * daisy wheel, measured in steps/s and steps/s^2. Use lower values if you find
  * that the printer sometimes prints the wrong letter.  Any value above zero is
  * ok but lower values will slow down printing, if you're having trouble start
  * by halving them and move up from there.  The speed you can reliably achieve
  * depends on the quality of the motor, how much current you've set it up to
  * use, and how fast the ESP-32 can talk with it. 1600 steps is a full
- * revolution of the carousel.
+ * revolution of the daisy wheel.
  */
 #define CHARACTER_STEPPER_MAX_SPEED 320000
 #define CHARACTER_STEPPER_MAX_ACCELERATION 16000
@@ -61,7 +61,7 @@
 #define ENABLE_FEED true
 #define ENABLE_CUT true
 #define ENABLE_PRESS true
-#define ENABLE_CAROUSEL true
+#define ENABLE_DAISYWHEEL true
 
 /**
  * Development
