@@ -353,7 +353,7 @@ void ETKT::tagCommandInternal() {
     this->display->renderProgress(i + 1, label);
 
     this->lock->lock();
-    this->progress = 100 * ((i + 1) / labelLength);
+    this->progress = 100.0f * (i + 1) / labelLength;
     if (this->progress >= 100) {
       this->progress = 99;  // avoid 100% progress while still finishing
     }

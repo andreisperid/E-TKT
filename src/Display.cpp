@@ -279,8 +279,7 @@ void Display::renderProgress(float progress, String label) {
   }
 
   // Print "XX%" at the bottom of the screen.
-  String progressString = String(progress / labelLength, 0);
-  progressString.concat("%");
+  String progressString = String((int)(100.0f * progress / labelLength)) + "%";
   this->u8g2->setDrawColor(1);
   this->u8g2->drawStr(6, 60, progressString.c_str());
 
