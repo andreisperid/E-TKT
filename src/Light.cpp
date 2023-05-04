@@ -14,11 +14,10 @@ void Light::initialize() {
 }
 
 void Light::on(float brightness) {
-  // analogWrite(this->pin, (uint16_t)(brightness * 128));
-  analogWrite(this->pin, 0);
+  analogWrite(this->pin, (uint16_t)(brightness * 128));
 }
 
-void Light::off() { digitalWrite(this->pin, LOW); }
+void Light::off() { analogWrite(this->pin, LOW); }
 
 Light::~Light() {
   // unused for now
