@@ -1,4 +1,4 @@
-//pressing carousel for DYMO label tabe
+//pressing daisy wheel for DYMO label tabe
 
 /*maybe it come in handy to calculate the deflection of the tongues (beams)
  starting point: https://mechanicalc.com/reference/beam-deflection-tables

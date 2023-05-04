@@ -42,7 +42,7 @@ nav_order: 8
 1. pass the flat cables for both DIP LEDs through the pathway;
 2. "click" the LEDs into their slots, and you might need carefully to cut a bit of material just enough to make sure it fits firmly;
 3. using a flat plier might help pressing them;
-4. strech the cables and make sure no segments are falling outside the boundaries, otherwise the daisywheel might be prevented from spinning;
+4. strech the cables and make sure no segments are falling outside the boundaries, otherwise the daisy wheel might be prevented from spinning;
 5. crimp the dupont connectors observing the polarity: arrows shoud be ground;
 6. place 2x 2-via 2.54mm caps.
 
